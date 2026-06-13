@@ -1,0 +1,189 @@
+package ro.solomon.app.ui.screens
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.services.SolomonMission
+import ro.solomon.core.domain.Obligation
+import ro.solomon.core.domain.Transaction
+import ro.solomon.core.domain.TransactionCategory
+import ro.solomon.core.domain.UserProfile
+import ro.solomon.moments.MomentEngine
+
+class TodayViewModel : ViewModel() {
+
+    data class State(
+        val userName: String = "",
+        val balanceAvailable: Int = 0,
+        val safeToSpendPerDay: Int = 0,
+        val daysUntilPayday: Int = 30,
+        val incomingToday: Int = 0,
+        val outgoingToday: Int = 0,
+        val recentTransactions: List<Transaction> = emptyList(),
+        val momentText: String = "Salut! Apasă aici ca să-ți generez primul moment financiar personalizat.",
+        val generatingMoment: Boolean = false,
+        val hasUnreadAlert: Boolean = false,
+        val activeMission: SolomonMission? = null,
+        val pendingMission: SolomonMission? = null,
+        val topCategory: TransactionCategory? = null,
+        val topCategoryAmount: Int = 0,
+        val avgDailySpending30d: Int = 0
+    )
+
+    private val _state = MutableStateFlow(State())
+    val state: StateFlow<State> = _state.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            ServiceLocator.missionEngine.loadAndRefresh(System.currentTimeMillis() / 1000L)
+            _state.value = _state.value.copy(
+                activeMission = ServiceLocator.missionEngine.active.value,
+                pendingMission = ServiceLocator.missionEngine.pending.value
+            )
+        }
+        ServiceLocator.missionEngine.active.let { /* no-op */ }
+        viewModelScope.launch {
+            ServiceLocator.missionEngine.active.collect { m ->
+                _state.value = _state.value.copy(activeMission = m)
+            }
+        }
+        viewModelScope.launch {
+            ServiceLocator.missionEngine.pending.collect { m ->
+                _state.value = _state.value.copy(pendingMission = m)
+            }
+        }
+        ServiceLocator.txnRepo.observeAll()
+            .combine(ServiceLocator.userRepo.observeProfile()) { txns, profile -> txns to profile }
+            .combine(ServiceLocator.obligationRepo.observeAll()) { (txns, profile), obligs ->
+                val today = System.currentTimeMillis() / 1000L
+                val dayStart = today - (today % 86400L)
+                val dayEnd = dayStart + 86400L
+                val todayTxns = txns.filter { it.date in dayStart until dayEnd }
+                val incoming = todayTxns.filter { it.isIncoming }.sumOf { it.amount.amount }
+                val outgoing = todayTxns.filter { it.isOutgoing }.sumOf { it.amount.amount }
+
+                val cash = ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = System.currentTimeMillis())
+                val obligations = obligs
+                val monthlyIncome = cash.monthlyIncomeAvg.amount
+                val monthlySpending = cash.monthlySpendingAvg.amount
+                val obligTotal = obligations.fold(0) { acc, o -> acc + o.amount.amount }
+                val balance = monthlyIncome - monthlySpending - obligTotal / 4
+                val payday = profile?.financials?.salaryFrequency?.dayOfMonth ?: 28
+                val days = daysUntilDayOfMonth(payday, System.currentTimeMillis()).coerceAtLeast(1)
+                val safePerDay = (balance / days).coerceAtLeast(0)
+
+                val monthStart = dayStart - 30L * 86400L
+                val monthlyByCat = txns
+                    .filter { it.isOutgoing && it.date >= monthStart }
+                    .groupBy { it.category }
+                    .mapValues { (_, list) -> list.sumOf { it.amount.amount } }
+
+                val limits = ro.solomon.app.services.CategoryLimitsStore.limits()
+                val hasOverLimit = limits.any { (cat, limit) ->
+                    val used = ro.solomon.app.services.CategoryLimitsStore.usedFor(cat, monthlyByCat[cat] ?: 0)
+                    ro.solomon.app.services.CategoryLimitsStore.isOverLimit(used)
+                }
+
+                val topCategoryEntry = monthlyByCat.maxByOrNull { it.value }
+                val topCategory = topCategoryEntry?.key
+                val topCategoryAmount = topCategoryEntry?.value ?: 0
+                val avgDailySpending30d = (monthlyByCat.values.sum() / 30).coerceAtLeast(0)
+
+                _state.value.copy(
+                    userName = profile?.demographics?.name ?: "",
+                    balanceAvailable = balance.coerceAtLeast(0),
+                    safeToSpendPerDay = safePerDay,
+                    daysUntilPayday = days,
+                    incomingToday = incoming,
+                    outgoingToday = outgoing,
+                    recentTransactions = txns.sortedByDescending { it.date }.take(15),
+                    hasUnreadAlert = _state.value.hasUnreadAlert || hasOverLimit,
+                    topCategory = topCategory,
+                    topCategoryAmount = topCategoryAmount,
+                    avgDailySpending30d = avgDailySpending30d
+                )
+            }
+            .onEach { _state.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun offerMissionIfReady() = viewModelScope.launch {
+        if (ServiceLocator.missionEngine.pending.value != null) return@launch
+        if (ServiceLocator.missionEngine.active.value != null) return@launch
+        val txns = ServiceLocator.txnRepo.fetchAll()
+        if (txns.isEmpty()) return@launch
+        val last30Start = System.currentTimeMillis() / 1000L - 30L * 86400L
+        val recent = txns.filter { it.date >= last30Start && it.isOutgoing }
+        if (recent.isEmpty()) return@launch
+        val grouped = recent.groupBy { it.category }
+        val topEntry = grouped.maxByOrNull { (_, list) -> list.sumOf { it.amount.amount } } ?: return@launch
+        val topCat = topEntry.key
+        val topAmount = topEntry.value.sumOf { it.amount.amount }
+        val goals = ServiceLocator.goalRepo.fetchAll()
+        val linked = goals.firstOrNull { !it.isReached }?.destination
+        val m = ServiceLocator.missionEngine.generate(
+            topCategory = topCat,
+            topCategoryAmountRON = topAmount,
+            linkedGoalName = linked
+        ) ?: return@launch
+        ServiceLocator.missionEngine.offer(m)
+    }
+
+    fun acceptMission() = viewModelScope.launch {
+        ServiceLocator.missionEngine.accept(ServiceLocator.appContext)
+    }
+
+    fun dismissMission() = viewModelScope.launch {
+        ServiceLocator.missionEngine.dismiss(ServiceLocator.appContext)
+    }
+
+    fun completeMission() = viewModelScope.launch {
+        ServiceLocator.missionEngine.complete(ServiceLocator.appContext)
+    }
+
+    fun generateMoment() = viewModelScope.launch {
+        _state.value = _state.value.copy(generatingMoment = true)
+        try {
+            val profile = ServiceLocator.userRepo.fetchProfile()
+            val txns = ServiceLocator.txnRepo.fetchAll()
+            val obligs = ServiceLocator.obligationRepo.fetchAll()
+            val subs = ServiceLocator.subRepo.fetchAll()
+            val goals = ServiceLocator.goalRepo.fetchAll()
+            val out = ServiceLocator.momentEngine.generateWowMoment(
+                MomentEngine.Snapshot(
+                    userProfile = profile,
+                    transactions = txns,
+                    obligations = obligs,
+                    subscriptions = subs,
+                    goals = goals,
+                    referenceDateEpochSeconds = System.currentTimeMillis() / 1000L
+                )
+            )
+            _state.value = _state.value.copy(momentText = out.llmResponse, generatingMoment = false)
+        } catch (e: Throwable) {
+            _state.value = _state.value.copy(
+                momentText = "Încă nu am destule date. Adaugă câteva tranzacții și revin-o în câteva minute.",
+                generatingMoment = false
+            )
+        }
+    }
+
+    private fun daysUntilDayOfMonth(targetDay: Int, nowMillis: Long): Int {
+        val cal = java.util.Calendar.getInstance().apply { timeInMillis = nowMillis }
+        val today = cal.get(java.util.Calendar.DAY_OF_MONTH)
+        return if (targetDay > today) {
+            targetDay - today
+        } else {
+            val daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+            daysInMonth - today + targetDay
+        }
+    }
+}
