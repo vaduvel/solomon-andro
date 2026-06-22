@@ -284,8 +284,9 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun appendAssistant(text: String) {
+        val cleaned = ro.solomon.core.util.AdvisorTextCleaner.clean(text)
         _state.value = _state.value.copy(
-            messages = _state.value.messages + Message(role = Role.Assistant, text = text)
+            messages = _state.value.messages + Message(role = Role.Assistant, text = cleaned)
         )
     }
 
@@ -296,6 +297,10 @@ class ChatViewModel : ViewModel() {
         val subs = ServiceLocator.subRepo.fetchAll()
         val goals = ServiceLocator.goalRepo.fetchAll()
         val cashFlow = ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = System.currentTimeMillis())
+        val detectedMoment = ro.solomon.app.services.TodayContextBridge.detectedToday
+        val momentLine = if (detectedMoment != null && detectedMoment.isFromToday) {
+            "\n            Moment detectat azi: ${detectedMoment.humanReadable}"
+        } else ""
         return """
             Nume: ${profile?.demographics?.name ?: "necunoscut"}
             Addressing: ${profile?.demographics?.addressing?.name ?: "tu"}
@@ -304,7 +309,7 @@ class ChatViewModel : ViewModel() {
             Obligații lunare (${obligs.size}): ${obligs.sumOf { it.amount.amount }} RON
             Abonamente active (${subs.size}): ${subs.sumOf { it.amountMonthly.amount }} RON/lună
             Obiective (${goals.size}): ${goals.joinToString { it.destination ?: it.kind.displayNameRO }}
-            Tranzacții istorice: ${txns.size}
+            Tranzacții istorice: ${txns.size}$momentLine
 
             Întrebare utilizator: $userText
         """.trimIndent()

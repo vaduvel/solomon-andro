@@ -31,6 +31,7 @@ import ro.solomon.app.services.IngestionEventBus
 import ro.solomon.app.services.SolomonMission
 import ro.solomon.app.ui.chat.ChatSheet
 import ro.solomon.app.ui.components.IngestionToast
+import ro.solomon.app.ui.components.SolInsightCard
 import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
@@ -133,6 +134,7 @@ fun TodayScreen(
                     onTap = { showChat = true }
                 )
             }
+            item { DailyTipCard() }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
                     ActionTile("Pot să-mi permit?", Icons.Filled.Search, onClick = onOpenCanIAfford, modifier = Modifier.weight(1f))
@@ -286,6 +288,27 @@ private fun MomentCard(text: String, generating: Boolean, onTap: () -> Unit) {
                     Text(text, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextPrimary, maxLines = 4)
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun DailyTipCard() {
+    val tip = ro.solomon.core.util.FinancialEducationTip.today
+    SolInsightCard(
+        label = "SFATUL ZILEI · ${tip.category.label}",
+        timestamp = null,
+        accent = SolAccent.Violet
+    ) {
+        Row(verticalAlignment = Alignment.Top) {
+            Text(tip.emoji, fontSize = 24.sp)
+            Spacer(Modifier.width(SolSpacing.sm))
+            Text(
+                tip.text,
+                color = SolomonColors.TextPrimary,
+                fontSize = 14.sp,
+                lineHeight = 20.sp
+            )
         }
     }
 }

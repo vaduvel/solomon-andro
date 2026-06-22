@@ -37,6 +37,7 @@ class DailyMomentWorker(ctx: Context, params: WorkerParameters) : CoroutineWorke
                     type = moment.momentType.toCooldownType(),
                     nowEpoch = System.currentTimeMillis() / 1000
                 )
+                MomentNotifier.notifyMoment(applicationContext, moment.momentType, moment.llmResponse)
             }
         }.fold(onSuccess = { Result.success() }, onFailure = { Result.retry() })
     }

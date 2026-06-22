@@ -232,7 +232,13 @@ class TodayViewModel : ViewModel() {
                     referenceDateEpochSeconds = System.currentTimeMillis() / 1000L
                 )
             )
-            _state.value = _state.value.copy(momentText = out.llmResponse, generatingMoment = false)
+            _state.value = _state.value.copy(momentText = ro.solomon.core.util.AdvisorTextCleaner.clean(out.llmResponse), generatingMoment = false)
+            ro.solomon.app.services.TodayContextBridge.detectedToday =
+                ro.solomon.app.services.TodayContextBridge.DetectedMoment(
+                    typeRaw = "wow_moment",
+                    title = "Moment wow",
+                    detectedAt = System.currentTimeMillis()
+                )
         } catch (e: Throwable) {
             _state.value = _state.value.copy(
                 momentText = "Încă nu am destule date. Adaugă câteva tranzacții și revin-o în câteva minute.",
@@ -242,13 +248,6 @@ class TodayViewModel : ViewModel() {
     }
 
     private fun daysUntilDayOfMonth(targetDay: Int, nowMillis: Long): Int {
-        val cal = java.util.Calendar.getInstance().apply { timeInMillis = nowMillis }
-        val today = cal.get(java.util.Calendar.DAY_OF_MONTH)
-        return if (targetDay > today) {
-            targetDay - today
-        } else {
-            val daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
-            daysInMonth - today + targetDay
-        }
+        return ro.solomon.core.util.CalendarSafeDate.daysUntilDayOfMonthClamped(targetDay, nowMillis)
     }
 }

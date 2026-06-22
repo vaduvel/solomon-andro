@@ -240,6 +240,7 @@ private fun FactorRow(factor: SpiralFactor) {
 
 @Composable
 private fun CsalbCard() {
+    val context = androidx.compose.ui.platform.LocalContext.current
     SolInsightCard(
         label = "CSALB poate ajuta",
         timestamp = null,
@@ -251,7 +252,7 @@ private fun CsalbCard() {
             fontSize = 14.sp
         )
         Button(
-            onClick = { /* open URL */ },
+            onClick = { ro.solomon.app.services.CSALBDeeplink.openStartProcedure(context) },
             colors = ButtonDefaults.buttonColors(containerColor = SolomonColors.Blue, contentColor = Color.Black)
         ) { Text("Începe procedura CSALB") }
     }
