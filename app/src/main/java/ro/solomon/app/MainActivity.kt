@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
             runCatching {
                 val parsed = BankNotificationParser.parse(
                     raw = text,
-                    dateEpochSeconds = System.currentTimeMillis() / 1000L
+                    dateEpochMillis = System.currentTimeMillis()
                 )
                 if (parsed != null) {
                     val withShareSource = parsed.copy(source = TransactionSource.share_intent_parsed)
