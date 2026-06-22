@@ -14,6 +14,22 @@ import java.util.regex.Pattern
 
 object BankNotificationParser {
 
+    val knownAppPackages: Set<String> = setOf(
+        "com.google.android.apps.walletnfcrel",
+        "ro.btrl.bt24",
+        "ro.ing.ingro",
+        "ro.bcr.george",
+        "ro.raiffeisen.raiffeisenbank",
+        "com.revolut.revolut",
+        "ro.brd.brdgo",
+        "ro.cec.cecbank",
+        "ro.alphabank.alphabank",
+        "ro.garanti.garantibank",
+        "ro.libra.librabank",
+        "ro.unicredit.unicreditbank",
+        "ro.saltedge.saltedge",
+    )
+
     enum class DecimalFormatHint { auto, european, us }
 
     private val amountRegex = Regex(

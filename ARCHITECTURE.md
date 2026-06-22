@@ -8,7 +8,7 @@ Solomon Android este un port nativ al iOS app-ului, scris în **Kotlin + Jetpack
 
 Toate datele financiare rămân pe telefon. Zero backend. Zero analytics extern. Singurele apeluri de rețea sunt:
 - **Mistral AI API** (opțional, user opt-in, EU-hosted, GDPR-compliant)
-- **Open Banking** (Q1 2025, prin Enable Banking — EU aggregator)
+- **Open Banking** (în lucru, prin Enable Banking — EU aggregator)
 
 ## Module
 
@@ -71,7 +71,7 @@ SolomonWorkScheduler
 | Share Intent | ~5% | none (system-wide) | `MainActivity.handleShareIntent` |
 | Email parsing | ~10% | Gmail OAuth (deferred) | `EmailTransactionParser` |
 | Manual entry | fallback | none | `ManualTransactionScreen`, `ChatSheet` |
-| **Open Banking** (Q1 2025) | **+5%** | EU PSD2 OAuth2 | `EnableBankingClient` (TODO) |
+| **Open Banking** (în lucru) | **+5%** | EU PSD2 OAuth2 | `EnableBankingClient` (TODO) |
 
 SMS import is debug/internal only. The Play release does not declare `READ_SMS` or `RECEIVE_SMS`, because Google Play SMS policy has a high rejection risk for non-default SMS apps.
 
@@ -101,7 +101,7 @@ Suport: română (`ro-RO`) + preferință offline (`EXTRA_PREFER_OFFLINE`).
 - **Zero tracking**: fără Google Analytics, Firebase, Crashlytics
 - **Network only for**:
   - Mistral AI (user opt-in, EU)
-  - Open Banking (Q1 2025, EU)
+  - Open Banking (în lucru, EU)
 - **User control**: toate permisiunile opționale, revocabile din Setări
 
 ## Build
@@ -117,7 +117,7 @@ APK: `app/build/outputs/apk/debug/app-debug.apk` (~18 MB)
 
 ## Roadmap
 
-- **v0.1.0 (acum)**: MVP cu Notif + SMS + Share + Email + Manual
-- **v0.2.0 (Q1 2025)**: Open Banking prin Enable Banking
-- **v0.3.0 (Q2 2025)**: PIS — plăți inițiate din Solomon
-- **v0.4.0 (Q3 2025)**: On-device LLM (Qwen 2.5 3B sau Ministral 3B)
+- **v0.1.0 (acum)**: MVP cu Notif + Share + Email + Manual
+- **v0.2.0** (următor): Open Banking prin Enable Banking
+- **v0.3.0**: PIS — plăți inițiate din Solomon
+- **v0.4.0**: On-device LLM (Qwen 2.5 3B sau Ministral 3B)

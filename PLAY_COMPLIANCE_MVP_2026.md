@@ -92,4 +92,4 @@ Do not declare SMS for release unless SMS is reintroduced after policy approval.
 - Any production UI asking for SMS access
 - Claims of financial advice
 - Credit marketplace / loan referral links
-- Unimplemented Open Banking login CTA that implies live bank sync
+- Open Banking CTA that implies live bank sync (use info-only UI)

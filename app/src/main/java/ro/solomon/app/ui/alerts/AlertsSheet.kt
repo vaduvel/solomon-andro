@@ -29,7 +29,7 @@ import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.services.MomentEntry
 import ro.solomon.app.services.MomentHistoryStore
-import ro.solomon.app.ui.components.SolAccent
+import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.components.SolChip
 import ro.solomon.app.ui.components.SolSectionHeaderRow
 import ro.solomon.app.ui.components.SolBackButton

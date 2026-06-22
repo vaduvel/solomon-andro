@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import ro.solomon.analytics.CashFlowAnalyzer
 import ro.solomon.analytics.ForecastEngine
 import ro.solomon.analytics.PatternDetector
+import ro.solomon.analytics.RecurringDetectionEngine
 import ro.solomon.analytics.SpiralDetector
 import ro.solomon.analytics.SubscriptionAuditor
 import ro.solomon.analytics.SafeToSpendCalculator
@@ -25,6 +29,7 @@ import ro.solomon.storage.repository.GoalRepository
 import ro.solomon.storage.repository.ObligationRepository
 import ro.solomon.storage.repository.OnboardingPersistence
 import ro.solomon.storage.repository.SubscriptionRepository
+import ro.solomon.core.enablebanking.BankConnectionService
 import ro.solomon.storage.repository.TransactionRepository
 import ro.solomon.storage.repository.UserProfileRepository
 
@@ -58,6 +63,8 @@ object ServiceLocator {
     lateinit var safeToSpend: SafeToSpendCalculator
         private set
     lateinit var suspicious: SuspiciousTransactionDetector
+        private set
+    lateinit var recurringDetection: RecurringDetectionEngine
         private set
     lateinit var llm: LLMProvider
         private set
@@ -94,6 +101,7 @@ object ServiceLocator {
         subscriptionAuditor = SubscriptionAuditor()
         safeToSpend = SafeToSpendCalculator()
         suspicious = SuspiciousTransactionDetector()
+        recurringDetection = RecurringDetectionEngine()
         forecastEngine = ForecastEngine()
         llm = ResolvingLLMProvider(
             templateFallback = TemplateLLMProvider()
@@ -102,6 +110,15 @@ object ServiceLocator {
         momentEngine = MomentEngine(llm = llm, json = json)
         missionEngine = MissionEngine()
         voiceInput = ro.solomon.app.services.VoiceInputService(app)
+        BankConnectionService.apply {
+            persistenceDir = app.filesDir
+            onTransactionIngested = { tx ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    txnRepo.save(tx)
+                }
+            }
+            initialize()
+        }
     }
 }
 
@@ -131,5 +148,4 @@ class ResolvingLLMProvider(
         maxWords: Int,
         imageData: ByteArray?
     ): String = resolve().generate(systemPrompt, userContext, maxWords, imageData)
-}
 }

@@ -5,7 +5,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.moments.MomentEngine
-import ro.solomon.moments.MomentType
+import ro.solomon.core.moments.MomentType
 
 class DailyMomentWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {

@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.delay
@@ -30,6 +31,7 @@ import ro.solomon.app.services.IngestionEventBus
 import ro.solomon.app.services.SolomonMission
 import ro.solomon.app.ui.chat.ChatSheet
 import ro.solomon.app.ui.components.IngestionToast
+import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.Transaction
@@ -91,15 +93,26 @@ fun TodayScreen(
             verticalArrangement = Arrangement.spacedBy(SolSpacing.md)
         ) {
             item { GreetingHeader(state.userName, state.hasUnreadAlert, onAlertsClick = { showAlerts = true }) }
-            item { SafeToSpendCard(state.safeToSpendPerDay, state.daysUntilPayday, state.balanceAvailable) }
+            item { SafeToSpendCard(state.safeToSpendPerDay, state.daysUntilPayday, state.balanceAvailable, state.paydayDayOfMonth) }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
                     StatPill("Venituri azi", "+${state.incomingToday} RON", SolomonColors.Incoming, modifier = Modifier.weight(1f))
                     StatPill("Cheltuieli azi", "-${state.outgoingToday} RON", SolomonColors.Outgoing, modifier = Modifier.weight(1f))
                 }
             }
-            if (state.topCategory != null) {
-                item { QuickStatsCard(state.topCategory.displayNameRO, state.topCategoryAmount, state.avgDailySpending30d) }
+            val topCat = state.topCategory
+            if (topCat != null) {
+                item { QuickStatsCard(topCat.displayNameRO, state.topCategoryAmount, state.avgDailySpending30d) }
+            }
+            if (state.upcomingBills.isNotEmpty()) {
+                item {
+                    Next7DaysCard(
+                        bills = state.upcomingBills,
+                        total = state.upcomingBillsTotal,
+                        count = state.upcomingBillsCount,
+                        paydayDay = state.paydayDayOfMonth
+                    )
+                }
             }
             state.activeMission?.let { mission ->
                 item { ActiveMissionCard(mission, onComplete = { vm.completeMission() }) }
@@ -214,19 +227,22 @@ private fun QuickStatsCard(topCategory: String, topAmount: Int, avgDaily: Int) {
 }
 
 @Composable
-private fun SafeToSpendCard(perDay: Int, daysLeft: Int, available: Int) {
+private fun SafeToSpendCard(perDay: Int, daysLeft: Int, available: Int, paydayDay: Int) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
         shape = RoundedCornerShape(SolSpacing.lg)
     ) {
         Column(modifier = Modifier.padding(SolSpacing.lg)) {
-            Text("DISPONIBIL LIBER · $daysLeft ZILE", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
+            Text("DISPONIBIL LIBER · URMĂTORUL SALARIU ZIUA $paydayDay", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
             Spacer(Modifier.height(SolSpacing.xs))
             Text(RomanianMoneyFormatter.format(perDay, RomanianMoneyFormatter.Style.bareNumber), style = MaterialTheme.typography.displayMedium, color = SolomonColors.Primary)
-            Text("RON / zi", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextSecondary)
+            Text("RON / zi · $daysLeft zile până la salariu", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextSecondary)
             Spacer(Modifier.height(SolSpacing.md))
-            Text("Total disponibil acum: ${RomanianMoneyFormatter.format(available)}", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+                Text("Total disponibil acum:", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
+                Text(RomanianMoneyFormatter.format(available), style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
+            }
         }
     }
 }
@@ -335,6 +351,48 @@ private fun TransactionRow(tx: Transaction) {
                 style = MaterialTheme.typography.titleMedium,
                 color = accent
             )
+        }
+    }
+}
+
+@Composable
+private fun Next7DaysCard(bills: List<TodayViewModel.UpcomingBillItem>, total: Int, count: Int, paydayDay: Int) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
+        shape = RoundedCornerShape(SolSpacing.lg)
+    ) {
+        Column(modifier = Modifier.padding(SolSpacing.lg)) {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+                Text("URMATOARELE 7 ZILE · $count facturi", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
+                Text("Total: ${RomanianMoneyFormatter.format(total)}", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
+            }
+            Spacer(Modifier.height(SolSpacing.md))
+            bills.forEach { bill ->
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)
+                ) {
+                    val accent = if (bill.isEssential) SolAccent.Amber else SolAccent.Blue
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(accent.color.copy(alpha = 0.12f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("${bill.daysRemaining}", color = accent.color, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    }
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(bill.name, style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary, maxLines = 1)
+                        Text("Ziua ${bill.dayOfMonth} · ${bill.kindLabel}", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
+                    }
+                    Text(RomanianMoneyFormatter.format(bill.amount), style = MaterialTheme.typography.titleSmall, color = if (bill.isEssential) SolomonColors.Amber else SolomonColors.TextPrimary)
+                }
+            }
+            Spacer(Modifier.height(SolSpacing.sm))
+            Text("Salariu: ziua $paydayDay", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextTertiary)
         }
     }
 }

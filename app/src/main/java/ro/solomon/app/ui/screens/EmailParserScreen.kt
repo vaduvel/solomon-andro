@@ -73,7 +73,7 @@ class EmailParserViewModel : ViewModel() {
                 direction = parsed.direction,
                 category = parsed.suggestedCategory,
                 merchant = parsed.merchant,
-                description = "[${parsed.amount.currency}] ${parsed.subject}",
+                description = "[${parsed.amount?.currency ?: "RON"}] ${parsed.subject}",
                 source = TransactionSource.email_parsed,
                 categorizationConfidence = parsed.confidence
             )

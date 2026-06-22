@@ -6,25 +6,34 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.services.SolomonMission
 import ro.solomon.core.domain.Obligation
+import ro.solomon.core.domain.Subscription
 import ro.solomon.core.domain.Transaction
 import ro.solomon.core.domain.TransactionCategory
-import ro.solomon.core.domain.UserProfile
 import ro.solomon.moments.MomentEngine
 
 class TodayViewModel : ViewModel() {
+
+    data class UpcomingBillItem(
+        val name: String,
+        val amount: Int,
+        val dayOfMonth: Int,
+        val daysRemaining: Int,
+        val isEssential: Boolean,
+        val kindLabel: String
+    )
 
     data class State(
         val userName: String = "",
         val balanceAvailable: Int = 0,
         val safeToSpendPerDay: Int = 0,
         val daysUntilPayday: Int = 30,
+        val paydayDayOfMonth: Int = 28,
         val incomingToday: Int = 0,
         val outgoingToday: Int = 0,
         val recentTransactions: List<Transaction> = emptyList(),
@@ -35,7 +44,10 @@ class TodayViewModel : ViewModel() {
         val pendingMission: SolomonMission? = null,
         val topCategory: TransactionCategory? = null,
         val topCategoryAmount: Int = 0,
-        val avgDailySpending30d: Int = 0
+        val avgDailySpending30d: Int = 0,
+        val upcomingBills: List<UpcomingBillItem> = emptyList(),
+        val upcomingBillsTotal: Int = 0,
+        val upcomingBillsCount: Int = 0
     )
 
     private val _state = MutableStateFlow(State())
@@ -62,7 +74,8 @@ class TodayViewModel : ViewModel() {
         }
         ServiceLocator.txnRepo.observeAll()
             .combine(ServiceLocator.userRepo.observeProfile()) { txns, profile -> txns to profile }
-            .combine(ServiceLocator.obligationRepo.observeAll()) { (txns, profile), obligs ->
+            .combine(ServiceLocator.obligationRepo.observeAll()) { (txns, profile), obligs -> Triple(txns, profile, obligs) }
+            .combine(ServiceLocator.subRepo.observeAll()) { (txns, profile, obligs), subs ->
                 val today = System.currentTimeMillis() / 1000L
                 val dayStart = today - (today % 86400L)
                 val dayEnd = dayStart + 86400L
@@ -97,22 +110,74 @@ class TodayViewModel : ViewModel() {
                 val topCategoryAmount = topCategoryEntry?.value ?: 0
                 val avgDailySpending30d = (monthlyByCat.values.sum() / 30).coerceAtLeast(0)
 
+                val upcomingBills = computeUpcomingBills(obligations, subs, payday)
+                val upcomingBillsTotal = upcomingBills.sumOf { it.amount }
+                val upcomingBillsCount = upcomingBills.size
+
                 _state.value.copy(
                     userName = profile?.demographics?.name ?: "",
                     balanceAvailable = balance.coerceAtLeast(0),
                     safeToSpendPerDay = safePerDay,
                     daysUntilPayday = days,
+                    paydayDayOfMonth = payday,
                     incomingToday = incoming,
                     outgoingToday = outgoing,
                     recentTransactions = txns.sortedByDescending { it.date }.take(15),
                     hasUnreadAlert = _state.value.hasUnreadAlert || hasOverLimit,
                     topCategory = topCategory,
                     topCategoryAmount = topCategoryAmount,
-                    avgDailySpending30d = avgDailySpending30d
+                    avgDailySpending30d = avgDailySpending30d,
+                    upcomingBills = upcomingBills,
+                    upcomingBillsTotal = upcomingBillsTotal,
+                    upcomingBillsCount = upcomingBillsCount
                 )
             }
             .onEach { _state.value = it }
             .launchIn(viewModelScope)
+    }
+
+    private fun computeUpcomingBills(
+        obligations: List<Obligation>,
+        subscriptions: List<Subscription>,
+        paydayDay: Int
+    ): List<UpcomingBillItem> {
+        val cal = java.util.Calendar.getInstance()
+        val today = cal.get(java.util.Calendar.DAY_OF_MONTH)
+        val daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+
+        val billItems = mutableListOf<UpcomingBillItem>()
+
+        fun daysUntil(target: Int): Int {
+            return if (target > today) target - today else (daysInMonth - today + target)
+        }
+
+        for (o in obligations) {
+            val remaining = daysUntil(o.dayOfMonth)
+            if (remaining <= 7) {
+                billItems.add(UpcomingBillItem(
+                    name = o.name,
+                    amount = o.amount.amount,
+                    dayOfMonth = o.dayOfMonth,
+                    daysRemaining = remaining,
+                    isEssential = o.isEssential,
+                    kindLabel = o.kind.displayNameRO
+                ))
+            }
+        }
+
+        val activeSubs = subscriptions.filter { !it.isGhost }
+        for (s in activeSubs) {
+            billItems.add(UpcomingBillItem(
+                name = s.name,
+                amount = s.amountMonthly.amount,
+                dayOfMonth = paydayDay,
+                daysRemaining = daysUntil(paydayDay),
+                isEssential = false,
+                kindLabel = "Abonament"
+            ))
+        }
+
+        return billItems.sortedBy { it.daysRemaining }
     }
 
     fun offerMissionIfReady() = viewModelScope.launch {

@@ -31,6 +31,7 @@ import ro.solomon.app.ui.components.SolHeroLabel
 import ro.solomon.app.ui.components.SolInsightCard
 import ro.solomon.app.ui.components.SolListCard
 import ro.solomon.app.ui.components.SolLoadingIndicator
+import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolSectionHeaderRow
 import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.theme.SolSpacing
@@ -137,7 +138,7 @@ private fun SpiralContent(report: SpiralReport, history: List<Money>) {
             .padding(SolSpacing.lg),
         verticalArrangement = Arrangement.spacedBy(SolSpacing.base)
     ) {
-        HeroBlock(report)
+        HeroBlock(report, history)
         if (report.factors.isNotEmpty()) {
             SolSectionHeaderRow("Factori contribuitori", "${report.factors.size} detectate")
             FactorsList(report.factors)
@@ -147,7 +148,7 @@ private fun SpiralContent(report: SpiralReport, history: List<Money>) {
 }
 
 @Composable
-private fun HeroBlock(report: SpiralReport) {
+private fun HeroBlock(report: SpiralReport, history: List<Money>) {
     SolHeroCard(accent = SolAccent.Rose, badge = "CRITIC") {
         SolHeroLabel(heroLabel(report.severity))
         Spacer(Modifier.height(SolSpacing.sm))
@@ -276,4 +277,5 @@ private fun factorName(kind: SpiralFactorKind): String = when (kind) {
     SpiralFactorKind.ifn_active -> "IFN activ"
     SpiralFactorKind.bnpl_stacking -> "BNPL stack"
     SpiralFactorKind.obligations_exceed_income -> "Obligații peste venit"
+    SpiralFactorKind.overdraft_frequent -> "Overdraft frecvent"
 }

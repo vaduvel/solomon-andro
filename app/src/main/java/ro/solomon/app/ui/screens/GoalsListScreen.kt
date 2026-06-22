@@ -30,7 +30,7 @@ import ro.solomon.app.ui.components.*
 import ro.solomon.app.ui.theme.*
 import ro.solomon.analytics.GoalProgress
 import ro.solomon.analytics.GoalProgressReport
-import ro.solomon.analytics.GoalFeasibility
+import ro.solomon.core.domain.GoalFeasibility
 import ro.solomon.core.domain.GoalKind
 import ro.solomon.core.format.RomanianMoneyFormatter
 import java.text.SimpleDateFormat

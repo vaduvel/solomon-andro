@@ -37,7 +37,8 @@ class SolomonNotificationListener : NotificationListenerService() {
             ?: s.notification?.extras?.getCharSequence(android.app.Notification.EXTRA_BIG_TEXT)?.toString()
             ?: return
         if (text.isBlank()) return
-        if (!BankNotificationParser.looksLikeBankNotification(text)) return
+        val isKnownApp = pkg in BankNotificationParser.knownAppPackages
+        if (!isKnownApp && !BankNotificationParser.looksLikeBankNotification(text)) return
 
         scope.launch {
             runCatching {

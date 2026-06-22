@@ -23,7 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ro.solomon.app.ui.components.SolAccent
+import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.components.SolBackButton
 import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolHeroCard

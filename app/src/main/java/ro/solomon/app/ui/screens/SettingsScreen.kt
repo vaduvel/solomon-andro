@@ -87,6 +87,7 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     var showLimits by remember { mutableStateOf(false) }
     var showMistral by remember { mutableStateOf(false) }
     var showBank by remember { mutableStateOf(false) }
+    var showBankSetup by remember { mutableStateOf(false) }
     var showShortcuts by remember { mutableStateOf(false) }
     var showDataSources by remember { mutableStateOf(false) }
 
@@ -104,6 +105,10 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
     }
     if (showBank) {
         ro.solomon.app.ui.bank.ConnectBankScreen(onBack = { showBank = false })
+        return
+    }
+    if (showBankSetup) {
+        ro.solomon.app.ui.bank.EnableBankingSetupScreen(onClose = { showBankSetup = false })
         return
     }
     if (showShortcuts) {
@@ -141,6 +146,7 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
         Spacer(Modifier.height(SolSpacing.base))
         SectionTitle("Conectivitate")
         SettingsRow("Conectează banca (Open Banking)", "8 bănci RO") { showBank = true }
+        SettingsRow("Configurare Enable Banking", "APP_ID + cheie RSA") { showBankSetup = true }
         SettingsRow("Automatizare plăți (Tasker/Macrodroid)", "ghid pas-cu-pas") { showShortcuts = true }
         SettingsRow("Import email-uri tranzacții", "configurează") { showMistral = true }
 
@@ -359,7 +365,7 @@ private fun MistralSettingsScreen(onClose: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(SolSpacing.md)
         ) {
             Text(
-                "Mistral procesează datele în UE (Paris), e GDPR-native și ISO 27001. Când e activ, chat-ul și comenzile de tip „adaugă chirie 1500 RON" folosesc Mistral în loc de template-uri locale.",
+                "Mistral procesează datele în UE (Paris), e GDPR-native și ISO 27001. Când e activ, chat-ul și comenzile de tip „adaugă chirie 1500 RON\u201D folosesc Mistral în loc de template-uri locale.",
                 color = SolomonColors.TextSecondary,
                 style = MaterialTheme.typography.bodyMedium
             )

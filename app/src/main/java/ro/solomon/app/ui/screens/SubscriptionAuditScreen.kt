@@ -33,8 +33,6 @@ import ro.solomon.analytics.SubscriptionAuditReport
 import ro.solomon.analytics.SubscriptionAuditor
 import ro.solomon.core.domain.Subscription
 import ro.solomon.core.format.RomanianMoneyFormatter
-import androidx.compose.ui.graphics.Color
-
 class SubscriptionAuditViewModel : ViewModel() {
     data class State(val loading: Boolean = true, val report: SubscriptionAuditReport? = null)
 

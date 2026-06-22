@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ro.solomon.app.ui.components.EmptyStateView
-import ro.solomon.app.ui.components.SolAccent
+import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.components.SolBackButton
 import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolHeroCard
@@ -131,7 +131,7 @@ private fun HeroCard() {
 
 @Composable
 private fun WhyInsight() {
-    SolInsightCard(icon = "🔒", label = "DE CE?", timestamp = "100% local", accent = SolAccent.Blue) {
+    SolInsightCard(label = "DE CE?", timestamp = "100% local", accent = SolAccent.Blue) {
         Text(
             "Datele tale nu părăsesc telefonul. Solomon citește notificările prin API-ul oficial Android (NotificationListenerService) — nu interceptăm SMS sau alte aplicații. Tu controlezi exact ce partajezi.",
             color = SolomonColors.TextSecondary, fontSize = 13.sp, lineHeight = 18.sp
@@ -181,7 +181,7 @@ private fun StepRow(step: ShortcutStep) {
 
 @Composable
 private fun TroubleshootingInsight() {
-    SolInsightCard(icon = "⚠", label = "DACĂ NU PRINDE NOTIFICĂRI", timestamp = "Verifică permisiunile", accent = SolAccent.Amber) {
+    SolInsightCard(label = "DACĂ NU PRINDE NOTIFICĂRI", timestamp = "Verifică permisiunile", accent = SolAccent.Amber) {
         Text(
             "Multe aplicații de banking (BT Pay, George, Revolut) folosesc notificări protejate. Intră în Setări → Aplicații → [Banca ta] → Notificări și asigură-te că toate categoriile sunt activate. Apoi revino în Solomon.",
             color = SolomonColors.TextSecondary, fontSize = 13.sp, lineHeight = 18.sp

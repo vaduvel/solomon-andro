@@ -69,7 +69,7 @@ sealed class LLMError : Exception() {
     object Timeout : LLMError()
     object EmptyResponse : LLMError()
     data class ProviderError(override val message: String) : LLMError()
-    data class NetworkError(override val message: String, val cause: Throwable? = null) : LLMError()
+    data class NetworkError(override val message: String, val networkCause: Throwable? = null) : LLMError()
 }
 
 object SolomonLLM {
