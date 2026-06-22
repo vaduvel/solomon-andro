@@ -141,7 +141,7 @@ class ChatViewModel : ViewModel() {
                 val kind = args.enumOrElse(args.stringOrNull("kind"), ObligationKind.entries.toList()) { ObligationKind.other }
                 if (amount <= 0) return "Suma trebuie să fie > 0."
                 persistObligation(name, amount, day, kind)
-                "Am adăugat obligația «$name» de $amount RON pe $day."
+                "Am adăugat obligația «name» de $amount RON pe $day.".replace("«name»", "«$name»")
             }
             "add_goal" -> {
                 val dest = args.stringOrNull("destination") ?: return "Lipsește destinația obiectivului."
@@ -260,7 +260,7 @@ class ChatViewModel : ViewModel() {
         val match = all.firstOrNull { it.destination?.contains(destination, ignoreCase = true) == true }
             ?: return "Nu am găsit obiectivul «$destination»."
         ServiceLocator.goalRepo.delete(match.id)
-        return "Am șers obiectivul «${match.destination}»."
+        return "Am șters obiectivul «${match.destination}»."
     }
 
     private suspend fun deleteSubscriptionByName(name: String): String {

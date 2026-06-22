@@ -76,9 +76,9 @@ class TodayViewModel : ViewModel() {
             .combine(ServiceLocator.userRepo.observeProfile()) { txns, profile -> txns to profile }
             .combine(ServiceLocator.obligationRepo.observeAll()) { (txns, profile), obligs -> Triple(txns, profile, obligs) }
             .combine(ServiceLocator.subRepo.observeAll()) { (txns, profile, obligs), subs ->
-                val today = System.currentTimeMillis() / 1000L
-                val dayStart = today - (today % 86400L)
-                val dayEnd = dayStart + 86400L
+                val nowMillis = System.currentTimeMillis()
+                val dayStart = nowMillis - (nowMillis % 86_400_000L)
+                val dayEnd = dayStart + 86_400_000L
                 val todayTxns = txns.filter { it.date in dayStart until dayEnd }
                 val incoming = todayTxns.filter { it.isIncoming }.sumOf { it.amount.amount }
                 val outgoing = todayTxns.filter { it.isOutgoing }.sumOf { it.amount.amount }
@@ -93,7 +93,7 @@ class TodayViewModel : ViewModel() {
                 val days = daysUntilDayOfMonth(payday, System.currentTimeMillis()).coerceAtLeast(1)
                 val safePerDay = (balance / days).coerceAtLeast(0)
 
-                val monthStart = dayStart - 30L * 86400L
+                val monthStart = dayStart - 30L * 86_400_000L
                 val monthlyByCat = txns
                     .filter { it.isOutgoing && it.date >= monthStart }
                     .groupBy { it.category }
@@ -185,7 +185,7 @@ class TodayViewModel : ViewModel() {
         if (ServiceLocator.missionEngine.active.value != null) return@launch
         val txns = ServiceLocator.txnRepo.fetchAll()
         if (txns.isEmpty()) return@launch
-        val last30Start = System.currentTimeMillis() / 1000L - 30L * 86400L
+        val last30Start = System.currentTimeMillis() - 30L * 86_400_000L
         val recent = txns.filter { it.date >= last30Start && it.isOutgoing }
         if (recent.isEmpty()) return@launch
         val grouped = recent.groupBy { it.category }

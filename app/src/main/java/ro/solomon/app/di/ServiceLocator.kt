@@ -20,7 +20,6 @@ import ro.solomon.app.services.MistralConfig
 import ro.solomon.app.services.MissionEngine
 import ro.solomon.llm.LLMProvider
 import ro.solomon.llm.MistralLLMProvider
-import ro.solomon.llm.SmartLLMProvider
 import ro.solomon.llm.TemplateLLMProvider
 import ro.solomon.moments.MomentEngine
 import ro.solomon.moments.MomentOrchestrator

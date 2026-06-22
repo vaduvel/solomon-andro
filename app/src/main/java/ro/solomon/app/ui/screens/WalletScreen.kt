@@ -217,7 +217,7 @@ private fun ObligationsList(
                 Text(o.name, color = SolomonColors.TextPrimary)
                 Text("Ziua ${o.dayOfMonth} • ${o.kind.displayNameRO}", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
             }
-            Text("${o.amount.amount} RON", color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall)
+            Text(RomanianMoneyFormatter.format(o.amount, RomanianMoneyFormatter.Style.short), color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall)
             Spacer(Modifier.width(SolSpacing.xs))
             Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
         }
@@ -246,7 +246,7 @@ private fun GoalsList(
                 .padding(vertical = SolSpacing.sm)
         ) {
             Text(g.destination ?: g.kind.displayNameRO, color = SolomonColors.TextPrimary)
-            Text("${g.amountSaved.amount} / ${g.amountTarget.amount} RON", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+            Text("${RomanianMoneyFormatter.format(g.amountSaved.amount, RomanianMoneyFormatter.Style.bareNumber)} / ${RomanianMoneyFormatter.format(g.amountTarget.amount, RomanianMoneyFormatter.Style.bareNumber)} RON", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(4.dp))
             LinearProgressIndicator(
                 progress = { pct.coerceIn(0f, 1f) },
@@ -281,7 +281,7 @@ private fun SubscriptionsList(
         ) {
             Column(Modifier.weight(1f)) {
                 Text(s.name, color = SolomonColors.TextPrimary)
-                Text("${s.amountMonthly.amount} RON/lună", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+                Text("${RomanianMoneyFormatter.format(s.amountMonthly.amount, RomanianMoneyFormatter.Style.bareNumber)} RON/lună", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
             }
             AssistChip(onClick = {}, label = { Text(s.cancellationDifficulty.displayNameRO) })
             Spacer(Modifier.width(SolSpacing.xs))
