@@ -1,5 +1,6 @@
 package ro.solomon.app.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
@@ -44,6 +45,7 @@ fun SolomonApp() {
         val openChat = remember { mutableStateOf(false) }
 
         Scaffold(
+            containerColor = ro.solomon.app.ui.theme.SolomonColors.Background,
             bottomBar = {
                 NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                     tabs.forEachIndexed { index, tab ->
@@ -62,13 +64,15 @@ fun SolomonApp() {
                 }
             }
         ) { padding ->
-            Modifier.padding(padding)
-            when (selectedTab) {
-                0 -> TodayScreen()
-                1 -> AnalysisScreen()
-                2 -> WalletScreen()
-                3 -> { openChat.value = true; selectedTab = 0 }
-                4 -> SettingsScreen()
+            Box(modifier = Modifier.padding(padding)) {
+                ro.solomon.app.ui.components.MeshBackground()
+                when (selectedTab) {
+                    0 -> TodayScreen()
+                    1 -> AnalysisScreen()
+                    2 -> WalletScreen()
+                    3 -> { openChat.value = true; selectedTab = 0 }
+                    4 -> SettingsScreen()
+                }
             }
         }
 
