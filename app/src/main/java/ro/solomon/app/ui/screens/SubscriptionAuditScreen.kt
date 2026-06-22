@@ -131,7 +131,7 @@ private fun Hero(report: SubscriptionAuditReport) {
             Text("RON / lună", color = SolomonColors.TextTertiary, fontSize = 14.sp, modifier = Modifier.padding(bottom = 6.dp))
         }
         Spacer(Modifier.height(SolSpacing.xs))
-        Text("= ${report.annualRecoverable.amount} RON / an", color = SolomonColors.Amber, fontSize = 13.sp)
+        Text("= ${RomanianMoneyFormatter.format(report.annualRecoverable.amount, RomanianMoneyFormatter.Style.bareNumber)} RON / an", color = SolomonColors.Amber, fontSize = 13.sp)
     }
 }
 
@@ -148,7 +148,7 @@ private fun Insight(report: SubscriptionAuditReport) {
             val names = report.ghostSubscriptions.take(3).joinToString(", ") { it.name }
             val verb = if (report.ghostSubscriptions.size == 1) "n-a fost deschis" else "n-au fost deschise"
             Text(
-                "$names $verb în 90+ zile. Recuperabil: ${report.monthlyRecoverable.amount} RON/lună.",
+                "$names $verb în 90+ zile. Recuperabil: ${RomanianMoneyFormatter.format(report.monthlyRecoverable.amount, RomanianMoneyFormatter.Style.bareNumber)} RON/lună.",
                 color = SolomonColors.TextSecondary,
                 fontSize = 14.sp
             )
@@ -179,7 +179,7 @@ private fun GhostRow(sub: Subscription) {
             )
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text("${sub.amountMonthly.amount}", color = SolomonColors.TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            Text(RomanianMoneyFormatter.format(sub.amountMonthly.amount, RomanianMoneyFormatter.Style.bareNumber), color = SolomonColors.TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
             Text("RON / lună", color = SolomonColors.TextTertiary, fontSize = 11.sp)
         }
     }
@@ -201,7 +201,7 @@ private fun ActiveRow(sub: Subscription) {
             Text("Folosit recent", color = SolomonColors.TextTertiary, fontSize = 11.sp)
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text("${sub.amountMonthly.amount}", color = SolomonColors.TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            Text(RomanianMoneyFormatter.format(sub.amountMonthly.amount, RomanianMoneyFormatter.Style.bareNumber), color = SolomonColors.TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
             Text("RON / lună", color = SolomonColors.TextTertiary, fontSize = 11.sp)
         }
     }

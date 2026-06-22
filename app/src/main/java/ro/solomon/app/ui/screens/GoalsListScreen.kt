@@ -122,7 +122,7 @@ private fun Content(reports: List<GoalProgressReport>) {
                     )
                     Spacer(Modifier.height(SolSpacing.sm))
                     Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
-                        if (totalMonthly > 0) SolChip("+${totalMonthly} lună", accent = SolAccent.Mint)
+                        if (totalMonthly > 0) SolChip("+${RomanianMoneyFormatter.format(totalMonthly, RomanianMoneyFormatter.Style.bareNumber)} lună", accent = SolAccent.Mint)
                         if (maxMonths > 0) SolChip("$maxMonths luni", accent = SolAccent.Mint)
                     }
                 }
@@ -134,7 +134,7 @@ private fun Content(reports: List<GoalProgressReport>) {
             val text = if (first != null) {
                 val monthly = first.monthlyRequired.amount
                 val months = if (first.monthsRemaining > 0) "${first.monthsRemaining} luni" else "termen scurt"
-                "Dacă ții ritmul de +$monthly RON/lună, ajungi la ${first.goal.kind.displayNameRO} în $months."
+                "Dacă ții ritmul de +${RomanianMoneyFormatter.format(monthly, RomanianMoneyFormatter.Style.bareNumber)} RON/lună, ajungi la ${first.goal.kind.displayNameRO} în $months."
             } else {
                 "Setează contribuții lunare ca Solomon să proiecteze când ajungi la fiecare obiectiv."
             }
@@ -192,13 +192,13 @@ private fun GoalRow(report: GoalProgressReport) {
         )
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                "${goal.amountSaved.amount} / ${goal.amountTarget.amount} RON",
+                "${RomanianMoneyFormatter.format(goal.amountSaved.amount, RomanianMoneyFormatter.Style.bareNumber)} / ${RomanianMoneyFormatter.format(goal.amountTarget.amount, RomanianMoneyFormatter.Style.bareNumber)} RON",
                 color = SolomonColors.TextSecondary,
                 fontSize = 11.sp
             )
             if (report.monthlyRequired.amount > 0) {
                 Text(
-                    "+${report.monthlyRequired.amount}/lună",
+                    "+${RomanianMoneyFormatter.format(report.monthlyRequired.amount, RomanianMoneyFormatter.Style.bareNumber)}/lună",
                     color = SolomonColors.TextTertiary,
                     fontSize = 11.sp
                 )
