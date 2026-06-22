@@ -15,7 +15,10 @@ import ro.solomon.storage.entity.*
         GoalEntity::class,
         UserProfileEntity::class
     ],
-    version = 1,
+    // v2: monetary amounts are now persisted in bani (minor units) instead of
+    // whole lei. The amount_ron column therefore carries bani going forward.
+    // Destructive migration is acceptable pre-release and wipes old whole-lei rows.
+    version = 2,
     exportSchema = false
 )
 abstract class SolomonDatabase : RoomDatabase() {

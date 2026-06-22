@@ -14,12 +14,12 @@ object DemoDataGenerator {
 
         val obligs = listOf(
             Obligation(
-                id = "demo-chirie", name = "Chirie", amount = Money(1500),
+                id = "demo-chirie", name = "Chirie", amount = Money.fromLei(1500),
                 dayOfMonth = 5, kind = ObligationKind.rent_mortgage,
                 confidence = ObligationConfidence.declared, since = now, nextDueDate = now + 5L * 86400
             ),
             Obligation(
-                id = "demo-internet", name = "Internet", amount = Money(80),
+                id = "demo-internet", name = "Internet", amount = Money.fromLei(80),
                 dayOfMonth = 15, kind = ObligationKind.utility,
                 confidence = ObligationConfidence.declared, since = now, nextDueDate = now + 15L * 86400
             )
@@ -29,7 +29,7 @@ object DemoDataGenerator {
         val goals = listOf(
             Goal(
                 id = "demo-vacanta", kind = GoalKind.vacation, destination = "Vacanță vară",
-                amountTarget = Money(3000), amountSaved = Money(450),
+                amountTarget = Money.fromLei(3000), amountSaved = Money.fromLei(450),
                 deadline = now + 180L * 86400
             )
         )
@@ -37,13 +37,13 @@ object DemoDataGenerator {
 
         val subs = listOf(
             Subscription(
-                id = "demo-netflix", name = "Netflix", amountMonthly = Money(39),
+                id = "demo-netflix", name = "Netflix", amountMonthly = Money.fromLei(39),
                 lastUsedDaysAgo = 14, cancellationDifficulty = CancellationDifficulty.medium,
                 cancellationUrl = "https://netflix.com/cancel", cancellationStepsSummary = "Cont → Setări → Anulează",
                 alternativeSuggestion = null, cancellationWarning = null
             ),
             Subscription(
-                id = "demo-spotify", name = "Spotify", amountMonthly = Money(29),
+                id = "demo-spotify", name = "Spotify", amountMonthly = Money.fromLei(29),
                 lastUsedDaysAgo = 1, cancellationDifficulty = CancellationDifficulty.easy,
                 cancellationUrl = null, cancellationStepsSummary = "App → Premium → Anulează",
                 alternativeSuggestion = null, cancellationWarning = null
@@ -69,7 +69,7 @@ object DemoDataGenerator {
             val n = rng.nextInt(1, 4)
             repeat(n) {
                 val (m, cat) = merchants.random(rng)
-                val amount = Money(rng.nextInt(15, 250))
+                val amount = Money.fromLei(rng.nextInt(15, 250))
                 val isIncome = day % 14 == 0 && rng.nextDouble() < 0.5
                 list.add(
                     Transaction(
