@@ -1,0 +1,1160 @@
+2026-04-28T09:23:18.676Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-28T09:23:18.679Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-28T09:23:18.680Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-28T09:23:18.686Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-28T09:23:18.706Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-28T09:23:19.296Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-04-28T09:23:19.297Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-28T09:23:19.297Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-28T09:23:19.297Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-04-28T09:23:19.297Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-04-28T09:23:19.354Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"result":{"prompts":[{"name":"get_code_for_selection","description":"Prompt to generate code for the currently selected design elements in Figma"},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo."},{"name":"map_selection_to_code_connect","description":"Provides a prompt to map the currently selected design elements in Figma to code components in the codebase using Code Connect.","arguments":[{"name":"nodeId","required":false,"description":"Optional, the ID of the node to generate an image for. When provided, this should be a valid node ID in the Figma document in, eg. \"123:456\"."},{"name":"source","required":true,"description":"The source of the code component to link to. This should be a valid path or URL to the code component in your codebase."},{"name":"componentName","required":true,"description":"The name of the code component to link to. This should match the name of the component in your codebase."}]}]}} { metadata: undefined }
+2026-04-28T09:23:19.355Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"result":{"resources":[]}} { metadata: undefined }
+2026-04-28T09:23:20.414Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_design_context","description":"Get design context for a Figma node — the primary tool for design-to-code workflows. Returns reference code, a screenshot, and contextual metadata that should be adapted...[9287 chars truncated]...d be a valid node ID in the Figma document."},"includeImagesOfNodes":{"type":"boolean","default":true,"description":"Whether to include images of nodes in the response"}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}}]}} { metadata: undefined }
+2026-04-28T19:11:48.967Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-28T19:11:48.968Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-28T19:11:49.012Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-28T19:11:49.185Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-28T19:11:49.185Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-28T19:11:48.966Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-29T08:46:18.768Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-29T08:46:18.772Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-29T08:46:18.773Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-29T08:46:18.774Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-29T08:46:18.808Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-29T08:46:19.024Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:46:19.024Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-29T08:46:19.148Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:46:19.151Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-29T08:46:19.151Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:46:19.024Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-29T08:46:19.151Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-29T08:46:19.152Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-29T08:46:20.342Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-29T08:46:20.347Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-29T08:46:21.189Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-29T08:46:21.191Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-29T08:46:21.388Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-29T08:46:21.389Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-29T08:46:21.390Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-29T08:47:53.484Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:47:53.484Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-29T08:47:53.535Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:47:53.550Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-29T08:47:53.550Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T08:47:53.484Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-29T08:48:18.869Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-29T08:48:18.873Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-29T08:48:18.878Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-29T08:48:18.880Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-29T08:48:20.843Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-29T08:48:20.846Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-29T08:48:21.623Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-29T08:48:21.623Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-29T08:48:21.624Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-29T19:28:26.878Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T19:28:26.879Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-29T19:28:26.936Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T19:28:27.031Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-29T19:28:27.031Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-29T19:28:26.877Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-30T04:13:47.308Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-30T04:13:47.312Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-30T04:13:47.314Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-30T04:13:47.315Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-30T04:13:47.442Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-30T04:13:48.923Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-04-30T04:13:49.776Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-30T04:13:49.778Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-30T04:13:49.778Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-04-30T04:13:49.778Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-04-30T04:13:49.812Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"error":{"code":-32603,"message":"No Figma window open"}} { metadata: undefined }
+2026-04-30T04:13:49.812Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"error":{"code":-32603,"message":"No Figma window open"}} { metadata: undefined }
+2026-04-30T04:14:19.678Z [Figma] [info] Message from client: {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":1,"reason":"McpError: MCP error -32001: Request timed out"}} { metadata: undefined }
+2026-04-30T04:32:33.905Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T04:32:33.905Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-30T04:32:33.955Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T04:32:33.999Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-30T04:32:33.999Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T04:32:33.904Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-30T04:32:52.776Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-30T04:32:52.781Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-30T04:32:52.785Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-30T04:32:52.789Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-30T04:32:54.733Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-30T04:32:54.750Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-04-30T04:32:55.950Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-30T04:32:55.950Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-30T04:32:55.950Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-04-30T04:32:55.950Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-04-30T04:32:55.966Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"error":{"code":-32603,"message":"No Figma window open"}} { metadata: undefined }
+2026-04-30T04:32:55.968Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"error":{"code":-32603,"message":"No Figma window open"}} { metadata: undefined }
+2026-04-30T04:33:25.952Z [Figma] [info] Message from client: {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":1,"reason":"McpError: MCP error -32001: Request timed out"}} { metadata: undefined }
+2026-04-30T06:27:55.617Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T06:27:55.617Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-04-30T06:27:55.648Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T06:27:55.692Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-04-30T06:27:55.692Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-04-30T06:27:55.616Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-04-30T08:19:53.749Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-04-30T08:19:53.753Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-04-30T08:19:53.754Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-04-30T08:19:53.755Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-04-30T08:19:55.854Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-30T08:19:55.856Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-04-30T08:19:55.990Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-04-30T08:19:55.990Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-04-30T08:19:55.991Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-01T05:58:06.908Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-01T05:58:06.908Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-01T05:58:06.965Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-01T05:58:07.034Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-01T05:58:07.034Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-01T05:58:06.908Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-09T16:41:55.648Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-09T16:41:55.652Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-09T16:41:55.653Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-09T16:41:55.656Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-09T16:41:57.573Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-09T16:41:57.575Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-09T16:41:57.838Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-09T16:41:57.841Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-09T16:41:57.854Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-09T17:43:29.382Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-09T17:43:29.383Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-09T17:43:29.420Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-09T17:43:29.381Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-09T17:43:29.445Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-09T17:43:29.445Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-09T17:43:44.784Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-09T17:43:44.788Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-09T17:43:44.790Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-09T17:43:44.791Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-09T17:43:46.029Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-09T17:43:46.031Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-09T17:43:46.130Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-09T17:43:46.130Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-09T17:43:46.136Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-11T06:46:01.215Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-11T06:46:01.216Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-11T06:46:01.345Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-11T06:46:01.683Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-11T06:46:01.683Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-11T06:46:01.214Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-11T07:52:28.154Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-11T07:52:28.157Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-11T07:52:28.159Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-11T07:52:28.160Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-11T07:52:28.267Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-11T07:52:29.693Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-11T07:52:29.886Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-11T07:52:29.886Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-11T07:52:29.887Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-12T05:07:45.467Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T05:07:45.467Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-12T05:07:45.531Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T05:07:45.584Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-12T05:07:45.584Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T05:07:45.467Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-12T05:08:59.594Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-12T05:08:59.605Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-12T05:08:59.610Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-12T05:08:59.613Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-12T05:08:59.791Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-12T05:09:02.042Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-12T05:09:02.985Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-12T05:09:02.988Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-12T05:09:02.991Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-12T09:28:25.685Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T09:28:25.685Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-12T09:28:25.740Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T09:28:25.783Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-12T09:28:25.783Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-12T09:28:25.685Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-13T09:28:24.795Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-13T09:28:24.802Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-13T09:28:24.812Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-13T09:28:24.816Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-13T09:28:24.864Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:28:26.635Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:28:26.951Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:28:26.951Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-13T09:28:26.971Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:28:26.974Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-13T09:28:26.974Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:28:26.951Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-13T09:28:26.974Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-13T09:28:26.977Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-13T09:28:27.029Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-13T09:28:27.031Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-13T09:28:27.440Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:28:27.443Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:28:27.607Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-13T09:28:27.607Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-13T09:28:27.610Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-13T09:28:44.236Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:28:44.236Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-13T09:28:44.256Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:28:44.236Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-13T09:28:44.290Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-13T09:28:44.290Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T09:29:08.324Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-13T09:29:08.328Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-13T09:29:08.331Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-13T09:29:08.334Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-13T09:29:08.404Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:29:08.748Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T09:29:08.849Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-13T09:29:08.849Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-13T09:29:08.850Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-13T18:07:50.273Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T18:07:50.273Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-13T18:07:50.335Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T18:07:50.394Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-13T18:07:50.394Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-13T18:07:50.272Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-13T18:08:29.028Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-13T18:08:29.032Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-13T18:08:29.034Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-13T18:08:29.036Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-13T18:08:29.160Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T18:08:30.495Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-13T18:08:30.854Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-13T18:08:30.854Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-13T18:08:30.855Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-15T04:30:37.869Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-15T04:30:37.869Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-15T04:30:37.918Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-15T04:30:37.971Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-15T04:30:37.972Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-15T04:30:37.869Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-15T04:30:45.767Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-15T04:30:45.771Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-15T04:30:45.774Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-15T04:30:45.776Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-15T04:30:45.875Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-15T04:30:47.331Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-15T04:30:48.075Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-15T04:30:48.099Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-15T04:30:48.100Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-16T18:08:11.379Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-16T18:08:11.380Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-16T18:08:11.665Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-16T18:08:11.376Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-16T18:08:11.818Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-16T18:08:11.819Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-16T18:08:21.942Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-16T18:08:21.947Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-16T18:08:21.950Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-16T18:08:21.953Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-16T18:08:24.082Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-16T18:08:24.097Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-05-16T18:08:25.645Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-16T18:08:25.646Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-16T18:08:25.646Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-05-16T18:08:25.646Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-05-16T18:08:25.709Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_design_context","description":"Get design context for a Figma node — the primary tool for design-to-code workflows. Returns reference code, a screenshot, and contextual metadata that should be adapted...[8515 chars truncated]...d be a valid node ID in the Figma document."},"includeImagesOfNodes":{"type":"boolean","default":true,"description":"Whether to include images of nodes in the response"}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}}]}} { metadata: undefined }
+2026-05-16T18:08:25.710Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"result":{"prompts":[{"name":"get_code_for_selection","description":"Prompt to generate code for the currently selected design elements in Figma"},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo."},{"name":"map_selection_to_code_connect","description":"Provides a prompt to map the currently selected design elements in Figma to code components in the codebase using Code Connect.","arguments":[{"name":"nodeId","required":false,"description":"Optional, the ID of the node to generate an image for. When provided, this should be a valid node ID in the Figma document in, eg. \"123:456\"."},{"name":"source","required":true,"description":"The source of the code component to link to. This should be a valid path or URL to the code component in your codebase."},{"name":"componentName","required":true,"description":"The name of the code component to link to. This should match the name of the component in your codebase."}]}]}} { metadata: undefined }
+2026-05-16T18:08:25.744Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"result":{"resources":[]}} { metadata: undefined }
+2026-05-17T07:06:03.906Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-17T07:06:03.906Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-17T07:06:03.939Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-17T07:06:03.996Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-17T07:06:03.996Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-17T07:06:03.905Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-17T07:06:16.895Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-17T07:06:16.899Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-17T07:06:16.902Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-17T07:06:16.904Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-17T07:06:18.550Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-17T07:06:18.589Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-05-17T07:06:18.781Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-17T07:06:18.782Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-17T07:06:18.782Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-05-17T07:06:18.782Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-05-17T07:06:18.803Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_design_context","description":"Get design context for a Figma node — the primary tool for design-to-code workflows. Returns reference code, a screenshot, and contextual metadata that should be adapted...[8515 chars truncated]...d be a valid node ID in the Figma document."},"includeImagesOfNodes":{"type":"boolean","default":true,"description":"Whether to include images of nodes in the response"}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}}]}} { metadata: undefined }
+2026-05-17T07:06:18.804Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"result":{"prompts":[{"name":"get_code_for_selection","description":"Prompt to generate code for the currently selected design elements in Figma"},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo."},{"name":"map_selection_to_code_connect","description":"Provides a prompt to map the currently selected design elements in Figma to code components in the codebase using Code Connect.","arguments":[{"name":"nodeId","required":false,"description":"Optional, the ID of the node to generate an image for. When provided, this should be a valid node ID in the Figma document in, eg. \"123:456\"."},{"name":"source","required":true,"description":"The source of the code component to link to. This should be a valid path or URL to the code component in your codebase."},{"name":"componentName","required":true,"description":"The name of the code component to link to. This should match the name of the component in your codebase."}]}]}} { metadata: undefined }
+2026-05-17T07:06:18.804Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"result":{"resources":[]}} { metadata: undefined }
+2026-05-18T08:54:15.706Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-18T08:54:15.710Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-18T08:54:15.711Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-18T08:54:15.712Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-18T08:54:15.814Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T08:54:16.106Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T08:54:16.231Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-18T08:54:16.231Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-18T08:54:16.232Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-18T14:25:47.426Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T14:25:47.427Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-18T14:25:47.519Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T14:25:47.584Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-18T14:25:47.584Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T14:25:47.425Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-18T14:26:04.063Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-18T14:26:04.067Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-18T14:26:04.069Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-18T14:26:04.073Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-18T14:26:04.211Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T14:26:04.847Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T14:26:04.878Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-18T14:26:04.878Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-18T14:26:04.879Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-18T18:30:43.359Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T18:30:43.360Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-18T18:30:43.420Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T18:30:43.469Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-18T18:30:43.469Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-18T18:30:43.359Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-18T18:31:00.484Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-18T18:31:00.488Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-18T18:31:00.490Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-18T18:31:00.492Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-18T18:31:00.630Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T18:31:01.982Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-18T18:31:03.091Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-18T18:31:03.116Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-18T18:31:03.117Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-19T11:08:02.891Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:02.892Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-05-19T11:08:02.964Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-19T11:08:02.964Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:05.729Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:05.729Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-19T11:08:05.729Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-19T11:08:05.731Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-19T11:08:05.733Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-19T11:08:05.735Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-19T11:08:05.983Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-19T11:08:06.244Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-19T11:08:07.294Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-19T11:08:07.298Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-19T11:08:07.299Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-19T11:08:56.251Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:56.251Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-19T11:08:56.260Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:56.281Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-19T11:08:56.281Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-19T11:08:56.251Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-19T17:48:50.685Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-19T17:48:50.689Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-19T17:48:50.695Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-19T17:48:50.697Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-19T17:48:53.897Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-19T17:48:53.929Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-19T17:48:54.018Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-19T17:48:54.018Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-19T17:48:54.020Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-20T06:57:56.689Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-20T06:57:56.689Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-20T06:57:56.762Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-20T06:57:56.687Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-20T06:57:56.955Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-20T06:57:56.955Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-21T11:08:02.710Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-21T11:08:02.716Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-21T11:08:04.864Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-21T11:08:04.886Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-21T11:08:05.358Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-21T11:08:06.544Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},"resources":{"listChanged":true,"subscribe":true},"prompts":{"listChanged":true}},"serverInfo":{"name":"Figma Dev Mode MCP Server","version":"1.0....[18926 chars truncated]...<blob>","mimeType":"image/png"}],"websiteUrl":"https://developers.figma.com/docs/figma-mcp-server/"}}} { metadata: undefined }
+2026-05-21T11:08:06.622Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-21T11:08:06.622Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-21T11:08:06.622Z [Figma] [info] Message from client: {"method":"prompts/list","params":{},"jsonrpc":"2.0","id":2} { metadata: undefined }
+2026-05-21T11:08:06.622Z [Figma] [info] Message from client: {"method":"resources/list","params":{},"jsonrpc":"2.0","id":3} { metadata: undefined }
+2026-05-21T11:08:06.686Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":1,"result":{"tools":[{"name":"get_design_context","description":"Get design context for a Figma node — the primary tool for design-to-code workflows. Returns reference code, a screenshot, and contextual metadata that should be adapted...[9199 chars truncated]... node id, omit the `nodeId` field entirely."},"includeImagesOfNodes":{"type":"boolean","default":true,"description":"Whether to include images of nodes in the response"}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}}]}} { metadata: undefined }
+2026-05-21T11:08:06.689Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":2,"result":{"prompts":[{"name":"get_code_for_selection","description":"Prompt to generate code for the currently selected design elements in Figma"},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo."},{"name":"map_selection_to_code_connect","description":"Provides a prompt to map the currently selected design elements in Figma to code components in the codebase using Code Connect.","arguments":[{"name":"nodeId","required":false,"description":"Optional, the ID of the node to generate an image for. When provided, this should be a valid node ID in the Figma document in, eg. \"123:456\"."},{"name":"source","required":true,"description":"The source of the code component to link to. This should be a valid path or URL to the code component in your codebase."},{"name":"componentName","required":true,"description":"The name of the code component to link to. This should match the name of the component in your codebase."}]}]}} { metadata: undefined }
+2026-05-21T11:08:06.694Z [Figma] [info] Message from server: {"jsonrpc":"2.0","id":3,"result":{"resources":[]}} { metadata: undefined }
+2026-05-22T12:21:31.915Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-22T12:21:31.919Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-22T12:21:31.924Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-22T12:21:31.927Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-22T12:21:31.964Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-22T12:21:33.477Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-22T12:21:33.590Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-22T12:21:33.592Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-22T12:21:33.593Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-22T12:28:12.954Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T12:28:12.954Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-22T12:28:12.966Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T12:28:12.977Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-22T12:28:12.977Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T12:28:12.954Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-22T12:28:29.263Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-22T12:28:29.270Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-22T12:28:29.277Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-22T12:28:29.280Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-22T12:28:29.323Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-22T12:28:30.494Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-22T12:28:30.560Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-22T12:28:30.561Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-22T12:28:30.566Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-22T13:23:23.857Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T13:23:23.857Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-22T13:23:23.875Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T13:23:23.885Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-22T13:23:23.885Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-22T13:23:23.857Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-24T17:00:07.670Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-24T17:00:07.674Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-24T17:00:07.678Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-24T17:00:07.680Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-24T17:00:07.714Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T17:00:08.062Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T17:00:08.108Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-24T17:00:08.109Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T17:00:08.115Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T17:00:20.062Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T17:00:20.062Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-24T17:00:20.069Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T17:00:20.102Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-24T17:00:20.102Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T17:00:20.062Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-24T17:00:35.195Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-24T17:00:35.200Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-24T17:00:35.206Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-24T17:00:35.208Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-24T17:00:35.265Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T17:00:36.374Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T17:00:36.414Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-24T17:00:36.415Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T17:00:36.417Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T18:23:27.313Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:23:27.316Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-24T18:23:27.394Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:23:27.526Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-24T18:23:27.527Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:23:27.311Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-24T18:35:26.840Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-24T18:35:26.847Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-24T18:35:26.853Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-24T18:35:26.856Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-24T18:35:28.531Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T18:35:28.534Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-24T18:35:28.680Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-24T18:35:28.680Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T18:35:28.681Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-24T18:35:58.201Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:35:58.201Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-24T18:35:58.225Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:35:58.257Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-24T18:35:58.257Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-24T18:35:58.200Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-25T11:22:44.603Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-25T11:22:44.649Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-25T11:22:44.667Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-25T11:22:44.688Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-25T11:22:46.202Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-25T11:22:46.204Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-25T11:22:46.338Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-25T11:22:46.339Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-25T11:22:46.340Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-25T11:53:48.276Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-25T11:53:48.276Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-25T11:53:48.318Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-25T11:53:48.342Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-25T11:53:48.342Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-25T11:53:48.275Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-25T14:56:37.894Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-25T14:56:37.902Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-25T14:56:37.906Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-25T14:56:37.910Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-25T14:56:39.396Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-25T14:56:39.401Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-25T14:56:39.498Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-25T14:56:39.499Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-25T14:56:39.500Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-25T15:13:31.263Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-25T15:13:31.263Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-25T15:13:31.309Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-25T15:13:31.261Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-25T15:13:31.370Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-25T15:13:31.370Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-26T15:47:03.631Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-26T15:47:03.635Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-26T15:47:03.637Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-26T15:47:03.638Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-26T15:47:03.672Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-26T15:47:04.861Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-26T15:47:04.894Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-26T15:47:04.894Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-26T15:47:04.895Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-26T15:56:25.103Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-26T15:56:25.103Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-26T15:56:25.171Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-26T15:56:25.234Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-26T15:56:25.234Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-26T15:56:25.101Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-28T09:11:15.936Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-28T09:11:15.940Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-28T09:11:15.942Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-28T09:11:15.944Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-28T09:11:15.980Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T09:11:17.862Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T09:11:17.919Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-28T09:11:17.919Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T09:11:17.920Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T09:23:35.138Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T09:23:35.138Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-28T09:23:35.156Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T09:23:35.202Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-28T09:23:35.202Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T09:23:35.136Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-28T16:10:24.880Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-28T16:10:24.910Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-28T16:10:24.984Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-28T16:10:24.991Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-28T16:10:27.259Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T16:10:27.266Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T16:10:27.488Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-28T16:10:27.489Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T16:10:27.490Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T16:16:11.329Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T16:16:11.329Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-28T16:16:11.363Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T16:16:11.388Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-28T16:16:11.388Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T16:16:11.328Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-28T18:10:09.091Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-28T18:10:09.096Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-28T18:10:09.147Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-28T18:10:09.150Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-28T18:10:09.176Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T18:10:10.563Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T18:10:10.640Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-28T18:10:10.640Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T18:10:10.641Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T18:10:39.493Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:10:39.493Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-05-28T18:10:39.508Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-28T18:10:39.508Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:11:20.887Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:11:20.887Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-28T18:11:20.888Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-28T18:11:20.890Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-28T18:11:20.892Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-28T18:11:20.894Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-28T18:11:20.936Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T18:11:21.342Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-28T18:11:21.518Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-28T18:11:21.519Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T18:11:21.519Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-28T18:20:34.950Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:20:34.950Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-28T18:20:34.978Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:20:35.009Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-28T18:20:35.009Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-28T18:20:34.949Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-29T05:36:03.299Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-29T05:36:03.307Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-29T05:36:03.316Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-29T05:36:03.318Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-29T05:36:03.343Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:36:03.683Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:36:03.752Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-29T05:36:03.753Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-29T05:36:03.754Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-29T05:36:24.886Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:24.886Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-05-29T05:36:24.901Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-29T05:36:24.901Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:41.948Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:41.948Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-29T05:36:41.948Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-29T05:36:41.949Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-29T05:36:41.951Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-29T05:36:41.954Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-29T05:36:42.020Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:36:42.466Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:36:42.619Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-29T05:36:42.619Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-29T05:36:42.620Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-29T05:36:46.285Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:46.285Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-05-29T05:36:46.292Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:46.365Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-05-29T05:36:46.365Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-05-29T05:36:46.285Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-05-29T05:37:03.379Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-05-29T05:37:03.387Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-05-29T05:37:03.393Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-05-29T05:37:03.396Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-05-29T05:37:04.802Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:37:04.805Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-05-29T05:37:04.969Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-05-29T05:37:04.970Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-05-29T05:37:04.971Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-01T15:10:27.838Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-01T15:10:27.849Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-01T15:10:27.876Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-01T15:10:27.879Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-01T15:10:28.064Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-01T15:10:28.668Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-01T15:10:28.834Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-01T15:10:28.834Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-01T15:10:28.836Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T06:01:53.374Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T06:01:53.376Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T06:01:53.376Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-02T06:01:53.497Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T06:01:53.568Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T06:01:53.568Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T06:02:15.747Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T06:02:15.755Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T06:02:15.771Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T06:02:15.775Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T06:02:18.460Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T06:02:18.465Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T06:02:18.947Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T06:02:18.950Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T06:02:18.952Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T06:07:56.890Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T06:07:56.890Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T06:07:56.890Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-02T06:07:56.919Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T06:07:56.968Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T06:07:56.968Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:09:37.321Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T08:09:37.333Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T08:09:37.361Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T08:09:37.364Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T08:09:37.488Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T08:09:39.609Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T08:09:39.761Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T08:09:39.762Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T08:09:39.765Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T08:20:50.175Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:20:50.179Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-02T08:20:50.293Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T08:20:50.296Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:21:04.173Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T08:21:04.173Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:21:04.173Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T08:21:04.177Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T08:21:04.190Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T08:21:04.201Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T08:21:04.283Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T08:21:10.528Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T08:21:10.529Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T08:21:10.530Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T08:21:10.531Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T08:27:17.075Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T08:27:17.077Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:27:17.077Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-02T08:27:17.146Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T08:27:17.233Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T08:27:17.234Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T13:28:17.174Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T13:28:17.178Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T13:28:17.180Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T13:28:17.182Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T13:28:17.281Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T13:28:18.634Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T13:28:18.755Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T13:28:18.755Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T13:28:18.756Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T13:28:29.954Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T13:28:29.954Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-02T13:28:29.994Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T13:28:29.994Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T13:28:51.328Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T13:28:51.328Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T13:28:51.328Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T13:28:51.329Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T13:28:51.331Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T13:28:51.335Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T13:28:51.356Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T13:28:53.819Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T13:28:53.819Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T13:28:53.820Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T13:28:53.821Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T16:41:16.766Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T16:41:16.767Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-02T16:41:16.840Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T16:41:16.840Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T16:41:36.993Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T16:41:36.993Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T16:41:36.993Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-02T16:41:36.994Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-02T16:41:36.995Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-02T16:41:36.998Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-02T16:41:37.028Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T16:41:37.440Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-02T16:41:37.619Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-02T16:41:37.620Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T16:41:37.621Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-02T17:05:14.352Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-02T17:05:14.353Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T17:05:14.353Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-02T17:05:14.379Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-02T17:05:14.436Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-02T17:05:14.436Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-03T04:41:23.881Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-03T04:41:23.895Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-03T04:41:23.902Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-03T04:41:23.904Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-03T04:41:25.678Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-03T04:41:25.681Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-03T04:41:25.823Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-03T04:41:25.824Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-03T04:41:25.825Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-03T05:44:29.023Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-03T05:44:29.024Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-03T05:44:29.025Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-03T05:44:29.090Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-03T05:44:29.143Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-03T05:44:29.143Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-04T06:10:29.975Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-04T06:10:29.984Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-04T06:10:32.035Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-04T06:10:32.041Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-04T06:10:32.430Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-04T06:10:34.153Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-04T06:10:34.154Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-04T06:10:34.155Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-04T06:10:34.155Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-04T06:15:04.139Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-04T06:15:04.139Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-04T06:15:04.139Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-04T06:15:04.162Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-04T06:15:04.170Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-04T06:15:04.170Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-04T06:15:20.395Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-04T06:15:20.399Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-04T06:15:20.400Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-04T06:15:20.402Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-04T06:15:21.802Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-04T06:15:21.804Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-04T06:15:21.996Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-04T06:15:21.996Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-04T06:15:21.997Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:02:30.284Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-08T05:02:30.326Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-08T05:02:30.370Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-08T05:02:30.373Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-08T05:02:30.422Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:02:31.180Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:02:31.207Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-08T05:02:31.207Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:02:31.208Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:32:20.767Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-08T05:32:20.770Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:32:20.770Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-08T05:32:20.827Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:32:20.849Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-08T05:32:20.849Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:32:37.598Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-08T05:32:37.603Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-08T05:32:37.616Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-08T05:32:37.617Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-08T05:32:37.797Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:32:37.977Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:32:37.982Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-08T05:32:37.982Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:32:37.983Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:46:44.224Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:44.224Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-08T05:46:44.260Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-08T05:46:44.260Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:44.714Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-08T05:46:44.714Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:44.714Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-08T05:46:44.715Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-08T05:46:44.723Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-08T05:46:44.729Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-08T05:46:44.987Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:46:45.744Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:46:45.768Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-08T05:46:45.768Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:46:45.770Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:46:52.420Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:52.421Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-08T05:46:52.443Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-08T05:46:52.443Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:52.938Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-08T05:46:52.938Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:46:52.941Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-08T05:46:52.970Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-08T05:46:53.007Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-08T05:46:53.012Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-08T05:46:53.308Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:46:53.936Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-08T05:46:53.936Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-08T05:46:53.937Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:46:53.938Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-08T05:47:22.075Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-08T05:47:22.075Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:47:22.075Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-08T05:47:22.085Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-08T05:47:22.096Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-08T05:47:22.096Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T07:30:30.512Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-09T07:30:30.516Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-09T07:30:30.518Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-09T07:30:30.521Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-09T07:30:30.545Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T07:30:30.946Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T07:30:31.146Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-09T07:30:31.146Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T07:30:31.147Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T08:47:30.822Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T08:47:30.823Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-09T08:47:30.885Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-09T08:47:30.885Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T08:47:50.335Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-09T08:47:50.336Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T08:47:50.336Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-09T08:47:50.336Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-09T08:47:50.338Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-09T08:47:50.342Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-09T08:47:50.398Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T08:47:50.944Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T08:47:51.067Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-09T08:47:51.068Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T08:47:51.069Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T10:44:26.673Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-09T10:44:26.675Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T10:44:26.675Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-09T10:44:26.738Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T10:44:26.840Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-09T10:44:26.840Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T18:05:35.271Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-09T18:05:35.305Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-09T18:05:35.310Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-09T18:05:35.312Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-09T18:05:36.724Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T18:05:36.727Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T18:05:36.962Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-09T18:05:36.962Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T18:05:36.963Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T18:47:51.355Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T18:47:51.356Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-09T18:47:51.381Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-09T18:47:51.381Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T18:48:01.711Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-09T18:48:01.711Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T18:48:01.711Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-09T18:48:01.712Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-09T18:48:01.713Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-09T18:48:01.717Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-09T18:48:01.765Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T18:48:02.197Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-09T18:48:02.430Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-09T18:48:02.430Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T18:48:02.431Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-09T19:37:56.352Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-09T19:37:56.353Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T19:37:56.353Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-09T19:37:56.369Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-09T19:37:56.411Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-09T19:37:56.411Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:09:46.857Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T04:09:46.863Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T04:09:46.869Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T04:09:46.872Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T04:09:46.893Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:09:47.267Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:09:47.269Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T04:09:47.271Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:09:47.272Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:09:58.386Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-10T04:09:58.386Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:09:58.386Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-10T04:09:58.396Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:09:58.406Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-10T04:09:58.406Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:10:13.847Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T04:10:13.851Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T04:10:13.852Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T04:10:13.854Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T04:10:13.973Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:10:14.222Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:10:14.227Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T04:10:14.227Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:10:14.229Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:10:29.242Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:10:29.242Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-10T04:10:29.251Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-10T04:10:29.251Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:10:36.437Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-10T04:10:36.437Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:10:36.437Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T04:10:36.438Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T04:10:36.454Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T04:10:36.457Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T04:10:36.505Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:10:36.861Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:10:36.936Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T04:10:36.937Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:10:36.938Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:24:07.486Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:24:07.486Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-10T04:24:07.522Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-10T04:24:07.522Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:24:24.973Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-10T04:24:24.973Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T04:24:24.973Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T04:24:24.990Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T04:24:24.991Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T04:24:25.000Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T04:24:25.225Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:24:25.910Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T04:24:26.033Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T04:24:26.033Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T04:24:26.036Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T10:24:57.519Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-10T10:24:57.519Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T10:24:57.519Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-10T10:24:57.559Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T10:24:57.600Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-10T10:24:57.600Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T10:25:05.176Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T10:25:05.180Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T10:25:05.182Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T10:25:05.184Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T10:25:06.665Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T10:25:06.669Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T10:25:06.780Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T10:25:06.783Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T10:25:06.791Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T16:51:14.820Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-10T16:51:14.820Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T16:51:14.820Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-10T16:51:14.858Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T16:51:14.898Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-10T16:51:14.898Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-10T16:51:20.133Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-10T16:51:20.138Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-10T16:51:20.144Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-10T16:51:20.148Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-10T16:51:20.177Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T16:51:21.659Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-10T16:51:21.698Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-10T16:51:21.723Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-10T16:51:21.725Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-11T16:35:40.557Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-11T16:35:40.557Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T16:35:40.557Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-11T16:35:40.612Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T16:35:40.659Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-11T16:35:40.659Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T16:35:49.012Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-11T16:35:49.022Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-11T16:35:49.035Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-11T16:35:49.037Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-11T16:35:49.082Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-11T16:35:51.068Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-11T16:35:51.205Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-11T16:35:51.205Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-11T16:35:51.206Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-11T19:36:22.627Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-11T19:36:22.627Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T19:36:22.627Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-11T19:36:22.682Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T19:36:22.708Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-11T19:36:22.708Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-11T19:36:42.656Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-11T19:36:42.666Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-11T19:36:42.698Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-11T19:36:42.707Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-11T19:36:44.518Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-11T19:36:44.520Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-11T19:36:44.622Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-11T19:36:44.623Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-11T19:36:44.623Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T04:48:07.993Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-13T04:48:07.993Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T04:48:07.993Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-13T04:48:08.049Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T04:48:08.138Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-13T04:48:08.138Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T04:48:33.557Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-13T04:48:33.561Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-13T04:48:33.571Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-13T04:48:33.574Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-13T04:48:35.160Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T04:48:35.163Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T04:48:35.325Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-13T04:48:35.325Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T04:48:35.330Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T09:29:51.250Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-13T09:29:51.250Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T09:29:51.251Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-13T09:29:51.304Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T09:29:51.342Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-13T09:29:51.343Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T09:30:01.680Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-13T09:30:01.689Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-13T09:30:01.695Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-13T09:30:01.701Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-13T09:30:01.912Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T09:30:02.458Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T09:30:02.579Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-13T09:30:02.579Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T09:30:02.582Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T17:13:42.973Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-13T17:13:42.973Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T17:13:42.974Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-13T17:13:43.023Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T17:13:43.059Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-13T17:13:43.059Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-13T17:14:12.398Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-13T17:14:12.410Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-13T17:14:12.421Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-13T17:14:12.425Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-13T17:14:12.453Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T17:14:13.724Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-13T17:14:13.775Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-13T17:14:13.799Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-13T17:14:13.800Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-14T10:13:11.574Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-14T10:13:11.587Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-14T10:13:11.596Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-14T10:13:11.599Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-14T10:13:11.678Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-14T10:13:12.944Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-14T10:13:13.104Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-14T10:13:13.105Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-14T10:13:13.106Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-15T17:25:29.561Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-15T17:25:29.562Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T17:25:29.563Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-15T17:25:29.646Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T17:25:29.914Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-15T17:25:29.914Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T18:04:00.902Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-15T18:04:00.927Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-15T18:04:00.977Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-15T18:04:00.980Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-15T18:04:03.662Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-15T18:04:03.668Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-15T18:04:03.729Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-15T18:04:03.729Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-15T18:04:03.730Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-15T18:04:19.518Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-15T18:04:19.518Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T18:04:19.518Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-15T18:04:19.532Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T18:04:19.543Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-15T18:04:19.543Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-15T18:33:34.076Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-15T18:33:34.083Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-15T18:33:34.091Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-15T18:33:34.093Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-15T18:33:34.610Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-15T18:33:35.087Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-15T18:33:35.103Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-15T18:33:35.104Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-15T18:33:35.105Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-16T04:28:40.713Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-16T04:28:40.735Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-16T04:28:40.740Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-16T04:28:40.748Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-16T04:28:40.772Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-16T04:28:42.314Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-16T04:28:42.383Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-16T04:28:42.384Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-16T04:28:42.385Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-16T17:36:51.385Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-16T17:36:51.386Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-16T17:36:51.386Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-16T17:36:51.435Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-16T17:36:51.498Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-16T17:36:51.498Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-17T06:28:58.160Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-17T06:28:58.165Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-17T06:28:58.173Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-17T06:28:58.181Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-17T06:28:58.226Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-17T06:29:00.900Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-17T06:29:01.180Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-17T06:29:01.181Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-17T06:29:01.188Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-17T06:29:17.704Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-17T06:29:17.704Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-17T06:29:17.704Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-17T06:29:17.715Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-17T06:29:17.747Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-17T06:29:17.747Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-17T06:29:41.331Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-17T06:29:41.342Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-17T06:29:42.503Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-17T06:29:42.512Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-17T06:29:42.604Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-17T06:29:43.030Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-17T06:29:43.168Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-17T06:29:43.168Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-17T06:29:43.169Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T03:09:25.139Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-18T03:09:25.140Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T03:09:25.140Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-18T03:09:25.200Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T03:09:25.242Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-18T03:09:25.242Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T03:09:44.965Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-18T03:09:44.969Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-18T03:09:44.990Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-18T03:09:45.000Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-18T03:09:45.062Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T03:09:46.461Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T03:09:46.620Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-18T03:09:46.626Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T03:09:46.628Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T05:36:02.793Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T05:36:02.793Z [Figma] [info] Server transport closed (renderer released port) { metadata: undefined }
+2026-06-18T05:36:02.859Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-18T05:36:02.859Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T05:37:29.788Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-18T05:37:29.788Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T05:51:28.822Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-18T05:51:28.825Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-18T05:51:28.828Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-18T05:51:28.830Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-18T05:51:30.550Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T05:51:30.555Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T05:51:30.990Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-18T05:51:30.991Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T05:51:30.998Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T09:14:16.014Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-18T09:14:16.014Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T09:14:16.015Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-18T09:14:16.138Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T09:14:16.555Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-18T09:14:16.555Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T09:20:38.113Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-18T09:20:38.117Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-18T09:20:39.597Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-18T09:20:39.610Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-18T09:20:40.095Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T09:20:42.627Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T09:20:42.628Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-18T09:20:42.628Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T09:20:42.629Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T18:21:03.865Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-18T18:21:03.865Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T18:21:03.865Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-18T18:21:03.930Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T18:21:03.972Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-18T18:21:03.972Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-18T18:21:25.212Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-18T18:21:25.218Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-18T18:21:25.223Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-18T18:21:25.232Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-18T18:21:25.308Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T18:21:26.905Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-18T18:21:27.169Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-18T18:21:27.169Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-18T18:21:27.170Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-22T04:38:11.768Z [Figma] [info] Shutting down server... { metadata: undefined }
+2026-06-22T04:38:11.768Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-22T04:38:11.768Z [Figma] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-06-22T04:38:11.768Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-22T04:38:11.827Z [Figma] [info] Server transport closed { metadata: undefined }
+2026-06-22T04:38:11.827Z [Figma] [info] Client transport closed { metadata: undefined }
+2026-06-22T05:09:20.381Z [Figma] [info] Initializing server... { metadata: undefined }
+2026-06-22T05:09:20.387Z [Figma] [info] Using built-in Node.js for MCP server: Figma { metadata: undefined }
+2026-06-22T05:09:20.393Z [Figma] [info] Extension Figma has prompts_generated=true, skipping prompt verification { metadata: undefined }
+2026-06-22T05:09:20.402Z [Figma] [info] Server started and connected successfully { metadata: undefined }
+2026-06-22T05:09:20.461Z [Figma] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-22T05:09:22.202Z [Figma] [info] Message from server: {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true}},"serverInfo":{"name":"Figma","version":"1.0.4"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-06-22T05:09:22.307Z [Figma] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-06-22T05:09:22.307Z [Figma] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-06-22T05:09:22.308Z [Figma] [info] Message from server: {"result":{"tools":[{"name":"get_design_context","description":"Generate UI code for a given node or the currently selected node in the Figma desktop app. Use the nodeId parameter to specify a node id. If no node id is provided, the currently selected node...[2823 chars truncated]...Code Connect.","inputSchema":{"type":"object","properties":{}}},{"name":"create_design_system_rules","description":"Provides a prompt to generate design system rules for this repo.","inputSchema":{"type":"object","properties":{}}}]},"jsonrpc":"2.0","id":1} { metadata: undefined }

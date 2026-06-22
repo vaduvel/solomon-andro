@@ -1,0 +1,1473 @@
+[VM] 2026-02-12 22:14:49 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-12 22:14:49 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-12 22:14:49 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-12 22:14:49 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-12 22:14:49 [info] VM startup step: create_vm_config started
+[VM] 2026-02-12 22:14:49 [info] Creating new session data disk (10GB) at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-12 22:14:49 [info] Session data disk created successfully (ASIF format)
+[VM] 2026-02-12 22:14:49 [info] Found smol-bin.img at /Applications/Claude.app/Contents/Resources/smol-bin.img
+[VM] 2026-02-12 22:14:49 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-12 22:14:49 [info] VM startup step: create_network started
+[VM] 2026-02-12 22:14:49 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-12 22:14:49 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-12 22:14:49 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-12 22:14:49 [info] VM startup step: create_network completed
+[VM] 2026-02-12 22:14:49 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-12 22:14:49 [info] Configuration created:
+[VM] 2026-02-12 22:14:49 [info]   - CPUs: 4
+[VM] 2026-02-12 22:14:49 [info]   - Memory: 4GB
+[VM] 2026-02-12 22:14:49 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-12 22:14:49 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-12 22:14:49 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-12 22:14:49 [info]   - MAC address: <ip>
+[VM] 2026-02-12 22:14:49 [info]   - Shared directory: <home>
+[VM] 2026-02-12 22:14:49 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-12 22:14:49 [info] VM startup step: vm_boot started
+[VM] 2026-02-12 22:14:49 [info] Linux VM started successfully
+[VM] 2026-02-12 22:14:49 [info] VM startup step: vm_boot completed
+[VM] 2026-02-12 22:14:49 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-12 22:15:00 [info] Guest connected
+[VM] 2026-02-12 22:15:00 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-12 22:15:00 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-12 22:15:00 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-12 22:15:00 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-12 22:15:00 [info] VM startup step: guest_ready started
+[VM] 2026-02-12 22:15:00 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-12 22:15:01 [info] Network status: CONNECTED
+[VM] 2026-02-12 22:15:01 [info] Guest ready
+[VM] 2026-02-12 22:15:01 [info] VM startup step: guest_ready completed
+[VM] 2026-02-12 22:15:01 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-12 22:15:01 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-12 22:15:01 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-12 22:15:01 [info] API reachability: REACHABLE
+[VM] 2026-02-12 22:15:01 [info] SDK installed successfully: version=2.1.34
+[VM] 2026-02-12 22:15:01 [info] SDK installed: version=2.1.34
+[VM] 2026-02-12 22:15:01 [info] Process spawned: id=<blob> name=cli-f8f6d8f5 command=claude
+[VM] 2026-02-13 12:39:09 [info] Process spawned: id=<blob> name=cli-5bb2d606 command=claude
+[VM] 2026-02-14 20:35:15 [info] Process spawned: id=<blob> name=cli-ae0599bd command=claude
+[VM] 2026-02-15 18:24:47 [info] Process spawned: id=<blob> name=cli-57194790 command=claude
+[VM] 2026-02-16 02:11:52 [info] Stopping VM...
+[VM] 2026-02-16 02:11:52 [info] VM requestStop() completed
+[VM] 2026-02-16 02:11:57 [info] Guest did stop
+[VM] 2026-02-16 02:11:57 [info] VM reached stopped state
+[VM] 2026-02-16 02:11:57 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-02-16 02:11:57 [info] VM stopped successfully
+[VM] 2026-02-16 02:13:11 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-16 02:13:11 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-16 02:13:11 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-16 02:13:11 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-16 02:13:11 [info] VM startup step: create_vm_config started
+[VM] 2026-02-16 02:13:11 [info] Found smol-bin.img at /Applications/Claude.app/Contents/Resources/smol-bin.img
+[VM] 2026-02-16 02:13:11 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-16 02:13:11 [info] VM startup step: create_network started
+[VM] 2026-02-16 02:13:11 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-16 02:13:11 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-16 02:13:11 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-16 02:13:11 [info] VM startup step: create_network completed
+[VM] 2026-02-16 02:13:11 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-16 02:13:11 [info] Configuration created:
+[VM] 2026-02-16 02:13:11 [info]   - CPUs: 4
+[VM] 2026-02-16 02:13:11 [info]   - Memory: 4GB
+[VM] 2026-02-16 02:13:11 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-16 02:13:11 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-16 02:13:11 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-16 02:13:11 [info]   - MAC address: <ip>
+[VM] 2026-02-16 02:13:11 [info]   - Shared directory: <home>
+[VM] 2026-02-16 02:13:11 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-16 02:13:11 [info] VM startup step: vm_boot started
+[VM] 2026-02-16 02:13:11 [info] Linux VM started successfully
+[VM] 2026-02-16 02:13:11 [info] VM startup step: vm_boot completed
+[VM] 2026-02-16 02:13:11 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-16 02:13:22 [info] Guest connected
+[VM] 2026-02-16 02:13:22 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-16 02:13:22 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-16 02:13:22 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-16 02:13:22 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-16 02:13:22 [info] VM startup step: guest_ready started
+[VM] 2026-02-16 02:13:22 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-16 02:13:22 [info] Network status: CONNECTED
+[VM] 2026-02-16 02:13:22 [info] Guest ready
+[VM] 2026-02-16 02:13:22 [info] VM startup step: guest_ready completed
+[VM] 2026-02-16 02:13:22 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-16 02:13:22 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-16 02:13:22 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-16 02:13:22 [info] API reachability: REACHABLE
+[VM] 2026-02-16 02:13:22 [info] SDK installed successfully: version=2.1.40
+[VM] 2026-02-16 02:13:22 [info] SDK installed: version=2.1.40
+[VM] 2026-02-16 02:13:23 [info] Process spawned: id=<blob> name=cli-f95ae1ed command=claude
+[VM] 2026-02-16 05:58:51 [info] Process spawned: id=<blob> name=cli-4e4a546b command=claude
+[VM] 2026-02-17 18:51:31 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-17 18:51:31 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-17 18:51:31 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-17 18:51:31 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-17 18:51:31 [info] VM startup step: create_vm_config started
+[VM] 2026-02-17 18:51:31 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-17 18:51:31 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-17 18:51:31 [info] VM startup step: create_network started
+[VM] 2026-02-17 18:51:31 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-17 18:51:32 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-17 18:51:32 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-17 18:51:32 [info] VM startup step: create_network completed
+[VM] 2026-02-17 18:51:32 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-17 18:51:32 [info] Configuration created:
+[VM] 2026-02-17 18:51:32 [info]   - CPUs: 4
+[VM] 2026-02-17 18:51:32 [info]   - Memory: 4GB
+[VM] 2026-02-17 18:51:32 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-17 18:51:32 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-17 18:51:32 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-17 18:51:32 [info]   - MAC address: <ip>
+[VM] 2026-02-17 18:51:32 [info]   - Shared directory: <home>
+[VM] 2026-02-17 18:51:32 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-17 18:51:32 [info] VM startup step: vm_boot started
+[VM] 2026-02-17 18:51:32 [info] Linux VM started successfully
+[VM] 2026-02-17 18:51:32 [info] VM startup step: vm_boot completed
+[VM] 2026-02-17 18:51:32 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-17 18:51:42 [info] Guest connected
+[VM] 2026-02-17 18:51:42 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-17 18:51:42 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-17 18:51:42 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-17 18:51:42 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-17 18:51:42 [info] VM startup step: guest_ready started
+[VM] 2026-02-17 18:51:42 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-17 18:51:43 [info] Network status: CONNECTED
+[VM] 2026-02-17 18:51:43 [info] Guest ready
+[VM] 2026-02-17 18:51:43 [info] VM startup step: guest_ready completed
+[VM] 2026-02-17 18:51:43 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-17 18:51:43 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-17 18:51:43 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-17 18:51:43 [info] API reachability: REACHABLE
+[VM] 2026-02-17 18:51:44 [info] SDK installed successfully: version=2.1.41
+[VM] 2026-02-17 18:51:44 [info] SDK installed: version=2.1.41
+[VM] 2026-02-17 18:51:44 [info] Process spawned: id=<blob> name=cli-c91bd98b command=claude
+[VM] 2026-02-18 01:33:43 [info] Process spawned: id=<blob> name=cli-39a37696 command=claude
+[VM] 2026-02-18 03:39:50 [info] Process spawned: id=<blob> name=cli-d06b7655 command=claude
+[VM] 2026-02-18 16:22:46 [info] Process spawned: id=<blob> name=cli-b41ffcf6 command=claude
+[VM] 2026-02-18 22:34:29 [info] Process spawned: id=<blob> name=cli-48ec7e42 command=claude
+[VM] 2026-02-19 10:40:10 [info] Process spawned: id=<blob> name=cli-87cf1608 command=claude
+[VM] 2026-02-19 20:08:24 [info] Process spawned: id=<blob> name=cli-364453f7 command=claude
+[VM] 2026-02-19 21:25:21 [info] Process spawned: id=<blob> name=cli-cc1e0159 command=claude
+[VM] 2026-02-20 08:17:53 [info] Process spawned: id=<blob> name=cli-36439801 command=claude
+[VM] 2026-02-20 08:18:03 [info] Process spawned: id=<blob> name=cli-12ed0246 command=claude
+[VM] 2026-02-20 15:16:45 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-20 15:16:45 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-20 15:16:45 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-20 15:16:45 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-20 15:16:45 [info] VM startup step: create_vm_config started
+[VM] 2026-02-20 15:16:45 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-20 15:16:45 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-20 15:16:45 [info] VM startup step: create_network started
+[VM] 2026-02-20 15:16:45 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-20 15:16:45 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-20 15:16:45 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-20 15:16:45 [info] VM startup step: create_network completed
+[VM] 2026-02-20 15:16:45 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-20 15:16:45 [info] Configuration created:
+[VM] 2026-02-20 15:16:45 [info]   - CPUs: 4
+[VM] 2026-02-20 15:16:45 [info]   - Memory: 4GB
+[VM] 2026-02-20 15:16:45 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-20 15:16:45 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-20 15:16:45 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-20 15:16:45 [info]   - MAC address: <ip>
+[VM] 2026-02-20 15:16:45 [info]   - Shared directory: <home>
+[VM] 2026-02-20 15:16:45 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-20 15:16:45 [info] VM startup step: vm_boot started
+[VM] 2026-02-20 15:16:45 [info] Linux VM started successfully
+[VM] 2026-02-20 15:16:45 [info] VM startup step: vm_boot completed
+[VM] 2026-02-20 15:16:45 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-20 15:16:59 [info] Guest connected
+[VM] 2026-02-20 15:16:59 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-20 15:16:59 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-20 15:16:59 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-20 15:16:59 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-20 15:16:59 [info] VM startup step: guest_ready started
+[VM] 2026-02-20 15:16:59 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-20 15:17:00 [info] Network status: CONNECTED
+[VM] 2026-02-20 15:17:00 [info] Guest ready
+[VM] 2026-02-20 15:17:00 [info] VM startup step: guest_ready completed
+[VM] 2026-02-20 15:17:00 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-20 15:17:00 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-20 15:17:00 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-20 15:17:00 [info] API reachability: REACHABLE
+[VM] 2026-02-20 15:17:01 [info] SDK installed successfully: version=2.1.41
+[VM] 2026-02-20 15:17:01 [info] SDK installed: version=2.1.41
+[VM] 2026-02-20 15:17:01 [info] Process spawned: id=<blob> name=cli-95730938 command=claude
+[VM] 2026-02-21 20:24:50 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-21 20:24:50 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-21 20:24:50 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-21 20:24:50 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-21 20:24:50 [info] VM startup step: create_vm_config started
+[VM] 2026-02-21 20:24:50 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-21 20:24:50 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-21 20:24:50 [info] VM startup step: create_network started
+[VM] 2026-02-21 20:24:50 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-21 20:24:51 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-21 20:24:51 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-21 20:24:51 [info] VM startup step: create_network completed
+[VM] 2026-02-21 20:24:51 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-21 20:24:51 [info] Configuration created:
+[VM] 2026-02-21 20:24:51 [info]   - CPUs: 4
+[VM] 2026-02-21 20:24:51 [info]   - Memory: 4GB
+[VM] 2026-02-21 20:24:51 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-21 20:24:51 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-21 20:24:51 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-21 20:24:51 [info]   - MAC address: <ip>
+[VM] 2026-02-21 20:24:51 [info]   - Shared directory: <home>
+[VM] 2026-02-21 20:24:51 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-21 20:24:51 [info] VM startup step: vm_boot started
+[VM] 2026-02-21 20:24:51 [info] Linux VM started successfully
+[VM] 2026-02-21 20:24:51 [info] VM startup step: vm_boot completed
+[VM] 2026-02-21 20:24:51 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-21 20:25:00 [info] Guest connected
+[VM] 2026-02-21 20:25:00 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-21 20:25:00 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-21 20:25:00 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-21 20:25:00 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-21 20:25:00 [info] VM startup step: guest_ready started
+[VM] 2026-02-21 20:25:00 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-21 20:25:00 [info] Network status: CONNECTED
+[VM] 2026-02-21 20:25:00 [info] Guest ready
+[VM] 2026-02-21 20:25:00 [info] VM startup step: guest_ready completed
+[VM] 2026-02-21 20:25:00 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-21 20:25:00 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-21 20:25:00 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-21 20:25:01 [info] API reachability: REACHABLE
+[VM] 2026-02-21 20:25:01 [info] SDK installed successfully: version=2.1.49
+[VM] 2026-02-21 20:25:01 [info] SDK installed: version=2.1.49
+[VM] 2026-02-21 20:25:01 [info] Process spawned: id=<blob> name=cli-c800a729 command=claude
+[VM] 2026-02-22 14:18:18 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-22 14:18:18 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-22 14:18:18 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-22 14:18:18 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-22 14:18:18 [info] VM startup step: create_vm_config started
+[VM] 2026-02-22 14:18:18 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-22 14:18:18 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-22 14:18:18 [info] VM startup step: create_network started
+[VM] 2026-02-22 14:18:18 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-22 14:18:18 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-22 14:18:18 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-22 14:18:18 [info] VM startup step: create_network completed
+[VM] 2026-02-22 14:18:18 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-22 14:18:18 [info] Configuration created:
+[VM] 2026-02-22 14:18:18 [info]   - CPUs: 4
+[VM] 2026-02-22 14:18:18 [info]   - Memory: 4GB
+[VM] 2026-02-22 14:18:18 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-22 14:18:18 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-22 14:18:18 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-22 14:18:18 [info]   - MAC address: <ip>
+[VM] 2026-02-22 14:18:18 [info]   - Shared directory: <home>
+[VM] 2026-02-22 14:18:18 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-22 14:18:18 [info] VM startup step: vm_boot started
+[VM] 2026-02-22 14:18:18 [info] Linux VM started successfully
+[VM] 2026-02-22 14:18:18 [info] VM startup step: vm_boot completed
+[VM] 2026-02-22 14:18:18 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-22 14:18:29 [info] Guest connected
+[VM] 2026-02-22 14:18:29 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-22 14:18:29 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-22 14:18:29 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-22 14:18:29 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-22 14:18:29 [info] VM startup step: guest_ready started
+[VM] 2026-02-22 14:18:29 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-22 14:18:29 [info] Network status: CONNECTED
+[VM] 2026-02-22 14:18:29 [info] Guest ready
+[VM] 2026-02-22 14:18:29 [info] VM startup step: guest_ready completed
+[VM] 2026-02-22 14:18:29 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-22 14:18:29 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-22 14:18:29 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-22 14:18:29 [info] API reachability: REACHABLE
+[VM] 2026-02-22 14:18:30 [info] SDK installed successfully: version=2.1.49
+[VM] 2026-02-22 14:18:30 [info] SDK installed: version=2.1.49
+[VM] 2026-02-22 14:18:30 [info] Process spawned: id=<blob> name=cli-c2e84a58 command=claude
+[VM] 2026-02-22 15:42:44 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-02-22 15:42:44 [info] VM requestStop() completed
+[VM] 2026-02-22 15:42:48 [info] Guest did stop
+[VM] 2026-02-22 15:42:48 [info] VM reached stopped state
+[VM] 2026-02-22 15:42:48 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-02-22 15:42:48 [info] VM stopped successfully
+[VM] 2026-02-22 18:59:05 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-22 18:59:05 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-22 18:59:05 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-22 18:59:05 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-22 18:59:05 [info] VM startup step: create_vm_config started
+[VM] 2026-02-22 18:59:05 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-22 18:59:05 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-22 18:59:05 [info] VM startup step: create_network started
+[VM] 2026-02-22 18:59:05 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-22 18:59:05 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-22 18:59:05 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-22 18:59:05 [info] VM startup step: create_network completed
+[VM] 2026-02-22 18:59:05 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-22 18:59:05 [info] Configuration created:
+[VM] 2026-02-22 18:59:05 [info]   - CPUs: 4
+[VM] 2026-02-22 18:59:05 [info]   - Memory: 4GB
+[VM] 2026-02-22 18:59:05 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-22 18:59:05 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-22 18:59:05 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-22 18:59:05 [info]   - MAC address: <ip>
+[VM] 2026-02-22 18:59:05 [info]   - Shared directory: <home>
+[VM] 2026-02-22 18:59:05 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-22 18:59:06 [info] VM startup step: vm_boot started
+[VM] 2026-02-22 18:59:06 [info] Linux VM started successfully
+[VM] 2026-02-22 18:59:06 [info] VM startup step: vm_boot completed
+[VM] 2026-02-22 18:59:06 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-22 18:59:11 [info] Guest connected
+[VM] 2026-02-22 18:59:11 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-22 18:59:11 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-22 18:59:11 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-22 18:59:11 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-22 18:59:11 [info] VM startup step: guest_ready started
+[VM] 2026-02-22 18:59:11 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-22 18:59:12 [info] Network status: CONNECTED
+[VM] 2026-02-22 18:59:12 [info] Guest ready
+[VM] 2026-02-22 18:59:12 [info] VM startup step: guest_ready completed
+[VM] 2026-02-22 18:59:12 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-22 18:59:12 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-22 18:59:12 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-22 18:59:12 [info] API reachability: REACHABLE
+[VM] 2026-02-22 18:59:13 [info] SDK installed successfully: version=2.1.49
+[VM] 2026-02-22 18:59:13 [info] SDK installed: version=2.1.49
+[VM] 2026-02-22 18:59:13 [info] Process spawned: id=<blob> name=cli-f9a3b3c9 command=claude
+[VM] 2026-02-23 20:52:02 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-02-23 20:52:02 [info] VM requestStop() completed
+[VM] 2026-02-23 20:52:07 [info] Guest did stop
+[VM] 2026-02-23 20:52:07 [info] VM reached stopped state
+[VM] 2026-02-23 20:52:07 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-02-23 20:52:07 [info] VM stopped successfully
+[VM] 2026-02-25 09:52:58 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-25 09:52:58 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-25 09:52:58 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-25 09:52:58 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-25 09:52:58 [info] VM startup step: create_vm_config started
+[VM] 2026-02-25 09:52:59 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-25 09:52:59 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-25 09:52:59 [info] VM startup step: create_network started
+[VM] 2026-02-25 09:52:59 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-25 09:53:01 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-25 09:53:01 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-25 09:53:01 [info] VM startup step: create_network completed
+[VM] 2026-02-25 09:53:01 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-25 09:53:01 [info] Configuration created:
+[VM] 2026-02-25 09:53:01 [info]   - CPUs: 4
+[VM] 2026-02-25 09:53:01 [info]   - Memory: 4GB
+[VM] 2026-02-25 09:53:01 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-25 09:53:01 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-25 09:53:01 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-25 09:53:01 [info]   - MAC address: <ip>
+[VM] 2026-02-25 09:53:01 [info]   - Shared directory: <home>
+[VM] 2026-02-25 09:53:01 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-25 09:53:01 [info] VM startup step: vm_boot started
+[VM] 2026-02-25 09:53:01 [info] Linux VM started successfully
+[VM] 2026-02-25 09:53:01 [info] VM startup step: vm_boot completed
+[VM] 2026-02-25 09:53:01 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-25 09:53:12 [info] Guest connected
+[VM] 2026-02-25 09:53:12 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-25 09:53:12 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-25 09:53:12 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-25 09:53:12 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-25 09:53:12 [info] VM startup step: guest_ready started
+[VM] 2026-02-25 09:53:12 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-25 09:53:12 [info] Network status: CONNECTED
+[VM] 2026-02-25 09:53:12 [info] Guest ready
+[VM] 2026-02-25 09:53:12 [info] VM startup step: guest_ready completed
+[VM] 2026-02-25 09:53:12 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-25 09:53:12 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-25 09:53:12 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-25 09:53:13 [info] API reachability: REACHABLE
+[VM] 2026-02-25 09:53:13 [info] SDK installed successfully: version=2.1.49
+[VM] 2026-02-25 09:53:13 [info] SDK installed: version=2.1.49
+[VM] 2026-02-25 09:53:13 [info] Process spawned: id=<blob> name=cli-f7b201c0 command=claude
+[VM] 2026-02-25 10:58:19 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-25 10:58:19 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-25 10:58:19 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-25 10:58:19 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-25 10:58:19 [info] VM startup step: create_vm_config started
+[VM] 2026-02-25 10:58:19 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-25 10:58:19 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-25 10:58:19 [info] VM startup step: create_network started
+[VM] 2026-02-25 10:58:19 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-25 10:58:19 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-25 10:58:19 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-25 10:58:19 [info] VM startup step: create_network completed
+[VM] 2026-02-25 10:58:19 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-25 10:58:19 [info] Configuration created:
+[VM] 2026-02-25 10:58:19 [info]   - CPUs: 4
+[VM] 2026-02-25 10:58:19 [info]   - Memory: 4GB
+[VM] 2026-02-25 10:58:19 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-25 10:58:19 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-25 10:58:19 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-25 10:58:19 [info]   - MAC address: <ip>
+[VM] 2026-02-25 10:58:19 [info]   - Shared directory: <home>
+[VM] 2026-02-25 10:58:19 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-25 10:58:19 [info] VM startup step: vm_boot started
+[VM] 2026-02-25 10:58:19 [info] Linux VM started successfully
+[VM] 2026-02-25 10:58:19 [info] VM startup step: vm_boot completed
+[VM] 2026-02-25 10:58:19 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-25 10:58:29 [info] Guest connected
+[VM] 2026-02-25 10:58:29 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-25 10:58:29 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-25 10:58:29 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-25 10:58:29 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-25 10:58:29 [info] VM startup step: guest_ready started
+[VM] 2026-02-25 10:58:29 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-25 10:58:29 [info] Network status: CONNECTED
+[VM] 2026-02-25 10:58:29 [info] Guest ready
+[VM] 2026-02-25 10:58:29 [info] VM startup step: guest_ready completed
+[VM] 2026-02-25 10:58:29 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-25 10:58:29 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-25 10:58:29 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-25 10:58:29 [info] API reachability: REACHABLE
+[VM] 2026-02-25 10:58:30 [info] SDK installed successfully: version=2.1.51
+[VM] 2026-02-25 10:58:30 [info] SDK installed: version=2.1.51
+[VM] 2026-02-25 10:58:30 [info] Process spawned: id=<blob> name=cli-1739d70d command=claude
+[VM] 2026-02-25 12:45:26 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-02-25 12:45:26 [info] VM requestStop() completed
+[VM] 2026-02-25 12:45:32 [info] Guest did stop
+[VM] 2026-02-25 12:45:32 [info] VM reached stopped state
+[VM] 2026-02-25 12:45:32 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-02-25 12:45:32 [info] VM stopped successfully
+[VM] 2026-02-28 22:48:07 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=auto
+[VM] 2026-02-28 22:48:07 [info] VM startup step: stop_existing_vm started
+[VM] 2026-02-28 22:48:07 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-02-28 22:48:07 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-02-28 22:48:07 [info] VM startup step: create_vm_config started
+[VM] 2026-02-28 22:48:07 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-02-28 22:48:07 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-02-28 22:48:07 [info] VM startup step: create_network started
+[VM] 2026-02-28 22:48:07 [info] macOS 26+ detected, attempting vmnet attachment
+[VM] 2026-02-28 22:48:09 [info] vmnet network: gateway=<ip> guestIP=<ip> mask=<ip> prefix=/24
+[VM] 2026-02-28 22:48:09 [info] Using VZVmnetNetworkDeviceAttachment (shared mode)
+[VM] 2026-02-28 22:48:09 [info] VM startup step: create_network completed
+[VM] 2026-02-28 22:48:09 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-02-28 22:48:09 [info] Configuration created:
+[VM] 2026-02-28 22:48:09 [info]   - CPUs: 4
+[VM] 2026-02-28 22:48:09 [info]   - Memory: 4GB
+[VM] 2026-02-28 22:48:09 [info]   - Boot: EFI (GRUB)
+[VM] 2026-02-28 22:48:09 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-02-28 22:48:09 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-02-28 22:48:09 [info]   - MAC address: <ip>
+[VM] 2026-02-28 22:48:09 [info]   - Shared directory: <home>
+[VM] 2026-02-28 22:48:09 [info] VM startup step: create_vm_config completed
+[VM] 2026-02-28 22:48:09 [info] VM startup step: vm_boot started
+[VM] 2026-02-28 22:48:09 [info] Linux VM started successfully
+[VM] 2026-02-28 22:48:09 [info] VM startup step: vm_boot completed
+[VM] 2026-02-28 22:48:09 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-02-28 22:48:15 [info] Guest connected
+[VM] 2026-02-28 22:48:15 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-02-28 22:48:15 [info] VM startup step: static_ip_assignment started
+[VM] 2026-02-28 22:48:15 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-02-28 22:48:15 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-02-28 22:48:15 [info] VM startup step: guest_ready started
+[VM] 2026-02-28 22:48:15 [info] Network status: NOT_CONNECTED
+[VM] 2026-02-28 22:48:16 [info] Network status: CONNECTED
+[VM] 2026-02-28 22:48:16 [info] Guest ready
+[VM] 2026-02-28 22:48:16 [info] VM startup step: guest_ready completed
+[VM] 2026-02-28 22:48:16 [info] VM startup step: install_ca_certificates started
+[VM] 2026-02-28 22:48:16 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-02-28 22:48:16 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-02-28 22:48:16 [info] API reachability: REACHABLE
+[VM] 2026-02-28 22:48:16 [info] SDK installed successfully: version=2.1.51
+[VM] 2026-02-28 22:48:16 [info] SDK installed: version=2.1.51
+[VM] 2026-02-28 22:48:17 [info] Process spawned: id=<blob> name=cli-233ac2bb command=claude
+[VM] 2026-03-01 20:18:01 [info] Process spawned: id=<blob> name=cli-bed50e3d command=claude
+[VM] 2026-03-02 14:37:44 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-03-02 14:37:44 [info] VM requestStop() completed
+[VM] 2026-03-02 14:37:49 [info] Guest did stop
+[VM] 2026-03-02 14:37:49 [info] VM reached stopped state
+[VM] 2026-03-02 14:37:49 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-02 14:37:49 [info] VM stopped successfully
+[VM] 2026-03-10 11:40:27 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=gvisor
+[VM] 2026-03-10 11:40:27 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-10 11:40:27 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-10 11:40:27 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-10 11:40:27 [info] VM startup step: create_vm_config started
+[VM] 2026-03-10 11:40:27 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-10 11:40:27 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-10 11:40:27 [info] VM startup step: create_network started
+[VM] 2026-03-10 11:40:27 [info] Using gvisor user-mode networking
+[VM] 2026-03-10 11:40:27 [info] Created gvisor network socket pair (vm=80, go=81)
+[VM] 2026-03-10 11:40:27 [info] Starting gvisor usernet on fd=81 mac=<ip>
+[VM] 2026-03-10 11:40:27 [info] Gvisor usernet started
+[VM] 2026-03-10 11:40:27 [info] VM startup step: create_network completed
+[VM] 2026-03-10 11:40:27 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-10 11:40:27 [info] Configuration created:
+[VM] 2026-03-10 11:40:27 [info]   - CPUs: 4
+[VM] 2026-03-10 11:40:27 [info]   - Memory: 4GB
+[VM] 2026-03-10 11:40:27 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-10 11:40:27 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-10 11:40:27 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-10 11:40:27 [info]   - MAC address: <ip>
+[VM] 2026-03-10 11:40:27 [info]   - Shared directory: <home>
+[VM] 2026-03-10 11:40:27 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-10 11:40:27 [info] VM startup step: vm_boot started
+[VM] 2026-03-10 11:40:28 [info] Linux VM started successfully
+[VM] 2026-03-10 11:40:28 [info] VM startup step: vm_boot completed
+[VM] 2026-03-10 11:40:28 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-10 11:40:38 [info] Guest connected
+[VM] 2026-03-10 11:40:38 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-10 11:40:38 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-10 11:40:38 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-10 11:40:38 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-10 11:40:38 [info] VM startup step: guest_ready started
+[VM] 2026-03-10 11:40:38 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-10 11:40:38 [info] Network status: CONNECTED
+[VM] 2026-03-10 11:40:38 [info] Guest ready
+[VM] 2026-03-10 11:40:38 [info] VM startup step: guest_ready completed
+[VM] 2026-03-10 11:40:38 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-10 11:40:38 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-10 11:40:38 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-10 11:40:38 [info] API reachability: REACHABLE
+[VM] 2026-03-10 11:40:39 [info] SDK installed successfully: version=2.1.63
+[VM] 2026-03-10 11:40:39 [info] SDK installed: version=2.1.63
+[VM] 2026-03-10 11:40:39 [info] Process spawned: id=<blob> name=cli-4d9a6683 command=claude
+[VM] 2026-03-10 11:40:42 [info] Process spawned: id=<blob> name=cli-df6f38e3 command=claude
+[VM] 2026-03-10 11:40:43 [info] Process spawned: id=<blob> name=cli-e83108a2 command=claude
+[VM] 2026-03-10 11:40:43 [info] Process spawned: id=<blob> name=cli-f089b5f4 command=claude
+[VM] 2026-03-11 11:10:50 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-03-11 11:10:50 [info] VM requestStop() completed
+[VM] 2026-03-11 11:10:57 [info] Guest did stop
+[VM] 2026-03-11 11:10:57 [info] VM reached stopped state
+[VM] 2026-03-11 11:10:57 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-11 11:10:57 [info] Gvisor network attachment stopped
+[VM] 2026-03-11 11:10:57 [info] VM stopped successfully
+[VM] 2026-03-23 10:19:49 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 networkMode=gvisor
+[VM] 2026-03-23 10:19:49 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-23 10:19:49 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-23 10:19:49 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-23 10:19:49 [info] VM startup step: create_vm_config started
+[VM] 2026-03-23 10:19:49 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-23 10:19:49 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-23 10:19:49 [info] VM startup step: create_network started
+[VM] 2026-03-23 10:19:49 [info] Using gvisor user-mode networking
+[VM] 2026-03-23 10:19:49 [info] Created gvisor network socket pair (vm=71, go=84)
+[VM] 2026-03-23 10:19:49 [info] Starting gvisor usernet on fd=84 mac=<ip>
+[VM] 2026-03-23 10:19:49 [info] Gvisor usernet started
+[VM] 2026-03-23 10:19:49 [info] VM startup step: create_network completed
+[VM] 2026-03-23 10:19:49 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-23 10:19:49 [info] Configuration created:
+[VM] 2026-03-23 10:19:49 [info]   - CPUs: 4
+[VM] 2026-03-23 10:19:49 [info]   - Memory: 4GB
+[VM] 2026-03-23 10:19:49 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-23 10:19:49 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-23 10:19:49 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-23 10:19:49 [info]   - MAC address: <ip>
+[VM] 2026-03-23 10:19:49 [info]   - Shared directory: <home>
+[VM] 2026-03-23 10:19:49 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-23 10:19:49 [info] VM startup step: vm_boot started
+[VM] 2026-03-23 10:19:49 [info] Linux VM started successfully
+[VM] 2026-03-23 10:19:49 [info] VM startup step: vm_boot completed
+[VM] 2026-03-23 10:19:49 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-23 10:19:58 [info] Guest connected
+[VM] 2026-03-23 10:19:58 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-23 10:19:58 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-23 10:19:58 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-23 10:19:58 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-23 10:19:58 [info] VM startup step: guest_ready started
+[VM] 2026-03-23 10:19:58 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-23 10:19:58 [info] Network status: CONNECTED
+[VM] 2026-03-23 10:19:58 [info] Guest ready
+[VM] 2026-03-23 10:19:58 [info] VM startup step: guest_ready completed
+[VM] 2026-03-23 10:19:58 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-23 10:19:58 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-23 10:19:58 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-23 10:19:58 [info] API reachability: REACHABLE
+[VM] 2026-03-23 10:19:59 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-23 10:19:59 [info] SDK installed: version=2.1.78
+[VM] 2026-03-23 10:19:59 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-23 10:19:59 [info] SDK installed: version=2.1.78
+[VM] 2026-03-23 10:20:00 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-23 10:20:00 [info] SDK installed: version=2.1.78
+[VM] 2026-03-23 10:20:00 [info] OAuth token approved successfully
+[VM] 2026-03-23 10:20:00 [info] OAuth token approved
+[VM] 2026-03-23 10:20:00 [info] Process spawned: id=d24e2bb9-bea4-4153-b717-f5769ee1a3a8 name=charming-peaceful-wozniak command=/usr/local/bin/claude
+[VM] 2026-03-23 10:20:01 [info] Process d24e2bb9-bea4-4153-b717-f5769ee1a3a8 killed with signal: SIGTERM
+[VM] 2026-03-23 17:44:42 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-03-23 17:44:42 [info] VM requestStop() completed
+[VM] 2026-03-23 17:44:49 [info] Guest did stop
+[VM] 2026-03-23 17:44:49 [info] VM reached stopped state
+[VM] 2026-03-23 17:44:49 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-23 17:44:49 [info] Gvisor network attachment stopped
+[VM] 2026-03-23 17:44:49 [info] VM stopped successfully
+[VM] 2026-03-25 09:09:00 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 09:09:00 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 09:09:00 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 09:09:00 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 09:09:00 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 09:09:00 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 09:09:00 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 09:09:00 [info] VM startup step: create_network started
+[VM] 2026-03-25 09:09:00 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 09:09:00 [info] Created gvisor network socket pair (vm=83, go=93)
+[VM] 2026-03-25 09:09:00 [info] Starting gvisor usernet on fd=93 mac=<ip>
+[VM] 2026-03-25 09:09:00 [info] Gvisor usernet started
+[VM] 2026-03-25 09:09:00 [info] VM startup step: create_network completed
+[VM] 2026-03-25 09:09:00 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 09:09:00 [info] Configuration created:
+[VM] 2026-03-25 09:09:00 [info]   - CPUs: 4
+[VM] 2026-03-25 09:09:00 [info]   - Memory: 4GB
+[VM] 2026-03-25 09:09:00 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 09:09:00 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 09:09:00 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 09:09:00 [info]   - MAC address: <ip>
+[VM] 2026-03-25 09:09:00 [info]   - Shared directory: <home>
+[VM] 2026-03-25 09:09:00 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 09:09:00 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 09:09:01 [info] Linux VM started successfully
+[VM] 2026-03-25 09:09:01 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 09:09:01 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 09:09:09 [info] Guest connected
+[VM] 2026-03-25 09:09:09 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 09:09:09 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 09:09:09 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 09:09:09 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 09:09:09 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 09:09:09 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 09:09:10 [info] Network status: CONNECTED
+[VM] 2026-03-25 09:09:10 [info] Guest ready
+[VM] 2026-03-25 09:09:10 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 09:09:10 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 09:09:10 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 09:09:10 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 09:09:10 [info] API reachability: REACHABLE
+[VM] 2026-03-25 09:09:10 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 09:09:10 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 11:10:02 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 11:10:02 [info] VM requestStop() completed
+[VM] 2026-03-25 11:10:07 [info] Guest did stop
+[VM] 2026-03-25 11:10:07 [info] VM reached stopped state
+[VM] 2026-03-25 11:10:07 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 11:10:07 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 11:10:07 [info] VM stopped successfully
+[VM] 2026-03-25 11:10:24 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 11:10:24 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 11:10:24 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 11:10:24 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 11:10:24 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 11:10:24 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 11:10:24 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 11:10:24 [info] VM startup step: create_network started
+[VM] 2026-03-25 11:10:24 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 11:10:24 [info] Created gvisor network socket pair (vm=83, go=93)
+[VM] 2026-03-25 11:10:24 [info] Starting gvisor usernet on fd=93 mac=<ip>
+[VM] 2026-03-25 11:10:24 [info] Gvisor usernet started
+[VM] 2026-03-25 11:10:24 [info] VM startup step: create_network completed
+[VM] 2026-03-25 11:10:24 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 11:10:24 [info] Configuration created:
+[VM] 2026-03-25 11:10:24 [info]   - CPUs: 4
+[VM] 2026-03-25 11:10:24 [info]   - Memory: 4GB
+[VM] 2026-03-25 11:10:24 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 11:10:24 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 11:10:24 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 11:10:24 [info]   - MAC address: <ip>
+[VM] 2026-03-25 11:10:24 [info]   - Shared directory: <home>
+[VM] 2026-03-25 11:10:24 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 11:10:24 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 11:10:24 [info] Linux VM started successfully
+[VM] 2026-03-25 11:10:24 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 11:10:24 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 11:10:30 [info] Guest connected
+[VM] 2026-03-25 11:10:30 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 11:10:30 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 11:10:30 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 11:10:30 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 11:10:30 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 11:10:30 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 11:10:30 [info] Network status: CONNECTED
+[VM] 2026-03-25 11:10:30 [info] Guest ready
+[VM] 2026-03-25 11:10:30 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 11:10:30 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 11:10:30 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 11:10:30 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 11:10:31 [info] API reachability: REACHABLE
+[VM] 2026-03-25 11:10:31 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 11:10:31 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 11:12:49 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 11:12:49 [info] VM requestStop() completed
+[VM] 2026-03-25 11:12:52 [info] Guest did stop
+[VM] 2026-03-25 11:12:52 [info] VM reached stopped state
+[VM] 2026-03-25 11:12:53 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 11:12:53 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 11:12:53 [info] VM stopped successfully
+[VM] 2026-03-25 11:13:18 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 11:13:18 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 11:13:18 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 11:13:18 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 11:13:18 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 11:13:18 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 11:13:18 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 11:13:18 [info] VM startup step: create_network started
+[VM] 2026-03-25 11:13:18 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 11:13:18 [info] Created gvisor network socket pair (vm=83, go=93)
+[VM] 2026-03-25 11:13:18 [info] Starting gvisor usernet on fd=93 mac=<ip>
+[VM] 2026-03-25 11:13:18 [info] Gvisor usernet started
+[VM] 2026-03-25 11:13:18 [info] VM startup step: create_network completed
+[VM] 2026-03-25 11:13:18 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 11:13:18 [info] Configuration created:
+[VM] 2026-03-25 11:13:18 [info]   - CPUs: 4
+[VM] 2026-03-25 11:13:18 [info]   - Memory: 4GB
+[VM] 2026-03-25 11:13:18 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 11:13:18 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 11:13:18 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 11:13:18 [info]   - MAC address: <ip>
+[VM] 2026-03-25 11:13:18 [info]   - Shared directory: <home>
+[VM] 2026-03-25 11:13:18 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 11:13:18 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 11:13:18 [info] Linux VM started successfully
+[VM] 2026-03-25 11:13:18 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 11:13:18 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 11:13:24 [info] Guest connected
+[VM] 2026-03-25 11:13:24 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 11:13:24 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 11:13:24 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 11:13:24 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 11:13:24 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 11:13:24 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 11:13:25 [info] Network status: CONNECTED
+[VM] 2026-03-25 11:13:25 [info] Guest ready
+[VM] 2026-03-25 11:13:25 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 11:13:25 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 11:13:25 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 11:13:25 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 11:13:25 [info] API reachability: REACHABLE
+[VM] 2026-03-25 11:13:25 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 11:13:25 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 11:13:38 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 11:13:38 [info] VM requestStop() completed
+[VM] 2026-03-25 11:13:42 [info] Guest did stop
+[VM] 2026-03-25 11:13:42 [info] VM reached stopped state
+[VM] 2026-03-25 11:13:42 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 11:13:42 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 11:13:42 [info] VM stopped successfully
+[VM] 2026-03-25 11:13:54 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 11:13:54 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 11:13:54 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 11:13:54 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 11:13:54 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 11:13:54 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 11:13:54 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 11:13:54 [info] VM startup step: create_network started
+[VM] 2026-03-25 11:13:54 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 11:13:54 [info] Created gvisor network socket pair (vm=83, go=103)
+[VM] 2026-03-25 11:13:54 [info] Starting gvisor usernet on fd=103 mac=<ip>
+[VM] 2026-03-25 11:13:54 [info] Gvisor usernet started
+[VM] 2026-03-25 11:13:54 [info] VM startup step: create_network completed
+[VM] 2026-03-25 11:13:54 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 11:13:54 [info] Configuration created:
+[VM] 2026-03-25 11:13:54 [info]   - CPUs: 4
+[VM] 2026-03-25 11:13:54 [info]   - Memory: 4GB
+[VM] 2026-03-25 11:13:54 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 11:13:54 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 11:13:54 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 11:13:54 [info]   - MAC address: <ip>
+[VM] 2026-03-25 11:13:54 [info]   - Shared directory: <home>
+[VM] 2026-03-25 11:13:54 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 11:13:54 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 11:13:54 [info] Linux VM started successfully
+[VM] 2026-03-25 11:13:54 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 11:13:54 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 11:13:59 [info] Guest connected
+[VM] 2026-03-25 11:13:59 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 11:13:59 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 11:13:59 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 11:13:59 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 11:13:59 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 11:13:59 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 11:14:00 [info] Network status: CONNECTED
+[VM] 2026-03-25 11:14:00 [info] Guest ready
+[VM] 2026-03-25 11:14:00 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 11:14:00 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 11:14:00 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 11:14:00 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 11:14:00 [info] API reachability: REACHABLE
+[VM] 2026-03-25 11:14:00 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 11:14:00 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 11:14:04 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 11:14:04 [info] VM requestStop() completed
+[VM] 2026-03-25 11:14:08 [info] Guest did stop
+[VM] 2026-03-25 11:14:08 [info] VM reached stopped state
+[VM] 2026-03-25 11:14:08 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 11:14:08 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 11:14:08 [info] VM stopped successfully
+[VM] 2026-03-25 11:14:19 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 11:14:19 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 11:14:19 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 11:14:19 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 11:14:19 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 11:14:19 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 11:14:19 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 11:14:19 [info] VM startup step: create_network started
+[VM] 2026-03-25 11:14:19 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 11:14:19 [info] Created gvisor network socket pair (vm=83, go=103)
+[VM] 2026-03-25 11:14:19 [info] Starting gvisor usernet on fd=103 mac=<ip>
+[VM] 2026-03-25 11:14:19 [info] Gvisor usernet started
+[VM] 2026-03-25 11:14:19 [info] VM startup step: create_network completed
+[VM] 2026-03-25 11:14:19 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 11:14:19 [info] Configuration created:
+[VM] 2026-03-25 11:14:19 [info]   - CPUs: 4
+[VM] 2026-03-25 11:14:19 [info]   - Memory: 4GB
+[VM] 2026-03-25 11:14:19 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 11:14:19 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 11:14:19 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 11:14:19 [info]   - MAC address: <ip>
+[VM] 2026-03-25 11:14:19 [info]   - Shared directory: <home>
+[VM] 2026-03-25 11:14:19 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 11:14:19 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 11:14:19 [info] Linux VM started successfully
+[VM] 2026-03-25 11:14:19 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 11:14:19 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 11:14:25 [info] Guest connected
+[VM] 2026-03-25 11:14:25 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 11:14:25 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 11:14:25 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 11:14:25 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 11:14:25 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 11:14:25 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 11:14:25 [info] Network status: CONNECTED
+[VM] 2026-03-25 11:14:25 [info] Guest ready
+[VM] 2026-03-25 11:14:25 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 11:14:25 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 11:14:25 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 11:14:25 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 11:14:25 [info] API reachability: REACHABLE
+[VM] 2026-03-25 11:14:26 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 11:14:26 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 11:14:45 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 11:14:45 [info] VM requestStop() completed
+[VM] 2026-03-25 11:14:48 [info] Guest did stop
+[VM] 2026-03-25 11:14:48 [info] VM reached stopped state
+[VM] 2026-03-25 11:14:48 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 11:14:48 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 11:14:48 [info] VM stopped successfully
+[VM] 2026-03-25 11:15:01 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 11:15:01 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 11:15:01 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 11:15:01 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 11:15:01 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 11:15:01 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 11:15:01 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 11:15:01 [info] VM startup step: create_network started
+[VM] 2026-03-25 11:15:01 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 11:15:01 [info] Created gvisor network socket pair (vm=83, go=97)
+[VM] 2026-03-25 11:15:01 [info] Starting gvisor usernet on fd=97 mac=<ip>
+[VM] 2026-03-25 11:15:01 [info] Gvisor usernet started
+[VM] 2026-03-25 11:15:01 [info] VM startup step: create_network completed
+[VM] 2026-03-25 11:15:01 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 11:15:01 [info] Configuration created:
+[VM] 2026-03-25 11:15:01 [info]   - CPUs: 4
+[VM] 2026-03-25 11:15:01 [info]   - Memory: 4GB
+[VM] 2026-03-25 11:15:01 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 11:15:01 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 11:15:01 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 11:15:01 [info]   - MAC address: <ip>
+[VM] 2026-03-25 11:15:01 [info]   - Shared directory: <home>
+[VM] 2026-03-25 11:15:01 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 11:15:01 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 11:15:01 [info] Linux VM started successfully
+[VM] 2026-03-25 11:15:01 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 11:15:01 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 11:15:07 [info] Guest connected
+[VM] 2026-03-25 11:15:07 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 11:15:07 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 11:15:07 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 11:15:07 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 11:15:07 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 11:15:07 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 11:15:08 [info] Network status: CONNECTED
+[VM] 2026-03-25 11:15:08 [info] Guest ready
+[VM] 2026-03-25 11:15:08 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 11:15:08 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 11:15:08 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 11:15:08 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 11:15:08 [info] API reachability: REACHABLE
+[VM] 2026-03-25 11:15:08 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 11:15:08 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 12:49:12 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 12:49:12 [info] VM requestStop() completed
+[VM] 2026-03-25 12:49:16 [info] Guest did stop
+[VM] 2026-03-25 12:49:16 [info] VM reached stopped state
+[VM] 2026-03-25 12:49:16 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 12:49:16 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 12:49:16 [info] VM stopped successfully
+[VM] 2026-03-25 12:49:32 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 12:49:32 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 12:49:32 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 12:49:32 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 12:49:32 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 12:49:32 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 12:49:32 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 12:49:32 [info] VM startup step: create_network started
+[VM] 2026-03-25 12:49:32 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 12:49:32 [info] Created gvisor network socket pair (vm=83, go=96)
+[VM] 2026-03-25 12:49:32 [info] Starting gvisor usernet on fd=96 mac=<ip>
+[VM] 2026-03-25 12:49:32 [info] Gvisor usernet started
+[VM] 2026-03-25 12:49:32 [info] VM startup step: create_network completed
+[VM] 2026-03-25 12:49:32 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 12:49:32 [info] Configuration created:
+[VM] 2026-03-25 12:49:32 [info]   - CPUs: 4
+[VM] 2026-03-25 12:49:32 [info]   - Memory: 4GB
+[VM] 2026-03-25 12:49:32 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 12:49:32 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 12:49:32 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 12:49:32 [info]   - MAC address: <ip>
+[VM] 2026-03-25 12:49:32 [info]   - Shared directory: <home>
+[VM] 2026-03-25 12:49:32 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 12:49:32 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 12:49:32 [info] Linux VM started successfully
+[VM] 2026-03-25 12:49:32 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 12:49:32 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 12:49:37 [info] Guest connected
+[VM] 2026-03-25 12:49:37 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 12:49:37 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 12:49:37 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 12:49:37 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 12:49:37 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 12:49:37 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 12:49:38 [info] Network status: CONNECTED
+[VM] 2026-03-25 12:49:38 [info] Guest ready
+[VM] 2026-03-25 12:49:38 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 12:49:38 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 12:49:38 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 12:49:38 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 12:49:38 [info] API reachability: REACHABLE
+[VM] 2026-03-25 12:49:38 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 12:49:38 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 12:50:18 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-03-25 12:50:18 [info] VM requestStop() completed
+[VM] 2026-03-25 12:50:21 [info] VM reached stopped state
+[VM] 2026-03-25 12:50:21 [info] Guest did stop
+[VM] 2026-03-25 12:50:21 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 12:50:21 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 12:50:21 [info] VM stopped successfully
+[VM] 2026-03-25 12:50:34 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-03-25 12:50:34 [info] VM startup step: stop_existing_vm started
+[VM] 2026-03-25 12:50:34 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-03-25 12:50:34 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-03-25 12:50:34 [info] VM startup step: create_vm_config started
+[VM] 2026-03-25 12:50:34 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-03-25 12:50:34 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-03-25 12:50:34 [info] VM startup step: create_network started
+[VM] 2026-03-25 12:50:34 [info] Using gvisor user-mode networking
+[VM] 2026-03-25 12:50:34 [info] Created gvisor network socket pair (vm=83, go=96)
+[VM] 2026-03-25 12:50:34 [info] Starting gvisor usernet on fd=96 mac=<ip>
+[VM] 2026-03-25 12:50:34 [info] Gvisor usernet started
+[VM] 2026-03-25 12:50:34 [info] VM startup step: create_network completed
+[VM] 2026-03-25 12:50:34 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-03-25 12:50:34 [info] Configuration created:
+[VM] 2026-03-25 12:50:34 [info]   - CPUs: 4
+[VM] 2026-03-25 12:50:34 [info]   - Memory: 4GB
+[VM] 2026-03-25 12:50:34 [info]   - Boot: EFI (GRUB)
+[VM] 2026-03-25 12:50:34 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-03-25 12:50:34 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-03-25 12:50:34 [info]   - MAC address: <ip>
+[VM] 2026-03-25 12:50:34 [info]   - Shared directory: <home>
+[VM] 2026-03-25 12:50:34 [info] VM startup step: create_vm_config completed
+[VM] 2026-03-25 12:50:34 [info] VM startup step: vm_boot started
+[VM] 2026-03-25 12:50:34 [info] Linux VM started successfully
+[VM] 2026-03-25 12:50:34 [info] VM startup step: vm_boot completed
+[VM] 2026-03-25 12:50:34 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-03-25 12:50:40 [info] Guest connected
+[VM] 2026-03-25 12:50:40 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-03-25 12:50:40 [info] VM startup step: static_ip_assignment started
+[VM] 2026-03-25 12:50:40 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-03-25 12:50:40 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-03-25 12:50:40 [info] VM startup step: guest_ready started
+[VM] 2026-03-25 12:50:40 [info] Network status: NOT_CONNECTED
+[VM] 2026-03-25 12:50:40 [info] Network status: CONNECTED
+[VM] 2026-03-25 12:50:40 [info] Guest ready
+[VM] 2026-03-25 12:50:40 [info] VM startup step: guest_ready completed
+[VM] 2026-03-25 12:50:40 [info] VM startup step: install_ca_certificates started
+[VM] 2026-03-25 12:50:40 [warn] Failed to query trusted certificates: -25300
+[VM] 2026-03-25 12:50:40 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-03-25 12:50:41 [info] API reachability: REACHABLE
+[VM] 2026-03-25 12:50:41 [info] SDK installed successfully: version=2.1.78
+[VM] 2026-03-25 12:50:41 [info] SDK installed: version=2.1.78
+[VM] 2026-03-25 16:00:47 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-03-25 16:00:47 [info] VM requestStop() completed
+[VM] 2026-03-25 16:00:51 [info] Guest did stop
+[VM] 2026-03-25 16:00:51 [info] VM reached stopped state
+[VM] 2026-03-25 16:00:51 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-03-25 16:00:51 [info] Gvisor network attachment stopped
+[VM] 2026-03-25 16:00:51 [info] VM stopped successfully
+[VM] 2026-04-02 12:39:44 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-02 12:39:44 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-02 12:39:44 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-02 12:39:44 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-02 12:39:44 [info] VM startup step: create_vm_config started
+[VM] 2026-04-02 12:39:44 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-02 12:39:44 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-02 12:39:44 [info] VM startup step: create_network started
+[VM] 2026-04-02 12:39:44 [info] Using gvisor user-mode networking
+[VM] 2026-04-02 12:39:44 [info] Created gvisor network socket pair (vm=89, go=91)
+[VM] 2026-04-02 12:39:44 [info] Starting gvisor usernet on fd=91 mac=<ip>
+[VM] 2026-04-02 12:39:44 [info] Gvisor usernet started
+[VM] 2026-04-02 12:39:44 [info] VM startup step: create_network completed
+[VM] 2026-04-02 12:39:44 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-02 12:39:44 [info] Configuration created:
+[VM] 2026-04-02 12:39:44 [info]   - CPUs: 4
+[VM] 2026-04-02 12:39:44 [info]   - Memory: 4GB
+[VM] 2026-04-02 12:39:44 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-02 12:39:44 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-02 12:39:44 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-02 12:39:44 [info]   - MAC address: <ip>
+[VM] 2026-04-02 12:39:44 [info]   - Shared directory: <home>
+[VM] 2026-04-02 12:39:44 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-02 12:39:44 [info] VM startup step: vm_boot started
+[VM] 2026-04-02 12:39:45 [info] Linux VM started successfully
+[VM] 2026-04-02 12:39:45 [info] VM startup step: vm_boot completed
+[VM] 2026-04-02 12:39:45 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-02 12:39:56 [info] Guest connected
+[VM] 2026-04-02 12:39:56 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-02 12:39:56 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-02 12:39:56 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-02 12:39:56 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-02 12:39:56 [info] VM startup step: guest_ready started
+[VM] 2026-04-02 12:39:56 [info] Network status: CONNECTED
+[VM] 2026-04-02 12:39:56 [info] Guest ready
+[VM] 2026-04-02 12:39:56 [info] VM startup step: guest_ready completed
+[VM] 2026-04-02 12:39:56 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-02 12:39:56 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-02 12:40:00 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 12:40:00 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 12:40:07 [info] API reachability: REACHABLE
+[VM] 2026-04-02 12:40:39 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 12:40:39 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 12:40:39 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 12:40:39 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 12:40:39 [info] OAuth token approved successfully
+[VM] 2026-04-02 12:40:39 [info] OAuth token approved
+[VM] 2026-04-02 12:40:39 [info] Process spawned: id=d990ea83-6653-4c36-adc0-03c644dea168 name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 12:40:44 [info] Process d990ea83-6653-4c36-adc0-03c644dea168 killed with signal: SIGTERM
+[VM] 2026-04-02 13:02:16 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:02:16 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:02:16 [info] OAuth token approved successfully
+[VM] 2026-04-02 13:02:16 [info] OAuth token approved
+[VM] 2026-04-02 13:02:16 [info] Process spawned: id=2b347208-703b-4cee-bedd-911f15b321e2 name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 13:05:26 [info] Process 2b347208-703b-4cee-bedd-911f15b321e2 killed with signal: SIGTERM
+[VM] 2026-04-02 13:10:50 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:10:50 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:10:50 [info] OAuth token approved successfully
+[VM] 2026-04-02 13:10:50 [info] OAuth token approved
+[VM] 2026-04-02 13:10:50 [info] Process spawned: id=fb3ee0f4-e3e9-47c1-b87f-f0d3621c67b6 name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 13:14:51 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:14:51 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:15:08 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:15:08 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:15:34 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:15:34 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:16:22 [info] Process fb3ee0f4-e3e9-47c1-b87f-f0d3621c67b6 killed with signal: SIGTERM
+[VM] 2026-04-02 13:17:01 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:17:01 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:17:01 [info] OAuth token approved successfully
+[VM] 2026-04-02 13:17:01 [info] OAuth token approved
+[VM] 2026-04-02 13:17:01 [info] Process spawned: id=4d53cc59-095e-4f07-8d02-ed2066b2a6d4 name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 13:19:14 [info] Process 4d53cc59-095e-4f07-8d02-ed2066b2a6d4 killed with signal: SIGTERM
+[VM] 2026-04-02 13:20:15 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:20:15 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:20:15 [info] OAuth token approved successfully
+[VM] 2026-04-02 13:20:15 [info] OAuth token approved
+[VM] 2026-04-02 13:20:15 [info] Process spawned: id=7e35893f-2141-46b7-a287-cc77e9611f7c name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 13:24:12 [info] Process 7e35893f-2141-46b7-a287-cc77e9611f7c killed with signal: SIGTERM
+[VM] 2026-04-02 13:24:47 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 13:24:47 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 13:24:47 [info] OAuth token approved successfully
+[VM] 2026-04-02 13:24:47 [info] OAuth token approved
+[VM] 2026-04-02 13:24:47 [info] Process spawned: id=e0fa9d8f-9b0f-4b5d-8d66-510a84830762 name=gifted-confident-ptolemy command=/usr/local/bin/claude
+[VM] 2026-04-02 13:25:11 [info] Process e0fa9d8f-9b0f-4b5d-8d66-510a84830762 killed with signal: SIGTERM
+[VM] 2026-04-02 13:49:09 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-02 13:49:09 [info] VM requestStop() completed
+[VM] 2026-04-02 13:49:14 [info] Guest did stop
+[VM] 2026-04-02 13:49:14 [info] VM reached stopped state
+[VM] 2026-04-02 13:49:14 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-02 13:49:14 [info] Gvisor network attachment stopped
+[VM] 2026-04-02 13:49:14 [info] VM stopped successfully
+[VM] 2026-04-02 18:47:14 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-02 18:47:14 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-02 18:47:14 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-02 18:47:14 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-02 18:47:14 [info] VM startup step: create_vm_config started
+[VM] 2026-04-02 18:47:14 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-02 18:47:14 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-02 18:47:14 [info] VM startup step: create_network started
+[VM] 2026-04-02 18:47:14 [info] Using gvisor user-mode networking
+[VM] 2026-04-02 18:47:14 [info] Created gvisor network socket pair (vm=91, go=92)
+[VM] 2026-04-02 18:47:14 [info] Starting gvisor usernet on fd=92 mac=<ip>
+[VM] 2026-04-02 18:47:14 [info] Gvisor usernet started
+[VM] 2026-04-02 18:47:14 [info] VM startup step: create_network completed
+[VM] 2026-04-02 18:47:14 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-02 18:47:14 [info] Configuration created:
+[VM] 2026-04-02 18:47:14 [info]   - CPUs: 4
+[VM] 2026-04-02 18:47:14 [info]   - Memory: 4GB
+[VM] 2026-04-02 18:47:14 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-02 18:47:14 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-02 18:47:14 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-02 18:47:14 [info]   - MAC address: <ip>
+[VM] 2026-04-02 18:47:14 [info]   - Shared directory: <home>
+[VM] 2026-04-02 18:47:14 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-02 18:47:14 [info] VM startup step: vm_boot started
+[VM] 2026-04-02 18:47:15 [info] Linux VM started successfully
+[VM] 2026-04-02 18:47:15 [info] VM startup step: vm_boot completed
+[VM] 2026-04-02 18:47:15 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-02 18:47:28 [info] Guest connected
+[VM] 2026-04-02 18:47:28 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-02 18:47:28 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-02 18:47:28 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-02 18:47:28 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-02 18:47:28 [info] VM startup step: guest_ready started
+[VM] 2026-04-02 18:47:28 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-02 18:47:29 [info] Network status: CONNECTED
+[VM] 2026-04-02 18:47:29 [info] Guest ready
+[VM] 2026-04-02 18:47:29 [info] VM startup step: guest_ready completed
+[VM] 2026-04-02 18:47:29 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-02 18:47:29 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-02 18:47:30 [info] SDK installed successfully: version=2.1.87
+[VM] 2026-04-02 18:47:30 [info] SDK installed: version=2.1.87
+[VM] 2026-04-02 18:47:39 [info] API reachability: REACHABLE
+[VM] 2026-04-02 19:20:32 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-02 19:20:32 [info] VM requestStop() completed
+[VM] 2026-04-02 19:20:42 [info] VM shutdown taking longer than 10s, showing panel
+[VM] 2026-04-02 19:20:47 [info] VM reached stopped state
+[VM] 2026-04-02 19:20:47 [info] Guest did stop
+[VM] 2026-04-02 19:20:47 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-02 19:20:47 [info] Gvisor network attachment stopped
+[VM] 2026-04-02 19:20:47 [info] VM stopped successfully
+[VM] 2026-04-16 12:07:50 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-16 12:07:50 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-16 12:07:50 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-16 12:07:50 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-16 12:07:50 [info] VM startup step: create_vm_config started
+[VM] 2026-04-16 12:07:50 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-16 12:07:50 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-16 12:07:50 [info] VM startup step: create_network started
+[VM] 2026-04-16 12:07:50 [info] Using gvisor user-mode networking
+[VM] 2026-04-16 12:07:50 [info] Created gvisor network socket pair (vm=87, go=90)
+[VM] 2026-04-16 12:07:50 [info] Starting gvisor usernet on fd=90 mac=<ip>
+[VM] 2026-04-16 12:07:50 [info] Gvisor usernet started
+[VM] 2026-04-16 12:07:50 [info] VM startup step: create_network completed
+[VM] 2026-04-16 12:07:50 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-16 12:07:50 [info] Configuration created:
+[VM] 2026-04-16 12:07:50 [info]   - CPUs: 4
+[VM] 2026-04-16 12:07:50 [info]   - Memory: 4GB
+[VM] 2026-04-16 12:07:50 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-16 12:07:50 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-16 12:07:50 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-16 12:07:50 [info]   - MAC address: <ip>
+[VM] 2026-04-16 12:07:50 [info]   - Shared directory: /
+[VM] 2026-04-16 12:07:50 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-16 12:07:50 [info] VM startup step: vm_boot started
+[VM] 2026-04-16 12:07:50 [info] Linux VM started successfully
+[VM] 2026-04-16 12:07:50 [info] VM startup step: vm_boot completed
+[VM] 2026-04-16 12:07:50 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-16 12:07:59 [info] Guest connected
+[VM] 2026-04-16 12:07:59 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-16 12:07:59 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-16 12:07:59 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-16 12:07:59 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-16 12:07:59 [info] VM startup step: guest_ready started
+[VM] 2026-04-16 12:07:59 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-16 12:08:00 [info] Network status: CONNECTED
+[VM] 2026-04-16 12:08:00 [info] Guest ready
+[VM] 2026-04-16 12:08:00 [info] VM startup step: guest_ready completed
+[VM] 2026-04-16 12:08:00 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-16 12:08:00 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-16 12:08:00 [info] SDK installed successfully: version=2.1.92
+[VM] 2026-04-16 12:08:00 [info] SDK installed: version=2.1.92
+[VM] 2026-04-16 12:08:10 [info] API reachability: REACHABLE
+[VM] 2026-04-16 12:38:58 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-16 12:38:58 [info] VM requestStop() completed
+[VM] 2026-04-16 12:39:02 [info] Guest did stop
+[VM] 2026-04-16 12:39:02 [info] VM reached stopped state
+[VM] 2026-04-16 12:39:02 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-16 12:39:02 [info] Gvisor network attachment stopped
+[VM] 2026-04-16 12:39:02 [info] VM stopped successfully
+[VM] 2026-04-17 01:05:00 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-17 01:05:00 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-17 01:05:00 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-17 01:05:00 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-17 01:05:00 [info] VM startup step: create_vm_config started
+[VM] 2026-04-17 01:05:00 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-17 01:05:00 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-17 01:05:00 [info] VM startup step: create_network started
+[VM] 2026-04-17 01:05:00 [info] Using gvisor user-mode networking
+[VM] 2026-04-17 01:05:00 [info] Created gvisor network socket pair (vm=105, go=106)
+[VM] 2026-04-17 01:05:00 [info] Starting gvisor usernet on fd=106 mac=<ip>
+[VM] 2026-04-17 01:05:00 [info] Gvisor usernet started
+[VM] 2026-04-17 01:05:00 [info] VM startup step: create_network completed
+[VM] 2026-04-17 01:05:00 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-17 01:05:00 [info] Configuration created:
+[VM] 2026-04-17 01:05:00 [info]   - CPUs: 4
+[VM] 2026-04-17 01:05:00 [info]   - Memory: 4GB
+[VM] 2026-04-17 01:05:00 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-17 01:05:00 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-17 01:05:00 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-17 01:05:00 [info]   - MAC address: <ip>
+[VM] 2026-04-17 01:05:00 [info]   - Shared directory: /
+[VM] 2026-04-17 01:05:00 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-17 01:05:00 [info] VM startup step: vm_boot started
+[VM] 2026-04-17 01:05:00 [info] Linux VM started successfully
+[VM] 2026-04-17 01:05:00 [info] VM startup step: vm_boot completed
+[VM] 2026-04-17 01:05:00 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-17 01:05:07 [info] Guest connected
+[VM] 2026-04-17 01:05:07 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-17 01:05:07 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-17 01:05:07 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-17 01:05:07 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-17 01:05:07 [info] VM startup step: guest_ready started
+[VM] 2026-04-17 01:05:07 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-17 01:05:08 [info] Network status: CONNECTED
+[VM] 2026-04-17 01:05:08 [info] Guest ready
+[VM] 2026-04-17 01:05:08 [info] VM startup step: guest_ready completed
+[VM] 2026-04-17 01:05:08 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-17 01:05:08 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-17 01:05:08 [info] SDK installed successfully: version=2.1.92
+[VM] 2026-04-17 01:05:08 [info] SDK installed: version=2.1.92
+[VM] 2026-04-17 01:05:18 [info] API reachability: REACHABLE
+[VM] 2026-04-17 01:06:03 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-17 01:06:03 [info] VM requestStop() completed
+[VM] 2026-04-17 01:06:06 [info] Guest did stop
+[VM] 2026-04-17 01:06:06 [info] VM reached stopped state
+[VM] 2026-04-17 01:06:06 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-17 01:06:06 [info] Gvisor network attachment stopped
+[VM] 2026-04-17 01:06:06 [info] VM stopped successfully
+[VM] 2026-04-17 01:29:15 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-17 01:29:15 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-17 01:29:15 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-17 01:29:15 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-17 01:29:15 [info] VM startup step: create_vm_config started
+[VM] 2026-04-17 01:29:15 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-17 01:29:15 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-17 01:29:15 [info] VM startup step: create_network started
+[VM] 2026-04-17 01:29:15 [info] Using gvisor user-mode networking
+[VM] 2026-04-17 01:29:15 [info] Created gvisor network socket pair (vm=87, go=89)
+[VM] 2026-04-17 01:29:15 [info] Starting gvisor usernet on fd=89 mac=<ip>
+[VM] 2026-04-17 01:29:15 [info] Gvisor usernet started
+[VM] 2026-04-17 01:29:15 [info] VM startup step: create_network completed
+[VM] 2026-04-17 01:29:15 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-17 01:29:15 [info] Configuration created:
+[VM] 2026-04-17 01:29:15 [info]   - CPUs: 4
+[VM] 2026-04-17 01:29:15 [info]   - Memory: 4GB
+[VM] 2026-04-17 01:29:15 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-17 01:29:15 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-17 01:29:15 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-17 01:29:15 [info]   - MAC address: <ip>
+[VM] 2026-04-17 01:29:15 [info]   - Shared directory: /
+[VM] 2026-04-17 01:29:15 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-17 01:29:15 [info] VM startup step: vm_boot started
+[VM] 2026-04-17 01:29:15 [info] Linux VM started successfully
+[VM] 2026-04-17 01:29:15 [info] VM startup step: vm_boot completed
+[VM] 2026-04-17 01:29:15 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-17 01:29:25 [info] Guest connected
+[VM] 2026-04-17 01:29:25 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-17 01:29:25 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-17 01:29:25 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-17 01:29:25 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-17 01:29:25 [info] VM startup step: guest_ready started
+[VM] 2026-04-17 01:29:25 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-17 01:29:26 [info] Network status: CONNECTED
+[VM] 2026-04-17 01:29:26 [info] Guest ready
+[VM] 2026-04-17 01:29:26 [info] VM startup step: guest_ready completed
+[VM] 2026-04-17 01:29:26 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-17 01:29:26 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-17 01:29:27 [info] SDK installed successfully: version=2.1.111
+[VM] 2026-04-17 01:29:27 [info] SDK installed: version=2.1.111
+[VM] 2026-04-17 01:29:34 [info] Stopping VM (isAppQuit: false)...
+[VM] 2026-04-17 01:29:34 [info] VM requestStop() completed
+[VM] 2026-04-17 01:29:38 [info] Guest did stop
+[VM] 2026-04-17 01:29:38 [info] VM reached stopped state
+[VM] 2026-04-17 01:29:38 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-17 01:29:38 [info] Gvisor network attachment stopped
+[VM] 2026-04-17 01:29:38 [info] VM stopped successfully
+[VM] 2026-04-17 01:29:52 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-17 01:29:52 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-17 01:29:52 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-17 01:29:52 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-17 01:29:52 [info] VM startup step: create_vm_config started
+[VM] 2026-04-17 01:29:52 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-17 01:29:52 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-17 01:29:52 [info] VM startup step: create_network started
+[VM] 2026-04-17 01:29:52 [info] Using gvisor user-mode networking
+[VM] 2026-04-17 01:29:52 [info] Created gvisor network socket pair (vm=87, go=89)
+[VM] 2026-04-17 01:29:52 [info] Starting gvisor usernet on fd=89 mac=<ip>
+[VM] 2026-04-17 01:29:52 [info] Gvisor usernet started
+[VM] 2026-04-17 01:29:52 [info] VM startup step: create_network completed
+[VM] 2026-04-17 01:29:52 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-17 01:29:52 [info] Configuration created:
+[VM] 2026-04-17 01:29:52 [info]   - CPUs: 4
+[VM] 2026-04-17 01:29:52 [info]   - Memory: 4GB
+[VM] 2026-04-17 01:29:52 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-17 01:29:52 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-17 01:29:52 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-17 01:29:52 [info]   - MAC address: <ip>
+[VM] 2026-04-17 01:29:52 [info]   - Shared directory: /
+[VM] 2026-04-17 01:29:52 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-17 01:29:52 [info] VM startup step: vm_boot started
+[VM] 2026-04-17 01:29:52 [info] Linux VM started successfully
+[VM] 2026-04-17 01:29:52 [info] VM startup step: vm_boot completed
+[VM] 2026-04-17 01:29:52 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-17 01:29:58 [info] Guest connected
+[VM] 2026-04-17 01:29:58 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-17 01:29:58 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-17 01:29:58 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-17 01:29:58 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-17 01:29:58 [info] VM startup step: guest_ready started
+[VM] 2026-04-17 01:29:58 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-17 01:29:59 [info] Network status: CONNECTED
+[VM] 2026-04-17 01:29:59 [info] Guest ready
+[VM] 2026-04-17 01:29:59 [info] VM startup step: guest_ready completed
+[VM] 2026-04-17 01:29:59 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-17 01:29:59 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-17 01:30:00 [info] SDK installed successfully: version=2.1.111
+[VM] 2026-04-17 01:30:00 [info] SDK installed: version=2.1.111
+[VM] 2026-04-17 01:30:09 [info] API reachability: REACHABLE
+[VM] 2026-04-17 10:17:25 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-17 10:17:25 [info] VM requestStop() completed
+[VM] 2026-04-17 10:17:29 [info] Guest did stop
+[VM] 2026-04-17 10:17:29 [info] VM reached stopped state
+[VM] 2026-04-17 10:17:29 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-17 10:17:29 [info] Gvisor network attachment stopped
+[VM] 2026-04-17 10:17:29 [info] VM stopped successfully
+[VM] 2026-04-25 12:20:56 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-25 12:20:56 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-25 12:20:56 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-25 12:20:56 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-25 12:20:56 [info] VM startup step: create_vm_config started
+[VM] 2026-04-25 12:20:56 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-25 12:20:56 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-25 12:20:56 [info] VM startup step: create_network started
+[VM] 2026-04-25 12:20:56 [info] Using gvisor user-mode networking
+[VM] 2026-04-25 12:20:56 [info] Created gvisor network socket pair (vm=93, go=94)
+[VM] 2026-04-25 12:20:56 [info] Starting gvisor usernet on fd=94 mac=<ip>
+[VM] 2026-04-25 12:20:56 [info] Gvisor usernet started
+[VM] 2026-04-25 12:20:56 [info] VM startup step: create_network completed
+[VM] 2026-04-25 12:20:56 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-25 12:20:56 [info] Configuration created:
+[VM] 2026-04-25 12:20:56 [info]   - CPUs: 4
+[VM] 2026-04-25 12:20:56 [info]   - Memory: 4GB
+[VM] 2026-04-25 12:20:56 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-25 12:20:56 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-25 12:20:56 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-25 12:20:56 [info]   - MAC address: <ip>
+[VM] 2026-04-25 12:20:56 [info]   - Shared directory: /
+[VM] 2026-04-25 12:20:56 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-25 12:20:56 [info] VM startup step: vm_boot started
+[VM] 2026-04-25 12:20:56 [info] Linux VM started successfully
+[VM] 2026-04-25 12:20:56 [info] VM startup step: vm_boot completed
+[VM] 2026-04-25 12:20:56 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-25 12:21:06 [info] Guest connected
+[VM] 2026-04-25 12:21:06 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-25 12:21:06 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-25 12:21:06 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-25 12:21:06 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-25 12:21:06 [info] VM startup step: guest_ready started
+[VM] 2026-04-25 12:21:06 [info] Network status: CONNECTED
+[VM] 2026-04-25 12:21:06 [info] Guest ready
+[VM] 2026-04-25 12:21:06 [info] VM startup step: guest_ready completed
+[VM] 2026-04-25 12:21:06 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-25 12:21:06 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-25 12:21:07 [info] SDK installed successfully: version=2.1.119
+[VM] 2026-04-25 12:21:07 [info] SDK installed: version=2.1.119
+[VM] 2026-04-25 12:21:17 [info] API reachability: REACHABLE
+[VM] 2026-04-25 12:22:14 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-25 12:22:14 [info] VM requestStop() completed
+[VM] 2026-04-25 12:22:18 [info] Guest did stop
+[VM] 2026-04-25 12:22:18 [info] VM reached stopped state
+[VM] 2026-04-25 12:22:18 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-25 12:22:18 [info] Gvisor network attachment stopped
+[VM] 2026-04-25 12:22:18 [info] VM stopped successfully
+[VM] 2026-04-25 13:56:20 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-04-25 13:56:20 [info] VM startup step: stop_existing_vm started
+[VM] 2026-04-25 13:56:20 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-04-25 13:56:20 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-04-25 13:56:20 [info] VM startup step: create_vm_config started
+[VM] 2026-04-25 13:56:20 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-04-25 13:56:20 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-04-25 13:56:20 [info] VM startup step: create_network started
+[VM] 2026-04-25 13:56:20 [info] Using gvisor user-mode networking
+[VM] 2026-04-25 13:56:20 [info] Created gvisor network socket pair (vm=85, go=86)
+[VM] 2026-04-25 13:56:20 [info] Starting gvisor usernet on fd=86 mac=<ip>
+[VM] 2026-04-25 13:56:20 [info] Gvisor usernet started
+[VM] 2026-04-25 13:56:20 [info] VM startup step: create_network completed
+[VM] 2026-04-25 13:56:20 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-04-25 13:56:20 [info] Configuration created:
+[VM] 2026-04-25 13:56:20 [info]   - CPUs: 4
+[VM] 2026-04-25 13:56:20 [info]   - Memory: 4GB
+[VM] 2026-04-25 13:56:20 [info]   - Boot: EFI (GRUB)
+[VM] 2026-04-25 13:56:20 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-04-25 13:56:20 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-04-25 13:56:20 [info]   - MAC address: <ip>
+[VM] 2026-04-25 13:56:20 [info]   - Shared directory: /
+[VM] 2026-04-25 13:56:20 [info] VM startup step: create_vm_config completed
+[VM] 2026-04-25 13:56:20 [info] VM startup step: vm_boot started
+[VM] 2026-04-25 13:56:21 [info] Linux VM started successfully
+[VM] 2026-04-25 13:56:21 [info] VM startup step: vm_boot completed
+[VM] 2026-04-25 13:56:21 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-04-25 13:56:30 [info] Guest connected
+[VM] 2026-04-25 13:56:30 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-04-25 13:56:30 [info] VM startup step: static_ip_assignment started
+[VM] 2026-04-25 13:56:30 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-04-25 13:56:30 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-04-25 13:56:30 [info] VM startup step: guest_ready started
+[VM] 2026-04-25 13:56:30 [info] Network status: NOT_CONNECTED
+[VM] 2026-04-25 13:56:30 [info] Network status: CONNECTED
+[VM] 2026-04-25 13:56:30 [info] Guest ready
+[VM] 2026-04-25 13:56:30 [info] VM startup step: guest_ready completed
+[VM] 2026-04-25 13:56:30 [info] VM startup step: install_ca_certificates started
+[VM] 2026-04-25 13:56:30 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-04-25 13:56:32 [info] SDK installed successfully: version=2.1.119
+[VM] 2026-04-25 13:56:32 [info] SDK installed: version=2.1.119
+[VM] 2026-04-25 13:56:41 [info] API reachability: REACHABLE
+[VM] 2026-04-25 14:17:38 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-04-25 14:17:38 [info] VM requestStop() completed
+[VM] 2026-04-25 14:17:42 [info] Guest did stop
+[VM] 2026-04-25 14:17:42 [info] VM reached stopped state
+[VM] 2026-04-25 14:17:42 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-04-25 14:17:42 [info] Gvisor network attachment stopped
+[VM] 2026-04-25 14:17:42 [info] VM stopped successfully
+[VM] 2026-06-12 17:41:07 [info] startVM called for <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle with memoryGB=4 cpuCount=auto networkMode=gvisor
+[VM] 2026-06-12 17:41:07 [info] VM startup step: stop_existing_vm started
+[VM] 2026-06-12 17:41:07 [info] VM startup step: stop_existing_vm completed
+[VM] 2026-06-12 17:41:07 [info] Using bundle at <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle
+[VM] 2026-06-12 17:41:07 [info] VM startup step: create_vm_config started
+[VM] 2026-06-12 17:41:07 [info] Found smol-bin image at /Applications/Claude.app/Contents/Resources/smol-bin.arm64.img
+[VM] 2026-06-12 17:41:07 [info] Added smol-bin.img as USB mass storage device
+[VM] 2026-06-12 17:41:07 [info] VM startup step: create_network started
+[VM] 2026-06-12 17:41:07 [info] Using gvisor user-mode networking
+[VM] 2026-06-12 17:41:07 [info] Created gvisor network socket pair (vm=111, go=129)
+[VM] 2026-06-12 17:41:07 [info] Starting gvisor usernet on fd=129 mac=<ip>
+[VM] 2026-06-12 17:41:07 [info] Gvisor usernet started
+[VM] 2026-06-12 17:41:07 [info] VM startup step: create_network completed
+[VM] 2026-06-12 17:41:07 [info] Console device attached: port 0 (coworkd/hvc0), port 1 (kernel boot/hvc1)
+[VM] 2026-06-12 17:41:07 [info] Configuration created:
+[VM] 2026-06-12 17:41:07 [info]   - CPUs: 4
+[VM] 2026-06-12 17:41:07 [info]   - Memory: 4GB
+[VM] 2026-06-12 17:41:07 [info]   - Boot: EFI (GRUB)
+[VM] 2026-06-12 17:41:07 [info]   - Rootfs: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/rootfs.img
+[VM] 2026-06-12 17:41:07 [info]   - Session data: <home>/Library/Application Support/Claude/vm_bundles/claudevm.bundle/sessiondata.img
+[VM] 2026-06-12 17:41:07 [info]   - MAC address: <ip>
+[VM] 2026-06-12 17:41:07 [info]   - Shared directory: /
+[VM] 2026-06-12 17:41:07 [info] VM startup step: create_vm_config completed
+[VM] 2026-06-12 17:41:07 [info] VM startup step: vm_boot started
+[VM] 2026-06-12 17:41:07 [info] Linux VM started successfully
+[VM] 2026-06-12 17:41:07 [info] VM startup step: vm_boot completed
+[VM] 2026-06-12 17:41:07 [info] VM startup step: guest_vsock_connect started
+[VM] 2026-06-12 17:41:29 [info] Guest connected
+[VM] 2026-06-12 17:41:29 [info] VM startup step: guest_vsock_connect completed
+[VM] 2026-06-12 17:41:29 [info] VM startup step: static_ip_assignment started
+[VM] 2026-06-12 17:41:29 [info] Sent static IP assignment: ip=<ip>/24 gateway=<ip>
+[VM] 2026-06-12 17:41:29 [info] VM startup step: static_ip_assignment completed
+[VM] 2026-06-12 17:41:29 [info] VM startup step: guest_ready started
+[VM] 2026-06-12 17:41:29 [info] Network status: CONNECTED
+[VM] 2026-06-12 17:41:29 [info] Guest ready
+[VM] 2026-06-12 17:41:29 [info] VM startup step: guest_ready completed
+[VM] 2026-06-12 17:41:29 [info] VM startup step: install_ca_certificates started
+[VM] 2026-06-12 17:41:29 [info] Forwarding 5 trusted CA certificates to guest
+[VM] 2026-06-12 17:41:31 [info] Installed 5 host CA certificates in guest
+[VM] 2026-06-12 17:41:31 [info] Guest installed 5 CA certificates
+[VM] 2026-06-12 17:41:31 [info] VM startup step: install_ca_certificates completed
+[VM] 2026-06-12 17:41:32 [info] API reachability: REACHABLE
+[VM] 2026-06-12 17:41:32 [info] SDK installed successfully: version=2.1.170
+[VM] 2026-06-12 17:41:32 [info] SDK installed: version=2.1.170
+[VM] 2026-06-13 07:48:08 [info] Stopping VM (isAppQuit: true)...
+[VM] 2026-06-13 07:48:08 [info] VM requestStop() completed
+[VM] 2026-06-13 07:48:09 [info] Guest did stop
+[VM] 2026-06-13 07:48:09 [info] VM reached stopped state
+[VM] 2026-06-13 07:48:09 [info] 🎈 [Balloon] Monitoring stopped
+[VM] 2026-06-13 07:48:09 [info] Gvisor network attachment stopped
+[VM] 2026-06-13 07:48:09 [info] VM stopped successfully

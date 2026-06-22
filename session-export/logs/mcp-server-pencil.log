@@ -1,0 +1,33 @@
+2026-03-10T09:40:18.068Z [pencil] [info] Initializing server... { metadata: undefined }
+2026-03-10T09:40:18.090Z [pencil] [info] Using MCP server command: <home>/.vscode/extensions/highagency.pencildev-0.6.30/out/mcp-server-darwin-arm64 with args and path: {
+  metadata: {
+    args: [ '--app', 'visual_studio_code', [length]: 2 ],
+    paths: [
+      '<home>/.nvm/versions/node/v20.20.0/bin',
+      '/usr/local/bin',
+      '/opt/homebrew/bin',
+      '/usr/bin',
+      '/bin',
+      '/usr/sbin',
+      '/sbin',
+      [length]: 7
+    ]
+  }
+} %o
+2026-03-10T09:40:18.093Z [pencil] [info] Server started and connected successfully { metadata: undefined }
+2026/03/10 11:40:18 [MCP] Starting server in stdio mode
+2026/03/10 11:40:18 [WebSocketClient] server connected to WebSocket server
+2026/03/10 11:40:18 [WebSocketClient] received client ID: da1b714a-adf4-4767-b9b4-6d64934d59b1
+2026-03-10T09:40:18.299Z [pencil] [info] Message from client: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"extensions":{"io.modelcontextprotocol/ui":{"mimeTypes":["text/html;profile=mcp-app"]}}},"clientInfo":{"name":"claude-ai","version":"0.1.0"}},"jsonrpc":"2.0","id":0} { metadata: undefined }
+2026-03-10T09:40:18.302Z [pencil] [info] Message from server: {"jsonrpc":"2.0","id":0,"result":{"protocolVersion":"2025-06-18","capabilities":{"logging":{},"tools":{}},"serverInfo":{"name":"pencil","version":"1.0.0"},"instructions":"The Pencil MCP server is the editor for reading and writing to .pen files and gives y...[3399 chars truncated]...rch_all_unique_properties\": Recursively search for all unique properties on the entire node tree on provided parent ids.\n- \"replace_all_matching_properties\": Recursively replace all matching properties on the entire node tree on provided parent ids."}} { metadata: undefined }
+2026-03-10T09:40:18.477Z [pencil] [info] Message from client: {"method":"notifications/initialized","jsonrpc":"2.0"} { metadata: undefined }
+2026-03-10T09:40:18.479Z [pencil] [info] Message from client: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1} { metadata: undefined }
+2026-03-10T09:40:18.482Z [pencil] [info] Message from server: {"jsonrpc":"2.0","id":1,"result":{"tools":[{"annotations":{"title":"Batch Design","readOnlyHint":false,"destructiveHint":true,"idempotentHint":false,"openWorldHint":true},"description":"Execute multiple <blob> operatio...[30628 chars truncated]..."string"},"problemsOnly":{"description":"Only return nodes that have some kind of problem with their layout, e.g. they are clipped by their parents. If omitted, the value is `false`.","type":"boolean"}},"required":["filePath"]},"name":"snapshot_layout"}]}} { metadata: undefined }
+2026/03/10 14:19:15 [WebSocketClient] error when reading message: websocket: close 1006 (abnormal closure): unexpected EOF
+2026/03/10 14:19:15 [WebSocketClient] connection closed
+2026-03-11T09:10:50.310Z [pencil] [info] Client transport closed { metadata: undefined }
+2026-03-11T09:10:50.316Z [pencil] [info] Server transport closed (intentional shutdown) { metadata: undefined }
+2026-03-11T09:10:50.316Z [pencil] [info] Client transport closed { metadata: undefined }
+2026-03-11T09:10:50.301Z [pencil] [info] Shutting down server... { metadata: undefined }
+2026-03-11T09:10:50.466Z [pencil] [info] Server transport closed { metadata: undefined }
+2026-03-11T09:10:50.466Z [pencil] [info] Client transport closed { metadata: undefined }
