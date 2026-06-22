@@ -109,6 +109,7 @@ object ServiceLocator {
         momentEngine = MomentEngine(llm = llm, json = json)
         missionEngine = MissionEngine()
         voiceInput = ro.solomon.app.services.VoiceInputService(app)
+        ro.solomon.app.services.SolomonTTS.init(app)
         BankConnectionService.apply {
             persistenceDir = app.filesDir
             onTransactionIngested = { tx ->

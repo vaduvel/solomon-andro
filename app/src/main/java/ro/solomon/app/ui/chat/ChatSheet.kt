@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -51,7 +52,14 @@ fun ChatSheet(onDismiss: () -> Unit, vm: ChatViewModel = viewModel()) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Solomon", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.Primary, modifier = Modifier.weight(1f))
-                IconButton(onClick = onDismiss) { Icon(Icons.Filled.Close, "Închide", tint = SolomonColors.TextSecondary) }
+                IconButton(onClick = { vm.toggleVoice() }) {
+                    Icon(
+                        Icons.Filled.PlayArrow,
+                        contentDescription = if (state.voiceEnabled) "Opre\u0219te vocea" else "Porne\u0219te vocea",
+                        tint = if (state.voiceEnabled) SolomonColors.Primary else SolomonColors.TextSecondary
+                    )
+                }
+                IconButton(onClick = onDismiss) { Icon(Icons.Filled.Close, "\u00CEnchide", tint = SolomonColors.TextSecondary) }
             }
             HorizontalDivider(color = SolomonColors.Hairline)
             LazyColumn(
@@ -61,7 +69,7 @@ fun ChatSheet(onDismiss: () -> Unit, vm: ChatViewModel = viewModel()) {
                 verticalArrangement = Arrangement.spacedBy(SolSpacing.sm)
             ) {
                 items(state.messages) { m ->
-                    ChatBubble(m)
+                    ChatBubble(m, onSpeak = { vm.speakMessage(m.text) })
                 }
             }
             ChatInput(
@@ -75,12 +83,14 @@ fun ChatSheet(onDismiss: () -> Unit, vm: ChatViewModel = viewModel()) {
 }
 
 @Composable
-private fun ChatBubble(m: ChatViewModel.Message) {
+private fun ChatBubble(m: ChatViewModel.Message, onSpeak: () -> Unit = {}) {
     val isUser = m.role == ChatViewModel.Role.User
     val isTool = m.role == ChatViewModel.Role.Tool
+    val isAssistant = m.role == ChatViewModel.Role.Assistant
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = if (isUser) Arrangement.End else Arrangement.Start
+        horizontalArrangement = if (isUser) Arrangement.End else Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
@@ -113,9 +123,14 @@ private fun ChatBubble(m: ChatViewModel.Message) {
                     },
                     style = MaterialTheme.typography.bodyMedium
                 )
+        }
+        if (isAssistant) {
+            IconButton(onClick = onSpeak) {
+                Icon(Icons.Filled.PlayArrow, contentDescription = "Cite\u0219te", tint = SolomonColors.TextSecondary)
             }
         }
     }
+}
 }
 
 @Composable

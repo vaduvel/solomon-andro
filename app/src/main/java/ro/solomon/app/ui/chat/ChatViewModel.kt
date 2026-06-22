@@ -46,13 +46,24 @@ class ChatViewModel : ViewModel() {
             )
         ),
         val draft: String = "",
-        val thinking: Boolean = false
+        val thinking: Boolean = false,
+        val voiceEnabled: Boolean = false
     )
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
 
     fun setDraft(v: String) { _state.value = _state.value.copy(draft = v) }
+
+    fun toggleVoice() {
+        val enabled = !_state.value.voiceEnabled
+        _state.value = _state.value.copy(voiceEnabled = enabled)
+        if (!enabled) ro.solomon.app.services.SolomonTTS.stop()
+    }
+
+    fun speakMessage(text: String) {
+        ro.solomon.app.services.SolomonTTS.speak(text)
+    }
 
     fun send() {
         val text = _state.value.draft.trim()
@@ -288,6 +299,7 @@ class ChatViewModel : ViewModel() {
         _state.value = _state.value.copy(
             messages = _state.value.messages + Message(role = Role.Assistant, text = cleaned)
         )
+        if (_state.value.voiceEnabled) ro.solomon.app.services.SolomonTTS.speak(cleaned)
     }
 
     private suspend fun buildUserContext(userText: String): String {
