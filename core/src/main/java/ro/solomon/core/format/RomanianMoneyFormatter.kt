@@ -10,13 +10,25 @@ object RomanianMoneyFormatter {
 
     fun format(money: Money, style: Style = Style.short): String = format(money.amount, style)
 
-    fun format(amount: Int, style: Style = Style.short): String = when (style) {
-        Style.short -> "${thousands(amount)} RON"
-        Style.bareNumber -> thousands(amount)
-        Style.compact -> compact(amount, "RON")
-        Style.lei -> "${thousands(amount)} lei"
+    /** [amountBani] is expressed in bani (minor units), matching Money.amount. */
+    fun format(amountBani: Int, style: Style = Style.short): String = when (style) {
+        Style.short -> "${leiWithDecimals(amountBani)} RON"
+        Style.bareNumber -> leiWithDecimals(amountBani)
+        Style.compact -> compact(amountBani, "RON")
+        Style.lei -> "${leiWithDecimals(amountBani)} lei"
     }
 
+    /** Formats a bani amount as lei with 2 decimals, e.g. 123456 -> "1.234,56". */
+    fun leiWithDecimals(amountBani: Int): String {
+        val sign = if (amountBani < 0) "-" else ""
+        val absBani = abs(amountBani)
+        val leiPart = absBani / 100
+        val baniPart = absBani % 100
+        val decimals = baniPart.toString().padStart(2, '0')
+        return "$sign${thousands(leiPart)},$decimals"
+    }
+
+    /** Groups a non-negative-or-signed integer with '.' as thousands separator. */
     fun thousands(amount: Int): String {
         val sign = if (amount < 0) "-" else ""
         var digits = abs(amount).toString()
@@ -29,12 +41,13 @@ object RomanianMoneyFormatter {
         return sign + groups.joinToString(".")
     }
 
-    private fun compact(amount: Int, suffix: String): String {
-        val magnitude = abs(amount)
+    private fun compact(amountBani: Int, suffix: String): String {
+        val lei = amountBani.toDouble() / 100.0
+        val magnitude = abs(lei)
         return when {
-            magnitude >= 1_000_000 -> "${decimal(amount.toDouble() / 1_000_000)} mil $suffix"
-            magnitude >= 1_000 -> "${decimal(amount.toDouble() / 1_000)}k $suffix"
-            else -> "$amount $suffix"
+            magnitude >= 1_000_000 -> "${decimal(lei / 1_000_000)} mil $suffix"
+            magnitude >= 1_000 -> "${decimal(lei / 1_000)}k $suffix"
+            else -> "${leiWithDecimals(amountBani)} $suffix"
         }
     }
 
