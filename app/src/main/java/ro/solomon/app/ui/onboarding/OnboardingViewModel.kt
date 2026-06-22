@@ -185,7 +185,7 @@ class OnboardingViewModel : ViewModel() {
                 salaryRange = s.salaryRange ?: SalaryRange.range3to5,
                 salaryFrequency = SalaryFrequency.monthly(dayOfMonth = s.paydayDay),
                 hasSecondaryIncome = s.hasSecondaryIncome,
-                secondaryIncomeAvg = if (s.hasSecondaryIncome && s.secondaryIncomeApprox > 0) Money(s.secondaryIncomeApprox) else null,
+                secondaryIncomeAvg = if (s.hasSecondaryIncome && s.secondaryIncomeApprox > 0) Money.fromLei(s.secondaryIncomeApprox) else null,
                 primaryBank = s.primaryBank ?: Bank.Other
             )
         )
@@ -197,7 +197,7 @@ class OnboardingViewModel : ViewModel() {
             Obligation(
                 id = UUID.randomUUID().toString(),
                 name = d.name.trim(),
-                amount = Money(d.amountRON),
+                amount = Money.fromLei(d.amountRON),
                 dayOfMonth = d.dayOfMonth,
                 kind = d.kind,
                 confidence = ro.solomon.core.domain.ObligationConfidence.declared
@@ -213,8 +213,8 @@ class OnboardingViewModel : ViewModel() {
                 id = UUID.randomUUID().toString(),
                 kind = s.firstGoalKind,
                 destination = s.firstGoalDestination.ifBlank { null },
-                amountTarget = Money(target),
-                amountSaved = Money(0),
+                amountTarget = Money.fromLei(target),
+                amountSaved = Money.zero,
                 deadline = s.firstGoalDeadlineMillis
             )
         )

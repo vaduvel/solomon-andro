@@ -33,6 +33,7 @@ object SolomonTools {
                         put("type", "string")
                         putJsonArray("enum") {
                             add("food_grocery")
+                            add("food_delivery")
                             add("food_dining")
                             add("transport")
                             add("utilities")
@@ -44,6 +45,9 @@ object SolomonTools {
                             add("entertainment")
                             add("travel")
                             add("loans_bank")
+                            add("loans_ifn")
+                            add("bnpl")
+                            add("savings")
                             add("income_salary")
                             add("income_other")
                             add("other")

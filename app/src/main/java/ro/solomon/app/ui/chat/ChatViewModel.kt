@@ -190,8 +190,8 @@ class ChatViewModel : ViewModel() {
     ) {
         val txn = Transaction(
             id = "txn-${System.currentTimeMillis()}",
-            date = System.currentTimeMillis() / 1000,
-            amount = Money(amount),
+            date = System.currentTimeMillis(),
+            amount = Money.fromLei(amount),
             direction = direction,
             category = cat,
             merchant = merchant,
@@ -212,7 +212,7 @@ class ChatViewModel : ViewModel() {
             Obligation(
                 id = "obl-${System.currentTimeMillis()}",
                 name = name,
-                amount = Money(amount),
+                amount = Money.fromLei(amount),
                 dayOfMonth = day,
                 kind = kind,
                 confidence = ObligationConfidence.declared,
@@ -228,8 +228,8 @@ class ChatViewModel : ViewModel() {
                 id = "goal-${System.currentTimeMillis()}",
                 kind = GoalKind.custom,
                 destination = destination,
-                amountTarget = Money(amount),
-                amountSaved = Money(0),
+                amountTarget = Money.fromLei(amount),
+                amountSaved = Money.zero,
                 deadline = System.currentTimeMillis() / 1000 + months * 30L * 86400L
             )
         )
@@ -240,7 +240,7 @@ class ChatViewModel : ViewModel() {
             Subscription(
                 id = "sub-${System.currentTimeMillis()}",
                 name = name,
-                amountMonthly = Money(amount),
+                amountMonthly = Money.fromLei(amount),
                 lastUsedDaysAgo = if (lastUsed > 0) lastUsed else null,
                 cancellationDifficulty = CancellationDifficulty.medium
             )
@@ -304,10 +304,10 @@ class ChatViewModel : ViewModel() {
         return """
             Nume: ${profile?.demographics?.name ?: "necunoscut"}
             Addressing: ${profile?.demographics?.addressing?.name ?: "tu"}
-            Venit mediu lunar: ${cashFlow.monthlyIncomeAvg.amount} RON
-            Cheltuieli medii lunare: ${cashFlow.monthlySpendingAvg.amount} RON
-            Obligații lunare (${obligs.size}): ${obligs.sumOf { it.amount.amount }} RON
-            Abonamente active (${subs.size}): ${subs.sumOf { it.amountMonthly.amount }} RON/lună
+            Venit mediu lunar: ${cashFlow.monthlyIncomeAvg.amount / 100} RON
+            Cheltuieli medii lunare: ${cashFlow.monthlySpendingAvg.amount / 100} RON
+            Obligații lunare (${obligs.size}): ${obligs.sumOf { it.amount.amount } / 100} RON
+            Abonamente active (${subs.size}): ${subs.sumOf { it.amountMonthly.amount } / 100} RON/lună
             Obiective (${goals.size}): ${goals.joinToString { it.destination ?: it.kind.displayNameRO }}
             Tranzacții istorice: ${txns.size}$momentLine
 
