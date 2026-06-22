@@ -83,7 +83,7 @@ object BankNotificationParser {
 
     fun parse(
         raw: String,
-        dateEpochSeconds: Long = System.currentTimeMillis() / 1000L,
+        dateEpochMillis: Long = System.currentTimeMillis(),
         decimalHint: DecimalFormatHint = DecimalFormatHint.auto
     ): Transaction? {
         val normalized = raw
@@ -107,13 +107,14 @@ object BankNotificationParser {
 
         val moneyAmount = Money.fromRON(extracted.amount.toDouble())
 
-        val bucketEpoch = dateEpochSeconds / 60L
+        // date is canonical epoch MILLIS; bucket on whole minutes for dedupe.
+        val bucketEpoch = dateEpochMillis / 60_000L
         val dedupeKey = "notif|$normalized|$bucketEpoch"
         val id = deterministicUUID(dedupeKey).toString()
 
         return Transaction(
             id = id,
-            date = dateEpochSeconds,
+            date = dateEpochMillis,
             amount = moneyAmount,
             direction = direction,
             category = category,

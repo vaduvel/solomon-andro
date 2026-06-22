@@ -44,7 +44,7 @@ class SolomonNotificationListener : NotificationListenerService() {
             runCatching {
                 val parsed = BankNotificationParser.parse(
                     raw = text,
-                    dateEpochSeconds = System.currentTimeMillis() / 1000L
+                    dateEpochMillis = System.currentTimeMillis()
                 )
                 if (parsed != null) {
                     ServiceLocator.txnRepo.save(parsed)

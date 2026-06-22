@@ -8,8 +8,11 @@ object DemoDataGenerator {
 
     suspend fun seedIfEmpty() {
         if (ServiceLocator.txnRepo.count() > 0) return
-        val now = System.currentTimeMillis() / 1000
-        val txns = buildDemoTransactions(now)
+        // Transactions use canonical epoch MILLIS. Obligation/Goal dates below are
+        // kept on the existing seconds basis (they are not used in calendar math).
+        val nowMs = System.currentTimeMillis()
+        val now = nowMs / 1000
+        val txns = buildDemoTransactions(nowMs)
         txns.forEach { ServiceLocator.txnRepo.save(it) }
 
         val obligs = listOf(
@@ -52,7 +55,7 @@ object DemoDataGenerator {
         subs.forEach { ServiceLocator.subRepo.save(it) }
     }
 
-    private fun buildDemoTransactions(now: Long): List<Transaction> {
+    private fun buildDemoTransactions(nowMs: Long): List<Transaction> {
         val merchants = listOf(
             "Kaufland" to TransactionCategory.food_grocery,
             "Lidl" to TransactionCategory.food_grocery,
@@ -74,7 +77,7 @@ object DemoDataGenerator {
                 list.add(
                     Transaction(
                         id = "demo-${day}-${it}",
-                        date = now - day * 86400L - rng.nextInt(0, 86400),
+                        date = nowMs - day * 86_400_000L - rng.nextInt(0, 86_400_000),
                         amount = amount,
                         direction = if (isIncome) FlowDirection.incoming else FlowDirection.outgoing,
                         category = if (isIncome) TransactionCategory.unknown else cat,

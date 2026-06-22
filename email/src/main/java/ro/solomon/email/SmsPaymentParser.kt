@@ -13,13 +13,13 @@ data class ParsedSmsPayment(
     val merchant: String?,
     val sender: String,
     val raw: String,
-    val receivedAtEpochSeconds: Long = System.currentTimeMillis() / 1000
+    val receivedAtEpochMillis: Long = System.currentTimeMillis()
 ) {
     fun toTransaction(): Transaction {
-        val dedupeKey = "sms|$sender|$raw|${receivedAtEpochSeconds / 60L}"
+        val dedupeKey = "sms|$sender|$raw|${receivedAtEpochMillis / 60_000L}"
         return Transaction(
             id = deterministicUUID(dedupeKey).toString(),
-            date = receivedAtEpochSeconds,
+            date = receivedAtEpochMillis,
             amount = Money(amount),
             direction = direction,
             category = TransactionCategory.unknown,
@@ -79,22 +79,22 @@ object SmsPaymentParser {
         return bankSenders.any { s.contains(it.uppercase()) } || s.startsWith("INFO") || s.startsWith("SMS") || s.startsWith("NOTIF")
     }
 
-    fun parse(sender: String, body: String, nowEpochSeconds: Long = System.currentTimeMillis() / 1000): ParsedSmsPayment? {
+    fun parse(sender: String, body: String, nowEpochMillis: Long = System.currentTimeMillis()): ParsedSmsPayment? {
         if (body.isBlank()) return null
         val incoming = incomingPatterns.firstNotNullOfOrNull { it.find(body)?.groupValues?.get(1)?.toAmount() }
         if (incoming != null) {
             val merchant = extractMerchant(body)
-            return ParsedSmsPayment(incoming, FlowDirection.incoming, merchant, sender, body, nowEpochSeconds)
+            return ParsedSmsPayment(incoming, FlowDirection.incoming, merchant, sender, body, nowEpochMillis)
         }
         val outgoing = patterns.firstNotNullOfOrNull { it.find(body)?.groupValues?.get(1)?.toAmount() }
         if (outgoing != null) {
             val merchant = extractMerchant(body)
-            return ParsedSmsPayment(outgoing, FlowDirection.outgoing, merchant, sender, body, nowEpochSeconds)
+            return ParsedSmsPayment(outgoing, FlowDirection.outgoing, merchant, sender, body, nowEpochMillis)
         }
         val dir = detectDirection(body)
         val amount = fallbackAmount(body) ?: return null
         val merchant = extractMerchant(body)
-        return ParsedSmsPayment(amount, dir, merchant, sender, body, nowEpochSeconds)
+        return ParsedSmsPayment(amount, dir, merchant, sender, body, nowEpochMillis)
     }
 
     private fun fallbackAmount(text: String): Int? {

@@ -91,7 +91,8 @@ class ForecastRefreshWorker(ctx: Context, params: WorkerParameters) : CoroutineW
         return runCatching {
             val txns = ServiceLocator.txnRepo.fetchAll()
             val cash = ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = System.currentTimeMillis())
-            val result = ServiceLocator.forecastEngine.analyze(cashFlow = cash, transactions = txns, nowEpoch = System.currentTimeMillis() / 1000)
+            // nowEpoch is canonical epoch MILLIS (matches Transaction.date and CashFlow referenceDate).
+            val result = ServiceLocator.forecastEngine.analyze(cashFlow = cash, transactions = txns, nowEpoch = System.currentTimeMillis())
             LastForecastStore.save(applicationContext, result.tip, result.riskLevel.name)
         }.fold(onSuccess = { Result.success() }, onFailure = { Result.retry() })
     }

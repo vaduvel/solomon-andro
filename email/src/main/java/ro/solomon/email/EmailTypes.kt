@@ -59,7 +59,8 @@ data class ParsedEmailTransaction(
         val ron = amt.moneyRON ?: return null
         return Transaction(
             id = "",
-            date = dateEpochSeconds,
+            // dateEpochSeconds is email metadata in SECONDS; Transaction.date is canonical MILLIS.
+            date = dateEpochSeconds * 1000L,
             amount = ron,
             direction = direction,
             category = suggestedCategory,
