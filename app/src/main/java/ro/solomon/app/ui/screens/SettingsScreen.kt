@@ -44,13 +44,23 @@ class SettingsViewModel : ViewModel() {
         val emailAccess: Boolean = false,
         val notifications: Boolean = false,
         val datasetOptIn: Boolean = false,
-        val onboardingComplete: Boolean = false
+        val onboardingComplete: Boolean = false,
+        val mistralActive: Boolean = false,
+        val mistralModel: String = "mistral-small-latest"
     )
 
     val state: StateFlow<State> = combine(
         ServiceLocator.userRepo.observeProfile(),
-        ServiceLocator.userRepo.observeConsent()
-    ) { p, c ->
+        ServiceLocator.userRepo.observeConsent(),
+        MistralConfig.enabledFlow(),
+        MistralConfig.apiKeyFlow(),
+        MistralConfig.modelFlow()
+    ) { values ->
+        val p = values[0] as? ro.solomon.core.domain.UserProfile
+        val c = values[1] as? UserConsent
+        val mistralEnabled = values[2] as? Boolean ?: false
+        val mistralKey = values[3] as? String ?: ""
+        val mistralModel = values[4] as? String ?: "mistral-small-latest"
         State(
             displayName = p?.demographics?.name ?: "—",
             ageRange = p?.demographics?.ageRange?.displayNameRO ?: "—",
@@ -59,7 +69,9 @@ class SettingsViewModel : ViewModel() {
             emailAccess = c?.emailAccessGranted ?: false,
             notifications = c?.notificationsGranted ?: false,
             datasetOptIn = c?.datasetOptIn ?: false,
-            onboardingComplete = c?.onboardingComplete ?: false
+            onboardingComplete = c?.onboardingComplete ?: false,
+            mistralActive = mistralEnabled && mistralKey.isNotBlank(),
+            mistralModel = mistralModel
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), State())
 
@@ -169,8 +181,10 @@ fun SettingsScreen(vm: SettingsViewModel = viewModel()) {
 
         Spacer(Modifier.height(SolSpacing.base))
         SectionTitle("Model lingvistic")
-        SettingsRow("Model activ", "Template local (placeholder)") {}
-        SettingsRow("Descărcare model on-device", "În curând") {}
+        SettingsRow(
+            "Model activ",
+            if (state.mistralActive) "Mistral cloud (UE) · ${state.mistralModel}" else "Template local (fără cheie Mistral)"
+        ) { showMistral = true }
         SettingsRow("Mistral AI (cloud, EU, GDPR)", "configurează →") { showMistral = true }
 
         Spacer(Modifier.height(SolSpacing.base))
@@ -365,7 +379,7 @@ private fun MistralSettingsScreen(onClose: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(SolSpacing.md)
         ) {
             Text(
-                "Mistral procesează datele în UE (Paris), e GDPR-native și ISO 27001. Când e activ, chat-ul și comenzile de tip „adaugă chirie 1500 RON\u201D folosesc Mistral în loc de template-uri locale.",
+                "Mistral procesează datele în UE (Paris), e GDPR-native și ISO 27001. Când e activ, chat-ul și comenzile de tip „adaugă chirie 1500 RON” folosesc Mistral în loc de template-uri locale. Identificatorii personali (IBAN, card, email, telefon, nume) sunt anonimizați înainte de trimitere.",
                 color = SolomonColors.TextSecondary,
                 style = MaterialTheme.typography.bodyMedium
             )

@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.core.domain.Money
 import ro.solomon.core.domain.TransactionCategory
+import java.util.Calendar
 
 class CanIAffordViewModel : ViewModel() {
 
@@ -34,16 +36,73 @@ class CanIAffordViewModel : ViewModel() {
     fun evaluate() = viewModelScope.launch {
         val s = _state.value
         if (s.amount <= 0) return@launch
+
+        val now = System.currentTimeMillis()
         val txns = ServiceLocator.txnRepo.fetchAll()
-        val cash = ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = System.currentTimeMillis())
-        val dailySafe = (cash.monthlyIncomeAvg.amount - cash.monthlySpendingAvg.amount).coerceAtLeast(0) / 30
-        val affordable = s.amount <= dailySafe * 7
-        val title = if (affordable) "Da, încape în buget" else "Mai bine nu acum"
-        val msg = if (affordable) {
-            "Cu ${s.amount} RON pe ${s.category.displayNameRO}, rămâi cu ${(dailySafe * 7 - s.amount).coerceAtLeast(0)} RON din bugetul pe 7 zile."
-        } else {
-            "Asta e cam mult. Mai sigur amâni sau redu suma la ${(dailySafe * 7).coerceAtLeast(0)} RON."
+        val cash = ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = now)
+        val profile = ServiceLocator.userRepo.fetchProfile()
+        val obligations = ServiceLocator.obligationRepo.fetchAll()
+
+        val cal = Calendar.getInstance().apply { timeInMillis = now }
+        val today = cal.get(Calendar.DAY_OF_MONTH)
+        val daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val monthStart = Calendar.getInstance().apply {
+            timeInMillis = now
+            set(Calendar.DAY_OF_MONTH, 1)
+            set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }.timeInMillis
+
+        // Real balance proxy: this month's income reference minus what was actually spent so far.
+        val spentThisMonth = txns
+            .filter { it.isOutgoing && it.date in monthStart..now }
+            .sumOf { it.amount.amount }
+        val currentBalance = Money(maxOf(0, cash.monthlyIncomeAvg.amount - spentThisMonth))
+
+        // Obligations still due before month end (real, from the ledger).
+        val obligationsRemaining = obligations
+            .filter { it.dayOfMonth >= today }
+            .fold(Money.zero) { acc, o -> acc + o.amount }
+
+        // Days until the user's real next payday.
+        val paydayDay = profile?.let { p ->
+            when (p.financials.salaryFrequency.type) {
+                "monthly" -> p.financials.salaryFrequency.dayOfMonth ?: 28
+                "bimonthly" -> p.financials.salaryFrequency.secondDay ?: 28
+                else -> 28
+            }
+        } ?: 28
+        val daysUntilPayday = if (paydayDay > today) paydayDay - today else daysInMonth - today + paydayDay
+
+        val velocity = Money(cash.monthlySpendingAvg.amount / 30)
+
+        val budget = ServiceLocator.safeToSpend.calculate(
+            currentBalance = currentBalance,
+            obligationsRemaining = obligationsRemaining,
+            daysUntilNextPayday = daysUntilPayday,
+            velocityRONPerDay = velocity,
+            monthlyIncomeReference = cash.monthlyIncomeAvg
+        )
+
+        val target = Money.fromLei(s.amount)
+        val catRO = s.category.displayNameRO
+        val verdict = when (val r = budget.verdictFor(target)) {
+            is ro.solomon.analytics.Verdict.Yes -> Verdict(
+                canAfford = true,
+                title = "Da, îți permiți",
+                message = "După ${s.amount} RON pe $catRO îți rămân ~${r.projectedPerDay.lei.toInt()} RON/zi până la salariu (în $daysUntilPayday zile). Ești pe verde."
+            )
+            is ro.solomon.analytics.Verdict.YesWithCaution -> Verdict(
+                canAfford = true,
+                title = "Da, dar cu atenție",
+                message = "Îți permiți, dar te lasă strâmt: ~${r.projectedPerDay.lei.toInt()} RON/zi pentru următoarele $daysUntilPayday zile. Dacă apare ceva neprevăzut, devine incomod."
+            )
+            is ro.solomon.analytics.Verdict.No -> Verdict(
+                canAfford = false,
+                title = "Mai bine nu acum",
+                message = "Cei ${s.amount} RON ar intra peste banii necesari obligațiilor rămase luna asta (${obligationsRemaining.lei.toInt()} RON). Riști să nu acoperi o rată sau o factură."
+            )
         }
-        _state.value = s.copy(verdict = Verdict(affordable, title, msg))
+        _state.value = s.copy(verdict = verdict)
     }
 }

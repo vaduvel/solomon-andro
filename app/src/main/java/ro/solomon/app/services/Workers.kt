@@ -6,6 +6,7 @@ import androidx.work.WorkerParameters
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.moments.MomentEngine
 import ro.solomon.core.moments.MomentType
+import ro.solomon.core.enablebanking.BankConnectionService
 
 class DailyMomentWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {
@@ -79,10 +80,11 @@ fun MomentType.toTitle(): String = when (this) {
 class HourlyIngestWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
     override suspend fun doWork(): Result {
         return runCatching {
-            val txns = ServiceLocator.txnRepo.fetchAll()
-            if (txns.isEmpty()) {
-                DemoDataGenerator.seedIfEmpty()
-            }
+            // Real ingestion: pull the latest transactions from connected banks
+            // (Enable Banking / Open Banking). Ingested transactions are persisted
+            // via BankConnectionService.onTransactionIngested -> txnRepo.save, wired
+            // in ServiceLocator. With no bank connected this is a safe no-op (0).
+            BankConnectionService.syncAll()
         }.fold(onSuccess = { Result.success() }, onFailure = { Result.retry() })
     }
 }

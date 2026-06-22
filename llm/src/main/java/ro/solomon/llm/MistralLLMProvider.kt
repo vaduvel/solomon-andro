@@ -156,10 +156,12 @@ class MistralLLMProvider(
         toolChoice: String?,
         maxTokens: Int
     ): String {
+        // Strip personal identifiers before the payload leaves the device.
+        val safeContext = PiiScrubber.scrub(userContext)
         val messages = listOf(
             ChatMessage(
                 role = "system",
-                content = "$systemPrompt\n\nContext utilizator:\n$userContext"
+                content = "$systemPrompt\n\nContext utilizator:\n$safeContext"
             ),
             ChatMessage(role = "user", content = "Continuă.")
         )

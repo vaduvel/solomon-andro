@@ -190,10 +190,11 @@ object BankConnectionService {
         val direction = if (amountDecimal < java.math.BigDecimal.ZERO) FlowDirection.outgoing else FlowDirection.incoming
 
         val dateStr = bt.bookingDate ?: bt.valueDate ?: bt.transactionDate
+        // Canonical Transaction.date is epoch MILLIS (matches manual/notification ingest and all date-window filters).
         val dateEpoch = try {
-            LocalDate.parse(dateStr).atStartOfDay(ZoneOffset.UTC).toEpochSecond()
+            LocalDate.parse(dateStr).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
         } catch (_: Exception) {
-            Instant.now().epochSecond
+            Instant.now().toEpochMilli()
         }
 
         val merchant = if (direction == FlowDirection.outgoing) bt.creditor?.name else bt.debtor?.name

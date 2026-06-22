@@ -21,6 +21,7 @@ import ro.solomon.core.domain.ObligationKind
 import ro.solomon.core.domain.SalaryFrequency
 import ro.solomon.core.domain.SalaryRange
 import ro.solomon.core.domain.UserProfile
+import ro.solomon.core.enablebanking.BankConnectionService
 import ro.solomon.storage.UserConsent
 import java.util.UUID
 
@@ -65,7 +66,7 @@ class OnboardingViewModel : ViewModel() {
         val pushAllowed: Boolean = false,
         val trainingOptIn: Boolean = false,
         val processingTasks: List<ProcessingTask> = listOf(
-            ProcessingTask("t1", "Citesc emailurile financiare..."),
+            ProcessingTask("t1", "Sincronizez datele financiare..."),
             ProcessingTask("t2", "Identific tranzacții și abonamente..."),
             ProcessingTask("t3", "Caut pattern-uri..."),
             ProcessingTask("t4", "Pregătesc primul raport...")
@@ -131,13 +132,33 @@ class OnboardingViewModel : ViewModel() {
     fun setPushAllowed(v: Boolean) = update { it.copy(pushAllowed = v) }
     fun setTrainingOptIn(v: Boolean) = update { it.copy(trainingOptIn = v) }
 
+    private fun setTaskState(index: Int, taskState: TaskState) = update { st ->
+        st.copy(processingTasks = st.processingTasks.mapIndexed { i, t -> if (i == index) t.copy(state = taskState) else t })
+    }
+
     fun runProcessing() = viewModelScope.launch {
-        val ids = _state.value.processingTasks.map { it.id }
-        for (i in ids.indices) {
-            update { st -> st.copy(processingTasks = st.processingTasks.mapIndexed { idx, t -> if (idx == i) t.copy(state = TaskState.Running) else t }) }
-            kotlinx.coroutines.delay(1100L)
-            update { st -> st.copy(processingTasks = st.processingTasks.mapIndexed { idx, t -> if (idx == i) t.copy(state = TaskState.Done) else t }) }
-        }
+        val now = System.currentTimeMillis()
+
+        // t1 — real ingestion: pull from connected bank(s). No-op (0) if none connected.
+        setTaskState(0, TaskState.Running)
+        runCatching { BankConnectionService.syncAll() }
+        val txns = ServiceLocator.txnRepo.fetchAll()
+        setTaskState(0, TaskState.Done)
+
+        // t2 — real subscription audit over stored subscriptions.
+        setTaskState(1, TaskState.Running)
+        runCatching { ServiceLocator.subscriptionAuditor.audit(subscriptions = ServiceLocator.subRepo.fetchAll()) }
+        setTaskState(1, TaskState.Done)
+
+        // t3 — real pattern detection over the ledger.
+        setTaskState(2, TaskState.Running)
+        runCatching { ServiceLocator.patternDetector.detect(transactions = txns, referenceDate = now) }
+        setTaskState(2, TaskState.Done)
+
+        // t4 — real cash-flow analysis to prime the first report.
+        setTaskState(3, TaskState.Running)
+        runCatching { ServiceLocator.cashFlow.analyze(transactions = txns, referenceDate = now) }
+        setTaskState(3, TaskState.Done)
     }
 
     fun generateWowMoment() = viewModelScope.launch {
@@ -185,7 +206,7 @@ class OnboardingViewModel : ViewModel() {
                 salaryRange = s.salaryRange ?: SalaryRange.range3to5,
                 salaryFrequency = SalaryFrequency.monthly(dayOfMonth = s.paydayDay),
                 hasSecondaryIncome = s.hasSecondaryIncome,
-                secondaryIncomeAvg = if (s.hasSecondaryIncome && s.secondaryIncomeApprox > 0) Money(s.secondaryIncomeApprox) else null,
+                secondaryIncomeAvg = if (s.hasSecondaryIncome && s.secondaryIncomeApprox > 0) Money.fromLei(s.secondaryIncomeApprox) else null,
                 primaryBank = s.primaryBank ?: Bank.Other
             )
         )
@@ -197,7 +218,7 @@ class OnboardingViewModel : ViewModel() {
             Obligation(
                 id = UUID.randomUUID().toString(),
                 name = d.name.trim(),
-                amount = Money(d.amountRON),
+                amount = Money.fromLei(d.amountRON),
                 dayOfMonth = d.dayOfMonth,
                 kind = d.kind,
                 confidence = ro.solomon.core.domain.ObligationConfidence.declared
@@ -213,8 +234,8 @@ class OnboardingViewModel : ViewModel() {
                 id = UUID.randomUUID().toString(),
                 kind = s.firstGoalKind,
                 destination = s.firstGoalDestination.ifBlank { null },
-                amountTarget = Money(target),
-                amountSaved = Money(0),
+                amountTarget = Money.fromLei(target),
+                amountSaved = Money.zero,
                 deadline = s.firstGoalDeadlineMillis
             )
         )

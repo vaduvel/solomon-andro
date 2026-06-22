@@ -13,10 +13,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.core.notifications.BankNotificationParser
+import ro.solomon.web.ScamPatternMatcher
 
 class SolomonNotificationListener : NotificationListenerService() {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val scamMatcher = ScamPatternMatcher()
 
     override fun onCreate() {
         super.onCreate()
@@ -52,6 +54,16 @@ class SolomonNotificationListener : NotificationListenerService() {
                 }
             }.onFailure { e ->
                 IngestionNotifier.notifyError(this@SolomonNotificationListener, "notif", e.message ?: "Eroare necunoscută")
+            }
+
+            // Play-safe fraud check: runs ONLY on text that already passed the
+            // bank-notification gate above (known bank app or looksLikeBankNotification).
+            // Catches bank-impersonation smishing without reading non-bank notifications.
+            runCatching {
+                val scam = scamMatcher.match(text)
+                if (scam != null && scam.shouldAlert) {
+                    IngestionNotifier.notifyScamAlert(this@SolomonNotificationListener, text.take(80))
+                }
             }
         }
     }
