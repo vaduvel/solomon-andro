@@ -49,4 +49,16 @@ object CategoryLimitsStore {
 
     fun isNearLimit(used: Double): Boolean = used >= 0.80
     fun isOverLimit(used: Double): Boolean = used >= 1.00
+
+    fun set(ctx: android.content.Context, cat: TransactionCategory, ron: Int) {
+        kotlinx.coroutines.runBlocking { setLimit(cat, ron) }
+    }
+
+    fun getAll(ctx: android.content.Context): Map<TransactionCategory, Int> {
+        return kotlinx.coroutines.runBlocking { readAll() }
+    }
+
+    fun remove(ctx: android.content.Context, cat: TransactionCategory) {
+        kotlinx.coroutines.runBlocking { remove(cat) }
+    }
 }
