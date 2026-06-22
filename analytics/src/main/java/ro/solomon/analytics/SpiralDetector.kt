@@ -2,6 +2,7 @@ package ro.solomon.analytics
 
 import ro.solomon.core.domain.*
 import ro.solomon.core.format.RomanianDateFormatter
+import ro.solomon.core.format.RomanianMoneyFormatter
 import ro.solomon.core.moments.SpiralFactor
 import ro.solomon.core.moments.SpiralFactorKind
 import ro.solomon.core.moments.SpiralSeverity
@@ -59,14 +60,13 @@ class SpiralDetector {
         if (history.size < 3) return null
         val amounts = history.takeLast(4).map { it.amount }
         if (amounts.size < 3) return null
-        var declining = true
-        for (i in 1 until amounts.size) {
-            if (amounts[i] >= amounts[i - 1]) { declining = false; break }
-        }
-        if (!declining) return null
+        // Trend-based: overall lower at the end, with more down-steps than up-steps.
+        // Real balances wobble month to month, so a strictly monotonic check almost
+        // never fired in practice.
+        if (!isDownwardTrend(amounts)) return null
         return SpiralFactor(
             factor = SpiralFactorKind.balance_declining,
-            evidence = "balanță finală scade ${amounts.size} luni la rând",
+            evidence = "balanță finală în scădere ca tendință pe ${amounts.size} luni",
             values = amounts
         )
     }
@@ -83,17 +83,36 @@ class SpiralDetector {
         if (monthly.size < 3) return null
         val sorted = monthly.entries.sortedBy { it.key }
         val amounts = sorted.map { it.value }
-        var increasing = true
-        for (i in 1 until amounts.size) {
-            if (amounts[i] < amounts[i - 1]) { increasing = false; break }
-        }
-        if (!increasing || (amounts.lastOrNull() ?: 0) <= 0) return null
+        // Trend-based increase rather than strictly monotonic.
+        if (!isUpwardTrend(amounts) || (amounts.lastOrNull() ?: 0) <= 0) return null
         val avgIncrease = (amounts.last() - amounts.first()).toDouble() / (amounts.size - 1)
         return SpiralFactor(
             factor = SpiralFactorKind.card_credit_increasing,
-            evidence = "cheltuieli pe credit cresc lunar consecutiv ${amounts.size} luni",
+            evidence = "cheltuieli pe credit cu tendință de creștere pe ${amounts.size} luni",
             monthlyIncreaseAvg = Money(avgIncrease.toInt())
         )
+    }
+
+    /** Overall decline (last < first) with a majority of month-over-month down-steps. */
+    private fun isDownwardTrend(values: List<Int>): Boolean {
+        if (values.size < 3) return false
+        if (values.last() >= values.first()) return false
+        var down = 0; var up = 0
+        for (i in 1 until values.size) {
+            if (values[i] < values[i - 1]) down++ else if (values[i] > values[i - 1]) up++
+        }
+        return down > up
+    }
+
+    /** Overall increase (last > first) with a majority of month-over-month up-steps. */
+    private fun isUpwardTrend(values: List<Int>): Boolean {
+        if (values.size < 3) return false
+        if (values.last() <= values.first()) return false
+        var down = 0; var up = 0
+        for (i in 1 until values.size) {
+            if (values[i] > values[i - 1]) up++ else if (values[i] < values[i - 1]) down++
+        }
+        return up > down
     }
 
     private fun ifnActiveFactor(transactions: List<Transaction>, referenceDate: Long, calendar: Calendar): SpiralFactor? {
@@ -131,7 +150,7 @@ class SpiralDetector {
         if (!gap.isPositive || monthlyIncome.amount <= 0) return null
         return SpiralFactor(
             factor = SpiralFactorKind.obligations_exceed_income,
-            evidence = "obligații + cheltuieli medii depășesc venitul cu ${gap.amount} RON/lună",
+            evidence = "obligații + cheltuieli medii depășesc venitul cu ${RomanianMoneyFormatter.format(gap)}/lună",
             monthlyGap = gap
         )
     }
