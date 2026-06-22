@@ -2,13 +2,13 @@
 
 ## Filosofie
 
-> **Date locale. Fără server. Fără tracking. Confidențialitate by default.**
+> **Date locale. Fără server propriu. Fără tracking. Confidențialitate by default.**
 
 Solomon Android este un port nativ al iOS app-ului, scris în **Kotlin + Jetpack Compose** cu **Material3 + tokens proprii (Solomon Design System)**. Spre deosebire de iOS, nu folosim KMP — totul e nativ Android.
 
-Toate datele financiare rămân pe telefon. Zero backend. Zero analytics extern. Singurele apeluri de rețea sunt:
-- **Mistral AI API** (opțional, user opt-in, EU-hosted, GDPR-compliant)
-- **Open Banking** (în lucru, prin Enable Banking — EU aggregator)
+Toate datele financiare rămân pe telefon în Room DB. Nu rulăm un backend propriu și nu folosim analytics extern. Singurele apeluri de rețea sunt:
+- **Mistral AI API** (creierul cloud, user opt-in, EU-hosted, GDPR-compliant; identificatorii personali sunt anonimizați înainte de trimitere prin `PiiScrubber`)
+- **Open Banking** (prin Enable Banking — EU aggregator)
 
 ## Module
 
@@ -18,16 +18,16 @@ core/          ← Domain models (Transaction, Goal, Obligation, UserProfile)
                ← Domain logic (Money, deterministicUUID, Clock)
                ← Formatters (RomanianMoneyFormatter, RomanianDateFormatter)
                ← Notification parser (BankNotificationParser, MerchantCategoryMatcher, IFNDatabase)
+               ← Open Banking (BankConnectionService, EnableBankingClient)
 storage/       ← Room database + DAOs + Repositories
 analytics/     ← CashFlowAnalyzer, ForecastEngine, PatternDetector,
                   SpiralDetector, SubscriptionAuditor, SuspiciousTransactionDetector,
                   SafeToSpendCalculator, GoalProgress
 email/         ← EmailTransactionParser, SenderMapper, SubjectClassifier,
-                  SmsPaymentParser (debug/internal only),
-                  SenderMapper (~80 senders), SubjectClassifier
-web/           ← Web fetchers (Stripe, Wise, eMAG)
-llm/           ← LLMProvider interface + MistralLLMProvider, SmartLLMProvider,
-                  TemplateLLMProvider, OllamaLLMProvider
+                  SmsPaymentParser (debug/internal only)
+web/           ← Web fetchers + ScamPatternMatcher
+llm/           ← LLMProvider interface + MistralLLMProvider (cloud, tool-aware),
+                  TemplateLLMProvider (fallback offline), PiiScrubber
 moments/       ← MomentEngine, MomentOrchestrator, MomentBuilders
 ```
 
@@ -36,9 +36,9 @@ moments/       ← MomentEngine, MomentOrchestrator, MomentBuilders
 ### Ingest (transactions in)
 
 ```
-[BT Pay / George / Revolut / eMAG / Share Intent / Email]
+[BT Pay / George / Revolut / eMAG / Share Intent / Email / Open Banking]
                           ↓
-             SolomonNotificationListener / Share Intent
+     SolomonNotificationListener / Share Intent / BankConnectionService
                           ↓
                BankNotificationParser
                           ↓
@@ -58,7 +58,7 @@ SolomonWorkScheduler
         ├── DailyMomentWorker    (every 24h)  ← MomentEngine.generateBestMoment()
         │                                    → LastMomentStore + MomentHistoryStore
         │                                    → MomentCooldownManager.recordShown()
-        ├── HourlyIngestWorker   (every 1h)   ← DemoDataGenerator.seedIfEmpty()
+        ├── HourlyIngestWorker   (every 1h)   ← BankConnectionService.syncAll()
         └── ForecastRefreshWorker (every 6h)  ← ForecastEngine.analyze()
                                              → LastForecastStore
 ```
@@ -71,7 +71,7 @@ SolomonWorkScheduler
 | Share Intent | ~5% | none (system-wide) | `MainActivity.handleShareIntent` |
 | Email parsing | ~10% | Gmail OAuth (deferred) | `EmailTransactionParser` |
 | Manual entry | fallback | none | `ManualTransactionScreen`, `ChatSheet` |
-| **Open Banking** (în lucru) | **+5%** | EU PSD2 OAuth2 | `EnableBankingClient` (TODO) |
+| **Open Banking** | **+5%** | EU PSD2 OAuth2 | `EnableBankingClient` / `BankConnectionService` |
 
 SMS import is debug/internal only. The Play release does not declare `READ_SMS` or `RECEIVE_SMS`, because Google Play SMS policy has a high rejection risk for non-default SMS apps.
 
@@ -100,8 +100,8 @@ Suport: română (`ro-RO`) + preferință offline (`EXTRA_PREFER_OFFLINE`).
 - **Local-first**: toate datele în Room DB (encrypted at rest cu Android keystore)
 - **Zero tracking**: fără Google Analytics, Firebase, Crashlytics
 - **Network only for**:
-  - Mistral AI (user opt-in, EU)
-  - Open Banking (în lucru, EU)
+  - Mistral AI (creier cloud, user opt-in, EU, PII anonimizat)
+  - Open Banking (EU)
 - **User control**: toate permisiunile opționale, revocabile din Setări
 
 ## Build
@@ -117,7 +117,7 @@ APK: `app/build/outputs/apk/debug/app-debug.apk` (~18 MB)
 
 ## Roadmap
 
-- **v0.1.0 (acum)**: MVP cu Notif + Share + Email + Manual
-- **v0.2.0** (următor): Open Banking prin Enable Banking
+- **v0.1.0 (acum)**: MVP cu Notif + Share + Email + Manual + Open Banking (Enable Banking)
+- **v0.2.0** (următor): rafinare Open Banking (mai multe ASPSP-uri) + creier cloud Mistral cu anonimizare PII
 - **v0.3.0**: PIS — plăți inițiate din Solomon
-- **v0.4.0**: On-device LLM (Qwen 2.5 3B sau Ministral 3B)
+- **v0.4.0**: confruntare comportamentală push-before-decision (intervenție înainte de cheltuială)
