@@ -4,20 +4,26 @@ import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.services.CategoryLimitsStore
 import ro.solomon.app.services.SolomonAdvisor
 import ro.solomon.app.services.SolomonCoachMemory
 import ro.solomon.app.services.SolomonCoachVulnerability
 import ro.solomon.app.services.TrueCostComparator
+import ro.solomon.core.domain.FlowDirection
+import ro.solomon.core.domain.Goal
 import ro.solomon.core.domain.GoalKind
 import ro.solomon.core.domain.Money
+import ro.solomon.core.domain.Obligation
 import ro.solomon.core.domain.ObligationConfidence
 import ro.solomon.core.domain.ObligationKind
+import ro.solomon.core.domain.Transaction
 import ro.solomon.core.domain.TransactionCategory
+import ro.solomon.core.domain.TransactionSource
 import ro.solomon.core.domain.FinancialPersonality
 import ro.solomon.core.enablebanking.BankConnectionService
-import ro.solomon.core.util.CategoryLimitsStore
 import ro.solomon.llm.AgentToolCall
 import ro.solomon.analytics.PatternDetector
+import java.util.UUID
 
 class LLMToolExecutor(private val context: Context) {
 
@@ -70,11 +76,17 @@ class LLMToolExecutor(private val context: Context) {
                 } catch (_: Exception) {
                     TransactionCategory.unknown
                 }
-                ServiceLocator.txnRepo.addManual(
-                    amountBani = amount * 100,
-                    merchant = merchant,
-                    category = category,
-                    isIncoming = direction == "incoming"
+                ServiceLocator.txnRepo.save(
+                    Transaction(
+                        id = "chat-${UUID.randomUUID()}",
+                        date = System.currentTimeMillis(),
+                        amount = Money.fromLei(amount),
+                        direction = if (direction == "incoming") FlowDirection.incoming else FlowDirection.outgoing,
+                        category = category,
+                        merchant = merchant,
+                        source = TransactionSource.manual_entry,
+                        categorizationConfidence = 0.9
+                    )
                 )
                 "Am adaugat ${if (direction == "incoming") "venit" else "cheltuiala"}: $amount RON${if (merchant != null) " la $merchant" else ""} (${category.displayNameRO})."
             }
@@ -89,9 +101,10 @@ class LLMToolExecutor(private val context: Context) {
                 val goals = ServiceLocator.goalRepo.fetchAll()
                 val goal = goals.firstOrNull { it.destination?.contains(goalName, ignoreCase = true) == true }
                     ?: return@withContext "Nu am gasit obiectivul '$goalName'. Obiective existente: ${goals.joinToString { it.destination ?: it.kind.displayNameRO }}"
-                ServiceLocator.goalRepo.addSaving(goal.id, Money.fromLei(addAmount))
-                val newSaved = (goal.savedAmount.amount + addAmount * 100) / 100
-                val target = goal.targetAmount.amount / 100
+                val newSavedBani = goal.amountSaved.amount + Money.fromLei(addAmount).amount
+                ServiceLocator.goalRepo.save(goal.copy(amountSaved = Money.fromBani(newSavedBani)))
+                val newSaved = newSavedBani / 100
+                val target = goal.amountTarget.amount / 100
                 "Am adaugat $addAmount RON la '${goal.destination ?: goal.kind.displayNameRO}'. Economisit: $newSaved RON din $target RON."
             }
 
@@ -101,8 +114,8 @@ class LLMToolExecutor(private val context: Context) {
                 val now = System.currentTimeMillis()
                 goals.joinToString("\n") { g ->
                     val name = g.destination ?: g.kind.displayNameRO
-                    val saved = g.savedAmount.amount / 100
-                    val target = g.targetAmount.amount / 100
+                    val saved = g.amountSaved.amount / 100
+                    val target = g.amountTarget.amount / 100
                     val pct = if (target > 0) (saved * 100 / target) else 0
                     val monthsLeft = if (g.deadline > now) ((g.deadline - now) / (30L * 86_400_000L)).toInt() else 0
                     "- $name: $saved RON / $target RON ($pct%) - ${if (monthsLeft > 0) "$monthsLeft luni ramase" else "scadent"}"
@@ -139,7 +152,7 @@ class LLMToolExecutor(private val context: Context) {
                 val goal = goals.firstOrNull { it.destination?.contains(goalName, ignoreCase = true) == true }
                     ?: return@withContext "Nu am gasit obiectivul '$goalName'."
                 val now = System.currentTimeMillis()
-                val remaining = (goal.targetAmount.amount - goal.savedAmount.amount) / 100
+                val remaining = (goal.amountTarget.amount - goal.amountSaved.amount) / 100
                 val monthsLeft = if (goal.deadline > now) ((goal.deadline - now) / (30L * 86_400_000L)).toInt().coerceAtLeast(1) else 1
                 val name = goal.destination ?: goal.kind.displayNameRO
                 val monthly = remaining / monthsLeft
@@ -175,11 +188,15 @@ class LLMToolExecutor(private val context: Context) {
                 val kindStr = params["kind"] as? String ?: "custom"
                 val kind = try { GoalKind.valueOf(kindStr) } catch (_: Exception) { GoalKind.custom }
                 val deadline = System.currentTimeMillis() + deadlineMonths * 30L * 86_400_000L
-                ServiceLocator.goalRepo.create(
-                    destination = name,
-                    targetAmount = Money.fromLei(targetAmount),
-                    deadline = deadline,
-                    kind = kind
+                ServiceLocator.goalRepo.save(
+                    Goal(
+                        id = UUID.randomUUID().toString(),
+                        kind = kind,
+                        destination = name,
+                        amountTarget = Money.fromLei(targetAmount),
+                        amountSaved = Money.zero,
+                        deadline = deadline
+                    )
                 )
                 val monthly = targetAmount / deadlineMonths
                 "Obiectiv creat: '$name' - $targetAmount RON in $deadlineMonths luni. Trebuie sa economisesti ~$monthly RON/luna."
@@ -236,12 +253,16 @@ class LLMToolExecutor(private val context: Context) {
                 val dayOfMonth = (params["day_of_month"] as? Int) ?: 1
                 val kindStr = params["kind"] as? String ?: "other"
                 val kind = try { ObligationKind.valueOf(kindStr) } catch (_: Exception) { ObligationKind.other }
-                ServiceLocator.obligationRepo.add(
-                    name = name,
-                    amount = Money.fromLei(amount),
-                    dayOfMonth = dayOfMonth,
-                    kind = kind,
-                    confidence = ObligationConfidence.declared
+                ServiceLocator.obligationRepo.save(
+                    Obligation(
+                        id = UUID.randomUUID().toString(),
+                        name = name,
+                        amount = Money.fromLei(amount),
+                        dayOfMonth = dayOfMonth,
+                        kind = kind,
+                        confidence = ObligationConfidence.declared,
+                        since = System.currentTimeMillis()
+                    )
                 )
                 "Obligatie adaugata: '$name' $amount RON/luna, scadenta in ziua $dayOfMonth."
             }
@@ -371,7 +392,7 @@ class LLMToolExecutor(private val context: Context) {
                         SolomonCoachVulnerability.HEAVY_OBLIGATIONS
                     income < 100 ->
                         SolomonCoachVulnerability.IRREGULAR_INCOME
-                    goals.isNotEmpty() && goals.all { it.savedAmount.amount == 0 } ->
+                    goals.isNotEmpty() && goals.all { it.amountSaved.amount == 0 } ->
                         SolomonCoachVulnerability.GOALS_WITHOUT_CONTRIBUTION
                     income > 0 && spend.toDouble() / income > 0.9 ->
                         SolomonCoachVulnerability.CASHFLOW_PRESSURE
@@ -433,7 +454,7 @@ class LLMToolExecutor(private val context: Context) {
                 val obligs = ServiceLocator.obligationRepo.fetchAll()
                 val obligTotal = obligs.sumOf { it.amount.amount } / 100
                 val goals = ServiceLocator.goalRepo.fetchAll()
-                val activeGoals = goals.filter { it.savedAmount.amount > 0 }
+                val activeGoals = goals.filter { it.amountSaved.amount > 0 }
                 val vulnerability = SolomonCoachMemory.vulnerability(context)
                 "=== Raport lunar Solomon ===\n" +
                 "1. Venituri: $income RON\n" +
@@ -461,7 +482,7 @@ class LLMToolExecutor(private val context: Context) {
                 val vulnerability = when {
                     obligTotal > 0 && income > 0 && obligTotal.toDouble() / income > 0.4 -> SolomonCoachVulnerability.HEAVY_OBLIGATIONS
                     income < 100 -> SolomonCoachVulnerability.IRREGULAR_INCOME
-                    goals.isNotEmpty() && goals.all { it.savedAmount.amount == 0 } -> SolomonCoachVulnerability.GOALS_WITHOUT_CONTRIBUTION
+                    goals.isNotEmpty() && goals.all { it.amountSaved.amount == 0 } -> SolomonCoachVulnerability.GOALS_WITHOUT_CONTRIBUTION
                     income > 0 && spend.toDouble() / income > 0.9 -> SolomonCoachVulnerability.CASHFLOW_PRESSURE
                     else -> SolomonCoachVulnerability.SMALL_RECURRING
                 }
@@ -480,7 +501,7 @@ class LLMToolExecutor(private val context: Context) {
                         "CE VAD:\n" +
                         "- Venituri: $income RON | Cheltuieli: $spend RON\n" +
                         "- Obligatii: $obligTotal RON/luna (${obligs.size}) | Abonamente: ${subs.size}\n" +
-                        "- Obiective: ${goals.size} (${goals.count { it.savedAmount.amount > 0 }} cu economii)\n" +
+                        "- Obiective: ${goals.size} (${goals.count { it.amountSaved.amount > 0 }} cu economii)\n" +
                         "- Tranzactii: ${txs.size} total, ${recentTxs.size} recente\n\n" +
                         "RISCUL DOMINANT: ${vulnerability.title}\n" +
                         "${vulnerability.lesson}\n\n" +
@@ -508,7 +529,7 @@ class LLMToolExecutor(private val context: Context) {
                         "1. Venituri: $income RON\n" +
                         "2. Cheltuieli: $spend RON\n" +
                         "3. Obligatii fixe: $obligTotal RON/luna\n" +
-                        "4. Obiective: ${goals.size} (${goals.count { it.savedAmount.amount > 0 }} active)\n" +
+                        "4. Obiective: ${goals.size} (${goals.count { it.amountSaved.amount > 0 }} active)\n" +
                         "5. Risc: ${vulnerability.title}\n\n" +
                         "Actiune recomandata: ${vulnerability.action}"
                     }
