@@ -42,17 +42,28 @@ class ChatViewModel : ViewModel() {
         val messages: List<Message> = listOf(
             Message(
                 role = Role.Assistant,
-                text = "Bună! Sunt Solomon. Spune-mi ce vrei să afli despre banii tăi — pot să te ajut cu buget, plan sau scenarii.\n\nPoți să-mi spui și lucruri de făcut, de exemplu:\n• adaugă o chirie de 1500 RON pe 5\n• cât am cheltuit luna asta\n• setează buget 500 RON la mâncare"
+                text = "Bun\u0103! Sunt Solomon. Spune-mi ce vrei s\u0103 afli despre banii t\u0103i \u2014 pot s\u0103 te ajut cu buget, plan sau scenarii.\n\nPo\u021bi s\u0103-mi spui \u0219i lucruri de f\u0103cut, de exemplu:\n\u2022 adaug\u0103 o chirie de 1500 RON pe 5\n\u2022 c\u00E2t am cheltuit luna asta\n\u2022 seteaz\u0103 buget 500 RON la m\u00E2ncare"
             )
         ),
         val draft: String = "",
-        val thinking: Boolean = false
+        val thinking: Boolean = false,
+        val voiceEnabled: Boolean = false
     )
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
 
     fun setDraft(v: String) { _state.value = _state.value.copy(draft = v) }
+
+    fun toggleVoice() {
+        val enabled = !_state.value.voiceEnabled
+        _state.value = _state.value.copy(voiceEnabled = enabled)
+        if (!enabled) ro.solomon.app.services.SolomonTTS.stop()
+    }
+
+    fun speakMessage(text: String) {
+        ro.solomon.app.services.SolomonTTS.speak(text)
+    }
 
     fun send() {
         val text = _state.value.draft.trim()
@@ -129,56 +140,56 @@ class ChatViewModel : ViewModel() {
                 }
                 val cat = args.enumOrElse(args.stringOrNull("category"), TransactionCategory.entries.toList()) { TransactionCategory.unknown }
                 val merchant = args.stringOrNull("merchant")
-                if (amount <= 0) return "Suma trebuie să fie > 0."
+                if (amount <= 0) return "Suma trebuie s\u0103 fie > 0."
                 persistTransaction(amount, direction, cat, merchant)
                 if (direction == FlowDirection.incoming) "Am notat venit: +${amount} RON la ${merchant ?: cat.displayNameRO}."
-                else "Am notat cheltuială: -${amount} RON la ${merchant ?: cat.displayNameRO}."
+                else "Am notat cheltuial\u0103: -${amount} RON la ${merchant ?: cat.displayNameRO}."
             }
             "add_obligation" -> {
-                val name = args.stringOrNull("name") ?: return "Lipsește numele obligației."
+                val name = args.stringOrNull("name") ?: return "Lipse\u0219te numele obliga\u021biei."
                 val amount = args.intOrZero("amount_ron")
                 val day = args.intOrZero("day_of_month").coerceIn(1, 31)
                 val kind = args.enumOrElse(args.stringOrNull("kind"), ObligationKind.entries.toList()) { ObligationKind.other }
-                if (amount <= 0) return "Suma trebuie să fie > 0."
+                if (amount <= 0) return "Suma trebuie s\u0103 fie > 0."
                 persistObligation(name, amount, day, kind)
-                "Am adăugat obligația «name» de $amount RON pe $day.".replace("«name»", "«$name»")
+                "Am ad\u0103ugat obliga\u021bia \u00abname\u00bb de $amount RON pe $day.".replace("\u00abname\u00bb", "\u00ab$name\u00bb")
             }
             "add_goal" -> {
-                val dest = args.stringOrNull("destination") ?: return "Lipsește destinația obiectivului."
+                val dest = args.stringOrNull("destination") ?: return "Lipse\u0219te destina\u021bia obiectivului."
                 val amount = args.intOrZero("amount_target_ron")
                 val months = args.intOrZero("deadline_months").let { if (it <= 0) 6 else it }
-                if (amount <= 0) return "Suma trebuie să fie > 0."
+                if (amount <= 0) return "Suma trebuie s\u0103 fie > 0."
                 persistGoal(dest, amount, months)
-                "Am adăugat obiectivul «$dest» cu ținta de $amount RON în $months luni."
+                "Am ad\u0103ugat obiectivul \u00ab$dest\u00bb cu \u021binta de $amount RON \u00een $months luni."
             }
             "add_subscription" -> {
-                val name = args.stringOrNull("name") ?: return "Lipsește numele abonamentului."
+                val name = args.stringOrNull("name") ?: return "Lipse\u0219te numele abonamentului."
                 val amount = args.intOrZero("amount_monthly_ron")
                 val lastUsed = args.intOrZero("last_used_days_ago")
-                if (amount <= 0) return "Suma trebuie să fie > 0."
+                if (amount <= 0) return "Suma trebuie s\u0103 fie > 0."
                 persistSubscription(name, amount, lastUsed)
-                "Am adăugat abonamentul «$name» de $amount RON/lună."
+                "Am ad\u0103ugat abonamentul \u00ab$name\u00bb de $amount RON/lun\u0103."
             }
             "delete_obligation" -> {
-                val name = args.stringOrNull("name") ?: return "Lipsește numele."
+                val name = args.stringOrNull("name") ?: return "Lipse\u0219te numele."
                 deleteObligationByName(name)
             }
             "delete_goal" -> {
-                val dest = args.stringOrNull("destination") ?: return "Lipsește destinația."
+                val dest = args.stringOrNull("destination") ?: return "Lipse\u0219te destina\u021bia."
                 deleteGoalByDest(dest)
             }
             "delete_subscription" -> {
-                val name = args.stringOrNull("name") ?: return "Lipsește numele."
+                val name = args.stringOrNull("name") ?: return "Lipse\u0219te numele."
                 deleteSubscriptionByName(name)
             }
             "set_category_limit" -> {
                 val cat = args.enumOrElse(args.stringOrNull("category"), TransactionCategory.entries.toList()) { TransactionCategory.unknown }
                 val amount = args.intOrZero("amount_ron")
-                if (amount <= 0) return "Suma trebuie să fie > 0."
+                if (amount <= 0) return "Suma trebuie s\u0103 fie > 0."
                 ro.solomon.app.services.CategoryLimitsStore.setLimit(cat, amount)
                 "Am setat bugetul de $amount RON pentru ${cat.displayNameRO}."
             }
-            else -> "Nu știu cum să execut «${call.name}»."
+            else -> "Nu \u0219tiu cum s\u0103 execut \u00ab${call.name}\u00bb."
         }
     }
 
@@ -250,25 +261,25 @@ class ChatViewModel : ViewModel() {
     private suspend fun deleteObligationByName(name: String): String {
         val all = ServiceLocator.obligationRepo.fetchAll()
         val match = all.firstOrNull { it.name.contains(name, ignoreCase = true) }
-            ?: return "Nu am găsit obligația «$name»."
+            ?: return "Nu am g\u0103sit obliga\u021bia \u00ab$name\u00bb."
         ServiceLocator.obligationRepo.delete(match.id)
-        return "Am șters obligația «${match.name}»."
+        return "Am \u0219ters obliga\u021bia \u00ab${match.name}\u00bb."
     }
 
     private suspend fun deleteGoalByDest(destination: String): String {
         val all = ServiceLocator.goalRepo.fetchAll()
         val match = all.firstOrNull { it.destination?.contains(destination, ignoreCase = true) == true }
-            ?: return "Nu am găsit obiectivul «$destination»."
+            ?: return "Nu am g\u0103sit obiectivul \u00ab$destination\u00bb."
         ServiceLocator.goalRepo.delete(match.id)
-        return "Am șters obiectivul «${match.destination}»."
+        return "Am \u0219ters obiectivul \u00ab${match.destination}\u00bb."
     }
 
     private suspend fun deleteSubscriptionByName(name: String): String {
         val all = ServiceLocator.subRepo.fetchAll()
         val match = all.firstOrNull { it.name.contains(name, ignoreCase = true) }
-            ?: return "Nu am găsit abonamentul «$name»."
+            ?: return "Nu am g\u0103sit abonamentul \u00ab$name\u00bb."
         ServiceLocator.subRepo.delete(match.id)
-        return "Am șters abonamentul «${match.name}»."
+        return "Am \u0219ters abonamentul \u00ab${match.name}\u00bb."
     }
 
     private suspend fun runLLMText(system: String, context: String): String {
@@ -279,7 +290,7 @@ class ChatViewModel : ViewModel() {
                 maxWords = 120
             )
         } catch (_: Throwable) {
-            "Îmi pare rău, am o problemă tehnică momentan. Încearcă din nou în câteva secunde."
+            "\u00CEmi pare r\u0103u, am o problem\u0103 tehnic\u0103 momentan. \u00CEncearc\u0103 din nou \u00een c\u00E2teva secunde."
         }
     }
 
@@ -288,6 +299,7 @@ class ChatViewModel : ViewModel() {
         _state.value = _state.value.copy(
             messages = _state.value.messages + Message(role = Role.Assistant, text = cleaned)
         )
+        if (_state.value.voiceEnabled) ro.solomon.app.services.SolomonTTS.speak(cleaned)
     }
 
     private suspend fun buildUserContext(userText: String): String {
@@ -306,12 +318,12 @@ class ChatViewModel : ViewModel() {
             Addressing: ${profile?.demographics?.addressing?.name ?: "tu"}
             Venit mediu lunar: ${cashFlow.monthlyIncomeAvg.amount / 100} RON
             Cheltuieli medii lunare: ${cashFlow.monthlySpendingAvg.amount / 100} RON
-            Obligații lunare (${obligs.size}): ${obligs.sumOf { it.amount.amount } / 100} RON
-            Abonamente active (${subs.size}): ${subs.sumOf { it.amountMonthly.amount } / 100} RON/lună
+            Obliga\u021bii lunare (${obligs.size}): ${obligs.sumOf { it.amount.amount } / 100} RON
+            Abonamente active (${subs.size}): ${subs.sumOf { it.amountMonthly.amount } / 100} RON/lun\u0103
             Obiective (${goals.size}): ${goals.joinToString { it.destination ?: it.kind.displayNameRO }}
-            Tranzacții istorice: ${txns.size}$momentLine
+            Tranzac\u021bii istorice: ${txns.size}$momentLine
 
-            Întrebare utilizator: $userText
+            \u00CEntrebare utilizator: $userText
         """.trimIndent()
     }
 }

@@ -37,7 +37,7 @@ class TodayViewModel : ViewModel() {
         val incomingToday: Int = 0,
         val outgoingToday: Int = 0,
         val recentTransactions: List<Transaction> = emptyList(),
-        val momentText: String = "Salut! Apasă aici ca să-ți generez primul moment financiar personalizat.",
+        val momentText: String = "Salut! Apas\u0103 aici ca s\u0103-\u021bi generez primul moment financiar personalizat.",
         val generatingMoment: Boolean = false,
         val hasUnreadAlert: Boolean = false,
         val activeMission: SolomonMission? = null,
@@ -47,8 +47,27 @@ class TodayViewModel : ViewModel() {
         val avgDailySpending30d: Int = 0,
         val upcomingBills: List<UpcomingBillItem> = emptyList(),
         val upcomingBillsTotal: Int = 0,
-        val upcomingBillsCount: Int = 0
+        val upcomingBillsCount: Int = 0,
+        val financialSafetyDays: Int = 0,
+        val safetyDaysTier: SafetyTier = SafetyTier.DANGER,
+        val zeroBalanceSentence: String = ""
     )
+
+    enum class SafetyTier(val label: String) {
+        DANGER("Zon\u0103 de risc"),
+        CAUTION("Te descurci"),
+        STABLE("Stabil"),
+        FREE("Liber de salariu \u2B50");
+
+        companion object {
+            fun from(days: Int): SafetyTier = when {
+                days < 7 -> DANGER
+                days < 15 -> CAUTION
+                days < 30 -> STABLE
+                else -> FREE
+            }
+        }
+    }
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State> = _state.asStateFlow()
@@ -114,6 +133,19 @@ class TodayViewModel : ViewModel() {
                 val upcomingBillsTotal = upcomingBills.sumOf { it.amount }
                 val upcomingBillsCount = upcomingBills.size
 
+                val financialSafetyDays = if (safePerDay > 0) balance / safePerDay else days
+                val safetyDaysTier = SafetyTier.from(financialSafetyDays)
+                val zeroBalanceSentence = if (safePerDay <= 0) {
+                    "Rezerva disponibil\u0103 e aproape de zero."
+                } else if (financialSafetyDays < days) {
+                    val cal = java.util.Calendar.getInstance()
+                    cal.add(java.util.Calendar.DAY_OF_YEAR, financialSafetyDays)
+                    val fmt = java.text.SimpleDateFormat("d MMMM", java.util.Locale("ro", "RO"))
+                    "La ritmul curent, rezerva ajunge la 0 pe ${fmt.format(cal.time)}."
+                } else {
+                    "Rezerva acoper\u0103 p\u00E2n\u0103 la salariul urm\u0103tor. \uD83D\uDC4D"
+                }
+
                 _state.value.copy(
                     userName = profile?.demographics?.name ?: "",
                     balanceAvailable = balance.coerceAtLeast(0),
@@ -129,7 +161,10 @@ class TodayViewModel : ViewModel() {
                     avgDailySpending30d = avgDailySpending30d,
                     upcomingBills = upcomingBills,
                     upcomingBillsTotal = upcomingBillsTotal,
-                    upcomingBillsCount = upcomingBillsCount
+                    upcomingBillsCount = upcomingBillsCount,
+                    financialSafetyDays = financialSafetyDays,
+                    safetyDaysTier = safetyDaysTier,
+                    zeroBalanceSentence = zeroBalanceSentence
                 )
             }
             .onEach { _state.value = it }
@@ -241,7 +276,7 @@ class TodayViewModel : ViewModel() {
                 )
         } catch (e: Throwable) {
             _state.value = _state.value.copy(
-                momentText = "Încă nu am destule date. Adaugă câteva tranzacții și revin-o în câteva minute.",
+                momentText = "\u00CEnc\u0103 nu am destule date. Adaug\u0103 c\u00E2teva tranzac\u021bii \u0219i revin-o \u00een c\u00E2teva minute.",
                 generatingMoment = false
             )
         }
