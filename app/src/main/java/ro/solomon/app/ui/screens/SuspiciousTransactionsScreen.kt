@@ -199,7 +199,7 @@ private fun Row(pair: SuspiciousTxViewModel.Pair, onConfirm: () -> Unit) {
             )
         }
         Column(horizontalAlignment = Alignment.End) {
-            Text("−${pair.transaction.amount.amount}", color = SolomonColors.Rose, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+            Text("−${RomanianMoneyFormatter.format(pair.transaction.amount.amount, RomanianMoneyFormatter.Style.bareNumber)}", color = SolomonColors.Rose, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
             Text("RON", color = SolomonColors.TextTertiary, fontSize = 10.sp)
         }
         Spacer(Modifier.width(SolSpacing.xs))
