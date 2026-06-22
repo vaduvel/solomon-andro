@@ -60,7 +60,7 @@ fun ModelDownloadScreen(onClose: () -> Unit) {
 
             SolInsightCard(label = "Solomon · Info", timestamp = "privacy", accent = SolAccent.Mint) {
                 Text(
-                    "Momentan folosim Mistral Small prin API (UE, GDPR). Când e activ, conversațiile și comenzile de tip „adaugă chirie 1500 RON\" sunt procesate în cloud-ul Mistral din Paris. Alternativ, în curând, vom suporta și un model on-device (Qwen 2.5 3B sau Ministral 3B) pentru cazuri 100% offline.",
+                    "Folosim Mistral prin API (UE, GDPR). Când e activ, conversațiile și comenzile de tip „adaugă chirie 1500 RON\" sunt procesate în cloud-ul Mistral din Paris, iar datele personale (nume, IBAN, card, telefon, email) sunt anonimizate înainte de trimitere. Fără cheie sau cu Mistral dezactivat, Solomon folosește un răspuns-șablon local, fără niciun apel în rețea.",
                     color = SolomonColors.TextSecondary,
                     fontSize = 14.sp
                 )
@@ -72,9 +72,9 @@ fun ModelDownloadScreen(onClose: () -> Unit) {
                 SolHairlineDivider()
                 ModelRow("Mistral Large (latest)", "UE · premium · mai scump, mai bun", false, SolAccent.Blue)
                 SolHairlineDivider()
-                ModelRow("Ministral 3B (latest)", "UE · cel mai ieftin · edge", false, SolAccent.Amber)
+                ModelRow("Ministral 3B (latest)", "UE · cel mai ieftin · edge (cloud)", false, SolAccent.Amber)
                 SolHairlineDivider()
-                ModelRow("Qwen 2.5 3B (on-device)", "Local · 100% offline · în curând", false, SolAccent.Violet)
+                ModelRow("Șablon local", "Fără rețea · fallback când Mistral e oprit", false, SolAccent.Violet)
             }
 
             Spacer(Modifier.height(SolSpacing.lg))

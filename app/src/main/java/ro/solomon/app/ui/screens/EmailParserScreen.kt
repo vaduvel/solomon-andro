@@ -68,7 +68,8 @@ class EmailParserViewModel : ViewModel() {
             val id = "email-${System.currentTimeMillis()}"
             val tx = Transaction(
                 id = id,
-                date = parsed.dateEpochSeconds,
+                // dateEpochSeconds is email metadata in SECONDS; Transaction.date is canonical MILLIS.
+                date = parsed.dateEpochSeconds * 1000L,
                 amount = ron,
                 direction = parsed.direction,
                 category = parsed.suggestedCategory,
