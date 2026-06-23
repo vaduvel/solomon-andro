@@ -1,39 +1,42 @@
 package ro.solomon.app.ui.wallet
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import ro.solomon.app.ui.components.MeshBackground
+import ro.solomon.app.ui.components.SolInsightCard
+import ro.solomon.app.ui.components.SolPill
+import ro.solomon.app.ui.components.SolPrimaryButton
+import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.theme.SolSpacing
+import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.GoalKind
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GoalEditScreen(
     goalId: String?,
@@ -45,87 +48,121 @@ fun GoalEditScreen(
     )
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    var showDeleteConfirm by remember { mutableStateOf(false) }
+
     LaunchedEffect(state.isSaved, state.isDeleted) {
         if (state.isSaved || state.isDeleted) onClose()
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(if (state.isNew) "Obiectiv nou" else "Editează obiectiv") },
-                navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Înapoi")
-                    }
-                },
-                actions = {
-                    if (!state.isNew) {
-                        IconButton(onClick = { vm.delete() }) {
-                            Icon(Icons.Default.Delete, contentDescription = "Șterge")
-                        }
-                    }
-                }
-            )
-        }
-    ) { padding ->
+    Box(modifier = Modifier.fillMaxSize()) {
+        MeshBackground(
+            topLeftAccent = SolAccent.Mint,
+            midRightAccent = SolAccent.Blue,
+            bottomLeftAccent = SolAccent.Violet,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(SolSpacing.lg)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(SolSpacing.md)
+                .verticalScroll(rememberScrollState())
+                .padding(SolSpacing.lg),
+            verticalArrangement = Arrangement.spacedBy(SolSpacing.base)
         ) {
-            Text("Tip obiectiv", style = MaterialTheme.typography.titleMedium)
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+            WalletEditHeader(
+                title = if (state.isNew) "Obiectiv nou" else "Editează obiectiv",
+                canDelete = !state.isNew,
+                onBack = onClose,
+                onDelete = { showDeleteConfirm = true }
+            )
+
+            Text("TIP OBIECTIV", color = SolomonColors.TextTertiary, fontSize = 11.sp)
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm),
+                verticalArrangement = Arrangement.spacedBy(SolSpacing.sm)
+            ) {
                 GoalKind.values().forEach { k ->
-                    FilterChip(
-                        selected = state.kind == k,
-                        onClick = { vm.onKind(k) },
-                        label = { Text(k.displayNameRO) }
-                    )
+                    SolPill(label = k.displayNameRO, isActive = state.kind == k, onClick = { vm.onKind(k) })
                 }
             }
-            OutlinedTextField(
+
+            WalletField(
                 value = state.destination,
                 onValueChange = vm::onDestination,
-                label = { Text("Destinație / detalii (opțional)") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
+                label = "Destinație / detalii (opțional)",
+                placeholder = "ex: Vacanță în Grecia"
             )
-            OutlinedTextField(
+            WalletField(
                 value = state.amountTargetText,
                 onValueChange = vm::onTarget,
-                label = { Text("Sumă țintă (RON)") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
+                label = "Sumă țintă",
+                placeholder = "0",
+                keyboardType = KeyboardType.Number,
+                suffix = "RON"
             )
-            OutlinedTextField(
+            WalletField(
                 value = state.amountSavedText,
                 onValueChange = vm::onSaved,
-                label = { Text("Sumă economisită deja (RON)") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
+                label = "Sumă economisită deja",
+                placeholder = "0",
+                keyboardType = KeyboardType.Number,
+                suffix = "RON"
             )
 
-            Text("Termen: ${state.deadlineLabel}", style = MaterialTheme.typography.titleMedium)
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+            Text("TERMEN: ${state.deadlineLabel}", color = SolomonColors.TextTertiary, fontSize = 11.sp)
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm),
+                verticalArrangement = Arrangement.spacedBy(SolSpacing.sm)
+            ) {
                 listOf(1 to "1 lună", 3 to "3 luni", 6 to "6 luni", 12 to "1 an", 24 to "2 ani").forEach { (m, l) ->
-                    FilterChip(
-                        selected = state.deadlineLabel == l,
-                        onClick = { vm.onDeadlinePreset(m, l) },
-                        label = { Text(l) }
+                    SolPill(label = l, isActive = state.deadlineLabel == l, onClick = { vm.onDeadlinePreset(m, l) })
+                }
+            }
+
+            val target = state.amountTargetText.toIntOrNull() ?: 0
+            if (target > 0) {
+                val saved = state.amountSavedText.toIntOrNull() ?: 0
+                val months = (((state.deadlineEpochMillis - System.currentTimeMillis()) / (30L * 86_400_000L)).toInt()).coerceAtLeast(1)
+                val monthly = if (target > saved) (target - saved) / months else 0
+                SolInsightCard(label = "Solomon · Proiecție", accent = SolAccent.Mint) {
+                    Text(
+                        if (monthly > 0)
+                            "Pentru a strânge $target RON până în ${state.deadlineLabel}, pune deoparte ~$monthly RON pe lună."
+                        else
+                            "Ai atins deja suma țintă. Poți marca obiectivul ca finalizat.",
+                        color = SolomonColors.TextSecondary,
+                        fontSize = 13.sp
                     )
                 }
             }
 
-            state.error?.let { Text("Eroare: $it", color = MaterialTheme.colorScheme.error) }
+            state.error?.let {
+                Text("Eroare: $it", color = SolomonColors.Error, fontSize = 13.sp)
+            }
 
-            Button(
-                onClick = { vm.save() },
-                enabled = state.canSave(),
-                modifier = Modifier.fillMaxWidth()
-            ) { Text("Salvează") }
+            Spacer(Modifier.height(SolSpacing.xs))
+            SolPrimaryButton(
+                title = if (state.isNew) "Adaugă obiectiv" else "Salvează",
+                accent = SolAccent.Mint,
+                fullWidth = true,
+                onClick = { vm.save() }
+            )
+            Spacer(Modifier.height(SolSpacing.xxl))
         }
+    }
+
+    if (showDeleteConfirm) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirm = false },
+            title = { Text("Ștergi obiectivul?") },
+            text = { Text("Această acțiune nu poate fi anulată.") },
+            confirmButton = {
+                TextButton(onClick = { showDeleteConfirm = false; vm.delete() }) {
+                    Text("Șterge", color = SolomonColors.Rose)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirm = false }) { Text("Anulează") }
+            }
+        )
     }
 }

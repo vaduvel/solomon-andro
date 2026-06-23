@@ -3,10 +3,9 @@ package ro.solomon.app.ui.wallet
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.core.domain.CancellationDifficulty
@@ -18,8 +17,8 @@ data class SubscriptionEditState(
     val isNew: Boolean = true,
     val id: String = UUID.randomUUID().toString(),
     val name: String = "",
-    val amountText: String = "0",
-    val lastUsedDaysAgo: String = "0",
+    val amountText: String = "",
+    val lastUsedDaysAgo: String = "",
     val difficulty: CancellationDifficulty = CancellationDifficulty.medium,
     val cancellationUrl: String = "",
     val notes: String = "",
@@ -34,40 +33,45 @@ class SubscriptionEditViewModel(
     private val subscriptionId: String? = null
 ) : ViewModel() {
 
-    private val _local = MutableStateFlow(SubscriptionEditState(isNew = subscriptionId == null))
+    private val _state = MutableStateFlow(SubscriptionEditState(isNew = subscriptionId == null))
+    val state: StateFlow<SubscriptionEditState> = _state.asStateFlow()
 
-    val state: StateFlow<SubscriptionEditState> = combine(
-        ServiceLocator.subRepo.observeAll(),
-        _local
-    ) { all, local ->
-        if (local.isNew || local.name.isNotBlank() || local.amountText != "0") return@combine local
-        val existing = all.firstOrNull { it.id == subscriptionId } ?: return@combine local
-        local.copy(
-            id = existing.id,
-            name = existing.name,
-            amountText = existing.amountMonthly.amount.toString(),
-            lastUsedDaysAgo = (existing.lastUsedDaysAgo ?: 0).toString(),
-            difficulty = existing.cancellationDifficulty,
-            cancellationUrl = existing.cancellationUrl ?: "",
-            notes = existing.cancellationStepsSummary ?: ""
-        )
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, _local.value)
+    init {
+        if (subscriptionId != null) {
+            viewModelScope.launch {
+                val existing = ServiceLocator.subRepo.observeAll().first()
+                    .firstOrNull { it.id == subscriptionId }
+                if (existing != null) {
+                    _state.value = _state.value.copy(
+                        isNew = false,
+                        id = existing.id,
+                        name = existing.name,
+                        amountText = (existing.amountMonthly.amount / 100).toString(),
+                        lastUsedDaysAgo = existing.lastUsedDaysAgo?.toString() ?: "",
+                        difficulty = existing.cancellationDifficulty,
+                        cancellationUrl = existing.cancellationUrl ?: "",
+                        notes = existing.cancellationStepsSummary ?: ""
+                    )
+                }
+            }
+        }
+    }
 
-    fun onName(v: String) { _local.value = _local.value.copy(name = v) }
-    fun onAmount(v: String) { _local.value = _local.value.copy(amountText = v.filter { c -> c.isDigit() }) }
-    fun onLastUsed(v: String) { _local.value = _local.value.copy(lastUsedDaysAgo = v.filter { c -> c.isDigit() }) }
-    fun onDifficulty(v: CancellationDifficulty) { _local.value = _local.value.copy(difficulty = v) }
-    fun onUrl(v: String) { _local.value = _local.value.copy(cancellationUrl = v) }
-    fun onNotes(v: String) { _local.value = _local.value.copy(notes = v) }
+    fun onName(v: String) { _state.value = _state.value.copy(name = v) }
+    fun onAmount(v: String) { _state.value = _state.value.copy(amountText = v.filter { c -> c.isDigit() }) }
+    fun onLastUsed(v: String) { _state.value = _state.value.copy(lastUsedDaysAgo = v.filter { c -> c.isDigit() }) }
+    fun onDifficulty(v: CancellationDifficulty) { _state.value = _state.value.copy(difficulty = v) }
+    fun onUrl(v: String) { _state.value = _state.value.copy(cancellationUrl = v) }
+    fun onNotes(v: String) { _state.value = _state.value.copy(notes = v) }
 
     fun save() {
-        val s = _local.value
+        val s = _state.value
         if (!s.canSave()) return
         val days = s.lastUsedDaysAgo.toIntOrNull() ?: 0
         val sub = Subscription(
             id = s.id,
             name = s.name.trim(),
-            amountMonthly = Money(s.amountText.toInt()),
+            amountMonthly = Money.fromLei(s.amountText.toInt()),
             lastUsedDaysAgo = if (days > 0) days else null,
             cancellationDifficulty = s.difficulty,
             cancellationUrl = s.cancellationUrl.takeIf { it.isNotBlank() },
@@ -76,9 +80,9 @@ class SubscriptionEditViewModel(
         viewModelScope.launch {
             try {
                 ServiceLocator.subRepo.save(sub)
-                _local.value = s.copy(isSaved = true, error = null)
+                _state.value = s.copy(isSaved = true, error = null)
             } catch (t: Throwable) {
-                _local.value = s.copy(error = t.message ?: "Eroare")
+                _state.value = s.copy(error = t.message ?: "Eroare")
             }
         }
     }
@@ -86,8 +90,8 @@ class SubscriptionEditViewModel(
     fun delete() {
         viewModelScope.launch {
             try {
-                ServiceLocator.subRepo.delete(_local.value.id)
-                _local.value = _local.value.copy(isDeleted = true)
+                ServiceLocator.subRepo.delete(_state.value.id)
+                _state.value = _state.value.copy(isDeleted = true)
             } catch (_: Throwable) { }
         }
     }
