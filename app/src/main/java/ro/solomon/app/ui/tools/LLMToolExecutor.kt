@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.services.CategoryLimitsStore
+import ro.solomon.app.services.ReminderScheduler
 import ro.solomon.app.services.SolomonAdvisor
 import ro.solomon.app.services.SolomonCoachMemory
 import ro.solomon.app.services.SolomonCoachVulnerability
@@ -233,14 +234,27 @@ class LLMToolExecutor(private val context: Context) {
             "schedule_reminder" -> {
                 val title = params["title"] as? String ?: return@withContext "Lipsa parametru: title"
                 val body = params["body"] as? String ?: ""
-                val dayOfMonth = params["day_of_month"] as? Int
-                val daysFromNow = params["days_from_now"] as? Int
-                val when_ = when {
-                    dayOfMonth != null -> "ziua $dayOfMonth a lunii"
-                    daysFromNow != null -> "peste $daysFromNow zile"
-                    else -> "curand"
+                val dayOfMonth = when (val d = params["day_of_month"]) {
+                    is Int -> d
+                    is Long -> d.toInt()
+                    is Double -> d.toInt()
+                    is String -> d.toIntOrNull()
+                    else -> null
                 }
-                "Reminder programat: '$title' - $when_. ($body)"
+                val daysFromNow = when (val d = params["days_from_now"]) {
+                    is Int -> d
+                    is Long -> d.toInt()
+                    is Double -> d.toInt()
+                    is String -> d.toIntOrNull()
+                    else -> null
+                }
+                val whenLabel = when {
+                    dayOfMonth != null -> ReminderScheduler.scheduleMonthly(context, title, body, dayOfMonth)
+                    daysFromNow != null -> ReminderScheduler.scheduleInDays(context, title, body, daysFromNow)
+                    else -> ReminderScheduler.scheduleInDays(context, title, body, 1)
+                }
+                "Reminder programat: '$title' - $whenLabel. Vei primi o notificare cand vine momentul." +
+                    if (body.isNotBlank()) " ($body)" else ""
             }
 
             "add_obligation" -> {
