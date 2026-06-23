@@ -1,5 +1,7 @@
 package ro.solomon.app.ui.bank
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,6 +27,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.components.SolBackButton
 import ro.solomon.app.ui.components.SolHairlineDivider
@@ -75,6 +79,7 @@ class ConnectBankViewModel : ViewModel() {
 fun ConnectBankScreen(onBack: () -> Unit, vm: ConnectBankViewModel = viewModel()) {
     LaunchedEffect(Unit) { vm.load() }
     val scope = rememberCoroutineScope()
+    val ctx = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -118,10 +123,18 @@ fun ConnectBankScreen(onBack: () -> Unit, vm: ConnectBankViewModel = viewModel()
                     SolListCard {
                         vm.banks.forEachIndexed { idx, bank ->
                             AvailableBankRow(bank, onClick = {
-                                try {
-                                    val url = BankConnectionService.startConnect(bank)
-                                } catch (e: Exception) {
-                                    vm.error = e.message
+                                scope.launch {
+                                    try {
+                                        val url = withContext(Dispatchers.IO) {
+                                            BankConnectionService.startConnect(bank)
+                                        }
+                                        ctx.startActivity(
+                                            Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        )
+                                    } catch (e: Exception) {
+                                        vm.error = e.message ?: "Nu am putut porni conectarea"
+                                    }
                                 }
                             })
                             if (idx < vm.banks.lastIndex) SolHairlineDivider()
@@ -145,7 +158,7 @@ private fun NotConfiguredCard() {
         Column(verticalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
             Text("OPEN BANKING · SETUP", color = Color.White.copy(alpha = 0.55f), fontSize = 10.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 1.4.sp)
             Text("Configurează Enable Banking", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-            Text("Pentru a conecta băncile, adaugă APPLICATION_ID și cheia privată RSA 4096 în Setări → Configurare Enable Banking.",
+            Text("Pentru a conecta băncile, adaugă APPLICATION_ID şi cheia privată RSA 4096 în Setări → Configurare Enable Banking.",
                 color = Color.White.copy(alpha = 0.7f), fontSize = 13.sp, lineHeight = 18.sp)
             Spacer(Modifier.height(SolSpacing.sm))
             Text("APP_ID + private key lipsă", color = Color.White.copy(alpha = 0.5f), fontSize = 11.sp)
@@ -159,7 +172,7 @@ private fun LoadingState() {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CircularProgressIndicator(color = SolomonColors.Primary, modifier = Modifier.size(32.dp))
             Spacer(Modifier.height(SolSpacing.sm))
-            Text("Încărc bănci suportate...", color = SolomonColors.TextTertiary, fontSize = 12.sp)
+            Text("Încarc bănci suportate...", color = SolomonColors.TextTertiary, fontSize = 12.sp)
         }
     }
 }

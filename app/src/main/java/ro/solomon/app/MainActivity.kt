@@ -23,6 +23,7 @@ import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.ui.SolomonApp
 import ro.solomon.app.ui.onboarding.OnboardingScreen
 import ro.solomon.core.domain.TransactionSource
+import ro.solomon.core.enablebanking.BankConnectionService
 import ro.solomon.core.notifications.BankNotificationParser
 
 class MainActivity : ComponentActivity() {
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         askForNotificationPermission()
         handleShareIntent(intent)
+        handleBankCallback(intent)
         setContent {
             var showOnboarding by remember { mutableStateOf<Boolean?>(null) }
             LaunchedEffect(Unit) {
@@ -57,6 +59,7 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         handleShareIntent(intent)
+        handleBankCallback(intent)
     }
 
     private fun handleShareIntent(intent: Intent?) {
@@ -85,6 +88,28 @@ class MainActivity : ComponentActivity() {
                 }
             }.onFailure { e ->
                 ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "share", e.message ?: "Eroare necunoscută")
+            }
+        }
+    }
+
+    private fun handleBankCallback(intent: Intent?) {
+        if (intent?.action != Intent.ACTION_VIEW) return
+        val data = intent.data ?: return
+        if (data.scheme != "solomon" || data.host != "bankcallback") return
+        val url = data.toString()
+        lifecycleScope.launch {
+            runCatching {
+                val handled = BankConnectionService.handleCallback(url)
+                if (handled) {
+                    val err = BankConnectionService.lastSyncError
+                    if (err == null) {
+                        ro.solomon.app.services.IngestionNotifier.notifyBankConnected(this@MainActivity)
+                    } else {
+                        ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", err)
+                    }
+                }
+            }.onFailure { e ->
+                ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", e.message ?: "Eroare la conectarea băncii")
             }
         }
     }
