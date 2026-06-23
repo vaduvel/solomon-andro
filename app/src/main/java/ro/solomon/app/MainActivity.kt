@@ -100,13 +100,9 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             runCatching {
                 val handled = BankConnectionService.handleCallback(url)
-                if (handled) {
-                    val err = BankConnectionService.lastSyncError
-                    if (err == null) {
-                        ro.solomon.app.services.IngestionNotifier.notifyBankConnected(this@MainActivity)
-                    } else {
-                        ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", err)
-                    }
+                val err = BankConnectionService.lastSyncError
+                if (handled && err != null) {
+                    ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", err)
                 }
             }.onFailure { e ->
                 ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", e.message ?: "Eroare la conectarea băncii")
