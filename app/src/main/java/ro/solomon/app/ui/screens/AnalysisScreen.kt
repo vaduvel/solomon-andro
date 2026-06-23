@@ -120,7 +120,7 @@ fun AnalysisScreen(vm: AnalysisViewModel = viewModel()) {
         Text("Pe categorii", style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
         if (state.categories.isEmpty()) {
-            Text("Nu sunt date încă. Importă tranzacții sau așteaptă notificările bancare.", color = SolomonColors.TextSecondary)
+            Text("Nu sunt date încă. Importă tranzacții sau aşteaptă notificările bancare.", color = SolomonColors.TextSecondary)
         } else {
             state.categories.forEach { c ->
                 CategoryBar(c)
@@ -147,7 +147,7 @@ fun AnalysisScreen(vm: AnalysisViewModel = viewModel()) {
         Spacer(Modifier.height(SolSpacing.sm))
         ToolTile("⚠ Alertă spirală", "Verifică presiunea financiară", SolomonColors.Rose) { showSpiral = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("🪒 Audit abonamente", "Găsește abonamente nefolosite", SolomonColors.Amber) { showAudit = true }
+        ToolTile("🪒 Audit abonamente", "Găseşte abonamente nefolosite", SolomonColors.Amber) { showAudit = true }
         Spacer(Modifier.height(SolSpacing.sm))
         ToolTile("🔍 Tranzacții suspecte", "Sume mari, burst-uri, nocturn", SolomonColors.Amber) { showSuspicious = true }
         Spacer(Modifier.height(SolSpacing.sm))
@@ -155,7 +155,7 @@ fun AnalysisScreen(vm: AnalysisViewModel = viewModel()) {
         Spacer(Modifier.height(SolSpacing.sm))
         ToolTile("✉ Importă email", "Parsează Glovo/Netflix/Enel din text", SolomonColors.Primary) { showEmailParser = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("⚙ Model AI", "Alege model lingvistic · Mistral / on-device", SolomonColors.Primary) { showModelDownload = true }
+        ToolTile("⚙ Model AI", "Alege model lingvistic · Mistral cloud (UE)", SolomonColors.Primary) { showModelDownload = true }
         Spacer(Modifier.height(SolSpacing.xl))
     }
 }
