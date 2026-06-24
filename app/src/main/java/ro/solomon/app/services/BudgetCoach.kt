@@ -33,8 +33,9 @@ import ro.solomon.moments.BudgetAlertBuilder
  *
  * Hybrid coach layer: the deterministic engine stays the source of truth for the
  * numbers, while every alert is now finished with a concrete implementation-intention
- * (if-then) plan for the at-risk category, phrased for the user's money script. That
- * is the anti "beep beep, stop spending" move — a real next action, not just an alarm.
+ * (if-then) plan for the at-risk category, phrased for the user's money script (declared
+ * in onboarding, or inferred from spending as a fallback). That is the anti "beep beep,
+ * stop spending" move — a real next action, not just an alarm.
  *
  * Two entry points:
  *  - [onOutgoing]: called the instant a new outgoing transaction is ingested
@@ -109,9 +110,12 @@ object BudgetCoach {
 
         // Hybrid coach layer: finish the alert with a concrete if-then plan for the
         // at-risk category, phrased for the user's money script. The deterministic
-        // engine owns the numbers; this owns the behavior-change nudge.
+        // engine owns the numbers; this owns the behavior-change nudge. Money script is
+        // declared in onboarding, or inferred from spending as a conservative fallback.
         val coachProfile = CoachProfileStore.load(ctx)
-        val plan = ImplementationIntentionEngine.forCategory(focus.category, coachProfile.moneyScript)
+        val script = coachProfile.moneyScript
+            ?: MoneyScriptInference.infer(ServiceLocator.txnRepo.fetchAll())
+        val plan = ImplementationIntentionEngine.forCategory(focus.category, script)
         val body = buildString {
             append(output.llmResponse.trim())
             append("\n\nPlan concret: ")
