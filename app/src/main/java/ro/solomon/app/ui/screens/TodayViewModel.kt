@@ -37,7 +37,7 @@ class TodayViewModel : ViewModel() {
         val incomingToday: Int = 0,
         val outgoingToday: Int = 0,
         val recentTransactions: List<Transaction> = emptyList(),
-        val momentText: String = "Salut! Apas\u0103 aici ca s\u0103-\u021bi generez primul moment financiar personalizat.",
+        val momentText: String = "Salut! Apasă aici ca să-ți generez primul moment financiar personalizat.",
         val generatingMoment: Boolean = false,
         val hasUnreadAlert: Boolean = false,
         val activeMission: SolomonMission? = null,
@@ -54,10 +54,10 @@ class TodayViewModel : ViewModel() {
     )
 
     enum class SafetyTier(val label: String) {
-        DANGER("Zon\u0103 de risc"),
+        DANGER("Zonă de risc"),
         CAUTION("Te descurci"),
         STABLE("Stabil"),
-        FREE("Liber de salariu \u2B50");
+        FREE("Liber de salariu ⭐");
 
         companion object {
             fun from(days: Int): SafetyTier = when {
@@ -119,8 +119,12 @@ class TodayViewModel : ViewModel() {
                     .mapValues { (_, list) -> list.sumOf { it.amount.amount } }
 
                 val limits = ro.solomon.app.services.CategoryLimitsStore.limits()
-                val hasOverLimit = limits.any { (cat, limit) ->
-                    val used = ro.solomon.app.services.CategoryLimitsStore.usedFor(cat, monthlyByCat[cat] ?: 0)
+                val hasOverLimit = limits.any { (cat, _) ->
+                    // monthlyByCat sums transaction amounts in bani, but category limits
+                    // are stored in whole RON. Convert spending to RON before comparing,
+                    // otherwise every limit reads as 100x exceeded (the over-limit bug).
+                    val spentRon = (monthlyByCat[cat] ?: 0) / 100
+                    val used = ro.solomon.app.services.CategoryLimitsStore.usedFor(cat, spentRon)
                     ro.solomon.app.services.CategoryLimitsStore.isOverLimit(used)
                 }
 
@@ -136,14 +140,14 @@ class TodayViewModel : ViewModel() {
                 val financialSafetyDays = if (safePerDay > 0) balance / safePerDay else days
                 val safetyDaysTier = SafetyTier.from(financialSafetyDays)
                 val zeroBalanceSentence = if (safePerDay <= 0) {
-                    "Rezerva disponibil\u0103 e aproape de zero."
+                    "Rezerva disponibilă e aproape de zero."
                 } else if (financialSafetyDays < days) {
                     val cal = java.util.Calendar.getInstance()
                     cal.add(java.util.Calendar.DAY_OF_YEAR, financialSafetyDays)
                     val fmt = java.text.SimpleDateFormat("d MMMM", java.util.Locale("ro", "RO"))
                     "La ritmul curent, rezerva ajunge la 0 pe ${fmt.format(cal.time)}."
                 } else {
-                    "Rezerva acoper\u0103 p\u00E2n\u0103 la salariul urm\u0103tor. \uD83D\uDC4D"
+                    "Rezerva acoperă până la salariul următor. 👍"
                 }
 
                 _state.value.copy(
@@ -276,7 +280,7 @@ class TodayViewModel : ViewModel() {
                 )
         } catch (e: Throwable) {
             _state.value = _state.value.copy(
-                momentText = "\u00CEnc\u0103 nu am destule date. Adaug\u0103 c\u00E2teva tranzac\u021bii \u0219i revin-o \u00een c\u00E2teva minute.",
+                momentText = "Încă nu am destule date. Adaugă câteva tranzacții și revin-o în câteva minute.",
                 generatingMoment = false
             )
         }
