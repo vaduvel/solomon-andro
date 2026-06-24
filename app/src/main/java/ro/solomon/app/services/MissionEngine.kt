@@ -44,6 +44,10 @@ class MissionEngine {
         _pending.value = pending
     }
 
+    /**
+     * Builds a localized, behavior-triggered mission for the user's heaviest
+     * spending category. Missions are short, concrete and Romanian-first.
+     */
     fun generate(
         topCategory: TransactionCategory?,
         topCategoryAmountRON: Int,
@@ -51,32 +55,94 @@ class MissionEngine {
     ): SolomonMission? {
         val cat = topCategory ?: return null
         val now = System.currentTimeMillis() / 1000
-        val target = (topCategoryAmountRON * 0.20).toInt().coerceAtLeast(50)
-        val title = when (cat) {
-            TransactionCategory.food_delivery, TransactionCategory.food_dining ->
-                "Săptămâna fără livrări"
-            TransactionCategory.shopping_online, TransactionCategory.shopping_offline ->
-                "Pauză de shopping online"
-            TransactionCategory.entertainment ->
-                "Mai puțin entertainment, mai mult ${linkedGoalName ?: "obiectiv"}"
-            TransactionCategory.subscriptions ->
-                "Anulează un abonament"
-            TransactionCategory.transport ->
-                "Mers pe jos / transport public"
-            else -> "Mai puțin pe ${cat.displayNameRO}"
-        }
-        val description = "Încearcă să reduci ${cat.displayNameRO} cu 20% în următoarele 14 zile. " +
-            "Dacă reușești, pune ${target} RON deoparte pentru ${linkedGoalName ?: "obiectivul tău"}."
-        val mission = SolomonMission(
+        val goal = linkedGoalName ?: "obiectivul tău"
+
+        val spec = specFor(cat)
+        val target = (topCategoryAmountRON * spec.savingsFraction).toInt()
+            .coerceAtLeast(spec.minSavingsRON)
+        val title = spec.title
+            .replace("{goal}", goal)
+            .replace("{category}", cat.displayNameRO)
+        val description = spec.descriptionTemplate
+            .replace("{target}", target.toString())
+            .replace("{goal}", goal)
+            .replace("{category}", cat.displayNameRO)
+
+        return SolomonMission(
             title = title,
             description = description,
             category = cat,
             targetSavingsRON = target,
-            durationDays = 14,
+            durationDays = spec.durationDays,
             startEpochSeconds = now,
             linkedGoalName = linkedGoalName
         )
-        return mission
+    }
+
+    private data class MissionSpec(
+        val title: String,
+        val durationDays: Int,
+        val savingsFraction: Double,
+        val minSavingsRON: Int,
+        val descriptionTemplate: String
+    )
+
+    private fun specFor(cat: TransactionCategory): MissionSpec = when (cat) {
+        TransactionCategory.food_delivery -> MissionSpec(
+            title = "3 zile fără livări",
+            durationDays = 3,
+            savingsFraction = 0.30,
+            minSavingsRON = 40,
+            descriptionTemplate = "Gata cu livările 3 zile la rând — gătești sau mănânci ce ai deja acasă. " +
+                "Dacă reziști, pui {target} RON deoparte pentru {goal}."
+        )
+        TransactionCategory.food_dining -> MissionSpec(
+            title = "O săptămână cu prânzul de acasă",
+            durationDays = 7,
+            savingsFraction = 0.25,
+            minSavingsRON = 60,
+            descriptionTemplate = "Ia-ți prânzul de acasă în loc de restaurant timp de 7 zile. " +
+                "Economia estimată: {target} RON pentru {goal}."
+        )
+        TransactionCategory.shopping_online, TransactionCategory.shopping_offline -> MissionSpec(
+            title = "Pauză de shopping 7 zile",
+            durationDays = 7,
+            savingsFraction = 0.25,
+            minSavingsRON = 80,
+            descriptionTemplate = "Niciun cumpărat impulsiv 7 zile. Pune produsul pe wishlist și revino peste o săptămână. " +
+                "Țintă: {target} RON puși deoparte pentru {goal}."
+        )
+        TransactionCategory.entertainment -> MissionSpec(
+            title = "Mai puțin entertainment, mai mult {goal}",
+            durationDays = 14,
+            savingsFraction = 0.20,
+            minSavingsRON = 50,
+            descriptionTemplate = "Redu cheltuielile de entertainment cu 20% în 14 zile și mută {target} RON spre {goal}."
+        )
+        TransactionCategory.subscriptions -> MissionSpec(
+            title = "Negociază sau anulează un abonament",
+            durationDays = 14,
+            savingsFraction = 0.50,
+            minSavingsRON = 20,
+            descriptionTemplate = "Alege un abonament pe care nu-l mai folosești și anulează-l (sau negociază un preț mai mic). " +
+                "Eliberezi ~{target} RON/lună pentru {goal}."
+        )
+        TransactionCategory.transport -> MissionSpec(
+            title = "Săptămâna cu transport public",
+            durationDays = 7,
+            savingsFraction = 0.20,
+            minSavingsRON = 30,
+            descriptionTemplate = "Lasă mașina/taxiul și mergi cu transportul public sau pe jos 7 zile. " +
+                "Estimat: {target} RON pentru {goal}."
+        )
+        else -> MissionSpec(
+            title = "Mai puțin pe {category}",
+            durationDays = 14,
+            savingsFraction = 0.20,
+            minSavingsRON = 50,
+            descriptionTemplate = "Încearcă să reduci {category} cu 20% în următoarele 14 zile. " +
+                "Dacă reușești, pune {target} RON deoparte pentru {goal}."
+        )
     }
 
     fun offer(mission: SolomonMission) {

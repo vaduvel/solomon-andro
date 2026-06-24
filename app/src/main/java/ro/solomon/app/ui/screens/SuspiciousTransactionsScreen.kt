@@ -101,6 +101,7 @@ fun SuspiciousTransactionsScreen(onClose: () -> Unit) {
 private fun Content(pairs: List<SuspiciousTxViewModel.Pair>, vm: SuspiciousTxViewModel) {
     val total = pairs.sumOf { it.transaction.amount.amount }
     val highCount = pairs.count { it.suspicion.severity == Suspicion.Severity.high }
+    var showPlaybook by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -155,10 +156,18 @@ private fun Content(pairs: List<SuspiciousTxViewModel.Pair>, vm: SuspiciousTxVie
         }
 
         Button(
+            onClick = { showPlaybook = true },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = SolomonColors.Rose)
+        ) { Text("🛡️ Ce faci acum", color = androidx.compose.ui.graphics.Color.White) }
+
+        Button(
             onClick = { vm.confirmAll() },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = SolomonColors.Amber)
         ) { Text("Confirm tot ca normal", color = androidx.compose.ui.graphics.Color.Black) }
+
+        if (showPlaybook) ScamPlaybookDialog(onDismiss = { showPlaybook = false })
     }
 }
 
