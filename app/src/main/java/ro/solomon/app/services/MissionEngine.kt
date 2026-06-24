@@ -54,8 +54,18 @@ class MissionEngine {
         linkedGoalName: String?
     ): SolomonMission? {
         val cat = topCategory ?: return null
+    /**
+     * Builds a localized, behavior-triggered mission for the user's heaviest
+     * spending category. Missions are short, concrete and Romanian-first.
+     */
+    fun generate(
+        topCategory: TransactionCategory?,
+        topCategoryAmountRON: Int,
+        linkedGoalName: String?
+    ): SolomonMission? {
+        val cat = topCategory ?: return null
         val now = System.currentTimeMillis() / 1000
-        val goal = linkedGoalName ?: "obiectivul tău"
+        val goal = linkedGoalName ?: "obiectivul t\u0103u"
 
         val spec = specFor(cat)
         val target = (topCategoryAmountRON * spec.savingsFraction).toInt()
@@ -69,7 +79,6 @@ class MissionEngine {
             .replace("{category}", cat.displayNameRO)
 
         return SolomonMission(
-            title = title,
             description = description,
             category = cat,
             targetSavingsRON = target,
@@ -155,11 +164,16 @@ class MissionEngine {
         _pending.value = null
         LastMissionStore.saveActive(ctx, _active.value!!)
         LastMissionStore.savePending(ctx, null)
+        // Feedback loop: accepting a mission is a concrete commitment the coach learns from.
+        CoachProfileStore.recordActedOn(ctx)
+        CoachProfileStore.setLastCommitment(ctx, p.title)
     }
 
     suspend fun dismiss(ctx: android.content.Context) {
         _pending.value = null
         LastMissionStore.savePending(ctx, null)
+        // Feedback loop: dismissing a suggested mission is an ignored nudge.
+        CoachProfileStore.recordIgnored(ctx)
     }
 
     suspend fun complete(ctx: android.content.Context) {
