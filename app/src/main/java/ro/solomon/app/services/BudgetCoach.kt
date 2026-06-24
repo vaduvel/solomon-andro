@@ -31,6 +31,11 @@ import ro.solomon.moments.BudgetAlertBuilder
  * when a category is over / projected to go over, it generates a dedicated
  * `budgetAlert` LLM moment with concrete, in-the-moment advice.
  *
+ * Hybrid coach layer: the deterministic engine stays the source of truth for the
+ * numbers, while every alert is now finished with a concrete implementation-intention
+ * (if-then) plan for the at-risk category, phrased for the user's money script. That
+ * is the anti "beep beep, stop spending" move — a real next action, not just an alarm.
+ *
  * Two entry points:
  *  - [onOutgoing]: called the instant a new outgoing transaction is ingested
  *    (direct, real-time updates) — but only if that category actually has a budget;
@@ -102,13 +107,24 @@ object BudgetCoach {
         val output = BudgetAlertBuilder().build(context, ServiceLocator.llm, json)
         if (output.llmResponse.isBlank()) return
 
-        MomentNotifier.notifyMoment(ctx, MomentType.budgetAlert, output.llmResponse)
-        LastMomentStore.save(ctx, output.llmResponse, MomentType.budgetAlert.serialName())
+        // Hybrid coach layer: finish the alert with a concrete if-then plan for the
+        // at-risk category, phrased for the user's money script. The deterministic
+        // engine owns the numbers; this owns the behavior-change nudge.
+        val coachProfile = CoachProfileStore.load(ctx)
+        val plan = ImplementationIntentionEngine.forCategory(focus.category, coachProfile.moneyScript)
+        val body = buildString {
+            append(output.llmResponse.trim())
+            append("\n\nPlan concret: ")
+            append(plan.asSentenceRo())
+        }
+
+        MomentNotifier.notifyMoment(ctx, MomentType.budgetAlert, body)
+        LastMomentStore.save(ctx, body, MomentType.budgetAlert.serialName())
         MomentHistoryStore.append(
             ctx = ctx,
             type = MomentType.budgetAlert.serialName(),
             title = MomentType.budgetAlert.toTitle(),
-            body = output.llmResponse,
+            body = body,
             nowEpochSeconds = now
         )
         MomentCooldownManager.recordShown(
