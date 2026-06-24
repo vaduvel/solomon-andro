@@ -24,6 +24,7 @@ import ro.solomon.app.ui.theme.SolAccent
 import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
+import ro.solomon.app.ui.theme.SpaceMono
 
 @Composable
 fun MeshBackground(
@@ -100,6 +101,7 @@ fun SolChip(
             text = label,
             color = accent.color,
             fontSize = 10.sp,
+            fontFamily = SpaceMono,
             fontWeight = FontWeight.SemiBold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
@@ -124,6 +126,7 @@ fun SolSectionHeaderRow(
             text = title.uppercase(),
             color = SolomonColors.TextTertiary,
             fontSize = 12.sp,
+            fontFamily = SpaceMono,
             fontWeight = FontWeight.SemiBold,
             letterSpacing = 0.6.sp
         )
@@ -131,6 +134,7 @@ fun SolSectionHeaderRow(
             Text(
                 text = it,
                 color = SolomonColors.TextTertiary,
+                fontFamily = SpaceMono,
                 fontSize = 12.sp
             )
         }
@@ -219,9 +223,9 @@ fun SolInsightCard(
                 )
             }
             Column(modifier = Modifier.weight(1f)) {
-                Text(label.uppercase(), color = accent.color, fontSize = 11.sp, fontWeight = FontWeight.SemiBold, letterSpacing = 0.5.sp)
+                Text(label.uppercase(), color = accent.color, fontSize = 11.sp, fontFamily = SpaceMono, fontWeight = FontWeight.SemiBold, letterSpacing = 0.5.sp)
                 timestamp?.let {
-                    Text(it, color = Color.White.copy(alpha = 0.35f), fontSize = 11.sp)
+                    Text(it, color = Color.White.copy(alpha = 0.35f), fontFamily = SpaceMono, fontSize = 11.sp)
                 }
             }
         }
@@ -286,6 +290,7 @@ fun SolHeroLabel(text: String, modifier: Modifier = Modifier) {
         text = text.uppercase(),
         color = Color.White.copy(alpha = 0.45f),
         fontSize = 11.sp,
+        fontFamily = SpaceMono,
         fontWeight = FontWeight.Medium,
         letterSpacing = 0.7.sp,
         modifier = modifier
@@ -309,6 +314,7 @@ fun SolHeroAmount(
             text = amount,
             color = SolomonColors.TextPrimary,
             fontSize = 42.sp,
+            fontFamily = SpaceMono,
             fontWeight = FontWeight.SemiBold,
             letterSpacing = (-1.5).sp
         )
@@ -317,6 +323,7 @@ fun SolHeroAmount(
                 text = it,
                 color = Color.White.copy(alpha = 0.4f),
                 fontSize = 22.sp,
+                fontFamily = SpaceMono,
                 fontWeight = FontWeight.Medium
             )
         }
@@ -324,6 +331,7 @@ fun SolHeroAmount(
             text = currency,
             color = Color.White.copy(alpha = 0.4f),
             fontSize = 13.sp,
+            fontFamily = SpaceMono,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.padding(start = 6.dp, bottom = 6.dp)
         )
@@ -447,6 +455,7 @@ fun SolStatCard(
                 text = label.uppercase(),
                 color = Color.White.copy(alpha = 0.4f),
                 fontSize = 10.sp,
+                fontFamily = SpaceMono,
                 fontWeight = FontWeight.Medium,
                 letterSpacing = 0.4.sp
             )
@@ -457,12 +466,14 @@ fun SolStatCard(
             text = value,
             color = SolomonColors.TextPrimary,
             fontSize = 17.sp,
+            fontFamily = SpaceMono,
             fontWeight = FontWeight.SemiBold
         )
         meta?.let {
             Text(
                 text = it,
                 color = metaAccent?.color ?: Color.White.copy(alpha = 0.45f),
+                fontFamily = SpaceMono,
                 fontSize = 11.sp
             )
         }
@@ -605,12 +616,14 @@ fun SolProgressRing(
                     text = "${(progress.coerceIn(0f, 1f) * 100).toInt()}%",
                     color = SolomonColors.TextPrimary,
                     fontSize = 18.sp,
+                    fontFamily = SpaceMono,
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
                     text = label.uppercase(),
                     color = SolomonColors.TextTertiary,
                     fontSize = 9.sp,
+                    fontFamily = SpaceMono,
                     letterSpacing = 1.0.sp
                 )
             }
