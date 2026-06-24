@@ -2,9 +2,12 @@ package ro.solomon.app.ui.screens
 
 import android.content.Intent
 import android.provider.Settings
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -14,7 +17,10 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +38,7 @@ import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolListCard
 import ro.solomon.app.ui.components.SolSectionHeaderRow
 import ro.solomon.app.ui.profile.ProfileEditScreen
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.TransactionCategory
@@ -317,46 +324,47 @@ private fun CategoryLimitRow(
 ) {
     var editing by remember(cat) { mutableStateOf(false) }
     var text by remember(cat) { mutableStateOf(if (current > 0) current.toString() else "") }
-    Card(
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = androidx.compose.foundation.shape.RoundedCornerShape(SolSpacing.md),
-        modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(SolRadius.lg))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.07f), RoundedCornerShape(SolRadius.lg))
+            .padding(SolSpacing.md)
     ) {
-        Column(Modifier.padding(SolSpacing.md)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(cat.displayNameRO, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
-                Text(
-                    if (current > 0) "$current RON / lun\u0103" else "nelimitat",
-                    color = if (current > 0) SolomonColors.Primary else SolomonColors.TextTertiary,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(cat.displayNameRO, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
+            Text(
+                if (current > 0) "$current RON / lun\u0103" else "nelimitat",
+                color = if (current > 0) SolomonColors.Primary else SolomonColors.TextTertiary,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+        if (editing) {
+            Spacer(Modifier.height(SolSpacing.xs))
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it.filter { c -> c.isDigit() } },
+                label = { Text("Limit\u0103 RON / lun\u0103") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(Modifier.height(SolSpacing.xs))
+            Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
+                Button(onClick = {
+                    onSave(text.toIntOrNull() ?: 0)
+                    editing = false
+                }) { Text("Salveaz\u0103") }
+                OutlinedButton(onClick = { editing = false }) { Text("Renun\u021b\u0103") }
             }
-            if (editing) {
-                Spacer(Modifier.height(SolSpacing.xs))
-                OutlinedTextField(
-                    value = text,
-                    onValueChange = { text = it.filter { c -> c.isDigit() } },
-                    label = { Text("Limit\u0103 RON / lun\u0103") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(Modifier.height(SolSpacing.xs))
-                Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
-                    Button(onClick = {
-                        onSave(text.toIntOrNull() ?: 0)
-                        editing = false
-                    }) { Text("Salveaz\u0103") }
-                    OutlinedButton(onClick = { editing = false }) { Text("Renun\u021b\u0103") }
+        } else {
+            Spacer(Modifier.height(SolSpacing.xs))
+            Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
+                TextButton(onClick = { editing = true }) {
+                    Text(if (current > 0) "Modific\u0103" else "Seteaz\u0103")
                 }
-            } else {
-                Spacer(Modifier.height(SolSpacing.xs))
-                Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
-                    TextButton(onClick = { editing = true }) {
-                        Text(if (current > 0) "Modific\u0103" else "Seteaz\u0103")
-                    }
-                    if (current > 0) {
-                        TextButton(onClick = onRemove) { Text("\u0218terge") }
-                    }
+                if (current > 0) {
+                    TextButton(onClick = onRemove) { Text("\u0218terge") }
                 }
             }
         }
