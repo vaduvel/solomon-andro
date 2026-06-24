@@ -228,15 +228,27 @@ class TodayViewModel : ViewModel() {
         val recent = txns.filter { it.date >= last30Start && it.isOutgoing }
         if (recent.isEmpty()) return@launch
         val grouped = recent.groupBy { it.category }
-        val topEntry = grouped.maxByOrNull { (_, list) -> list.sumOf { it.amount.amount } } ?: return@launch
-        val topCat = topEntry.key
-        val topAmount = topEntry.value.sumOf { it.amount.amount }
+        val topEntry = grouped.maxByOrNull { (_, list) -> list.sumOf { it.amount.amount } }
+        val topCat = topEntry?.key
+        val topAmount = topEntry?.value?.sumOf { it.amount.amount } ?: 0
         val goals = ServiceLocator.goalRepo.fetchAll()
-        val linked = goals.firstOrNull { !it.isReached }?.destination
-        val m = ServiceLocator.missionEngine.generate(
+        val unreachedGoal = goals.firstOrNull { !it.isReached }
+        val linked = unreachedGoal?.destination
+        val savedRecently = recent.any { it.category == TransactionCategory.savings }
+        val hasGoalWithoutContribution = unreachedGoal != null && !savedRecently
+        val obligations = ServiceLocator.obligationRepo.fetchAll()
+        val monthlyDebt = obligations.sumOf { it.amount.amount }
+        val vulnerability = withContext(Dispatchers.IO) {
+            ro.solomon.app.services.SolomonCoachMemory.vulnerability(ServiceLocator.appContext)
+        }
+        val m = ServiceLocator.missionEngine.generateAny(
+            nowEpoch = System.currentTimeMillis() / 1000L,
             topCategory = topCat,
             topCategoryAmountRON = topAmount,
-            linkedGoalName = linked
+            linkedGoalName = linked,
+            monthlyDebtPaymentRON = monthlyDebt,
+            hasGoalWithoutContribution = hasGoalWithoutContribution,
+            vulnerability = vulnerability
         ) ?: return@launch
         ServiceLocator.missionEngine.offer(m)
     }
@@ -252,6 +264,7 @@ class TodayViewModel : ViewModel() {
 
     fun completeMission() = viewModelScope.launch {
         ServiceLocator.missionEngine.complete(ServiceLocator.appContext)
+        refreshCommitment()
     }
 
     private fun refreshCommitment() = viewModelScope.launch {
