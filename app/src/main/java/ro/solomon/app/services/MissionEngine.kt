@@ -48,12 +48,6 @@ class MissionEngine {
      * Builds a localized, behavior-triggered mission for the user's heaviest
      * spending category. Missions are short, concrete and Romanian-first.
      */
-    fun generate(
-        topCategory: TransactionCategory?,
-        topCategoryAmountRON: Int,
-        linkedGoalName: String?
-    ): SolomonMission? {
-        val cat = topCategory ?: return null
     /**
      * Builds a localized, behavior-triggered mission for the user's heaviest
      * spending category. Missions are short, concrete and Romanian-first.
@@ -79,6 +73,7 @@ class MissionEngine {
             .replace("{category}", cat.displayNameRO)
 
         return SolomonMission(
+            title = title,
             description = description,
             category = cat,
             targetSavingsRON = target,
