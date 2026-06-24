@@ -2,6 +2,7 @@ package ro.solomon.app.ui.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.services.SolomonMission
 import ro.solomon.core.domain.Obligation
@@ -42,6 +44,7 @@ class TodayViewModel : ViewModel() {
         val hasUnreadAlert: Boolean = false,
         val activeMission: SolomonMission? = null,
         val pendingMission: SolomonMission? = null,
+        val lastCommitment: String? = null,
         val topCategory: TransactionCategory? = null,
         val topCategoryAmount: Int = 0,
         val avgDailySpending30d: Int = 0,
@@ -80,6 +83,7 @@ class TodayViewModel : ViewModel() {
                 pendingMission = ServiceLocator.missionEngine.pending.value
             )
         }
+        refreshCommitment()
         ServiceLocator.missionEngine.active.let { /* no-op */ }
         viewModelScope.launch {
             ServiceLocator.missionEngine.active.collect { m ->
@@ -239,6 +243,7 @@ class TodayViewModel : ViewModel() {
 
     fun acceptMission() = viewModelScope.launch {
         ServiceLocator.missionEngine.accept(ServiceLocator.appContext)
+        refreshCommitment()
     }
 
     fun dismissMission() = viewModelScope.launch {
@@ -247,6 +252,13 @@ class TodayViewModel : ViewModel() {
 
     fun completeMission() = viewModelScope.launch {
         ServiceLocator.missionEngine.complete(ServiceLocator.appContext)
+    }
+
+    private fun refreshCommitment() = viewModelScope.launch {
+        val commitment = withContext(Dispatchers.IO) {
+            ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext).lastCommitment
+        }
+        _state.value = _state.value.copy(lastCommitment = commitment)
     }
 
     fun generateMoment() = viewModelScope.launch {
