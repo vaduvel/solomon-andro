@@ -39,6 +39,24 @@ object CoachingVoice {
     }
 
     /**
+     * Inchidere tonata pe money script pentru un insight complet (ex: momentul "wow").
+     * Nu reincadreaza textul (e deja o analiza), ci adauga un singur indemn final
+     * in tonul scriptului dominant - ca sa fie consistent cu restul coach-ului.
+     */
+    fun closingNudge(script: MoneyScript?): String = when (script) {
+        MoneyScript.AVOIDANCE ->
+            "Nu trebuie sa rezolvi tot acum - alege un singur lucru din asta si opreste-te aici."
+        MoneyScript.WORSHIP ->
+            "Intrebarea buna: cat din ce vezi mai sus te apropie de ce-ti doresti cu adevarat?"
+        MoneyScript.STATUS ->
+            "Conteaza ce construiesti tu pe termen lung, nu ce se vede din afara."
+        MoneyScript.VIGILANCE ->
+            "E sub control - ai voie sa te bucuri si sa cheltui pe ce chiar conteaza pentru tine."
+        null ->
+            "Hai sa vedem impreuna ce vrei sa faci concret cu asta."
+    }
+
+    /**
      * Consuma feedback loop-ul: cat de tare impingem pasul concret depinde de cat
      * de mult a actionat userul la nudge-urile trecute.
      *  - istoric insuficient sau engagement ridicat -> direct si scurt;

@@ -47,6 +47,17 @@ fun TodayScreen(
     vm: TodayViewModel = viewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val coachLesson by produceState<ro.solomon.app.services.CoachMicroLessons.MicroLesson?>(
+        initialValue = ro.solomon.app.services.CoachMicroLessons.forDate(System.currentTimeMillis()),
+        context
+    ) {
+        value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            val vuln = ro.solomon.app.services.SolomonCoachMemory.vulnerability(context)
+            val script = ro.solomon.app.services.CoachProfileStore.load(context).moneyScript
+            ro.solomon.app.services.CoachMicroLessons.forContext(System.currentTimeMillis(), vuln, script)
+        }
+    }
     var showChat by remember { mutableStateOf(false) }
     var showManualTxn by remember { mutableStateOf(false) }
     var showAlerts by remember { mutableStateOf(false) }
@@ -104,6 +115,9 @@ fun TodayScreen(
             val topCat = state.topCategory
             if (topCat != null) {
                 item { QuickStatsCard(topCat.displayNameRO, state.topCategoryAmount, state.avgDailySpending30d) }
+                if (state.topCategoryAmount > 0) {
+                    item { ReflectionCard(category = topCat.displayNameRO, onTap = { showChat = true }) }
+                }
             }
             if (state.upcomingBills.isNotEmpty()) {
                 item {
@@ -127,6 +141,11 @@ fun TodayScreen(
                     )
                 }
             }
+            if (state.activeMission == null) {
+                state.lastCommitment?.takeIf { it.isNotBlank() }?.let { commitment ->
+                    item { LastCommitmentCard(commitment) }
+                }
+            }
             item {
                 MomentCard(
                     text = state.momentText,
@@ -135,8 +154,19 @@ fun TodayScreen(
                 )
             }
             item { DailyTipCard() }
-            ro.solomon.app.services.CoachMicroLessons.forDate(System.currentTimeMillis())?.let { lesson ->
+            coachLesson?.let { lesson ->
                 item { CoachLessonCard(lesson) }
+            }
+            if (state.commitmentCount > 0 || state.hasEngagementHistory) {
+                item {
+                    CoachProgressCard(
+                        respectRate = state.commitmentRespectRate,
+                        resolvedCount = state.resolvedCommitmentCount,
+                        commitmentCount = state.commitmentCount,
+                        engagementRatio = state.engagementRatio,
+                        hasEngagementHistory = state.hasEngagementHistory
+                    )
+                }
             }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
@@ -328,6 +358,104 @@ private fun CoachLessonCard(lesson: ro.solomon.app.services.CoachMicroLessons.Mi
             Spacer(Modifier.width(SolSpacing.sm))
             Text(
                 lesson.text,
+                color = SolomonColors.TextPrimary,
+                fontSize = 14.sp,
+                lineHeight = 20.sp
+            )
+        }
+    }
+}
+
+@Composable
+private fun ReflectionCard(category: String, onTap: () -> Unit) {
+    SolInsightCard(
+        label = "REFLEC\u021aIE \u00B7 $category",
+        timestamp = null,
+        accent = SolAccent.Amber
+    ) {
+        Row(verticalAlignment = Alignment.Top, modifier = Modifier.clickable(onClick = onTap)) {
+            Text("\uD83E\uDD14", fontSize = 24.sp)
+            Spacer(Modifier.width(SolSpacing.sm))
+            Column {
+                Text(
+                    ro.solomon.app.services.CoachingVoice.worthItQuestion(category),
+                    color = SolomonColors.TextPrimary,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp
+                )
+                Spacer(Modifier.height(SolSpacing.xs))
+                Text(
+                    "Apas\u0103 ca s\u0103 reflect\u0103m \u00eempreun\u0103",
+                    color = SolomonColors.Primary,
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CoachProgressCard(
+    respectRate: Double,
+    resolvedCount: Int,
+    commitmentCount: Int,
+    engagementRatio: Double,
+    hasEngagementHistory: Boolean
+) {
+    val pct = (respectRate * 100).toInt()
+    val engagePct = (engagementRatio * 100).toInt()
+    SolInsightCard(
+        label = "SOLOMON TE OBSERV\u0102",
+        timestamp = null,
+        accent = SolAccent.Violet
+    ) {
+        Column {
+            Row(verticalAlignment = Alignment.Top) {
+                Text("\uD83D\uDCC8", fontSize = 24.sp)
+                Spacer(Modifier.width(SolSpacing.sm))
+                Text(
+                    if (resolvedCount > 0)
+                        "Ai respectat $pct% din angajamente ($resolvedCount din $commitmentCount). Te v\u0103d."
+                    else if (commitmentCount > 0)
+                        "Ai luat $commitmentCount ${if (commitmentCount == 1) "angajament" else "angajamente"}. Termin\u0103 unul \u0219i \u00eencep s\u0103 num\u0103r respectarea."
+                    else
+                        "\u00CEncep s\u0103 \u00een\u021beleg cum reac\u021bionezi la sugestiile mele.",
+                    color = SolomonColors.TextPrimary,
+                    fontSize = 14.sp,
+                    lineHeight = 20.sp
+                )
+            }
+            if (hasEngagementHistory) {
+                Spacer(Modifier.height(SolSpacing.sm))
+                LinearProgressIndicator(
+                    progress = { engagementRatio.toFloat().coerceIn(0f, 1f) },
+                    modifier = Modifier.fillMaxWidth().height(6.dp),
+                    color = SolAccent.Violet.color,
+                    trackColor = SolomonColors.SurfaceVariant
+                )
+                Spacer(Modifier.height(SolSpacing.xs))
+                Text(
+                    "Dai curs la $engagePct% din ce-\u021bi propun.",
+                    color = SolomonColors.TextSecondary,
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun LastCommitmentCard(commitment: String) {
+    SolInsightCard(
+        label = "ULTIMUL T\u0102U ANGAJAMENT",
+        timestamp = null,
+        accent = SolAccent.Amber
+    ) {
+        Row(verticalAlignment = Alignment.Top) {
+            Text("\uD83E\uDD1D", fontSize = 24.sp)
+            Spacer(Modifier.width(SolSpacing.sm))
+            Text(
+                commitment,
                 color = SolomonColors.TextPrimary,
                 fontSize = 14.sp,
                 lineHeight = 20.sp

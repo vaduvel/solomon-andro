@@ -53,7 +53,12 @@ class TodayViewModel : ViewModel() {
         val upcomingBillsCount: Int = 0,
         val financialSafetyDays: Int = 0,
         val safetyDaysTier: SafetyTier = SafetyTier.DANGER,
-        val zeroBalanceSentence: String = ""
+        val zeroBalanceSentence: String = "",
+        val commitmentCount: Int = 0,
+        val resolvedCommitmentCount: Int = 0,
+        val commitmentRespectRate: Double = 0.0,
+        val engagementRatio: Double = 0.0,
+        val hasEngagementHistory: Boolean = false
     )
 
     enum class SafetyTier(val label: String) {
@@ -232,15 +237,27 @@ class TodayViewModel : ViewModel() {
         val recent = txns.filter { it.date >= last30Start && it.isOutgoing }
         if (recent.isEmpty()) return@launch
         val grouped = recent.groupBy { it.category }
-        val topEntry = grouped.maxByOrNull { (_, list) -> list.sumOf { it.amount.amount } } ?: return@launch
-        val topCat = topEntry.key
-        val topAmount = topEntry.value.sumOf { it.amount.amount }
+        val topEntry = grouped.maxByOrNull { (_, list) -> list.sumOf { it.amount.amount } }
+        val topCat = topEntry?.key
+        val topAmount = topEntry?.value?.sumOf { it.amount.amount } ?: 0
         val goals = ServiceLocator.goalRepo.fetchAll()
-        val linked = goals.firstOrNull { !it.isReached }?.destination
-        val m = ServiceLocator.missionEngine.generate(
+        val unreachedGoal = goals.firstOrNull { !it.isReached }
+        val linked = unreachedGoal?.destination
+        val savedRecently = recent.any { it.category == TransactionCategory.savings }
+        val hasGoalWithoutContribution = unreachedGoal != null && !savedRecently
+        val obligations = ServiceLocator.obligationRepo.fetchAll()
+        val monthlyDebt = obligations.sumOf { it.amount.amount }
+        val vulnerability = withContext(Dispatchers.IO) {
+            ro.solomon.app.services.SolomonCoachMemory.vulnerability(ServiceLocator.appContext)
+        }
+        val m = ServiceLocator.missionEngine.generateAny(
+            nowEpoch = System.currentTimeMillis() / 1000L,
             topCategory = topCat,
             topCategoryAmountRON = topAmount,
-            linkedGoalName = linked
+            linkedGoalName = linked,
+            monthlyDebtPaymentRON = monthlyDebt,
+            hasGoalWithoutContribution = hasGoalWithoutContribution,
+            vulnerability = vulnerability
         ) ?: return@launch
         ServiceLocator.missionEngine.offer(m)
     }
@@ -256,13 +273,21 @@ class TodayViewModel : ViewModel() {
 
     fun completeMission() = viewModelScope.launch {
         ServiceLocator.missionEngine.complete(ServiceLocator.appContext)
+        refreshCommitment()
     }
 
     private fun refreshCommitment() = viewModelScope.launch {
-        val commitment = withContext(Dispatchers.IO) {
-            ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext).lastCommitment
+        val profile = withContext(Dispatchers.IO) {
+            ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext)
         }
-        _state.value = _state.value.copy(lastCommitment = commitment)
+        _state.value = _state.value.copy(
+            lastCommitment = profile.lastCommitment,
+            commitmentCount = profile.commitmentCount,
+            resolvedCommitmentCount = profile.resolvedCommitments.size,
+            commitmentRespectRate = profile.commitmentRespectRate,
+            engagementRatio = profile.engagementRatio,
+            hasEngagementHistory = profile.hasEnoughHistory
+        )
     }
 
     fun generateMoment() = viewModelScope.launch {
@@ -283,7 +308,12 @@ class TodayViewModel : ViewModel() {
                     referenceDateEpochSeconds = System.currentTimeMillis() / 1000L
                 )
             )
-            _state.value = _state.value.copy(momentText = ro.solomon.core.util.AdvisorTextCleaner.clean(out.llmResponse), generatingMoment = false)
+            val script = withContext(Dispatchers.IO) {
+                ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext).moneyScript
+            } ?: ro.solomon.app.services.MoneyScriptInference.infer(txns)
+            val cleaned = ro.solomon.core.util.AdvisorTextCleaner.clean(out.llmResponse)
+            val toned = cleaned + "\n\n" + ro.solomon.app.services.CoachingVoice.closingNudge(script)
+            _state.value = _state.value.copy(momentText = toned, generatingMoment = false)
             ro.solomon.app.services.TodayContextBridge.detectedToday =
                 ro.solomon.app.services.TodayContextBridge.DetectedMoment(
                     typeRaw = "wow_moment",
