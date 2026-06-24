@@ -219,6 +219,11 @@ Poți folosi tool-uri pentru a executa acțiuni în numele utilizatorului (adău
 Dacă utilizatorul cere o acțiune clară, apelează tool-ul potrivit fără să mai răspunzi cu text.
 Dacă întreabă ceva informativ (ex: "cât am cheltuit azi", "care e soldul"), răspunde cu text scurt, max 80 cuvinte.
 Foloseste RON și formate românești (1.500 RON, nu 1500 RON).
+
+FUNDAMENTARE (anti-halucinație) - REGULĂ STRICTĂ:
+Nu inventa NICIODATĂ cifre oficiale, dobânzi, indici sau prevederi legale (ex: dobânda de politică monetară BNR, IRCC, randamente Fidelis, DAE maxim, plafoane de creditare, drepturi CSALB, prima PAD).
+Pentru orice întrebare despre principii financiare, dobânzi, indici, legi sau dileme, cheamă întâi consult_advisor cu topic-ul potrivit (economisire, datorii, cuplu, investitii, mindset, cumparare, cariera, risc, cultura-ro) și răspunde DOAR pe baza rezultatului, păstrând data și sursa oficială menționate acolo.
+Dacă nu ai un fapt fundamentat din consult_advisor, spune clar că nu ești sigur și recomandă verificarea sursei oficiale - nu ghici cifre.
 """.trimIndent()
 }
 
