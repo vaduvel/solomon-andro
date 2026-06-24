@@ -23,6 +23,7 @@ import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.ui.SolomonApp
 import ro.solomon.app.ui.onboarding.OnboardingScreen
 import ro.solomon.core.domain.TransactionSource
+import ro.solomon.core.enablebanking.BankConnectionService
 import ro.solomon.core.notifications.BankNotificationParser
 
 class MainActivity : ComponentActivity() {
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         askForNotificationPermission()
         handleShareIntent(intent)
+        handleBankCallback(intent)
         setContent {
             var showOnboarding by remember { mutableStateOf<Boolean?>(null) }
             LaunchedEffect(Unit) {
@@ -57,6 +59,7 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         handleShareIntent(intent)
+        handleBankCallback(intent)
     }
 
     private fun handleShareIntent(intent: Intent?) {
@@ -76,6 +79,9 @@ class MainActivity : ComponentActivity() {
                     val withShareSource = parsed.copy(source = TransactionSource.share_intent_parsed)
                     ServiceLocator.txnRepo.save(withShareSource)
                     ro.solomon.app.services.IngestionNotifier.notifyShareIntent(this@MainActivity, 1)
+                    // Event-driven reactivity: react the instant a shared SMS/receipt
+                    // is parsed into a transaction, not just on the daily worker.
+                    ro.solomon.app.services.ReactiveMomentEvaluator.onTransactionIngested(this@MainActivity, withShareSource)
                 } else {
                     ro.solomon.app.services.IngestionNotifier.notifyError(
                         this@MainActivity,
@@ -85,6 +91,24 @@ class MainActivity : ComponentActivity() {
                 }
             }.onFailure { e ->
                 ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "share", e.message ?: "Eroare necunoscută")
+            }
+        }
+    }
+
+    private fun handleBankCallback(intent: Intent?) {
+        if (intent?.action != Intent.ACTION_VIEW) return
+        val data = intent.data ?: return
+        if (data.scheme != "solomon" || data.host != "bankcallback") return
+        val url = data.toString()
+        lifecycleScope.launch {
+            runCatching {
+                val handled = BankConnectionService.handleCallback(url)
+                val err = BankConnectionService.lastSyncError
+                if (handled && err != null) {
+                    ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", err)
+                }
+            }.onFailure { e ->
+                ro.solomon.app.services.IngestionNotifier.notifyError(this@MainActivity, "bank", e.message ?: "Eroare la conectarea băncii")
             }
         }
     }
