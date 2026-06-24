@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
 import ro.solomon.app.services.CategoryLimitsStore
+import ro.solomon.app.services.CoachKnowledgeBase
 import ro.solomon.app.services.ReminderScheduler
 import ro.solomon.app.services.SolomonAdvisor
 import ro.solomon.app.services.SolomonCoachMemory
@@ -363,13 +364,19 @@ class LLMToolExecutor(private val context: Context) {
                 val bankCount = recentTxs.count { it.source.name == "bank_connection" }
                 val shareCount = recentTxs.count { it.source.name == "share_intent_parsed" }
                 val connections = try { BankConnectionService.allConnections } catch (_: Exception) { emptyList() }
+                val staleTopics = CoachKnowledgeBase.staleTopics(System.currentTimeMillis())
+                val kbNote = if (staleTopics.isEmpty())
+                    "\n- Baza de cunostinte: cifre oficiale verificate recent (sub ${CoachKnowledgeBase.REFRESH_HORIZON_DAYS} de zile)."
+                else
+                    "\n- Baza de cunostinte: ${staleTopics.size} subiecte cu cifre de re-verificat (${staleTopics.joinToString { it.name }}). Confirma la sursa oficiala inainte de a le cita ca fiind curente."
+                val bankNote = if (bankCount == 0 && connections.isEmpty()) "\nAtentie: Solomon nu are acces direct la contul bancii. Adauga tranzactii manual sau conecteaza o banca pentru analiza completa." else ""
                 "Acoperire date ($days zile - ${recentTxs.size} tranzactii):\n" +
                 "- Manuale: $manualCount\n" +
                 "- SMS parsate: $smsCount\n" +
                 "- Banca conectata: $bankCount\n" +
                 "- Share intent: $shareCount\n" +
-                "- Conexiuni bancare active: ${connections.size}\n" +
-                if (bankCount == 0 && connections.isEmpty()) "\nAtentie: Solomon nu are acces direct la contul bancii. Adauga tranzactii manual sau conecteaza o banca pentru analiza completa." else ""
+                "- Conexiuni bancare active: ${connections.size}" +
+                kbNote + bankNote
             }
 
             "analyze_budget" -> {
