@@ -1,7 +1,10 @@
 package ro.solomon.app.ui.caniafford
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -10,9 +13,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 
@@ -83,15 +90,18 @@ fun CanIAffordSheet(
             }
             Spacer(Modifier.height(SolSpacing.lg))
             state.verdict?.let { v ->
-                Card(
-                    colors = CardDefaults.cardColors(containerColor = if (v.canAfford) SolomonColors.Surface else SolomonColors.SurfaceVariant),
-                    modifier = Modifier.fillMaxWidth()
+                val accentColor = if (v.canAfford) SolomonColors.Incoming else SolomonColors.Outgoing
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(SolRadius.lg))
+                        .background(Color.White.copy(alpha = 0.04f))
+                        .border(1.dp, accentColor.copy(alpha = 0.25f), RoundedCornerShape(SolRadius.lg))
+                        .padding(SolSpacing.lg)
                 ) {
-                    Column(Modifier.padding(SolSpacing.lg)) {
-                        Text(v.title, style = MaterialTheme.typography.titleLarge, color = if (v.canAfford) SolomonColors.Incoming else SolomonColors.Outgoing)
-                        Spacer(Modifier.height(SolSpacing.sm))
-                        Text(v.message, color = SolomonColors.TextPrimary, style = MaterialTheme.typography.bodyMedium)
-                    }
+                    Text(v.title, style = MaterialTheme.typography.titleLarge, color = accentColor)
+                    Spacer(Modifier.height(SolSpacing.sm))
+                    Text(v.message, color = SolomonColors.TextPrimary, style = MaterialTheme.typography.bodyMedium)
                 }
             }
         }
