@@ -7,17 +7,20 @@ import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.AccountBalance
 import androidx.compose.material.icons.outlined.Analytics
 import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.PieChart
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import ro.solomon.app.ui.screens.AnalysisScreen
+import ro.solomon.app.ui.screens.BudgetsScreen
 import ro.solomon.app.ui.screens.SettingsScreen
 import ro.solomon.app.ui.screens.TodayScreen
 import ro.solomon.app.ui.screens.WalletScreen
@@ -31,10 +34,11 @@ data class TabItem(
 
 private val tabs = listOf(
     TabItem("Azi", Icons.Filled.Home, Icons.Outlined.Home),
-    TabItem("Analiză", Icons.Filled.Analytics, Icons.Outlined.Analytics),
+    TabItem("Analiz\u0103", Icons.Filled.Analytics, Icons.Outlined.Analytics),
+    TabItem("Bugete", Icons.Filled.PieChart, Icons.Outlined.PieChart),
     TabItem("Portofel", Icons.Filled.AccountBalance, Icons.Outlined.AccountBalance),
     TabItem("Chat", Icons.Filled.Chat, Icons.Outlined.Chat),
-    TabItem("Setări", Icons.Filled.Settings, Icons.Outlined.Settings),
+    TabItem("Set\u0103ri", Icons.Filled.Settings, Icons.Outlined.Settings),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,9 +73,10 @@ fun SolomonApp() {
                 when (selectedTab) {
                     0 -> TodayScreen()
                     1 -> AnalysisScreen()
-                    2 -> WalletScreen()
-                    3 -> { openChat.value = true; selectedTab = 0 }
-                    4 -> SettingsScreen()
+                    2 -> BudgetsScreen()
+                    3 -> WalletScreen()
+                    4 -> { openChat.value = true; selectedTab = 0 }
+                    5 -> SettingsScreen()
                 }
             }
         }

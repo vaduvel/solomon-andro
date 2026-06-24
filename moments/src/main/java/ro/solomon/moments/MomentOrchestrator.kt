@@ -76,6 +76,7 @@ class MomentOrchestrator(
         MomentType.subscriptionAudit -> SubscriptionAuditBuilder()
         MomentType.weeklySummary -> WeeklySummaryBuilder()
         MomentType.wowMoment -> WowMomentBuilder()
+        MomentType.budgetAlert -> BudgetAlertBuilder()
     }
 
     private fun encodeContext(builder: MomentBuilder<*>, context: Any): String = when (builder) {
@@ -87,7 +88,8 @@ class MomentOrchestrator(
         is SubscriptionAuditBuilder -> encode(context, SubscriptionAuditContext.serializer())
         is WeeklySummaryBuilder -> encode(context, WeeklySummaryContext.serializer())
         is WowMomentBuilder -> encode(context, WowMomentContext.serializer())
-        else -> throw IllegalStateException("Unknown builder: ${builder::class}")
+        is BudgetAlertBuilder -> encode(context, BudgetAlertContext.serializer())
+        else -> throw IllegalStateException("Unknown builder: ${'$'}{builder::class}")
     }
 
     private fun contextFor(type: MomentType, candidates: MomentCandidates): Any? = when (type) {
@@ -99,5 +101,6 @@ class MomentOrchestrator(
         MomentType.subscriptionAudit -> candidates.subscriptionAudit
         MomentType.weeklySummary -> candidates.weeklySummary
         MomentType.wowMoment -> candidates.wowMoment
+        MomentType.budgetAlert -> null
     }
 }

@@ -40,11 +40,13 @@ class DailyMomentWorker(ctx: Context, params: WorkerParameters) : CoroutineWorke
                 )
                 MomentNotifier.notifyMoment(applicationContext, moment.momentType, moment.llmResponse)
             }
+            // Daily budget safety net (own cooldown guards against spam).
+            BudgetCoach.evaluateDaily(applicationContext)
         }.fold(onSuccess = { Result.success() }, onFailure = { Result.retry() })
     }
 }
 
-private fun MomentType.toCooldownType(): MomentCooldownManager.CooldownType = when (this) {
+fun MomentType.toCooldownType(): MomentCooldownManager.CooldownType = when (this) {
     MomentType.spiralAlert -> MomentCooldownManager.CooldownType.SpiralAlert
     MomentType.canIAfford -> MomentCooldownManager.CooldownType.CanIAfford
     MomentType.upcomingObligation -> MomentCooldownManager.CooldownType.UpcomingObligation
@@ -52,6 +54,7 @@ private fun MomentType.toCooldownType(): MomentCooldownManager.CooldownType = wh
     MomentType.patternAlert -> MomentCooldownManager.CooldownType.PatternAlert
     MomentType.subscriptionAudit -> MomentCooldownManager.CooldownType.SubscriptionAudit
     MomentType.weeklySummary -> MomentCooldownManager.CooldownType.WeeklySummary
+    MomentType.budgetAlert -> MomentCooldownManager.CooldownType.BudgetAlert
     MomentType.wowMoment -> MomentCooldownManager.CooldownType.WowMoment
 }
 
@@ -63,17 +66,19 @@ fun MomentType.serialName(): String = when (this) {
     MomentType.patternAlert -> "pattern_alert"
     MomentType.subscriptionAudit -> "subscription_audit"
     MomentType.weeklySummary -> "weekly_summary"
+    MomentType.budgetAlert -> "budget_alert"
     MomentType.wowMoment -> "wow_moment"
 }
 
 fun MomentType.toTitle(): String = when (this) {
-    MomentType.spiralAlert -> "Risc de spirală detectat"
-    MomentType.upcomingObligation -> "Obligație apropiată"
-    MomentType.canIAfford -> "Îmi permit asta?"
-    MomentType.payday -> "Salariu așteptat"
+    MomentType.spiralAlert -> "Risc de spiral\u0103 detectat"
+    MomentType.upcomingObligation -> "Obliga\u021Bie apropiat\u0103"
+    MomentType.canIAfford -> "\u00CEmi permit asta?"
+    MomentType.payday -> "Salariu a\u0219teptat"
     MomentType.patternAlert -> "Pattern financiar"
     MomentType.subscriptionAudit -> "Audit abonamente"
-    MomentType.weeklySummary -> "Sumar săptămânal"
+    MomentType.weeklySummary -> "Sumar s\u0103pt\u0103m\u00E2nal"
+    MomentType.budgetAlert -> "Buget pe categorie"
     MomentType.wowMoment -> "Moment wow"
 }
 

@@ -21,6 +21,7 @@ object MomentNotifier {
             MomentType.weeklySummary -> "Rezumatul t\u0103u s\u0103pt\u0103m\u00E2nal \uD83D\uDCCA" to "Cum a mers s\u0103pt\u0103m\u00E2na financiar? Deschide Solomon s\u0103 afli."
             MomentType.spiralAlert -> "Aten\u021Bie \u2014 alert\u0103 financiar\u0103 \uD83D\uDD34" to "Solomon a detectat presiune financiar\u0103. Deschide app-ul acum."
             MomentType.subscriptionAudit -> "Abonamente nefolosite g\u0103site \uD83D\uDCA8" to "Po\u021Bi recupera bani anul\u00E2nd abonamente fantom\u0103. Tap s\u0103 vezi."
+            MomentType.budgetAlert -> "Buget pe categorie \uD83D\uDCCA" to "O categorie de buget e aproape dep\u0103\u0219it\u0103. Deschide Solomon s\u0103 vezi."
             MomentType.canIAfford, MomentType.wowMoment -> return
         }
 

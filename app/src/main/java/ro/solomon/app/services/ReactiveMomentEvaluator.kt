@@ -28,6 +28,9 @@ import ro.solomon.moments.MomentEngine
  *  - a global debounce coalesces the burst of transactions that arrives during a
  *    bank sync into a single evaluation;
  *  - a per-type cooldown prevents repeated alerts of the same kind.
+ *
+ * Budget alerts are handled in parallel by [BudgetCoach], which has its own
+ * guards and only reacts when the spent category actually has a budget.
  */
 object ReactiveMomentEvaluator {
 
@@ -46,7 +49,7 @@ object ReactiveMomentEvaluator {
     }
 
     private fun lastPushKey(type: MomentType) =
-        longPreferencesKey("reactiveMoment.lastPush.${type.serialName()}")
+        longPreferencesKey("reactiveMoment.lastPush.${'$'}{type.serialName()}")
 
     /**
      * Called right after a freshly ingested transaction has been persisted.
@@ -55,6 +58,9 @@ object ReactiveMomentEvaluator {
     suspend fun onTransactionIngested(ctx: Context, tx: Transaction) {
         // Only money going OUT can put the user at risk in-the-moment.
         if (!tx.isOutgoing) return
+
+        // Budget coach reacts independently (its own cooldown/guards).
+        BudgetCoach.onOutgoing(ctx, tx)
 
         runCatching {
             val now = System.currentTimeMillis() / 1000L
@@ -107,16 +113,5 @@ object ReactiveMomentEvaluator {
             )
             ctx.preferencesStore.edit { it[lastPushKey(moment.momentType)] = now }
         }
-    }
-
-    private fun MomentType.toCooldownType(): MomentCooldownManager.CooldownType = when (this) {
-        MomentType.spiralAlert -> MomentCooldownManager.CooldownType.SpiralAlert
-        MomentType.canIAfford -> MomentCooldownManager.CooldownType.CanIAfford
-        MomentType.upcomingObligation -> MomentCooldownManager.CooldownType.UpcomingObligation
-        MomentType.payday -> MomentCooldownManager.CooldownType.Payday
-        MomentType.patternAlert -> MomentCooldownManager.CooldownType.PatternAlert
-        MomentType.subscriptionAudit -> MomentCooldownManager.CooldownType.SubscriptionAudit
-        MomentType.weeklySummary -> MomentCooldownManager.CooldownType.WeeklySummary
-        MomentType.wowMoment -> MomentCooldownManager.CooldownType.WowMoment
     }
 }
