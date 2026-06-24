@@ -34,8 +34,9 @@ import ro.solomon.moments.BudgetAlertBuilder
  * Hybrid coach layer: the deterministic engine stays the source of truth for the
  * numbers, while every alert is now finished with a concrete implementation-intention
  * (if-then) plan for the at-risk category, phrased for the user's money script (declared
- * in onboarding, or inferred from spending as a fallback). That is the anti "beep beep,
- * stop spending" move — a real next action, not just an alarm.
+ * in onboarding, or inferred from spending as a fallback), and with its push intensity
+ * tuned by the engagement feedback loop. That is the anti "beep beep, stop spending"
+ * move — a real next action, not just an alarm.
  *
  * Two entry points:
  *  - [onOutgoing]: called the instant a new outgoing transaction is ingested
@@ -116,10 +117,18 @@ object BudgetCoach {
         val script = coachProfile.moneyScript
             ?: MoneyScriptInference.infer(ServiceLocator.txnRepo.fetchAll())
         val plan = ImplementationIntentionEngine.forCategory(focus.category, script)
+        // Consume the feedback loop: how hard we push the concrete step depends on
+        // whether the user has been acting on past nudges. Ignoring -> back off
+        // (autonomy-supporting); acting -> stay crisp and direct.
+        val planTail = CoachingVoice.adaptPlanToEngagement(
+            planSentenceRo = plan.asSentenceRo(),
+            engagementRatio = coachProfile.engagementRatio,
+            hasEnoughHistory = coachProfile.hasEnoughHistory
+        )
         val body = buildString {
             append(output.llmResponse.trim())
-            append("\n\nPlan concret: ")
-            append(plan.asSentenceRo())
+            append("\n\n")
+            append(planTail)
         }
 
         MomentNotifier.notifyMoment(ctx, MomentType.budgetAlert, body)

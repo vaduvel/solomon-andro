@@ -37,4 +37,23 @@ object CoachingVoice {
         null ->
             "$factRo. Hai sa vedem impreuna ce vrei sa faci cu asta."
     }
+
+    /**
+     * Consuma feedback loop-ul: cat de tare impingem pasul concret depinde de cat
+     * de mult a actionat userul la nudge-urile trecute.
+     *  - istoric insuficient sau engagement ridicat -> direct si scurt;
+     *  - engagement mediu -> oferim pasul, mai bland;
+     *  - engagement scazut (ne ignora) -> NU impingem mai tare, dam inapoi la un ton
+     *    care sustine autonomia (Motivational Interviewing).
+     */
+    fun adaptPlanToEngagement(
+        planSentenceRo: String,
+        engagementRatio: Double,
+        hasEnoughHistory: Boolean
+    ): String = when {
+        !hasEnoughHistory -> "Plan concret: $planSentenceRo"
+        engagementRatio >= 0.6 -> "Plan concret: $planSentenceRo"
+        engagementRatio < 0.3 -> "Fara presiune - tu decizi daca merita. Daca vrei un pas mic: $planSentenceRo"
+        else -> "O idee, daca ti se pare utila: $planSentenceRo"
+    }
 }
