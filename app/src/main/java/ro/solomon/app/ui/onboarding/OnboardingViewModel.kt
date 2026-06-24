@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.services.MoneyScript
 import ro.solomon.moments.MomentEngine
 import ro.solomon.core.domain.Addressing
 import ro.solomon.core.domain.AgeRange
@@ -58,6 +59,7 @@ class OnboardingViewModel : ViewModel() {
         val primaryBank: Bank? = null,
         val draftObligations: List<DraftObligation> = emptyList(),
         val selectedGoals: Set<GoalChip> = emptySet(),
+        val moneyScript: MoneyScript? = null,
         val firstGoalKind: GoalKind = GoalKind.vacation,
         val firstGoalDestination: String = "",
         val firstGoalTargetText: String = "",
@@ -123,6 +125,7 @@ class OnboardingViewModel : ViewModel() {
         if (!s.add(g)) s.remove(g)
         it.copy(selectedGoals = s)
     }
+    fun setMoneyScript(v: MoneyScript) = update { it.copy(moneyScript = v) }
     fun setFirstGoalKind(v: GoalKind) = update { it.copy(firstGoalKind = v) }
     fun setFirstGoalDestination(v: String) = update { it.copy(firstGoalDestination = v) }
     fun setFirstGoalTargetText(v: String) = update { it.copy(firstGoalTargetText = v.filter(Char::isDigit)) }

@@ -21,12 +21,15 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ro.solomon.app.services.CoachProfileStore
+import ro.solomon.app.services.MoneyScript
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.app.ui.util.rememberHaptics
@@ -484,6 +487,54 @@ private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel)
             modifier = Modifier.fillMaxWidth(),
             colors = textFieldColors()
         )
+        Spacer(Modifier.height(SolSpacing.xl))
+        Text("Cum te simți de obicei cu banii?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Spacer(Modifier.height(SolSpacing.xs))
+        Text(
+            "Opțional. Mă ajută să-ți vorbesc pe limba ta — fără judecată. Dacă sari peste, învăț din cum cheltui.",
+            style = MaterialTheme.typography.bodySmall,
+            color = SolomonColors.TextSecondary
+        )
+        Spacer(Modifier.height(SolSpacing.sm))
+        val ctx = LocalContext.current
+        Column(verticalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
+            MoneyScript.entries.forEach { ms ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = state.moneyScript == ms,
+                            onClick = {
+                                vm.setMoneyScript(ms)
+                                CoachProfileStore.setMoneyScript(ctx, ms)
+                            }
+                        )
+                        .padding(vertical = SolSpacing.xs),
+                    verticalAlignment = Alignment.Top
+                ) {
+                    RadioButton(
+                        selected = state.moneyScript == ms,
+                        onClick = {
+                            vm.setMoneyScript(ms)
+                            CoachProfileStore.setMoneyScript(ctx, ms)
+                        }
+                    )
+                    Spacer(Modifier.width(SolSpacing.xs))
+                    Column {
+                        Text(
+                            ms.labelRo.replaceFirstChar { it.uppercase() },
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = SolomonColors.TextPrimary
+                        )
+                        Text(
+                            ms.signatureRo,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = SolomonColors.TextSecondary
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
