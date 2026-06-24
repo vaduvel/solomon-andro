@@ -43,6 +43,7 @@ import ro.solomon.core.enablebanking.BankConnection
 import ro.solomon.core.enablebanking.BankConnectionService
 import ro.solomon.core.enablebanking.EnableBankingClient
 import ro.solomon.core.enablebanking.EnableBankingConfig
+import ro.solomon.core.enablebanking.RomanianBankDirectory
 
 class ConnectBankViewModel : ViewModel() {
     var banks by mutableStateOf<List<ASPSP>>(emptyList())
@@ -233,7 +234,7 @@ private fun AvailableBankRow(bank: ASPSP, onClick: () -> Unit) {
 @Composable
 private fun AvailableBanksFallback() {
     SolListCard {
-        val fallback = listOf("Banca Transilvania", "BCR", "ING Bank", "BRD", "Raiffeisen Bank", "UniCredit Bank", "CEC Bank", "Alpha Bank", "Revolut", "Garanti Bank", "Libra Bank")
+        val fallback = RomanianBankDirectory.displayNames
         fallback.forEachIndexed { idx, name ->
             Row(Modifier.fillMaxWidth().padding(SolSpacing.base), verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
