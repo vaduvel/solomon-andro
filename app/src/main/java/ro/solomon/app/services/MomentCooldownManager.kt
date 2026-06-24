@@ -17,10 +17,11 @@ object MomentCooldownManager {
         PatternAlert(72L * 3600L),
         SubscriptionAudit(7L * 24L * 3600L),
         WeeklySummary(7L * 24L * 3600L),
+        BudgetAlert(24L * 3600L),
         WowMoment(-1L);
     }
 
-    private fun keyFor(type: CooldownType) = longPreferencesKey("momentCooldown.${type.name}")
+    private fun keyFor(type: CooldownType) = longPreferencesKey("momentCooldown.${'$'}{type.name}")
     private val KEY_WOW = booleanPreferencesKey("momentCooldown.wowShown")
 
     suspend fun isOnCooldown(type: CooldownType, nowEpoch: Long): Boolean {

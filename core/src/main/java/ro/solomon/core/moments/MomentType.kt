@@ -12,7 +12,8 @@ enum class MomentType {
     @SerialName("pattern_alert") patternAlert,
     @SerialName("subscription_audit") subscriptionAudit,
     @SerialName("spiral_alert") spiralAlert,
-    @SerialName("weekly_summary") weeklySummary;
+    @SerialName("weekly_summary") weeklySummary,
+    @SerialName("budget_alert") budgetAlert;
 
     val maxWords: Int get() = when (this) {
         wowMoment -> 280
@@ -23,5 +24,6 @@ enum class MomentType {
         subscriptionAudit -> 140
         spiralAlert -> 200
         weeklySummary -> 90
+        budgetAlert -> 90
     }
 }
