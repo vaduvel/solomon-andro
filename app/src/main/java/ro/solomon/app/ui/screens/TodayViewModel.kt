@@ -53,7 +53,12 @@ class TodayViewModel : ViewModel() {
         val upcomingBillsCount: Int = 0,
         val financialSafetyDays: Int = 0,
         val safetyDaysTier: SafetyTier = SafetyTier.DANGER,
-        val zeroBalanceSentence: String = ""
+        val zeroBalanceSentence: String = "",
+        val commitmentCount: Int = 0,
+        val resolvedCommitmentCount: Int = 0,
+        val commitmentRespectRate: Double = 0.0,
+        val engagementRatio: Double = 0.0,
+        val hasEngagementHistory: Boolean = false
     )
 
     enum class SafetyTier(val label: String) {
@@ -268,10 +273,17 @@ class TodayViewModel : ViewModel() {
     }
 
     private fun refreshCommitment() = viewModelScope.launch {
-        val commitment = withContext(Dispatchers.IO) {
-            ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext).lastCommitment
+        val profile = withContext(Dispatchers.IO) {
+            ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext)
         }
-        _state.value = _state.value.copy(lastCommitment = commitment)
+        _state.value = _state.value.copy(
+            lastCommitment = profile.lastCommitment,
+            commitmentCount = profile.commitmentCount,
+            resolvedCommitmentCount = profile.resolvedCommitments.size,
+            commitmentRespectRate = profile.commitmentRespectRate,
+            engagementRatio = profile.engagementRatio,
+            hasEngagementHistory = profile.hasEnoughHistory
+        )
     }
 
     fun generateMoment() = viewModelScope.launch {
