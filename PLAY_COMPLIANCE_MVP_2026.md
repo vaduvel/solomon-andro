@@ -38,7 +38,7 @@ Allowed wording:
 - "analiză informativă"
 - "asistent digital"
 - "nu constituie consiliere financiară"
-- "datele rămân pe telefon"
+- "datele financiare rămân pe telefon; AI cloud e opțional (opt-in) și trimite doar date anonimizate (PII scrubbed)"
 
 Avoid wording:
 
@@ -48,6 +48,17 @@ Avoid wording:
 - "recomandare de credit"
 - "aplică pentru credit"
 - "investește în"
+- "100% local" / "datele nu părăsesc niciodată telefonul" (neadevărat când AI cloud e activat)
+
+## Open Banking — Decizie v1
+
+Open Banking (Enable Banking, PSD2/AISP) **nu intră în prima versiune publicată**: credentials/keys ASPSP nu sunt încă provisionate. Codul (`EnableBankingClient`, `BankConnectionService`) rămâne în repo, dar pentru release:
+
+- niciun CTA care implică sync live de cont bancar în UI;
+- `HourlyIngestWorker` (OB sync) rămâne inactiv în v1;
+- ingestia v1 se bazează pe Notification Listener + Share Intent + Email + Manual.
+
+Reactivare planificată în v0.3.0, după provisionarea keys + actualizarea Privacy Policy / Data Safety pentru fluxul AISP.
 
 ## Permission Copy
 
@@ -74,6 +85,7 @@ Declare:
 - Cloud AI data sharing: optional and user-controlled
 
 Do not declare SMS for release unless SMS is reintroduced after policy approval.
+Do not declare Open Banking data flows for v1 (feature deferred until keys are provisioned).
 
 ## MVP Must-Ship
 
@@ -92,4 +104,4 @@ Do not declare SMS for release unless SMS is reintroduced after policy approval.
 - Any production UI asking for SMS access
 - Claims of financial advice
 - Credit marketplace / loan referral links
-- Open Banking CTA that implies live bank sync (use info-only UI)
+- Open Banking CTA / live bank sync UI (feature deferred for v1 — keep info-only or hidden)
