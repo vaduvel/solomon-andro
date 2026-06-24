@@ -230,9 +230,9 @@ private fun chipFor(feasibility: GoalFeasibility): Pair<String, SolAccent> = whe
     GoalFeasibility.unrealistic -> "blocat" to SolAccent.Rose
 }
 
-private fun formatMonthYear(epochSeconds: Long): String {
+private fun formatMonthYear(epochMillis: Long): String {
     val fmt = SimpleDateFormat("MMM yyyy", Locale("ro"))
-    return fmt.format(Date(epochSeconds * 1000L))
+    return fmt.format(Date(epochMillis))
 }
 
 @Composable
