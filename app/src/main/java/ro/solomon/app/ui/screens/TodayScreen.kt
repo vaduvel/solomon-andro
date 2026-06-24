@@ -127,6 +127,11 @@ fun TodayScreen(
                     )
                 }
             }
+            if (state.activeMission == null) {
+                state.lastCommitment?.takeIf { it.isNotBlank() }?.let { commitment ->
+                    item { LastCommitmentCard(commitment) }
+                }
+            }
             item {
                 MomentCard(
                     text = state.momentText,
@@ -328,6 +333,26 @@ private fun CoachLessonCard(lesson: ro.solomon.app.services.CoachMicroLessons.Mi
             Spacer(Modifier.width(SolSpacing.sm))
             Text(
                 lesson.text,
+                color = SolomonColors.TextPrimary,
+                fontSize = 14.sp,
+                lineHeight = 20.sp
+            )
+        }
+    }
+}
+
+@Composable
+private fun LastCommitmentCard(commitment: String) {
+    SolInsightCard(
+        label = "ULTIMUL T\u0102U ANGAJAMENT",
+        timestamp = null,
+        accent = SolAccent.Amber
+    ) {
+        Row(verticalAlignment = Alignment.Top) {
+            Text("\uD83E\uDD1D", fontSize = 24.sp)
+            Spacer(Modifier.width(SolSpacing.sm))
+            Text(
+                commitment,
                 color = SolomonColors.TextPrimary,
                 fontSize = 14.sp,
                 lineHeight = 20.sp
