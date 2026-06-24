@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.services.CoachProfileStore
 import ro.solomon.app.services.MomentEntry
 import ro.solomon.app.services.MomentHistoryStore
 import ro.solomon.app.ui.theme.SolAccent
@@ -62,6 +63,10 @@ class AlertsViewModel : ViewModel() {
     private val _loading = MutableStateFlow(true)
     val loading: StateFlow<Boolean> = _loading.asStateFlow()
 
+    // Tracks alerts the user actively engaged with this session so a later
+    // dismiss is not double-counted as "ignored".
+    private val recordedEngagement = mutableSetOf<String>()
+
     init {
         viewModelScope.launch {
             val ctx = ServiceLocator.appContext
@@ -73,9 +78,26 @@ class AlertsViewModel : ViewModel() {
         }
     }
 
-    fun dismiss(id: String) {
+    /** User tapped a coaching nudge — positive engagement signal for the coach. */
+    fun onAlertTapped(alert: DisplayAlert) {
+        if (!isCoachingNudge(alert.typeKey)) return
+        if (!recordedEngagement.add(alert.id)) return
         viewModelScope.launch {
-            withContext(Dispatchers.IO) { MomentHistoryStore.dismiss(ServiceLocator.appContext, id) }
+            withContext(Dispatchers.IO) { CoachProfileStore.recordActedOn(ServiceLocator.appContext) }
+        }
+    }
+
+    fun dismiss(id: String) {
+        val alert = _currentAlert.value?.takeIf { it.id == id }
+            ?: _alerts.value.firstOrNull { it.id == id }
+        val wasActedOn = id in recordedEngagement
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                MomentHistoryStore.dismiss(ServiceLocator.appContext, id)
+                if (!wasActedOn && alert != null && isCoachingNudge(alert.typeKey)) {
+                    CoachProfileStore.recordIgnored(ServiceLocator.appContext)
+                }
+            }
             _currentAlert.value = _currentAlert.value?.takeIf { it.id != id }
             _alerts.value = _alerts.value.filter { it.id != id }
         }
@@ -96,6 +118,16 @@ class AlertsViewModel : ViewModel() {
         generatedAt = generatedAt,
         badge = badgeFor(type)
     )
+}
+
+/**
+ * Coaching nudges are moments where the coach asked the user to do something.
+ * Purely positive / informational moments (payday, weekly recap, wow) are excluded
+ * so they don't pollute the engagement signal.
+ */
+private fun isCoachingNudge(typeKey: String): Boolean = when (typeKey) {
+    "payday", "weekly_summary", "wow_moment" -> false
+    else -> true
 }
 
 private fun badgeFor(typeKey: String): String? = when (typeKey) {
@@ -197,13 +229,13 @@ fun AlertsSheet(onDismiss: () -> Unit, vm: AlertsViewModel = viewModel()) {
                     current != null -> {
                         SolSectionHeaderRow("AZI", meta = (1 + alerts.count { isToday(it.generatedAt) }).toString())
                         Spacer(Modifier.height(SolSpacing.sm))
-                        AlertCard(current!!)
-                        alerts.filter { isToday(it.generatedAt) }.forEach { AlertCard(it) }
+                        AlertCard(current!!, onTap = { vm.onAlertTapped(current!!) }, onDismiss = { vm.dismiss(current!!.id) })
+                        alerts.filter { isToday(it.generatedAt) }.forEach { AlertCard(it, onTap = { vm.onAlertTapped(it) }, onDismiss = { vm.dismiss(it.id) }) }
                     }
                     alerts.isNotEmpty() -> {
                         SolSectionHeaderRow("AZI", meta = alerts.count { isToday(it.generatedAt) }.toString())
                         Spacer(Modifier.height(SolSpacing.sm))
-                        alerts.filter { isToday(it.generatedAt) }.forEach { AlertCard(it) }
+                        alerts.filter { isToday(it.generatedAt) }.forEach { AlertCard(it, onTap = { vm.onAlertTapped(it) }, onDismiss = { vm.dismiss(it.id) }) }
                     }
                     else -> {
                         Spacer(Modifier.height(SolSpacing.lg))
@@ -220,7 +252,7 @@ fun AlertsSheet(onDismiss: () -> Unit, vm: AlertsViewModel = viewModel()) {
                     Spacer(Modifier.height(SolSpacing.lg))
                     SolSectionHeaderRow("ANTERIOARE", meta = older.size.toString())
                     Spacer(Modifier.height(SolSpacing.sm))
-                    older.forEach { AlertCard(it, dimmed = true) }
+                    older.forEach { AlertCard(it, dimmed = true, onTap = { vm.onAlertTapped(it) }, onDismiss = { vm.dismiss(it.id) }) }
                 }
 
                 Spacer(Modifier.height(SolSpacing.xl))
@@ -246,7 +278,12 @@ private fun isToday(epochSeconds: Long): Boolean {
 }
 
 @Composable
-private fun AlertCard(alert: DisplayAlert, dimmed: Boolean = false) {
+private fun AlertCard(
+    alert: DisplayAlert,
+    dimmed: Boolean = false,
+    onTap: () -> Unit = {},
+    onDismiss: () -> Unit = {}
+) {
     val accent = accentForTypeKey(alert.typeKey)
     val titleColor = if (dimmed) SolomonColors.TextSecondary else SolomonColors.TextPrimary
     val bodyColor = if (dimmed) SolomonColors.TextTertiary else SolomonColors.TextSecondary
@@ -258,7 +295,7 @@ private fun AlertCard(alert: DisplayAlert, dimmed: Boolean = false) {
             .clip(RoundedCornerShape(SolRadius.lg))
             .background(SolomonColors.Surface)
             .border(1.dp, accent.color.copy(alpha = if (dimmed) 0.10f else 0.20f), RoundedCornerShape(SolRadius.lg))
-            .clickable { }
+            .clickable { onTap() }
             .padding(horizontal = SolSpacing.base, vertical = SolSpacing.md)
     ) {
         Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
@@ -287,6 +324,17 @@ private fun AlertCard(alert: DisplayAlert, dimmed: Boolean = false) {
                         timeAgo(alert.generatedAt),
                         color = SolomonColors.TextTertiary,
                         fontSize = 11.sp
+                    )
+                    Spacer(Modifier.width(SolSpacing.sm))
+                    Text(
+                        "×",
+                        color = SolomonColors.TextTertiary,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(6.dp))
+                            .clickable { onDismiss() }
+                            .padding(horizontal = 6.dp, vertical = 2.dp)
                     )
                 }
                 Spacer(Modifier.height(4.dp))
