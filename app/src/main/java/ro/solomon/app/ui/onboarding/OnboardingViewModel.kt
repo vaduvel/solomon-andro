@@ -2,11 +2,14 @@ package ro.solomon.app.ui.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.services.CoachProfileStore
 import ro.solomon.app.services.MoneyScript
 import ro.solomon.moments.MomentEngine
 import ro.solomon.core.domain.Addressing
@@ -195,6 +198,14 @@ class OnboardingViewModel : ViewModel() {
                 obligations = buildObligations(),
                 goals = buildGoals()
             )
+            // Seed the coach profile with the user's primary goal so future nudges can
+            // reference what they're working toward. Money script is already persisted
+            // on selection in the Goals step; vulnerability is shared via SolomonCoach.
+            _state.value.selectedGoals.firstOrNull()?.let { chip ->
+                withContext(Dispatchers.IO) {
+                    CoachProfileStore.setPrimaryGoal(ServiceLocator.appContext, chip.label)
+                }
+            }
             update { it.copy(finished = true) }
         } catch (_: Throwable) {
             update { it.copy(finished = true) }
