@@ -1,16 +1,25 @@
 package ro.solomon.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalance
+import androidx.compose.material.icons.filled.Autorenew
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,6 +30,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.ui.components.EmptyStateView
+import ro.solomon.app.ui.components.SolBackButton
+import ro.solomon.app.ui.components.SolChip
+import ro.solomon.app.ui.components.SolHairlineDivider
+import ro.solomon.app.ui.components.SolLinearProgress
+import ro.solomon.app.ui.components.SolListCard
+import ro.solomon.app.ui.components.SolSecondaryButton
+import ro.solomon.app.ui.theme.SolAccent
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.app.ui.wallet.GoalEditScreen
@@ -120,25 +138,30 @@ private fun WalletOverview(state: WalletViewModel.State, onSection: (WalletSecti
     Column(
         Modifier
             .fillMaxSize()
-            .background(SolomonColors.Background)
             .verticalScroll(rememberScrollState())
-            .padding(SolSpacing.base)
+            .padding(SolSpacing.base),
+        verticalArrangement = Arrangement.spacedBy(SolSpacing.sm)
     ) {
-        Text("Portofel", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
-        Spacer(Modifier.height(SolSpacing.base))
+        Text("Bani", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
+        Text("Obligații, obiective și abonamente", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.height(SolSpacing.xs))
         WalletCard(
+            icon = Icons.Filled.AccountBalance,
+            accent = SolAccent.Rose,
             title = "Obligații lunare",
             subtitle = "${state.obligations.size} • ${RomanianMoneyFormatter.format(state.monthlyDebt, RomanianMoneyFormatter.Style.bareNumber)} RON",
             onClick = { onSection(WalletSection.Obligations) }
         )
-        Spacer(Modifier.height(SolSpacing.sm))
         WalletCard(
+            icon = Icons.Filled.Flag,
+            accent = SolAccent.Mint,
             title = "Obiective",
             subtitle = "${state.goals.size} • ${RomanianMoneyFormatter.format(state.goalsSaved, RomanianMoneyFormatter.Style.bareNumber)} / ${RomanianMoneyFormatter.format(state.goalsTarget, RomanianMoneyFormatter.Style.bareNumber)} RON",
             onClick = { onSection(WalletSection.Goals) }
         )
-        Spacer(Modifier.height(SolSpacing.sm))
         WalletCard(
+            icon = Icons.Filled.Autorenew,
+            accent = SolAccent.Blue,
             title = "Abonamente",
             subtitle = "${state.subscriptions.size} active • ${RomanianMoneyFormatter.format(state.monthlySubs, RomanianMoneyFormatter.Style.bareNumber)} RON/lună",
             onClick = { onSection(WalletSection.Subscriptions) }
@@ -147,21 +170,33 @@ private fun WalletOverview(state: WalletViewModel.State, onSection: (WalletSecti
 }
 
 @Composable
-private fun WalletCard(title: String, subtitle: String, onClick: () -> Unit) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        modifier = Modifier.fillMaxWidth().clickable { onClick() }
+private fun WalletCard(icon: ImageVector, accent: SolAccent, title: String, subtitle: String, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(SolRadius.lg))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.07f), RoundedCornerShape(SolRadius.lg))
+            .clickable { onClick() }
+            .padding(SolSpacing.base),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            modifier = Modifier.padding(SolSpacing.base),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(accent.color.copy(alpha = 0.15f))
+                .border(1.dp, accent.color.copy(alpha = 0.25f), RoundedCornerShape(12.dp)),
+            contentAlignment = Alignment.Center
         ) {
-            Column(Modifier.weight(1f)) {
-                Text(title, color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleMedium)
-                Text(subtitle, color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodyMedium)
-            }
-            Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
+            Icon(icon, null, tint = accent.color, modifier = Modifier.size(20.dp))
         }
+        Spacer(Modifier.width(SolSpacing.md))
+        Column(Modifier.weight(1f)) {
+            Text(title, color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Text(subtitle, color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodyMedium)
+        }
+        Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
     }
 }
 
@@ -180,11 +215,11 @@ private fun SectionDetail(
     Column(
         Modifier
             .fillMaxSize()
-            .background(SolomonColors.Background)
-            .padding(SolSpacing.base)
+            .verticalScroll(rememberScrollState())
+            .padding(SolSpacing.base),
+        verticalArrangement = Arrangement.spacedBy(SolSpacing.base)
     ) {
-        TextButton(onClick = onBack) { Text("← Înapoi", color = SolomonColors.Primary) }
-        Spacer(Modifier.height(SolSpacing.sm))
+        SolBackButton(onClick = onBack)
         when (section) {
             WalletSection.Obligations -> ObligationsList(state.obligations, onTapObligation, onAddObligation)
             WalletSection.Goals -> GoalsList(state.goals, onTapGoal, onAddGoal)
@@ -194,34 +229,48 @@ private fun SectionDetail(
 }
 
 @Composable
+private fun SectionHeader(title: String, onAdd: () -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(title, style = MaterialTheme.typography.headlineSmall, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
+        SolSecondaryButton(title = "+ Adaugă", onClick = onAdd)
+    }
+}
+
+@Composable
 private fun ObligationsList(
     items: List<Obligation>,
     onTap: (Obligation) -> Unit,
     onAdd: () -> Unit
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text("Obligații", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
-        TextButton(onClick = onAdd) { Text("+ Adaugă", color = SolomonColors.Primary) }
-    }
-    Spacer(Modifier.height(SolSpacing.base))
-    if (items.isEmpty()) EmptyHint("Nu avem obligații înregistrate. Apasă + Adaugă.")
-    items.forEach { o ->
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .clickable { onTap(o) }
-                .padding(vertical = SolSpacing.sm),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(Modifier.weight(1f)) {
-                Text(o.name, color = SolomonColors.TextPrimary)
-                Text("Ziua ${o.dayOfMonth} • ${o.kind.displayNameRO}", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+    SectionHeader("Obligații", onAdd)
+    if (items.isEmpty()) {
+        EmptyStateView(
+            icon = "📄",
+            title = "Nicio obligație",
+            subtitle = "Apasă + Adaugă ca să începi.",
+            accent = SolAccent.Amber
+        )
+    } else {
+        SolListCard {
+            items.forEachIndexed { i, o ->
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { onTap(o) }
+                        .padding(SolSpacing.base),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(Modifier.weight(1f)) {
+                        Text(o.name, color = SolomonColors.TextPrimary)
+                        Text("Ziua ${o.dayOfMonth} • ${o.kind.displayNameRO}", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+                    }
+                    Text(RomanianMoneyFormatter.format(o.amount, RomanianMoneyFormatter.Style.short), color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall)
+                    Spacer(Modifier.width(SolSpacing.xs))
+                    Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
+                }
+                if (i < items.lastIndex) SolHairlineDivider()
             }
-            Text(RomanianMoneyFormatter.format(o.amount, RomanianMoneyFormatter.Style.short), color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall)
-            Spacer(Modifier.width(SolSpacing.xs))
-            Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
         }
-        HorizontalDivider(color = SolomonColors.Hairline)
     }
 }
 
@@ -231,31 +280,32 @@ private fun GoalsList(
     onTap: (Goal) -> Unit,
     onAdd: () -> Unit
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text("Obiective", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
-        TextButton(onClick = onAdd) { Text("+ Adaugă", color = SolomonColors.Primary) }
-    }
-    Spacer(Modifier.height(SolSpacing.base))
-    if (items.isEmpty()) EmptyHint("Nu ai obiective încă. Apasă + Adaugă.")
-    items.forEach { g ->
-        val pct = if (g.amountTarget.amount > 0) g.amountSaved.amount.toFloat() / g.amountTarget.amount else 0f
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable { onTap(g) }
-                .padding(vertical = SolSpacing.sm)
-        ) {
-            Text(g.destination ?: g.kind.displayNameRO, color = SolomonColors.TextPrimary)
-            Text("${RomanianMoneyFormatter.format(g.amountSaved.amount, RomanianMoneyFormatter.Style.bareNumber)} / ${RomanianMoneyFormatter.format(g.amountTarget.amount, RomanianMoneyFormatter.Style.bareNumber)} RON", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
-            Spacer(Modifier.height(4.dp))
-            LinearProgressIndicator(
-                progress = { pct.coerceIn(0f, 1f) },
-                modifier = Modifier.fillMaxWidth(),
-                color = SolomonColors.Primary,
-                trackColor = SolomonColors.SurfaceVariant
-            )
+    SectionHeader("Obiective", onAdd)
+    if (items.isEmpty()) {
+        EmptyStateView(
+            icon = "🎯",
+            title = "Niciun obiectiv încă",
+            subtitle = "Apasă + Adaugă ca să începi să economisești.",
+            accent = SolAccent.Mint
+        )
+    } else {
+        SolListCard {
+            items.forEachIndexed { i, g ->
+                val pct = if (g.amountTarget.amount > 0) g.amountSaved.amount.toFloat() / g.amountTarget.amount else 0f
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { onTap(g) }
+                        .padding(SolSpacing.base)
+                ) {
+                    Text(g.destination ?: g.kind.displayNameRO, color = SolomonColors.TextPrimary)
+                    Text("${RomanianMoneyFormatter.format(g.amountSaved.amount, RomanianMoneyFormatter.Style.bareNumber)} / ${RomanianMoneyFormatter.format(g.amountTarget.amount, RomanianMoneyFormatter.Style.bareNumber)} RON", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+                    Spacer(Modifier.height(6.dp))
+                    SolLinearProgress(progress = pct.coerceIn(0f, 1f), accent = SolAccent.Mint, height = 8, modifier = Modifier.fillMaxWidth())
+                }
+                if (i < items.lastIndex) SolHairlineDivider()
+            }
         }
-        HorizontalDivider(color = SolomonColors.Hairline)
     }
 }
 
@@ -265,33 +315,34 @@ private fun SubscriptionsList(
     onTap: (Subscription) -> Unit,
     onAdd: () -> Unit
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text("Abonamente", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
-        TextButton(onClick = onAdd) { Text("+ Adaugă", color = SolomonColors.Primary) }
-    }
-    Spacer(Modifier.height(SolSpacing.base))
-    if (items.isEmpty()) EmptyHint("Nu am găsit abonamente. Apasă + Adaugă.")
-    items.forEach { s ->
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .clickable { onTap(s) }
-                .padding(vertical = SolSpacing.sm),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(Modifier.weight(1f)) {
-                Text(s.name, color = SolomonColors.TextPrimary)
-                Text("${RomanianMoneyFormatter.format(s.amountMonthly.amount, RomanianMoneyFormatter.Style.bareNumber)} RON/lună", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+    SectionHeader("Abonamente", onAdd)
+    if (items.isEmpty()) {
+        EmptyStateView(
+            icon = "🔁",
+            title = "Niciun abonament",
+            subtitle = "Apasă + Adaugă ca să le urmărești.",
+            accent = SolAccent.Blue
+        )
+    } else {
+        SolListCard {
+            items.forEachIndexed { i, s ->
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { onTap(s) }
+                        .padding(SolSpacing.base),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(Modifier.weight(1f)) {
+                        Text(s.name, color = SolomonColors.TextPrimary)
+                        Text("${RomanianMoneyFormatter.format(s.amountMonthly.amount, RomanianMoneyFormatter.Style.bareNumber)} RON/lună", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+                    }
+                    SolChip(s.cancellationDifficulty.displayNameRO, accent = SolAccent.Amber)
+                    Spacer(Modifier.width(SolSpacing.xs))
+                    Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
+                }
+                if (i < items.lastIndex) SolHairlineDivider()
             }
-            AssistChip(onClick = {}, label = { Text(s.cancellationDifficulty.displayNameRO) })
-            Spacer(Modifier.width(SolSpacing.xs))
-            Icon(Icons.Filled.ChevronRight, null, tint = SolomonColors.TextTertiary)
         }
-        HorizontalDivider(color = SolomonColors.Hairline)
     }
-}
-
-@Composable
-private fun EmptyHint(text: String) {
-    Text(text, color = SolomonColors.TextSecondary, modifier = Modifier.padding(vertical = SolSpacing.base))
 }
