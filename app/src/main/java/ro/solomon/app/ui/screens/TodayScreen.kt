@@ -47,6 +47,17 @@ fun TodayScreen(
     vm: TodayViewModel = viewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val coachLesson by produceState<ro.solomon.app.services.CoachMicroLessons.MicroLesson?>(
+        initialValue = ro.solomon.app.services.CoachMicroLessons.forDate(System.currentTimeMillis()),
+        context
+    ) {
+        value = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            val vuln = ro.solomon.app.services.SolomonCoachMemory.vulnerability(context)
+            val script = ro.solomon.app.services.CoachProfileStore.load(context).moneyScript
+            ro.solomon.app.services.CoachMicroLessons.forContext(System.currentTimeMillis(), vuln, script)
+        }
+    }
     var showChat by remember { mutableStateOf(false) }
     var showManualTxn by remember { mutableStateOf(false) }
     var showAlerts by remember { mutableStateOf(false) }
@@ -140,7 +151,7 @@ fun TodayScreen(
                 )
             }
             item { DailyTipCard() }
-            ro.solomon.app.services.CoachMicroLessons.forDate(System.currentTimeMillis())?.let { lesson ->
+            coachLesson?.let { lesson ->
                 item { CoachLessonCard(lesson) }
             }
             item {
