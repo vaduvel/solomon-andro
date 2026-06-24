@@ -279,7 +279,12 @@ class TodayViewModel : ViewModel() {
                     referenceDateEpochSeconds = System.currentTimeMillis() / 1000L
                 )
             )
-            _state.value = _state.value.copy(momentText = ro.solomon.core.util.AdvisorTextCleaner.clean(out.llmResponse), generatingMoment = false)
+            val script = withContext(Dispatchers.IO) {
+                ro.solomon.app.services.CoachProfileStore.load(ServiceLocator.appContext).moneyScript
+            } ?: ro.solomon.app.services.MoneyScriptInference.infer(txns)
+            val cleaned = ro.solomon.core.util.AdvisorTextCleaner.clean(out.llmResponse)
+            val toned = cleaned + "\n\n" + ro.solomon.app.services.CoachingVoice.closingNudge(script)
+            _state.value = _state.value.copy(momentText = toned, generatingMoment = false)
             ro.solomon.app.services.TodayContextBridge.detectedToday =
                 ro.solomon.app.services.TodayContextBridge.DetectedMoment(
                     typeRaw = "wow_moment",
