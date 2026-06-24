@@ -51,6 +51,9 @@ class SolomonNotificationListener : NotificationListenerService() {
                 if (parsed != null) {
                     ServiceLocator.txnRepo.save(parsed)
                     IngestionNotifier.notifyBankNotification(this@SolomonNotificationListener, 1, text)
+                    // Event-driven reactivity: react the instant a bank notification
+                    // is parsed into a transaction, not just on the daily worker.
+                    ReactiveMomentEvaluator.onTransactionIngested(this@SolomonNotificationListener, parsed)
                 }
             }.onFailure { e ->
                 IngestionNotifier.notifyError(this@SolomonNotificationListener, "notif", e.message ?: "Eroare necunoscută")

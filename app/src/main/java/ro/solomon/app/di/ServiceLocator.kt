@@ -115,6 +115,9 @@ object ServiceLocator {
             onTransactionIngested = { tx ->
                 CoroutineScope(Dispatchers.IO).launch {
                     txnRepo.save(tx)
+                    // Event-driven reactivity: react the instant an open-banking
+                    // sync ingests a new transaction, not just on the daily worker.
+                    ro.solomon.app.services.ReactiveMomentEvaluator.onTransactionIngested(appContext, tx)
                 }
             }
             initialize()

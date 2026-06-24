@@ -79,6 +79,9 @@ class MainActivity : ComponentActivity() {
                     val withShareSource = parsed.copy(source = TransactionSource.share_intent_parsed)
                     ServiceLocator.txnRepo.save(withShareSource)
                     ro.solomon.app.services.IngestionNotifier.notifyShareIntent(this@MainActivity, 1)
+                    // Event-driven reactivity: react the instant a shared SMS/receipt
+                    // is parsed into a transaction, not just on the daily worker.
+                    ro.solomon.app.services.ReactiveMomentEvaluator.onTransactionIngested(this@MainActivity, withShareSource)
                 } else {
                     ro.solomon.app.services.IngestionNotifier.notifyError(
                         this@MainActivity,
