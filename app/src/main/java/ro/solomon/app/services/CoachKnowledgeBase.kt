@@ -8,13 +8,15 @@ package ro.solomon.app.services
  * - [KnowledgeEntry.datedFacts] are time-sensitive (rates, prices, legal
  *   thresholds); each carries the date it was verified plus an official source,
  *   and is subject to periodic refresh.
+ * - [KnowledgeEntry.microLesson] is a short behavioral takeaway for drip delivery.
  *
  * Grounding guardrail: never present a dated fact without its date and source,
  * and flag entries past the refresh horizon as needing re-verification.
  */
 
 enum class CoachKnowledgeTopic {
-    SAVING, DEBT, COUPLE, INVESTING, MINDSET, BIG_PURCHASE, CAREER, RISK, CULTURE_RO, GENERAL
+    SAVING, DEBT, COUPLE, INVESTING, MINDSET, BIG_PURCHASE, CAREER, RISK, CULTURE_RO, GENERAL,
+    HABITS, DEBT_PSYCHOLOGY, EMOTIONAL_MONEY, COMPOUNDING
 }
 
 data class DatedFact(
@@ -28,6 +30,7 @@ data class KnowledgeEntry(
     val title: String,
     val principles: List<String>,
     val datedFacts: List<DatedFact> = emptyList(),
+    val microLesson: String? = null,
     val lastReviewed: String
 )
 
@@ -67,6 +70,7 @@ object CoachKnowledgeBase {
                     source = "Ministerul Finantelor, Ordin 661/2026 - mfinante.gov.ro (Fidelis)"
                 )
             ),
+            microLesson = "Da fiecarui leu o destinatie inainte sa-si gaseasca singur una.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.DEBT to KnowledgeEntry(
@@ -97,6 +101,7 @@ object CoachKnowledgeBase {
                     source = "CSALB - csalb.ro (OG 38/2015)"
                 )
             ),
+            microLesson = "Ataca intai dobanda cea mai scumpa; acolo pierzi cei mai multi bani in tacere.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.COUPLE to KnowledgeEntry(
@@ -109,6 +114,7 @@ object CoachKnowledgeBase {
                 "Prag de decizie comuna: orice cheltuiala peste un nivel agreat se discuta.",
                 "Intalnirea financiara lunara de circa 20 de minute rezolva majoritatea tensiunilor inainte sa devina conflicte."
             ),
+            microLesson = "20 de minute pe luna despre bani previn majoritatea conflictelor financiare.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.INVESTING to KnowledgeEntry(
@@ -129,6 +135,7 @@ object CoachKnowledgeBase {
                     source = "Ministerul Finantelor, Ordin 661/2026 - mfinante.gov.ro (Fidelis)"
                 )
             ),
+            microLesson = "Intai fondul de urgente, apoi diversificare, apoi rabdare. In aceasta ordine.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.MINDSET to KnowledgeEntry(
@@ -142,6 +149,7 @@ object CoachKnowledgeBase {
                 "FOMO financiar: cand toata lumea cumpara, adesea e varful ciclului.",
                 "Reguli simple si automatizare bat vointa zilnica."
             ),
+            microLesson = "Cei mai buni cu banii nu castiga cel mai mult; stiu unde se duc banii lor si de ce.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.BIG_PURCHASE to KnowledgeEntry(
@@ -153,6 +161,7 @@ object CoachKnowledgeBase {
                 "Atentie la ratele 'fara dobanda' cu penalitati ascunse la intarziere.",
                 "Upgrade-ul inutil si presiunea sociala sunt capcane frecvente."
             ),
+            microLesson = "Daca dupa 72 de ore tot o vrei si raspunzi da la cele 4 intrebari, e o decizie, nu un impuls.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.CAREER to KnowledgeEntry(
@@ -165,6 +174,7 @@ object CoachKnowledgeBase {
                 "Venitul pasiv vine dupa stabilitate, nu inaintea ei.",
                 "In Romania, contractul de drepturi de autor, PFA vs microintreprindere si munca remote pentru companii din afara tarii pot schimba semnificativ venitul net; verifica regulile fiscale curente."
             ),
+            microLesson = "O ora de negociere a salariului poate valora mai mult decat un an de taiat cheltuieli.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.RISK to KnowledgeEntry(
@@ -183,6 +193,7 @@ object CoachKnowledgeBase {
                     source = "Legea 260/2008 (modif. Legea 115/2023), PAID - padrom.ro; ghiseul.ro/paid"
                 )
             ),
+            microLesson = "Fondul de urgente nu e o economie, e asigurarea ta ca un soc nu devine catastrofa.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.CULTURE_RO to KnowledgeEntry(
@@ -199,6 +210,7 @@ object CoachKnowledgeBase {
                     source = "Ministerul Finantelor - mfinante.gov.ro (Tezaur/Fidelis)"
                 )
             ),
+            microLesson = "Educatia financiara e cea mai rentabila investitie pe care o poti face azi, si e gratuita.",
             lastReviewed = REVIEWED
         ),
         CoachKnowledgeTopic.GENERAL to KnowledgeEntry(
@@ -212,12 +224,68 @@ object CoachKnowledgeBase {
                 "Investeste in tine; competentele care iti cresc venitul rentaza cel mai mult.",
                 "Urmareste progresul: un obiectiv nevizualizat ramane o dorinta."
             ),
+            microLesson = "Cel mai bun moment sa incepi un plan financiar a fost acum 5 ani. Al doilea, azi.",
+            lastReviewed = REVIEWED
+        ),
+        CoachKnowledgeTopic.HABITS to KnowledgeEntry(
+            topic = CoachKnowledgeTopic.HABITS,
+            title = "Obiceiuri financiare",
+            principles = listOf(
+                "Un obicei are 3 parti: declansator, rutina, recompensa. Schimba rutina pastrand declansatorul si recompensa.",
+                "Regula celor 2 minute: orice obicei nou incepe cu o versiune care dureaza sub 2 minute, ca sa fie usor de pornit.",
+                "Habit stacking: leaga obiceiul nou de unul existent (dupa ce imi iau cafeaua, verific o cheltuiala).",
+                "Automatizarea bate vointa: ce se intampla singur (transfer in ziua salariului) nu depinde de motivatie.",
+                "Mediul conteaza mai mult decat disciplina: sterge cardul salvat din aplicatiile de shopping."
+            ),
+            microLesson = "Nu iti propune sa economisesti mai mult luna asta. Propune-ti un singur gest automat care se repeta singur.",
+            lastReviewed = REVIEWED
+        ),
+        CoachKnowledgeTopic.DEBT_PSYCHOLOGY to KnowledgeEntry(
+            topic = CoachKnowledgeTopic.DEBT_PSYCHOLOGY,
+            title = "Psihologia datoriei",
+            principles = listOf(
+                "Rusinea intretine datoria: cu cat eviti sa te uiti, cu atat creste. Primul pas e sa privesti cifra exacta, fara judecata.",
+                "Plata minimului la card pare o usurare, dar e o capcana: dobanda mananca progresul, iar soldul aproape nu scade.",
+                "Mental accounting: banii de la bonus sau cadou se cheltuie mai usor desi sunt la fel de reali. Trateaza-i la fel.",
+                "O datorie are o poveste, nu doar o cifra. Intelege ce nevoie a acoperit, ca sa nu se repete.",
+                "Progresul vizibil (sold care scade lunar) bate orice plan tinut doar in minte."
+            ),
+            microLesson = "Datoria nu spune cine esti. E doar o problema de rezolvat, cu pasi mici si vizibili.",
+            lastReviewed = REVIEWED
+        ),
+        CoachKnowledgeTopic.EMOTIONAL_MONEY to KnowledgeEntry(
+            topic = CoachKnowledgeTopic.EMOTIONAL_MONEY,
+            title = "Relatia emotionala cu banii",
+            principles = listOf(
+                "Tiparele despre bani se formeaza in copilarie (money scripts) si ne conduc inconstient ca adulti.",
+                "Cheltuitul e adesea reglare emotionala: cumperi ca sa gestionezi stres, plictiseala sau tristete, nu nevoia in sine.",
+                "Comparatia sociala (si online) imprumuta dorinte care nu sunt ale tale si distorsioneaza ce inseamna suficient.",
+                "Numeste emotia inainte de cumparare (sunt obosit, stresat, plictisit); de multe ori dispare nevoia de a cumpara.",
+                "Banii sunt un instrument pentru valorile tale, nu un scor al valorii tale ca om."
+            ),
+            microLesson = "Inainte sa cumperi cand esti agitat, intreaba-te: ce simt acum si ce am nevoie de fapt?",
+            lastReviewed = REVIEWED
+        ),
+        CoachKnowledgeTopic.COMPOUNDING to KnowledgeEntry(
+            topic = CoachKnowledgeTopic.COMPOUNDING,
+            title = "Dobanda compusa si timpul",
+            principles = listOf(
+                "Dobanda compusa inseamna ca si dobanda produce dobanda: efectul devine exponential pe termen lung.",
+                "Timpul e cel mai mare avantaj: a incepe devreme bate a investi sume mari mai tarziu.",
+                "Regula 72: imparti 72 la randamentul anual in procente si afli in cati ani se dubleaza banii (de exemplu 6% inseamna circa 12 ani).",
+                "Acelasi principiu lucreaza si impotriva ta la datorii: dobanda compusa la card creste soldul daca platesti doar minimul.",
+                "Costul amanarii e real: fiecare an de asteptare pierde tocmai anii cei mai valorosi de compunere."
+            ),
+            microLesson = "Nu suma conteaza cel mai mult, ci de cand incepi. Cel mai bun moment a fost ieri; al doilea, azi.",
             lastReviewed = REVIEWED
         )
     )
 
     fun entry(topic: CoachKnowledgeTopic): KnowledgeEntry =
         entries[topic] ?: entries.getValue(CoachKnowledgeTopic.GENERAL)
+
+    /** The short behavioral takeaway for a topic, if any. */
+    fun microLessonFor(topic: CoachKnowledgeTopic): String? = entry(topic).microLesson
 
     private fun epochMillisOf(isoDate: String): Long = try {
         val pattern = if (isoDate.length == 7) "yyyy-MM" else "yyyy-MM-dd"
@@ -265,6 +333,7 @@ object CoachKnowledgeBase {
                     .append(" de zile. Confirma la sursa oficiala inainte de a te baza pe ele.\n")
             }
         }
+        e.microLesson?.let { sb.append("\nMicro-lectie: ").append(it).append("\n") }
         sb.append("\nUltima verificare editoriala: ").append(e.lastReviewed).append(".")
         return sb.toString().trimEnd()
     }
