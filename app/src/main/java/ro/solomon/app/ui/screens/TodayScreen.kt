@@ -1,10 +1,10 @@
 package ro.solomon.app.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -30,9 +30,22 @@ import ro.solomon.app.services.IngestionEvent
 import ro.solomon.app.services.IngestionEventBus
 import ro.solomon.app.services.SolomonMission
 import ro.solomon.app.ui.chat.ChatSheet
+import ro.solomon.app.ui.components.EmptyStateView
 import ro.solomon.app.ui.components.IngestionToast
+import ro.solomon.app.ui.components.MeshBackground
+import ro.solomon.app.ui.components.SolHairlineDivider
+import ro.solomon.app.ui.components.SolHeroAmount
+import ro.solomon.app.ui.components.SolHeroCard
+import ro.solomon.app.ui.components.SolHeroLabel
 import ro.solomon.app.ui.components.SolInsightCard
+import ro.solomon.app.ui.components.SolLinearProgress
+import ro.solomon.app.ui.components.SolListCard
+import ro.solomon.app.ui.components.SolPrimaryButton
+import ro.solomon.app.ui.components.SolSecondaryButton
+import ro.solomon.app.ui.components.SolSectionHeaderRow
+import ro.solomon.app.ui.components.SolStatCard
 import ro.solomon.app.ui.theme.SolAccent
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.Transaction
@@ -92,7 +105,9 @@ fun TodayScreen(
         ro.solomon.app.ui.alerts.AlertsSheet(onDismiss = { showAlerts = false })
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(SolomonColors.Background)) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        MeshBackground()
+
         toastMessage?.let { msg ->
             Box(modifier = Modifier.align(Alignment.TopCenter).padding(top = SolSpacing.base).fillMaxWidth()) {
                 IngestionToast(title = msg, detail = toastDetail)
@@ -108,8 +123,22 @@ fun TodayScreen(
             item { SafeToSpendCard(state.safeToSpendPerDay, state.daysUntilPayday, state.balanceAvailable, state.paydayDayOfMonth) }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
-                    StatPill("Venituri azi", "+${state.incomingToday} RON", SolomonColors.Incoming, modifier = Modifier.weight(1f))
-                    StatPill("Cheltuieli azi", "-${state.outgoingToday} RON", SolomonColors.Outgoing, modifier = Modifier.weight(1f))
+                    SolStatCard(
+                        label = "Azi",
+                        name = "Venituri",
+                        value = "+${state.incomingToday} RON",
+                        icon = Icons.Filled.ArrowDownward,
+                        iconAccent = SolAccent.Success,
+                        modifier = Modifier.weight(1f)
+                    )
+                    SolStatCard(
+                        label = "Azi",
+                        name = "Cheltuieli",
+                        value = "-${state.outgoingToday} RON",
+                        icon = Icons.Filled.ArrowUpward,
+                        iconAccent = SolAccent.Error,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
             }
             val topCat = state.topCategory
@@ -171,14 +200,28 @@ fun TodayScreen(
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
                     ActionTile("Pot s\u0103-mi permit?", Icons.Filled.Search, onClick = onOpenCanIAfford, modifier = Modifier.weight(1f))
-                    ActionTile("\u00CEntreab\u0103 Solomon", Icons.Filled.Chat, onClick = { showChat = true }, modifier = Modifier.weight(1f))
+                    ActionTile("\u00centreab\u0103 Solomon", Icons.Filled.Chat, onClick = { showChat = true }, modifier = Modifier.weight(1f))
                 }
             }
-            item { Text("Ultimele tranzac\u021bii", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary) }
+            item { SolSectionHeaderRow(title = "Ultimele tranzac\u021bii") }
             if (state.recentTransactions.isEmpty()) {
-                item { EmptyHint("Adaug\u0103 prima tranzac\u021bie din Chat sau manual din Portofel.") }
+                item {
+                    EmptyStateView(
+                        icon = "\uD83D\uDCB3",
+                        title = "Nicio tranzac\u021bie \u00eenc\u0103",
+                        subtitle = "Adaug\u0103 prima tranzac\u021bie din Chat sau manual din Portofel.",
+                        accent = SolAccent.Mint
+                    )
+                }
             } else {
-                items(state.recentTransactions, key = { it.id }) { tx -> TransactionRow(tx) }
+                item {
+                    SolListCard {
+                        state.recentTransactions.forEachIndexed { index, tx ->
+                            TransactionRow(tx)
+                            if (index < state.recentTransactions.lastIndex) SolHairlineDivider()
+                        }
+                    }
+                }
             }
             item { Spacer(Modifier.height(80.dp)) }
         }
@@ -196,7 +239,7 @@ fun TodayScreen(
             contentColor = SolomonColors.OnPrimary,
             modifier = Modifier.align(Alignment.BottomEnd).padding(SolSpacing.base)
         ) {
-            Icon(androidx.compose.material.icons.Icons.Filled.Add, "Adauga tranzactie")
+            Icon(Icons.Filled.Add, "Adauga tranzactie")
         }
     }
 }
@@ -205,14 +248,19 @@ fun TodayScreen(
 private fun GreetingHeader(name: String, hasAlert: Boolean, onAlertsClick: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
-            Text("Bun\u0103${if (name.isNotBlank()) ", $name" else ""} \uD83D\uDC4B", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
-            Text("Azi e", style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
+            Text("Ast\u0103zi", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
+            Text(
+                if (name.isNotBlank()) "Bun\u0103, $name" else "Bun\u0103",
+                style = MaterialTheme.typography.bodyMedium,
+                color = SolomonColors.TextSecondary
+            )
         }
         Box(
             modifier = Modifier
                 .size(40.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(SolomonColors.SurfaceVariant)
+                .background(Color.White.copy(alpha = 0.06f))
+                .border(1.dp, Color.White.copy(alpha = 0.08f), RoundedCornerShape(12.dp))
                 .clickable { onAlertsClick() },
             contentAlignment = Alignment.Center
         ) {
@@ -237,20 +285,42 @@ private fun GreetingHeader(name: String, hasAlert: Boolean, onAlertsClick: () ->
 }
 
 @Composable
+private fun SafeToSpendCard(perDay: Int, daysLeft: Int, available: Int, paydayDay: Int) {
+    SolHeroCard(accent = SolAccent.Mint) {
+        SolHeroLabel("Disponibil liber \u00b7 salariu ziua $paydayDay")
+        SolHeroAmount(
+            amount = RomanianMoneyFormatter.format(perDay, RomanianMoneyFormatter.Style.bareNumber),
+            currency = "RON / zi",
+            accent = SolAccent.Mint
+        )
+        Text(
+            "Aproximativ at\u00e2t pe zi \u00ee\u021bi po\u021bi permite \u2014 nu trebuie s\u0103-i cheltui, e doar perimetrul \u00een care n-ai grij\u0103.",
+            style = MaterialTheme.typography.bodySmall,
+            color = SolomonColors.TextSecondary
+        )
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+            Text("$daysLeft zile p\u00e2n\u0103 la salariu", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextTertiary)
+            Text("\u00b7", color = SolomonColors.TextTertiary)
+            Text("Disponibil: ${RomanianMoneyFormatter.format(available)}", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
+        }
+    }
+}
+
+@Composable
 private fun QuickStatsCard(topCategory: String, topAmount: Int, avgDaily: Int) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.lg)
-    ) {
-        Row(modifier = Modifier.padding(SolSpacing.base), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(SolSpacing.base)) {
+    SolListCard {
+        Row(
+            modifier = Modifier.padding(SolSpacing.base),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(SolSpacing.base)
+        ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text("TOP CATEGORIE \u00B7 30Z", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
+                Text("TOP CATEGORIE \u00b7 30Z", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
                 Spacer(Modifier.height(2.dp))
                 Text(topCategory, color = SolomonColors.TextPrimary, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, maxLines = 1)
                 Text("$topAmount RON", color = SolomonColors.Primary, fontSize = 13.sp, fontWeight = FontWeight.Medium)
             }
-            Box(modifier = Modifier.width(1.dp).height(36.dp).background(SolomonColors.Hairline))
+            Box(modifier = Modifier.width(1.dp).height(36.dp).background(Color.White.copy(alpha = 0.08f)))
             Column(modifier = Modifier.weight(1f)) {
                 Text("MEDIE ZILNIC\u0102", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
                 Spacer(Modifier.height(2.dp))
@@ -262,66 +332,19 @@ private fun QuickStatsCard(topCategory: String, topAmount: Int, avgDaily: Int) {
 }
 
 @Composable
-private fun SafeToSpendCard(perDay: Int, daysLeft: Int, available: Int, paydayDay: Int) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.lg)
-    ) {
-        Column(modifier = Modifier.padding(SolSpacing.lg)) {
-            Text("DISPONIBIL LIBER \u00B7 URM\u0102TORUL SALARIU ZIUA $paydayDay", style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextTertiary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(RomanianMoneyFormatter.format(perDay, RomanianMoneyFormatter.Style.bareNumber), style = MaterialTheme.typography.displayMedium, color = SolomonColors.Primary)
-            Text("RON / zi \u00B7 $daysLeft zile p\u00E2n\u0103 la salariu", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextSecondary)
-            Spacer(Modifier.height(SolSpacing.md))
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
-                Text("Total disponibil acum:", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
-                Text(RomanianMoneyFormatter.format(available), style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
-            }
-        }
-    }
-}
-
-@Composable
-private fun StatPill(label: String, value: String, accent: Color, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.md)
-    ) {
-        Column(Modifier.padding(SolSpacing.md)) {
-            Text(label, style = MaterialTheme.typography.labelSmall, color = SolomonColors.TextSecondary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(value, style = MaterialTheme.typography.headlineSmall, color = accent)
-        }
-    }
-}
-
-@Composable
 private fun MomentCard(text: String, generating: Boolean, onTap: () -> Unit) {
-    Card(
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onTap),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.lg)
+    SolInsightCard(
+        label = "Solomon \u00ee\u021bi spune",
+        timestamp = "acum",
+        accent = SolAccent.Mint,
+        modifier = Modifier.clickable(onClick = onTap)
     ) {
-        Row(Modifier.padding(SolSpacing.md), verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(SolSpacing.sm))
-                    .background(SolomonColors.Primary.copy(alpha = 0.15f)),
-                contentAlignment = Alignment.Center
-            ) { Text("\uD83D\uDCA1", style = MaterialTheme.typography.titleLarge) }
-            Spacer(Modifier.width(SolSpacing.md))
-            Column(Modifier.weight(1f)) {
-                Text("Solomon \u00ee\u021bi spune", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
-                if (generating) {
-                    Text("Se g\u00e2nde\u0219te...", style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
-                } else {
-                    Text(text, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextPrimary, maxLines = 4)
-                }
-            }
+        if (generating) {
+            Text("Se g\u00e2nde\u0219te...", style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
+        } else {
+            Text(text, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextPrimary)
         }
+        Text("Apas\u0103 pentru detalii", color = SolomonColors.Primary, fontSize = 12.sp)
     }
 }
 
@@ -329,7 +352,7 @@ private fun MomentCard(text: String, generating: Boolean, onTap: () -> Unit) {
 private fun DailyTipCard() {
     val tip = ro.solomon.core.util.FinancialEducationTip.today
     SolInsightCard(
-        label = "SFATUL ZILEI \u00B7 ${tip.category.label}",
+        label = "SFATUL ZILEI \u00b7 ${tip.category.label}",
         timestamp = null,
         accent = SolAccent.Violet
     ) {
@@ -349,7 +372,7 @@ private fun DailyTipCard() {
 @Composable
 private fun CoachLessonCard(lesson: ro.solomon.app.services.CoachMicroLessons.MicroLesson) {
     SolInsightCard(
-        label = "ANTRENAMENT SOLOMON \u00B7 ${lesson.title}",
+        label = "ANTRENAMENT SOLOMON \u00b7 ${lesson.title}",
         timestamp = null,
         accent = SolAccent.Blue
     ) {
@@ -369,7 +392,7 @@ private fun CoachLessonCard(lesson: ro.solomon.app.services.CoachMicroLessons.Mi
 @Composable
 private fun ReflectionCard(category: String, onTap: () -> Unit) {
     SolInsightCard(
-        label = "REFLEC\u021aIE \u00B7 $category",
+        label = "REFLEC\u021aIE \u00b7 $category",
         timestamp = null,
         accent = SolAccent.Amber
     ) {
@@ -419,7 +442,7 @@ private fun CoachProgressCard(
                     else if (commitmentCount > 0)
                         "Ai luat $commitmentCount ${if (commitmentCount == 1) "angajament" else "angajamente"}. Termin\u0103 unul \u0219i \u00eencep s\u0103 num\u0103r respectarea."
                     else
-                        "\u00CEncep s\u0103 \u00een\u021beleg cum reac\u021bionezi la sugestiile mele.",
+                        "\u00cencep s\u0103 \u00een\u021beleg cum reac\u021bionezi la sugestiile mele.",
                     color = SolomonColors.TextPrimary,
                     fontSize = 14.sp,
                     lineHeight = 20.sp
@@ -427,11 +450,10 @@ private fun CoachProgressCard(
             }
             if (hasEngagementHistory) {
                 Spacer(Modifier.height(SolSpacing.sm))
-                LinearProgressIndicator(
-                    progress = { engagementRatio.toFloat().coerceIn(0f, 1f) },
-                    modifier = Modifier.fillMaxWidth().height(6.dp),
-                    color = SolAccent.Violet.color,
-                    trackColor = SolomonColors.SurfaceVariant
+                SolLinearProgress(
+                    progress = engagementRatio.toFloat(),
+                    accent = SolAccent.Violet,
+                    modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(SolSpacing.xs))
                 Text(
@@ -466,79 +488,63 @@ private fun LastCommitmentCard(commitment: String) {
 
 @Composable
 private fun ActionTile(label: String, icon: androidx.compose.ui.graphics.vector.ImageVector, onClick: () -> Unit, modifier: Modifier = Modifier) {
-    OutlinedButton(
-        onClick = onClick,
-        modifier = modifier.height(60.dp),
-        shape = RoundedCornerShape(SolSpacing.md)
+    Row(
+        modifier = modifier
+            .height(56.dp)
+            .clip(RoundedCornerShape(SolRadius.md))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.08f), RoundedCornerShape(SolRadius.md))
+            .clickable(onClick = onClick)
+            .padding(horizontal = SolSpacing.base),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)
     ) {
         Icon(icon, null, tint = SolomonColors.Primary, modifier = Modifier.size(18.dp))
-        Spacer(Modifier.width(SolSpacing.xs))
-        Text(label, color = SolomonColors.TextPrimary)
-    }
-}
-
-@Composable
-private fun EmptyHint(text: String) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.md)
-    ) {
-        Text(text, modifier = Modifier.padding(SolSpacing.md), color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodyMedium)
+        Text(label, color = SolomonColors.TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.Medium, maxLines = 1)
     }
 }
 
 @Composable
 private fun TransactionRow(tx: Transaction) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.md)
-    ) {
-        Row(Modifier.padding(SolSpacing.md), verticalAlignment = Alignment.CenterVertically) {
-            val accent = if (tx.direction == FlowDirection.incoming) SolomonColors.Incoming else SolomonColors.Outgoing
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clip(RoundedCornerShape(SolSpacing.sm))
-                    .background(accent.copy(alpha = 0.15f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    if (tx.direction == FlowDirection.incoming) Icons.Filled.ArrowDownward else Icons.Filled.ArrowUpward,
-                    null,
-                    tint = accent
-                )
-            }
-            Spacer(Modifier.width(SolSpacing.md))
-            Column(Modifier.weight(1f)) {
-                Text(tx.merchant ?: tx.category.displayNameRO, style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
-                Text(
-                    "${tx.category.displayNameRO} \u00B7 ${RomanianDateFormatter.format(tx.date * 1000L, RomanianDateFormatter.Style.dayMonth)}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = SolomonColors.TextSecondary
-                )
-            }
-            val sign = if (tx.direction == FlowDirection.incoming) "+" else "-"
-            Text(
-                "$sign${RomanianMoneyFormatter.format(tx.amount.amount)}",
-                style = MaterialTheme.typography.titleMedium,
-                color = accent
+    Row(Modifier.fillMaxWidth().padding(SolSpacing.md), verticalAlignment = Alignment.CenterVertically) {
+        val accent = if (tx.direction == FlowDirection.incoming) SolomonColors.Incoming else SolomonColors.Outgoing
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(RoundedCornerShape(SolSpacing.sm))
+                .background(accent.copy(alpha = 0.15f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                if (tx.direction == FlowDirection.incoming) Icons.Filled.ArrowDownward else Icons.Filled.ArrowUpward,
+                null,
+                tint = accent
             )
         }
+        Spacer(Modifier.width(SolSpacing.md))
+        Column(Modifier.weight(1f)) {
+            Text(tx.merchant ?: tx.category.displayNameRO, style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
+            Text(
+                "${tx.category.displayNameRO} \u00b7 ${RomanianDateFormatter.format(tx.date * 1000L, RomanianDateFormatter.Style.dayMonth)}",
+                style = MaterialTheme.typography.bodySmall,
+                color = SolomonColors.TextSecondary
+            )
+        }
+        val sign = if (tx.direction == FlowDirection.incoming) "+" else "-"
+        Text(
+            "$sign${RomanianMoneyFormatter.format(tx.amount.amount)}",
+            style = MaterialTheme.typography.titleMedium,
+            color = accent
+        )
     }
 }
 
 @Composable
 private fun Next7DaysCard(bills: List<TodayViewModel.UpcomingBillItem>, total: Int, count: Int, paydayDay: Int) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.lg)
-    ) {
+    SolListCard {
         Column(modifier = Modifier.padding(SolSpacing.lg)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-                Text("URM\u0102TOARELE 7 ZILE \u00B7 $count facturi", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
+                Text("URM\u0102TOARELE 7 ZILE \u00b7 $count facturi", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
                 Text("Total: ${RomanianMoneyFormatter.format(total)}", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
             }
             Spacer(Modifier.height(SolSpacing.md))
@@ -560,7 +566,7 @@ private fun Next7DaysCard(bills: List<TodayViewModel.UpcomingBillItem>, total: I
                     }
                     Column(modifier = Modifier.weight(1f)) {
                         Text(bill.name, style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary, maxLines = 1)
-                        Text("Ziua ${bill.dayOfMonth} \u00B7 ${bill.kindLabel}", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
+                        Text("Ziua ${bill.dayOfMonth} \u00b7 ${bill.kindLabel}", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextSecondary)
                     }
                     Text(RomanianMoneyFormatter.format(bill.amount), style = MaterialTheme.typography.titleSmall, color = if (bill.isEssential) SolomonColors.Amber else SolomonColors.TextPrimary)
                 }
@@ -576,59 +582,32 @@ private fun ActiveMissionCard(mission: SolomonMission, onComplete: () -> Unit) {
     val now = System.currentTimeMillis() / 1000L
     val progress = mission.progressFraction(now).toFloat()
     val daysLeft = mission.daysRemaining(now)
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        shape = RoundedCornerShape(SolSpacing.lg)
-    ) {
-        Column(Modifier.padding(SolSpacing.lg)) {
-            Text("MISIUNEA TA \u00B7 ${mission.daysRemaining(now)} ZILE R\u0102MASE",
-                style = MaterialTheme.typography.labelSmall,
-                color = SolomonColors.Primary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(mission.title, style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(mission.description, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
-            Spacer(Modifier.height(SolSpacing.md))
-            LinearProgressIndicator(
-                progress = { progress },
-                modifier = Modifier.fillMaxWidth().height(8.dp),
-                color = SolomonColors.Primary,
-                trackColor = SolomonColors.SurfaceVariant
-            )
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text("\u021aint\u0103: ${mission.targetSavingsRON} RON \u00B7 ${daysLeft} zile r\u0103mase",
-                style = MaterialTheme.typography.bodySmall,
-                color = SolomonColors.TextTertiary)
-            if (mission.isCompleted) {
-                Spacer(Modifier.height(SolSpacing.sm))
-                Text("Misiune \u00eendeplinit\u0103 \uD83C\uDF89", color = SolomonColors.Incoming, style = MaterialTheme.typography.titleSmall)
-            } else if (daysLeft == 0) {
-                Spacer(Modifier.height(SolSpacing.sm))
-                TextButton(onClick = onComplete) { Text("Marcheaz\u0103 ca terminat\u0103") }
-            }
+    SolHeroCard(accent = SolAccent.Mint, badge = "Misiune") {
+        SolHeroLabel("Misiunea ta \u00b7 $daysLeft zile r\u0103mase")
+        Text(mission.title, style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
+        Text(mission.description, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
+        SolLinearProgress(progress = progress, accent = SolAccent.Mint, height = 8, modifier = Modifier.fillMaxWidth())
+        Text(
+            "\u021aint\u0103: ${mission.targetSavingsRON} RON \u00b7 $daysLeft zile r\u0103mase",
+            style = MaterialTheme.typography.bodySmall,
+            color = SolomonColors.TextTertiary
+        )
+        if (mission.isCompleted) {
+            Text("Misiune \u00eendeplinit\u0103 \uD83C\uDF89", color = SolomonColors.Incoming, style = MaterialTheme.typography.titleSmall)
+        } else if (daysLeft == 0) {
+            SolPrimaryButton(title = "Marcheaz\u0103 ca terminat\u0103", onClick = onComplete)
         }
     }
 }
 
 @Composable
 private fun PendingMissionCard(mission: SolomonMission, onAccept: () -> Unit, onDismiss: () -> Unit) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.SurfaceVariant),
-        shape = RoundedCornerShape(SolSpacing.lg)
-    ) {
-        Column(Modifier.padding(SolSpacing.lg)) {
-            Text("MISIUNE NOU\u0102", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(mission.title, style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
-            Spacer(Modifier.height(SolSpacing.xs))
-            Text(mission.description, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
-            Spacer(Modifier.height(SolSpacing.md))
-            Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
-                Button(onClick = onAccept) { Text("Accept") }
-                OutlinedButton(onClick = onDismiss) { Text("Nu acum") }
-            }
+    SolInsightCard(label = "Misiune nou\u0103", accent = SolAccent.Mint) {
+        Text(mission.title, style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
+        Text(mission.description, style = MaterialTheme.typography.bodyMedium, color = SolomonColors.TextSecondary)
+        Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+            SolPrimaryButton(title = "Accept", onClick = onAccept)
+            SolSecondaryButton(title = "Nu acum", onClick = onDismiss)
         }
     }
 }

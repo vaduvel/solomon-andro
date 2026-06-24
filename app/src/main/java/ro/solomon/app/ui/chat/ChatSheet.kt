@@ -1,6 +1,7 @@
 package ro.solomon.app.ui.chat
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,11 +18,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 
@@ -51,7 +54,10 @@ fun ChatSheet(onDismiss: () -> Unit, vm: ChatViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth().padding(SolSpacing.base),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Solomon", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.Primary, modifier = Modifier.weight(1f))
+                Column(Modifier.weight(1f)) {
+                    Text("Solomon", style = MaterialTheme.typography.headlineSmall, color = SolomonColors.Primary)
+                    Text("Vocea ta financiar\u0103", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextTertiary)
+                }
                 IconButton(onClick = { vm.toggleVoice() }) {
                     Icon(
                         Icons.Filled.PlayArrow,
@@ -61,7 +67,7 @@ fun ChatSheet(onDismiss: () -> Unit, vm: ChatViewModel = viewModel()) {
                 }
                 IconButton(onClick = onDismiss) { Icon(Icons.Filled.Close, "\u00CEnchide", tint = SolomonColors.TextSecondary) }
             }
-            HorizontalDivider(color = SolomonColors.Hairline)
+            SolHairlineDivider()
             LazyColumn(
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 state = list,
@@ -87,6 +93,12 @@ private fun ChatBubble(m: ChatViewModel.Message, onSpeak: () -> Unit = {}) {
     val isUser = m.role == ChatViewModel.Role.User
     val isTool = m.role == ChatViewModel.Role.Tool
     val isAssistant = m.role == ChatViewModel.Role.Assistant
+    val shape = RoundedCornerShape(
+        topStart = SolSpacing.md,
+        topEnd = SolSpacing.md,
+        bottomStart = if (isUser) SolSpacing.md else 2.dp,
+        bottomEnd = if (isUser) 2.dp else SolSpacing.md
+    )
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = if (isUser) Arrangement.End else Arrangement.Start,
@@ -95,18 +107,11 @@ private fun ChatBubble(m: ChatViewModel.Message, onSpeak: () -> Unit = {}) {
         Box(
             modifier = Modifier
                 .widthIn(max = 320.dp)
-                .clip(RoundedCornerShape(
-                    topStart = SolSpacing.md,
-                    topEnd = SolSpacing.md,
-                    bottomStart = if (isUser) SolSpacing.md else 2.dp,
-                    bottomEnd = if (isUser) 2.dp else SolSpacing.md
-                ))
-                .background(
-                    when {
-                        isUser -> SolomonColors.Primary
-                        isTool -> SolomonColors.SurfaceVariant
-                        else -> SolomonColors.Surface
-                    }
+                .clip(shape)
+                .background(if (isUser) SolomonColors.Primary else Color.White.copy(alpha = 0.05f))
+                .then(
+                    if (isUser) Modifier
+                    else Modifier.border(1.dp, Color.White.copy(alpha = if (isTool) 0.12f else 0.08f), shape)
                 )
                 .padding(horizontal = SolSpacing.md, vertical = SolSpacing.sm)
         ) {
@@ -116,11 +121,7 @@ private fun ChatBubble(m: ChatViewModel.Message, onSpeak: () -> Unit = {}) {
                 }
                 Text(
                     m.text,
-                    color = when {
-                        isUser -> SolomonColors.OnPrimary
-                        isTool -> SolomonColors.TextPrimary
-                        else -> SolomonColors.TextPrimary
-                    },
+                    color = if (isUser) SolomonColors.OnPrimary else SolomonColors.TextPrimary,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

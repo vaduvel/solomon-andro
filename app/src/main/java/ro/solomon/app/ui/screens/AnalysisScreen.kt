@@ -1,18 +1,25 @@
 package ro.solomon.app.ui.screens
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalanceWallet
+import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,6 +29,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import ro.solomon.app.di.ServiceLocator
+import ro.solomon.app.ui.components.EmptyStateView
+import ro.solomon.app.ui.components.SolHairlineDivider
+import ro.solomon.app.ui.components.SolLinearProgress
+import ro.solomon.app.ui.components.SolListCard
+import ro.solomon.app.ui.components.SolSectionHeaderRow
+import ro.solomon.app.ui.components.SolStatCard
+import ro.solomon.app.ui.theme.SolAccent
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.Money
@@ -99,10 +114,11 @@ fun AnalysisScreen(vm: AnalysisViewModel = viewModel()) {
     if (showEmailParser) { EmailParserScreen(onClose = { showEmailParser = false }); return }
     if (showModelDownload) { ModelDownloadScreen(onClose = { showModelDownload = false }); return }
 
+    fun fmt(v: Int) = RomanianMoneyFormatter.format(v, RomanianMoneyFormatter.Style.bareNumber) + " RON"
+
     Column(
         Modifier
             .fillMaxSize()
-            .background(SolomonColors.Background)
             .verticalScroll(rememberScrollState())
             .padding(SolSpacing.base)
     ) {
@@ -110,124 +126,129 @@ fun AnalysisScreen(vm: AnalysisViewModel = viewModel()) {
         Text(state.monthLabel, color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(SolSpacing.base))
         Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
-            StatTile("Venit", RomanianMoneyFormatter.format(state.totalIncome.amount, RomanianMoneyFormatter.Style.bareNumber) + " RON", SolomonColors.Incoming, Modifier.weight(1f))
-            StatTile("Cheltuit", RomanianMoneyFormatter.format(state.totalSpent.amount, RomanianMoneyFormatter.Style.bareNumber) + " RON", SolomonColors.Outgoing, Modifier.weight(1f))
+            SolStatCard(
+                label = "30Z",
+                name = "Venit",
+                value = fmt(state.totalIncome.amount),
+                icon = Icons.Filled.ArrowDownward,
+                iconAccent = SolAccent.Success,
+                modifier = Modifier.weight(1f)
+            )
+            SolStatCard(
+                label = "30Z",
+                name = "Cheltuit",
+                value = fmt(state.totalSpent.amount),
+                icon = Icons.Filled.ArrowUpward,
+                iconAccent = SolAccent.Error,
+                modifier = Modifier.weight(1f)
+            )
         }
         Spacer(Modifier.height(SolSpacing.sm))
-        val netColor = if (state.net.amount >= 0) SolomonColors.Incoming else SolomonColors.Outgoing
-        StatTile("Net", RomanianMoneyFormatter.format(state.net.amount, RomanianMoneyFormatter.Style.bareNumber) + " RON", netColor, Modifier.fillMaxWidth())
+        SolStatCard(
+            label = "30Z",
+            name = "Net",
+            value = fmt(state.net.amount),
+            icon = Icons.Filled.AccountBalanceWallet,
+            iconAccent = if (state.net.amount >= 0) SolAccent.Success else SolAccent.Error,
+            modifier = Modifier.fillMaxWidth()
+        )
         Spacer(Modifier.height(SolSpacing.lg))
-        Text("Pe categorii", style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
-        Spacer(Modifier.height(SolSpacing.sm))
+        SolSectionHeaderRow(title = "Pe categorii")
         if (state.categories.isEmpty()) {
-            Text("Nu sunt date încă. Importă tranzacții sau aşteaptă notificările bancare.", color = SolomonColors.TextSecondary)
+            EmptyStateView(
+                icon = "📊",
+                title = "Nu sunt date încă",
+                subtitle = "Importă tranzacții sau așteaptă notificările bancare.",
+                accent = SolAccent.Blue
+            )
         } else {
-            state.categories.forEach { c ->
-                CategoryBar(c)
-                Spacer(Modifier.height(SolSpacing.sm))
-            }
-        }
-        Spacer(Modifier.height(SolSpacing.lg))
-        Text("Top comercianți", style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
-        Spacer(Modifier.height(SolSpacing.sm))
-        if (state.topMerchants.isEmpty()) {
-            Text("Încă nu avem comercianți evidențiați.", color = SolomonColors.TextSecondary)
-        } else {
-            state.topMerchants.forEachIndexed { i, (m, amt) ->
-                Row(Modifier.fillMaxWidth().padding(vertical = SolSpacing.xs), verticalAlignment = Alignment.CenterVertically) {
-                    Text("${i + 1}.", color = SolomonColors.TextTertiary, modifier = Modifier.width(28.dp))
-                    Text(m, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
-                    Text(RomanianMoneyFormatter.format(amt, RomanianMoneyFormatter.Style.bareNumber) + " RON", color = SolomonColors.TextSecondary)
+            SolListCard {
+                state.categories.forEachIndexed { i, c ->
+                    CategoryBar(c)
+                    if (i < state.categories.lastIndex) SolHairlineDivider()
                 }
-                HorizontalDivider(color = SolomonColors.Hairline)
             }
         }
         Spacer(Modifier.height(SolSpacing.lg))
-        Text("Instrumente Solomon", style = MaterialTheme.typography.titleLarge, color = SolomonColors.TextPrimary)
+        SolSectionHeaderRow(title = "Top comercianți")
+        if (state.topMerchants.isEmpty()) {
+            EmptyStateView(
+                icon = "🏷",
+                title = "Niciun comerciant evidențiat",
+                subtitle = "Apare aici după ce înregistrezi câteva cheltuieli.",
+                accent = SolAccent.Violet
+            )
+        } else {
+            SolListCard {
+                state.topMerchants.forEachIndexed { i, (m, amt) ->
+                    Row(
+                        Modifier.fillMaxWidth().padding(SolSpacing.md),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("${i + 1}", color = SolomonColors.TextTertiary, modifier = Modifier.width(28.dp))
+                        Text(m, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f), maxLines = 1)
+                        Text(fmt(amt), color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
+                    }
+                    if (i < state.topMerchants.lastIndex) SolHairlineDivider()
+                }
+            }
+        }
+        Spacer(Modifier.height(SolSpacing.lg))
+        SolSectionHeaderRow(title = "Instrumente Solomon")
+        ToolTile("⚠", "Alertă spirală", "Verifică presiunea financiară", SolAccent.Rose) { showSpiral = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("⚠ Alertă spirală", "Verifică presiunea financiară", SolomonColors.Rose) { showSpiral = true }
+        ToolTile("🪒", "Audit abonamente", "Găsește abonamente nefolosite", SolAccent.Amber) { showAudit = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("🪒 Audit abonamente", "Găseşte abonamente nefolosite", SolomonColors.Amber) { showAudit = true }
+        ToolTile("🔍", "Tranzacții suspecte", "Sume mari, burst-uri, nocturn", SolAccent.Amber) { showSuspicious = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("🔍 Tranzacții suspecte", "Sume mari, burst-uri, nocturn", SolomonColors.Amber) { showSuspicious = true }
+        ToolTile("◎", "Obiective", "Progres + proiecție per obiectiv", SolAccent.Mint) { showGoals = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("◎ Obiective", "Progres + proiecție per obiectiv", SolomonColors.Primary) { showGoals = true }
+        ToolTile("✉", "Importă email", "Parsează Glovo/Netflix/Enel din text", SolAccent.Mint) { showEmailParser = true }
         Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("✉ Importă email", "Parsează Glovo/Netflix/Enel din text", SolomonColors.Primary) { showEmailParser = true }
-        Spacer(Modifier.height(SolSpacing.sm))
-        ToolTile("⚙ Model AI", "Alege model lingvistic · Mistral cloud (UE)", SolomonColors.Primary) { showModelDownload = true }
+        ToolTile("⚙", "Model AI", "Alege model lingvistic · Mistral cloud (UE)", SolAccent.Mint) { showModelDownload = true }
         Spacer(Modifier.height(SolSpacing.xl))
     }
 }
 
 @Composable
-private fun ToolTile(title: String, subtitle: String, accent: Color, onClick: () -> Unit) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+private fun ToolTile(icon: String, title: String, subtitle: String, accent: SolAccent, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(SolRadius.lg))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.07f), RoundedCornerShape(SolRadius.lg))
+            .clickable(onClick = onClick)
+            .padding(SolSpacing.md),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            Modifier.padding(SolSpacing.md),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier
+                .size(36.dp)
+                .clip(RoundedCornerShape(11.dp))
+                .background(accent.color.copy(alpha = 0.15f))
+                .border(1.dp, accent.color.copy(alpha = 0.25f), RoundedCornerShape(11.dp)),
+            contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(accent.copy(alpha = 0.18f))
-            ) {
-                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(title.take(1), color = accent, style = MaterialTheme.typography.titleMedium)
-                }
-            }
-            Spacer(Modifier.width(SolSpacing.md))
-            Column(Modifier.weight(1f)) {
-                Text(title.removePrefix("⚠ ").removePrefix("🪒 ").removePrefix("🔍 ").removePrefix("◎ "),
-                    color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall)
-                Text(subtitle, color = SolomonColors.TextTertiary, style = MaterialTheme.typography.bodySmall)
-            }
-            Text("›", color = SolomonColors.TextTertiary, style = MaterialTheme.typography.titleLarge)
+            Text(icon, color = accent.color, fontSize = 16.sp)
         }
-    }
-}
-
-@Composable
-private fun StatTile(label: String, value: String, accent: Color, modifier: Modifier = Modifier) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        modifier = modifier
-    ) {
-        Column(Modifier.padding(SolSpacing.md)) {
-            Text(label, color = SolomonColors.TextSecondary, style = MaterialTheme.typography.labelMedium)
-            Spacer(Modifier.height(2.dp))
-            Text(value, color = accent, style = MaterialTheme.typography.titleLarge)
+        Spacer(Modifier.width(SolSpacing.md))
+        Column(Modifier.weight(1f)) {
+            Text(title, color = SolomonColors.TextPrimary, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+            Text(subtitle, color = SolomonColors.TextTertiary, style = MaterialTheme.typography.bodySmall)
         }
+        Text("›", color = SolomonColors.TextTertiary, style = MaterialTheme.typography.titleLarge)
     }
 }
 
 @Composable
 private fun CategoryBar(c: AnalysisViewModel.CategoryStat) {
-    Column(Modifier.fillMaxWidth()) {
+    Column(Modifier.fillMaxWidth().padding(horizontal = SolSpacing.base, vertical = SolSpacing.md)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(c.category.displayNameRO, color = SolomonColors.TextPrimary, modifier = Modifier.weight(1f))
             Text(RomanianMoneyFormatter.format(c.amount.amount, RomanianMoneyFormatter.Style.bareNumber) + " RON", color = SolomonColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
         }
-        Spacer(Modifier.height(4.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(8.dp)
-                .clip(RoundedCornerShape(4.dp))
-                .background(SolomonColors.SurfaceVariant)
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(c.percent.coerceIn(0f, 1f))
-                    .height(8.dp)
-                    .clip(RoundedCornerShape(4.dp))
-                    .background(SolomonColors.Primary)
-            )
-        }
+        Spacer(Modifier.height(6.dp))
+        SolLinearProgress(progress = c.percent.coerceIn(0f, 1f), accent = SolAccent.Mint, height = 8, modifier = Modifier.fillMaxWidth())
     }
 }

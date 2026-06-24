@@ -5,19 +5,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButton
@@ -25,14 +21,18 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ro.solomon.app.ui.components.SolBackButton
 import ro.solomon.app.ui.theme.SolSpacing
+import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.core.domain.Addressing
 import ro.solomon.core.domain.AgeRange
 import ro.solomon.core.domain.Bank
@@ -51,14 +51,12 @@ fun ProfileEditScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Profil") },
-                navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Înapoi")
-                    }
-                }
+                title = { Text("Profil", color = SolomonColors.TextPrimary, fontSize = 18.sp, fontWeight = FontWeight.SemiBold) },
+                navigationIcon = { SolBackButton(onClick = onClose) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = SolomonColors.Background)
             )
-        }
+        },
+        containerColor = SolomonColors.Background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -77,7 +75,7 @@ fun ProfileEditScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Text("Cum te adresez?")
+            Text("Cum te adresez?", color = SolomonColors.TextSecondary)
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                 SegmentedButton(
                     selected = state.addressing == Addressing.tu,
@@ -103,7 +101,7 @@ fun ProfileEditScreen(
             }
 
             SectionTitle("Venit")
-            Text("Interval salarial")
+            Text("Interval salarial", color = SolomonColors.TextSecondary)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
                 SalaryRange.values().forEach { sr ->
                     FilterChip(
@@ -114,7 +112,7 @@ fun ProfileEditScreen(
                 }
             }
 
-            Text("Tip salariu")
+            Text("Tip salariu", color = SolomonColors.TextSecondary)
             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                 SegmentedButton(
                     selected = state.salaryType == "monthly",
@@ -144,6 +142,7 @@ fun ProfileEditScreen(
                         "Cu salariu lunar de ${state.salaryRange.midpointRON} RON pe ${state.paydayDay}, ai un flux previzibil."
                     else
                         "Cu venit variabil în intervalul ${state.salaryRange.midpointRON} RON, Solomon îți calculează un buffer adaptiv.",
+                    color = SolomonColors.TextTertiary,
                     modifier = Modifier.padding(vertical = SolSpacing.xs)
                 )
             }
@@ -183,7 +182,7 @@ fun ProfileEditScreen(
             }
 
             SectionTitle("Personalitate financiară")
-            Text("Opțional: Solomon ajustează recomandările în funcție de stilul tău.")
+            Text("Opțional: Solomon ajustează recomandările în funcție de stilul tău.", color = SolomonColors.TextTertiary)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
                 FinancialPersonality.values().forEach { p ->
                     FilterChip(
@@ -196,15 +195,16 @@ fun ProfileEditScreen(
                 }
             }
             state.personality?.let { p ->
-                Text(p.descriptionRO, modifier = Modifier.padding(vertical = SolSpacing.xs))
+                Text(p.descriptionRO, color = SolomonColors.TextTertiary, modifier = Modifier.padding(vertical = SolSpacing.xs))
             }
 
-            state.error?.let { Text("Eroare: $it", color = androidx.compose.material3.MaterialTheme.colorScheme.error) }
+            state.error?.let { Text("Eroare: $it", color = SolomonColors.Error) }
 
             Button(
                 onClick = { vm.save() },
                 enabled = state.canSave(),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = SolomonColors.Primary, contentColor = SolomonColors.OnPrimary)
             ) { Text("Salvează") }
         }
     }
@@ -213,8 +213,10 @@ fun ProfileEditScreen(
 @Composable
 private fun SectionTitle(text: String) {
     Text(
-        text = text,
-        style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
+        text = text.uppercase(),
+        color = SolomonColors.TextTertiary,
+        fontSize = 11.sp,
+        fontWeight = FontWeight.SemiBold,
         modifier = Modifier.padding(top = SolSpacing.sm)
     )
 }

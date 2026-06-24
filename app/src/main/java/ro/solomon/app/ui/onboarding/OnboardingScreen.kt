@@ -5,6 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -21,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +32,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ro.solomon.app.services.CoachProfileStore
 import ro.solomon.app.services.MoneyScript
+import ro.solomon.app.ui.components.SolInsightCard
+import ro.solomon.app.ui.components.SolLinearProgress
+import ro.solomon.app.ui.theme.SolAccent
+import ro.solomon.app.ui.theme.SolRadius
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 import ro.solomon.app.ui.util.rememberHaptics
@@ -104,15 +110,23 @@ fun OnboardingScreen(
 }
 
 @Composable
+private fun GlassCard(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
+    Column(
+        modifier
+            .clip(RoundedCornerShape(SolRadius.lg))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.07f), RoundedCornerShape(SolRadius.lg))
+    ) { content() }
+}
+
+@Composable
 private fun ProgressHeader(current: Int, total: Int) {
     Column(Modifier.padding(horizontal = SolSpacing.base, vertical = SolSpacing.md)) {
-        LinearProgressIndicator(
-            progress = { (current + 1).toFloat() / total },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(4.dp),
-            color = SolomonColors.Primary,
-            trackColor = SolomonColors.SurfaceVariant,
+        SolLinearProgress(
+            progress = ((current + 1).toFloat() / total).coerceIn(0f, 1f),
+            accent = SolAccent.Mint,
+            height = 4,
+            modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(SolSpacing.xs))
         Text(
@@ -130,10 +144,10 @@ private fun OnboardingBottomBar(
     onNext: () -> Unit
 ) {
     val label = when (state.currentStep) {
-        0 -> "Începe"
-        7 -> "Continuă"
-        8 -> "Finalizează"
-        else -> "Continuă"
+        0 -> "\u00cencepe"
+        7 -> "Continu\u0103"
+        8 -> "Finalizeaz\u0103"
+        else -> "Continu\u0103"
     }
     Surface(
         color = SolomonColors.Background,
@@ -152,7 +166,7 @@ private fun OnboardingBottomBar(
                 ) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null, modifier = Modifier.size(18.dp))
                     Spacer(Modifier.width(SolSpacing.xs))
-                    Text("Înapoi")
+                    Text("\u00cenapoi")
                 }
             } else {
                 Spacer(Modifier.weight(1f))
@@ -202,23 +216,23 @@ private fun WelcomeStep(onStart: () -> Unit) {
         Text("Solomon", style = MaterialTheme.typography.displayLarge, color = SolomonColors.Primary)
         Spacer(Modifier.height(SolSpacing.md))
         Text(
-            "Consilierul tău financiar calm și direct.",
+            "Consilierul t\u0103u financiar calm \u0219i direct.",
             style = MaterialTheme.typography.titleLarge,
             color = SolomonColors.TextPrimary,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(SolSpacing.sm))
         Text(
-            "Fără dramă. Fără judecată. Doar date clare și un plan pe zile.",
+            "F\u0103r\u0103 dram\u0103. F\u0103r\u0103 judecat\u0103. Doar date clare \u0219i un plan pe zile.",
             style = MaterialTheme.typography.bodyMedium,
             color = SolomonColors.TextSecondary,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(SolSpacing.xl))
         listOf(
-            "Îți citesc emailurile și notificările bancare" to "📨",
-            "Găsesc tranzacții, abonamente, pattern-uri" to "🔍",
-            "Generez primul tău raport în ~60 secunde" to "⚡"
+            "\u00ce\u021bi citesc emailurile \u0219i notific\u0103rile bancare" to "\ud83d\udce8",
+            "G\u0103sesc tranzac\u021bii, abonamente, pattern-uri" to "\ud83d\udd0d",
+            "Generez primul t\u0103u raport \u00een ~60 secunde" to "\u26a1"
         ).forEach { (line, emoji) ->
             Row(
                 modifier = Modifier.fillMaxWidth().padding(vertical = SolSpacing.sm),
@@ -235,19 +249,19 @@ private fun WelcomeStep(onStart: () -> Unit) {
 @Composable
 private fun IdentityStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "Cum te cheamă?",
-        "Folosesc numele ca să fiu mai natural, nu să te urmăresc."
+        "Cum te cheam\u0103?",
+        "Folosesc numele ca s\u0103 fiu mai natural, nu s\u0103 te urm\u0103resc."
     ) {
         OutlinedTextField(
             value = state.name,
             onValueChange = vm::setName,
-            label = { Text("Numele tău") },
+            label = { Text("Numele t\u0103u") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             colors = textFieldColors()
         )
         Spacer(Modifier.height(SolSpacing.xl))
-        Text("Cum vrei să-ți vorbesc?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Text("Cum vrei s\u0103-\u021bi vorbesc?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
         Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
             Addressing.entries.forEach { a ->
@@ -259,7 +273,7 @@ private fun IdentityStep(state: OnboardingViewModel.State, vm: OnboardingViewMod
             }
         }
         Spacer(Modifier.height(SolSpacing.xl))
-        Text("Ce vârstă ai aproximativ?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Text("Ce v\u00e2rst\u0103 ai aproximativ?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
         Column(verticalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
             AgeRange.entries.forEach { ar ->
@@ -283,14 +297,14 @@ private fun IdentityStep(state: OnboardingViewModel.State, vm: OnboardingViewMod
 
 private val Addressing.label: String get() = when (this) {
     Addressing.tu -> "Tu"
-    Addressing.dumneavoastra -> "Dumneavoastră"
+    Addressing.dumneavoastra -> "Dumneavoastr\u0103"
 }
 
 @Composable
 private fun IncomeStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "Cât câștigi pe lună?",
-        "Nu salvez suma exactă — folosesc intervalul ca să calibrez planul."
+        "C\u00e2t c\u00e2\u0219tigi pe lun\u0103?",
+        "Nu salvez suma exact\u0103 \u2014 folosesc intervalul ca s\u0103 calibrez planul."
     ) {
         Text("Interval salarial net (RON)", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
@@ -312,7 +326,7 @@ private fun IncomeStep(state: OnboardingViewModel.State, vm: OnboardingViewModel
             }
         }
         Spacer(Modifier.height(SolSpacing.xl))
-        Text("În ce zi a lunii primești salariul?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Text("\u00cen ce zi a lunii prime\u0219ti salariul?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("Ziua: ${state.paydayDay}", style = MaterialTheme.typography.bodyLarge, color = SolomonColors.TextPrimary, modifier = Modifier.width(80.dp))
@@ -328,14 +342,14 @@ private fun IncomeStep(state: OnboardingViewModel.State, vm: OnboardingViewModel
         Row(verticalAlignment = Alignment.CenterVertically) {
             Switch(checked = state.hasSecondaryIncome, onCheckedChange = vm::setHasSecondaryIncome)
             Spacer(Modifier.width(SolSpacing.md))
-            Text("Mai am și alte venituri (freelance, chirii etc.)", color = SolomonColors.TextPrimary)
+            Text("Mai am \u0219i alte venituri (freelance, chirii etc.)", color = SolomonColors.TextPrimary)
         }
         if (state.hasSecondaryIncome) {
             Spacer(Modifier.height(SolSpacing.sm))
             OutlinedTextField(
                 value = if (state.secondaryIncomeApprox == 0) "" else state.secondaryIncomeApprox.toString(),
                 onValueChange = { vm.setSecondaryIncomeApprox(it.toIntOrNull() ?: 0) },
-                label = { Text("Aproximativ (RON/lună)") },
+                label = { Text("Aproximativ (RON/lun\u0103)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -347,17 +361,17 @@ private fun IncomeStep(state: OnboardingViewModel.State, vm: OnboardingViewModel
 
 private val SalaryRange.label: String get() = when (this) {
     SalaryRange.under3k -> "Sub 3.000 RON"
-    SalaryRange.range3to5 -> "3.000 – 5.000 RON"
-    SalaryRange.range5to8 -> "5.000 – 8.000 RON"
-    SalaryRange.range8to15 -> "8.000 – 15.000 RON"
+    SalaryRange.range3to5 -> "3.000 \u2013 5.000 RON"
+    SalaryRange.range5to8 -> "5.000 \u2013 8.000 RON"
+    SalaryRange.range8to15 -> "8.000 \u2013 15.000 RON"
     SalaryRange.over15k -> "Peste 15.000 RON"
 }
 
 @Composable
 private fun BankStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "La ce bancă ai contul principal?",
-        "Îl folosesc ca să recunosc mai bine tranzacțiile din notificări."
+        "La ce banc\u0103 ai contul principal?",
+        "\u00cel folosesc ca s\u0103 recunosc mai bine tranzac\u021biile din notific\u0103ri."
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(SolSpacing.xs)) {
             Bank.entries.forEach { b ->
@@ -382,14 +396,11 @@ private fun BankStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) 
 @Composable
 private fun ObligationsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "Ce plăți fixe ai lunar?",
-        "Opțional. Dacă nu introduci nimic, le găsesc eu din emailuri/notificări."
+        "Ce pl\u0103\u021bi fixe ai lunar?",
+        "Op\u021bional. Dac\u0103 nu introduci nimic, le g\u0103sesc eu din emailuri/notific\u0103ri."
     ) {
         state.draftObligations.forEach { o ->
-            Card(
-                colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-                modifier = Modifier.fillMaxWidth().padding(vertical = SolSpacing.xs)
-            ) {
+            GlassCard(Modifier.fillMaxWidth().padding(vertical = SolSpacing.xs)) {
                 Column(Modifier.padding(SolSpacing.md)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         OutlinedTextField(
@@ -401,7 +412,7 @@ private fun ObligationsStep(state: OnboardingViewModel.State, vm: OnboardingView
                             colors = textFieldColors()
                         )
                         IconButton(onClick = { vm.removeDraftObligation(o.id) }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, "Șterge", tint = SolomonColors.Error)
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, "\u0218terge", tint = SolomonColors.Error)
                         }
                     }
                     Spacer(Modifier.height(SolSpacing.sm))
@@ -409,7 +420,7 @@ private fun ObligationsStep(state: OnboardingViewModel.State, vm: OnboardingView
                         OutlinedTextField(
                             value = if (o.amountRON == 0) "" else o.amountRON.toString(),
                             onValueChange = { v -> vm.updateDraftObligation(o.id) { it.copy(amountRON = v.toIntOrNull() ?: 0) } },
-                            label = { Text("Sumă (RON)") },
+                            label = { Text("Sum\u0103 (RON)") },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             singleLine = true,
                             modifier = Modifier.weight(1f),
@@ -440,7 +451,7 @@ private fun ObligationsStep(state: OnboardingViewModel.State, vm: OnboardingView
             onClick = vm::addDraftObligation,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("+ Adaugă obligație")
+            Text("+ Adaug\u0103 obliga\u021bie")
         }
     }
 }
@@ -448,8 +459,8 @@ private fun ObligationsStep(state: OnboardingViewModel.State, vm: OnboardingView
 @Composable
 private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "Ce vrei să rezolvi?",
-        "Alege unul sau mai multe. Mă ajută să prioritizez ce-ți arăt."
+        "Ce vrei s\u0103 rezolvi?",
+        "Alege unul sau mai multe. M\u0103 ajut\u0103 s\u0103 prioritizez ce-\u021bi ar\u0103t."
     ) {
         FlowRowWrap {
             OnboardingViewModel.GoalChip.entries.forEach { g ->
@@ -461,7 +472,7 @@ private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel)
             }
         }
         Spacer(Modifier.height(SolSpacing.xl))
-        Text("Primul tău obiectiv concret (opțional)", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Text("Primul t\u0103u obiectiv concret (op\u021bional)", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.sm))
         ExposedChipGroup(
             items = GoalKind.entries.map { it to it.displayNameRO },
@@ -472,7 +483,7 @@ private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel)
         OutlinedTextField(
             value = state.firstGoalDestination,
             onValueChange = vm::setFirstGoalDestination,
-            label = { Text("Destinație (ex: Vacanță Grecia)") },
+            label = { Text("Destina\u021bie (ex: Vacan\u021b\u0103 Grecia)") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             colors = textFieldColors()
@@ -481,17 +492,17 @@ private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel)
         OutlinedTextField(
             value = state.firstGoalTargetText,
             onValueChange = vm::setFirstGoalTargetText,
-            label = { Text("Sumă țintă (RON)") },
+            label = { Text("Sum\u0103 \u021bint\u0103 (RON)") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             colors = textFieldColors()
         )
         Spacer(Modifier.height(SolSpacing.xl))
-        Text("Cum te simți de obicei cu banii?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
+        Text("Cum te sim\u021bi de obicei cu banii?", style = MaterialTheme.typography.titleMedium, color = SolomonColors.TextPrimary)
         Spacer(Modifier.height(SolSpacing.xs))
         Text(
-            "Opțional. Mă ajută să-ți vorbesc pe limba ta — fără judecată. Dacă sari peste, învăț din cum cheltui.",
+            "Op\u021bional. M\u0103 ajut\u0103 s\u0103-\u021bi vorbesc pe limba ta \u2014 f\u0103r\u0103 judecat\u0103. Dac\u0103 sari peste, \u00eenv\u0103\u021b din cum cheltui.",
             style = MaterialTheme.typography.bodySmall,
             color = SolomonColors.TextSecondary
         )
@@ -541,30 +552,30 @@ private fun GoalsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel)
 @Composable
 private fun PermissionsStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     ScreenScaffold(
-        "Ce permisiuni îmi dai?",
-        "Poți să le schimbi oricând din Setări."
+        "Ce permisiuni \u00eemi dai?",
+        "Po\u021bi s\u0103 le schimbi oric\u00e2nd din Set\u0103ri."
     ) {
         PermissionRow(
             title = "Emailuri",
-            description = "Citesc emailurile de la bănci și magazine ca să găsesc tranzacții automat.",
+            description = "Citesc emailurile de la b\u0103nci \u0219i magazine ca s\u0103 g\u0103sesc tranzac\u021bii automat.",
             checked = state.gmailConnected,
             onChange = vm::setGmailConnected
         )
         PermissionRow(
-            title = "Notificări",
-            description = "Îți arăt alerte și confirmări pe ecranul blocat.",
+            title = "Notific\u0103ri",
+            description = "\u00ce\u021bi ar\u0103t alerte \u0219i confirm\u0103ri pe ecranul blocat.",
             checked = state.pushAllowed,
             onChange = vm::setPushAllowed
         )
         PermissionRow(
-            title = "Notificări bancare (Listener)",
-            description = "Solomon poate importa tranzacții din notificările de la BT Pay, George, ING, Revolut etc. Datele rămân pe telefon. Activezi accesul din Setări → \"Acces la notificări\".",
+            title = "Notific\u0103ri bancare (Listener)",
+            description = "Solomon poate importa tranzac\u021bii din notific\u0103rile de la BT Pay, George, ING, Revolut etc. Datele r\u0103m\u00e2n pe telefon. Activezi accesul din Set\u0103ri \u2192 \"Acces la notific\u0103ri\".",
             checked = state.pushAllowed,
             onChange = { }
         )
         PermissionRow(
             title = "Antrenare model",
-            description = "Datele tale ajută la îmbunătățirea recomandărilor (opțional, anonim).",
+            description = "Datele tale ajut\u0103 la \u00eembun\u0103t\u0103\u021birea recomand\u0103rilor (op\u021bional, anonim).",
             checked = state.trainingOptIn,
             onChange = vm::setTrainingOptIn
         )
@@ -573,10 +584,7 @@ private fun PermissionsStep(state: OnboardingViewModel.State, vm: OnboardingView
 
 @Composable
 private fun PermissionRow(title: String, description: String, checked: Boolean, onChange: (Boolean) -> Unit) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-        modifier = Modifier.fillMaxWidth().padding(vertical = SolSpacing.xs)
-    ) {
+    GlassCard(Modifier.fillMaxWidth().padding(vertical = SolSpacing.xs)) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(SolSpacing.md),
             verticalAlignment = Alignment.CenterVertically
@@ -595,8 +603,8 @@ private fun PermissionRow(title: String, description: String, checked: Boolean, 
 private fun ProcessingStep(state: OnboardingViewModel.State, vm: OnboardingViewModel) {
     LaunchedEffect(Unit) { vm.runProcessing() }
     ScreenScaffold(
-        "Construiesc primul tău tablou…",
-        "Mai durează puțin. Poți să te uiți — animația e scurtă."
+        "Construiesc primul t\u0103u tablou\u2026",
+        "Mai dureaz\u0103 pu\u021bin. Po\u021bi s\u0103 te ui\u021bi \u2014 anima\u021bia e scurt\u0103."
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
             state.processingTasks.forEach { t ->
@@ -608,7 +616,9 @@ private fun ProcessingStep(state: OnboardingViewModel.State, vm: OnboardingViewM
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(SolomonColors.Surface, RoundedCornerShape(SolSpacing.md))
+                        .clip(RoundedCornerShape(SolRadius.md))
+                        .background(Color.White.copy(alpha = 0.04f))
+                        .border(1.dp, Color.White.copy(alpha = 0.07f), RoundedCornerShape(SolRadius.md))
                         .padding(SolSpacing.md),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -632,8 +642,8 @@ private fun ProcessingStep(state: OnboardingViewModel.State, vm: OnboardingViewM
 @Composable
 private fun WowStep(state: OnboardingViewModel.State) {
     ScreenScaffold(
-        "Primul tău tablou",
-        "Pe baza a ce ai introdus, iată cum arată situația ta acum."
+        "Primul t\u0103u tablou",
+        "Pe baza a ce ai introdus, iat\u0103 cum arat\u0103 situa\u021bia ta acum."
     ) {
         if (state.isGeneratingWow) {
             Box(
@@ -643,15 +653,11 @@ private fun WowStep(state: OnboardingViewModel.State) {
                 CircularProgressIndicator(color = SolomonColors.Primary)
             }
         } else {
-            Card(
-                colors = CardDefaults.cardColors(containerColor = SolomonColors.Surface),
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            SolInsightCard(label = "Solomon \u00b7 Primul tablou", accent = SolAccent.Mint) {
                 Text(
-                    state.wowMomentText.ifBlank { "Gata — contul tău e configurat. Apasă Finalizează ca să intri în Solomon." },
+                    state.wowMomentText.ifBlank { "Gata \u2014 contul t\u0103u e configurat. Apas\u0103 Finalizeaz\u0103 ca s\u0103 intri \u00een Solomon." },
                     style = MaterialTheme.typography.bodyLarge,
-                    color = SolomonColors.TextPrimary,
-                    modifier = Modifier.padding(SolSpacing.lg)
+                    color = SolomonColors.TextPrimary
                 )
             }
         }

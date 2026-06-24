@@ -3,8 +3,6 @@ package ro.solomon.app.ui.bank
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -13,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import ro.solomon.app.services.EnableBankingConfigStore
+import ro.solomon.app.ui.components.SolBackButton
+import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.theme.SolSpacing
 import ro.solomon.app.ui.theme.SolomonColors
 
@@ -28,14 +28,12 @@ fun EnableBankingSetupScreen(onClose: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Enable Banking") },
-                navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Înapoi")
-                    }
-                }
+                title = { Text("Enable Banking", color = SolomonColors.TextPrimary, fontSize = 18.sp, fontWeight = FontWeight.SemiBold) },
+                navigationIcon = { SolBackButton(onClick = onClose) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = SolomonColors.Background)
             )
-        }
+        },
+        containerColor = SolomonColors.Background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -84,7 +82,7 @@ fun EnableBankingSetupScreen(onClose: () -> Unit) {
                 colors = ButtonDefaults.buttonColors(containerColor = SolomonColors.Primary)
             ) { Text("Salvează credențiale") }
 
-            HorizontalDivider(color = SolomonColors.Hairline)
+            SolHairlineDivider()
 
             Text(
                 "Cheia PEM rămâne doar pe dispozitivul tău, stocată în DataStore criptat. " +

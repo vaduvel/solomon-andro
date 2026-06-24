@@ -7,9 +7,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
+import ro.solomon.app.R
 
-private val SpaceGrotesk = FontFamily.SansSerif
+private val googleFontProvider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
+)
+
+private val SpaceGroteskGF = GoogleFont("Space Grotesk")
+private val SpaceMonoGF = GoogleFont("Space Mono")
+
+private val SpaceGrotesk = FontFamily(
+    Font(googleFont = SpaceGroteskGF, fontProvider = googleFontProvider, weight = FontWeight.Normal),
+    Font(googleFont = SpaceGroteskGF, fontProvider = googleFontProvider, weight = FontWeight.Medium),
+    Font(googleFont = SpaceGroteskGF, fontProvider = googleFontProvider, weight = FontWeight.SemiBold),
+    Font(googleFont = SpaceGroteskGF, fontProvider = googleFontProvider, weight = FontWeight.Bold)
+)
+
+/** Monospace face for labels, figures and timestamps (per design spec). */
+val SpaceMono = FontFamily(
+    Font(googleFont = SpaceMonoGF, fontProvider = googleFontProvider, weight = FontWeight.Normal),
+    Font(googleFont = SpaceMonoGF, fontProvider = googleFontProvider, weight = FontWeight.Bold)
+)
 
 private val SolomonColorScheme = darkColorScheme(
     primary = SolomonColors.Primary,
