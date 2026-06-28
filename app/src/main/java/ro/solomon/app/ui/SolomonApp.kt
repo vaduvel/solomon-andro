@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import ro.solomon.app.ui.focus.FocusScreen
 import ro.solomon.app.ui.screens.AnalysisScreen
 import ro.solomon.app.ui.screens.BudgetsScreen
 import ro.solomon.app.ui.screens.SettingsScreen
@@ -65,6 +66,7 @@ private val tabs = listOf(
 fun SolomonApp() {
     SolomonTheme {
         var selectedTab by remember { mutableIntStateOf(0) }
+        var showFocus by remember { mutableStateOf(false) }
         val openChat = remember { mutableStateOf(false) }
 
         Scaffold(
@@ -73,19 +75,26 @@ fun SolomonApp() {
                 GlassBottomBar(
                     tabs = tabs,
                     selectedTab = selectedTab,
-                    onSelect = { selectedTab = it }
+                    onSelect = {
+                        showFocus = false
+                        selectedTab = it
+                    }
                 )
             }
         ) { padding ->
             Box(modifier = Modifier.padding(padding)) {
                 ro.solomon.app.ui.components.MeshBackground()
-                when (selectedTab) {
-                    0 -> TodayScreen()
-                    1 -> AnalysisScreen()
-                    2 -> BudgetsScreen()
-                    3 -> WalletScreen()
-                    4 -> { openChat.value = true; selectedTab = 0 }
-                    5 -> SettingsScreen()
+                if (showFocus) {
+                    FocusScreen(onBack = { showFocus = false })
+                } else {
+                    when (selectedTab) {
+                        0 -> TodayScreen(onOpenFocus = { showFocus = true })
+                        1 -> AnalysisScreen()
+                        2 -> BudgetsScreen()
+                        3 -> WalletScreen()
+                        4 -> { openChat.value = true; selectedTab = 0 }
+                        5 -> SettingsScreen()
+                    }
                 }
             }
         }

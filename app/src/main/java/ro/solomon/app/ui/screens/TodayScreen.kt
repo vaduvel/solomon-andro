@@ -33,6 +33,7 @@ import ro.solomon.app.ui.chat.ChatSheet
 import ro.solomon.app.ui.components.EmptyStateView
 import ro.solomon.app.ui.components.IngestionToast
 import ro.solomon.app.ui.components.MeshBackground
+import ro.solomon.app.ui.components.SolChip
 import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolHeroAmount
 import ro.solomon.app.ui.components.SolHeroCard
@@ -57,6 +58,7 @@ import ro.solomon.core.format.RomanianMoneyFormatter
 fun TodayScreen(
     onOpenChat: () -> Unit = {},
     onOpenCanIAfford: () -> Unit = {},
+    onOpenFocus: () -> Unit = {},
     vm: TodayViewModel = viewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
@@ -121,6 +123,7 @@ fun TodayScreen(
         ) {
             item { GreetingHeader(state.userName, state.hasUnreadAlert, onAlertsClick = { showAlerts = true }) }
             item { SafeToSpendCard(state.safeToSpendPerDay, state.daysUntilPayday, state.balanceAvailable, state.paydayDayOfMonth) }
+            item { FocusEntryCard(onOpenFocus = onOpenFocus) }
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
                     SolStatCard(
@@ -302,6 +305,27 @@ private fun SafeToSpendCard(perDay: Int, daysLeft: Int, available: Int, paydayDa
             Text("$daysLeft zile p\u00e2n\u0103 la salariu", style = MaterialTheme.typography.bodySmall, color = SolomonColors.TextTertiary)
             Text("\u00b7", color = SolomonColors.TextTertiary)
             Text("Disponibil: ${RomanianMoneyFormatter.format(available)}", style = MaterialTheme.typography.titleSmall, color = SolomonColors.TextPrimary)
+        }
+    }
+}
+
+@Composable
+private fun FocusEntryCard(onOpenFocus: () -> Unit) {
+    SolListCard(modifier = Modifier.clickable(onClick = onOpenFocus)) {
+        Column(modifier = Modifier.padding(SolSpacing.lg), verticalArrangement = Arrangement.spacedBy(SolSpacing.sm)) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Text("SOLOMON FOCUS", style = MaterialTheme.typography.labelSmall, color = SolomonColors.Primary)
+                SolChip("nou", SolAccent.Mint)
+            }
+            Text("Ține-mă pe plus", color = SolomonColors.TextPrimary, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+            Text(
+                "Deschide prioritizarea pe Necesar / Moft / Prioritate. Focus rulează peste bugetare și obiective, fără să le oprească.",
+                color = SolomonColors.TextSecondary,
+                fontSize = 14.sp,
+                lineHeight = 20.sp
+            )
+            SolLinearProgress(progress = 0.62f, accent = SolAccent.Mint)
+            Text("Atinge cardul ca să vezi calculul real", color = SolomonColors.Primary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
         }
     }
 }

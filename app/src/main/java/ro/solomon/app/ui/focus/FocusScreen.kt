@@ -35,8 +35,8 @@ import ro.solomon.analytics.FocusPlan
 import ro.solomon.app.ui.components.AllocationSegment
 import ro.solomon.app.ui.components.EmptyStateView
 import ro.solomon.app.ui.components.SolAllocationBar
+import ro.solomon.app.ui.components.SolBackButton
 import ro.solomon.app.ui.components.SolChip
-import ro.solomon.app.ui.components.SolHairlineDivider
 import ro.solomon.app.ui.components.SolHeroAmount
 import ro.solomon.app.ui.components.SolHeroCard
 import ro.solomon.app.ui.components.SolHeroLabel
@@ -56,6 +56,7 @@ import ro.solomon.core.domain.Money
 
 @Composable
 fun FocusScreen(
+    onBack: (() -> Unit)? = null,
     vm: FocusViewModel = viewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
@@ -66,7 +67,7 @@ fun FocusScreen(
         contentPadding = PaddingValues(SolSpacing.base),
         verticalArrangement = Arrangement.spacedBy(SolSpacing.md)
     ) {
-        item { FocusHeader() }
+        item { FocusHeader(onBack = onBack) }
 
         when {
             state.loading -> item { SolLoadingIndicator(accent = SolAccent.Mint, label = "Calculez Focus din date reale...") }
@@ -91,14 +92,19 @@ fun FocusScreen(
 }
 
 @Composable
-private fun FocusHeader() {
-    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        Text("Focus", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
-        Text(
-            "Prioritizare reală: Necesar, Moft, Prioritate — fără să opresc obiectivele.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = SolomonColors.TextSecondary
-        )
+private fun FocusHeader(onBack: (() -> Unit)?) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(SolSpacing.md)) {
+        if (onBack != null) {
+            SolBackButton(onClick = onBack)
+        }
+        Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text("Focus", style = MaterialTheme.typography.headlineLarge, color = SolomonColors.TextPrimary)
+            Text(
+                "Prioritizare reală: Necesar, Moft, Prioritate — fără să opresc obiectivele.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = SolomonColors.TextSecondary
+            )
+        }
     }
 }
 
