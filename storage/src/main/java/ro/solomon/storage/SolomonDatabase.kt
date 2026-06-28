@@ -13,12 +13,16 @@ import ro.solomon.storage.entity.*
         ObligationEntity::class,
         SubscriptionEntity::class,
         GoalEntity::class,
-        UserProfileEntity::class
+        UserProfileEntity::class,
+        FocusEntity::class,
+        CategoryBucketOverrideEntity::class
     ],
     // v2: monetary amounts are now persisted in bani (minor units) instead of
     // whole lei. The amount_ron column therefore carries bani going forward.
     // Destructive migration is acceptable pre-release and wipes old whole-lei rows.
-    version = 2,
+    // v3: adds Solomon Focus persistence (focuses) and per-category bucket
+    // overrides (category_bucket_overrides) for the prioritization engine.
+    version = 3,
     exportSchema = false
 )
 abstract class SolomonDatabase : RoomDatabase() {
@@ -27,6 +31,8 @@ abstract class SolomonDatabase : RoomDatabase() {
     abstract fun subscriptionDao(): SubscriptionDao
     abstract fun goalDao(): GoalDao
     abstract fun userProfileDao(): UserProfileDao
+    abstract fun focusDao(): FocusDao
+    abstract fun categoryBucketOverrideDao(): CategoryBucketOverrideDao
 
     companion object {
         @Volatile
