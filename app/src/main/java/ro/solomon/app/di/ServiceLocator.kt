@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import ro.solomon.analytics.CashFlowAnalyzer
+import ro.solomon.analytics.FocusEngine
 import ro.solomon.analytics.ForecastEngine
 import ro.solomon.analytics.PatternDetector
 import ro.solomon.analytics.RecurringDetectionEngine
@@ -24,6 +25,8 @@ import ro.solomon.llm.TemplateLLMProvider
 import ro.solomon.moments.MomentEngine
 import ro.solomon.moments.MomentOrchestrator
 import ro.solomon.storage.SolomonDatabase
+import ro.solomon.storage.repository.CategoryBucketOverrideRepository
+import ro.solomon.storage.repository.FocusRepository
 import ro.solomon.storage.repository.GoalRepository
 import ro.solomon.storage.repository.ObligationRepository
 import ro.solomon.storage.repository.OnboardingPersistence
@@ -47,11 +50,17 @@ object ServiceLocator {
         private set
     lateinit var goalRepo: GoalRepository
         private set
+    lateinit var focusRepo: FocusRepository
+        private set
+    lateinit var bucketOverrideRepo: CategoryBucketOverrideRepository
+        private set
     lateinit var subRepo: SubscriptionRepository
         private set
     lateinit var onboardingPersistence: OnboardingPersistence
         private set
     lateinit var cashFlow: CashFlowAnalyzer
+        private set
+    lateinit var focusEngine: FocusEngine
         private set
     lateinit var patternDetector: PatternDetector
         private set
@@ -92,9 +101,12 @@ object ServiceLocator {
         txnRepo = TransactionRepository(db.transactionDao())
         obligationRepo = ObligationRepository(db.obligationDao())
         goalRepo = GoalRepository(db.goalDao())
+        focusRepo = FocusRepository(db.focusDao())
+        bucketOverrideRepo = CategoryBucketOverrideRepository(db.categoryBucketOverrideDao())
         subRepo = SubscriptionRepository(db.subscriptionDao())
         onboardingPersistence = OnboardingPersistence(userRepo, obligationRepo, goalRepo)
         cashFlow = CashFlowAnalyzer()
+        focusEngine = FocusEngine()
         patternDetector = PatternDetector()
         spiralDetector = SpiralDetector()
         subscriptionAuditor = SubscriptionAuditor()
